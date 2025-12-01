@@ -1,0 +1,96 @@
+﻿# ---- General ----
+*.log
+*.tmp
+*.tmp.*
+*.bak
+*.swp
+*.swo
+*.orig
+*.user
+*.userosscache
+*.suo
+*.sln.iml
+*.DS_Store
+Thumbs.db
+
+# ---- Build output ----
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+# .NET publish artifacts (usually under bin, but keep explicit just in case)
+publish/
+dist/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.assets.json
+artifacts/
+
+# Test results & coverage
+TestResults/
+[Tt]est[Rr]esult*/
+*.coverage
+*.coveragexml
+coverage*/
+
+# ---- IDE / Tooling ----
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.vcxproj.filters
+*.vcproj.*
+*_i.c
+*_p.c
+*.ipch
+*.opensdf
+*.sdf
+*.cachefile
+*.dbmdl
+*.jfm
+
+# Rider / IntelliJ
+.idea/
+*.sln.DotSettings.user
+.resharper/
+_ReSharper*/
+*.ReSharper
+
+# VS Code (keep workspace settings out of git)
+.vscode/
+
+# JetBrains Fleet
+.fleet/
+
+# ---- ASP.NET / Blazor specifics ----
+# Static web assets generated during build (kept under obj/bin already)
+**/wwwroot/_framework/
+**/wwwroot/_content/
+
+# CSS isolation and static web assets (covered by obj, but explicit for clarity)
+**/obj/**/scopedcss/
+**/obj/**/staticwebassets/
+**/obj/**/webcil/
+**/obj/**/tmp-webcil/
+
+# Node tooling (if present)
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# ---- Misc ----
+*.local.json
+*.Secret.json
+*.Secrets.json
+.env
+.env.*

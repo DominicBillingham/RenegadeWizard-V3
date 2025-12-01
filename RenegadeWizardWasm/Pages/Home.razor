@@ -1,0 +1,173 @@
+﻿@page "/"
+@inject IJSRuntime JS
+
+@using RenegadeWizard.Classes
+@using RenegadeWizard.Classes.Data
+@inject CoreGame _gameLoop;
+
+<PageTitle>Home</PageTitle>
+<div class="d-flex flex-wrap justify-content-center">
+
+    <div class="card shadow border-0 m-4 @Animations mobile-remove-margins"
+         style="width:950px; max-width: 950px; flex: 1 1 48; ">
+        <h1 class="card-header mobile-hide">RENEGADE WIZARD</h1>
+        <div class="card-body">
+            <div class="form-control bg-body mb-3 text-white pb-5 position-relative mobile-max-height mobile-text-size"
+                 disabled id="mainDisplay"
+                 style=" overflow-y: auto; white-space: pre-wrap; font-size: 18px; height: calc(100vh - 230px); ">
+
+                <pre class="text-center m-auto ascii-art mobile-hide" style="font-size: 14px">
+
+                                                                                        /\         *         
+[][]    [][][]  []  []  [][][]  [][][]    []    [][]    [][][]                        //  \\               * 
+[]  []  []      [][ []  []      []       [][]   []  []  []                          ///    \\ =====    *     
+[][]    [][][]  [] ][]  [][][]  []  []  []  []  []  []  [][][]                     //       \\     ==        
+[]  []  []      []  []  []      []  []  []  []  []  []  []                        //  /\  /\/\\     ==  *   *
+[]  []  [][][]  []  []  [][][]  [][][]  []  []  [][]    [][][]                    |/\/  \/    \\     =       
+                                                                                 //        .  \\    ==  *    
+                                                                                //    .         \ ==       * 
+                      W  W  W  WWWWW   WWWW     WW    WWWW    WWWW            //         V      \\         
+                      W  W  W    |         W   WWWW   W   WW  W   W          //     V         .  ||        
+                      W  W  W    |     WWWW   W    W  WWWWW   W   W         ||         .          \\       
+                      W  W  W    |    W       W    W  W    W  W   W        //      V        V     \\       
+                       WW WW   WWWWWW  WWWW   W    W  W    W  WWWW        //    .      .            \\     
+                                                                        ///                    V     \\\   
+                                                                       ///  .   V        .         .  \\\  
+
+                </pre>
+
+                @foreach (var line in ConsoleLines)
+                {
+                    <div>@((MarkupString)line)</div>
+                }
+
+
+            </div>
+            <div class="row">
+                <div class="col">
+                    <form @onsubmit="HandleSubmit" class="d-flex">
+                        <input class="fs-5 form-control bg-white mobile-text-size" autocomplete="off" @bind="UserInput"
+                               onkeydown="ConsoleSound(event)"
+                               id="mainTextInput" placeholder="I wonder what to do next..."/>
+                    </form>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="bg-animation">
+    <div id='stars'></div>
+    <div id='stars2'></div>
+    <div id='stars3'></div>
+    <div id='stars4'></div>
+</div><!-- / STAR ANIMATION -->
+
+@code {
+
+    private List<string> ConsoleLines { get; set; } = new();
+    public string UserInput { get; set; } = string.Empty;
+    public string Animations { get; set; } = string.Empty;
+    private bool _shouldScroll = false;
+
+    public async Task HandleSubmit(EventArgs e)
+    {
+        
+        CommandResponse response = _gameLoop.GetResponse(UserInput);
+        UserInput = string.Empty;
+
+        ConsoleLines.AddRange(response.ConsoleLines);
+        _shouldScroll = true;
+
+        if (response.Audio != string.Empty)
+        {
+            await PlaySound(response.Audio, response.OverrideAudio);
+        }
+
+        Animations = response.ConsoleAnimation;
+        await Task.Delay(750);
+        Animations = string.Empty;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_shouldScroll)
+        {
+            await JS.InvokeVoidAsync("ScrollToBottom");
+            _shouldScroll = false;
+        }
+    }
+
+    private async Task PlaySound(string audio, bool overrideAudio)
+    {
+        await JS.InvokeVoidAsync("PlaySound", audio, overrideAudio);
+    }
+
+}
+
+<script src="/javascript/terminal.js"></script>
+
+<style>
+
+    .ascii-art {
+        animation: fade 15s ease forwards;
+    }
+
+    .console-line {
+        animation: fade 3s ease forwards;
+    }
+
+    @@keyframes fade {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @@media (max-width: 768px) {
+
+        .mobile-text-size {
+            font-size: 14px !important;
+        }
+
+        .mobile-hide {
+            display: none;
+        }
+
+        .mobile-remove-margins {
+            margin: 0px !important;
+        }
+
+        .mobile-max-height {
+            height: 90svh !important;
+        }
+
+        body {
+            background-color: black !important;
+            background-size: 0% !important;
+            background-position: 0%, 0% !important;
+        }
+
+        body::before {
+            display: none !important;
+        }
+
+        .bg-animation, body {
+            animation: none !important;
+            transition: none !important;
+        }
+
+
+    }
+
+
+</style>
