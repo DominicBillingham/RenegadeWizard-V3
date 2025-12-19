@@ -1,0 +1,29 @@
+﻿
+
+
+
+=== Current ===
+
+=== Future Features ===
+Add a MiniMarkup language for styling console lines, e.g #blue this text becomes wrapped in a span with blue class #
+Add an item wing to the left of the terminal that displays all items in the scene.
+Add an enemy wing to the right of the terminal that displays all enemies in the scene.
+Add a sarcastic introduction.
+Add status effects and a status system.
+Create a word generator that fetches "types" of words. E.G synonyms for powerful, dangerous, etc.
+Add tab auto complete and suggestions.
+
+=== Finished ===
+Allow the user input to queue up an action 
+Allow the action to damage a goblin 
+Add the healing spell (Done)
+Add a basic situation report that outputs the state of the scene.
+
+
+
+
+
+
+
+
+

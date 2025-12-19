@@ -2,6 +2,7 @@
 
 public class InputManager(SceneManager sceneManager)
 {
+    public List<Entity> Targets { get; set; } = new();
     public GameAction? chosenAction { get; set; }
     public void ProcessInput(string userInput)
     {
@@ -19,11 +20,12 @@ public class InputManager(SceneManager sceneManager)
         
         if (chosenAction == null) return;
         
-        chosenAction.Actor = sceneManager.Player;
-        
-        chosenAction.Targets = sceneManager.Entities
+        Targets = sceneManager.Entities
             .Where(entity => FuzzyMatch(entity.Names, userInputChunks))
             .ToList();
+        
+        if (!Targets.Any())
+            Targets.Add(sceneManager.Player);
     }
 
     public bool FuzzyMatch(string keyword, IEnumerable<string> input)
