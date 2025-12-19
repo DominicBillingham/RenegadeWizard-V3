@@ -3,8 +3,6 @@
 public class InputManager(SceneManager sceneManager)
 {
     public GameAction? chosenAction { get; set; }
-    public List<Entity> targets { get; set; }
-
     public void ProcessInput(string userInput)
     {
         string[] userInputChunks = new string(userInput
@@ -19,11 +17,14 @@ public class InputManager(SceneManager sceneManager)
         chosenAction = sceneManager.Player.Actions.
             FirstOrDefault(action => FuzzyMatch(action.Names, userInputChunks));
         
-        targets = sceneManager.Entities
+        if (chosenAction == null) return;
+        
+        chosenAction.Actor = sceneManager.Player;
+        
+        chosenAction.Targets = sceneManager.Entities
             .Where(entity => FuzzyMatch(entity.Names, userInputChunks))
             .ToList();
     }
-
 
     public bool FuzzyMatch(string keyword, IEnumerable<string> input)
     {
@@ -39,7 +40,7 @@ public class InputManager(SceneManager sceneManager)
 
         return false;
     }
-
+    
     public bool FuzzyMatch(IEnumerable<string> keywords, IEnumerable<string> input)
     {
         foreach (var inputWord in input)
@@ -57,7 +58,7 @@ public class InputManager(SceneManager sceneManager)
 
         return false;
     }
-
+    
     private int LevenshteinDistance(string a, string b)
     {
         a = a.ToLower();
