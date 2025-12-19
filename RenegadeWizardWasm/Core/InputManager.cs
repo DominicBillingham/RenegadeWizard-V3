@@ -1,26 +1,27 @@
 ﻿namespace RenegadeWizardWasm.Core;
 
-public class InputManager
+public class InputManager(SceneManager sceneManager)
 {
-    public string rawInput { get; set; }
-    public string[] inputArray { get; set; }
-
-public string action { get; set; }
-
-    public List<string> targets { get; set; }
+    public GameAction? chosenAction { get; set; }
+    public List<Entity> targets { get; set; }
 
     public void ProcessInput(string userInput)
     {
-        rawInput = userInput;
-        
-        inputArray = new string(userInput
-                .Where(c => !char.IsPunctuation(c))
-                .ToArray())
+        string[] userInputChunks = new string(userInput
+            .Where(c => !char.IsPunctuation(c))
+            .ToArray())
             .Trim()
             .ToLower()
             .Split(" ")
             .Where(x => x.Length > 2 || x == "go")
             .ToArray();
+        
+        chosenAction = sceneManager.Player.Actions.
+            FirstOrDefault(action => FuzzyMatch(action.Names, userInputChunks));
+        
+        targets = sceneManager.Entities
+            .Where(entity => FuzzyMatch(entity.Names, userInputChunks))
+            .ToList();
     }
 
 
