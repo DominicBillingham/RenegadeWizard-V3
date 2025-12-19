@@ -1,24 +1,6 @@
 ﻿
 
 
-mini markup lanuage brief:
-I would like a mini markup language that lets me rapidly style strings using a set of tags.
-Each tag starts #BluBold with a hastag. Then, multiple tags (each startred with a capital) can be used to style the string (returning a span containing the styled text).
-The stylying should be done using tailwind classes.
-
-Examples:
-
-#BluBold this text should be blue # 
-<span class="text-blue-500 weight-bold">this text should be blue and bold</span>
-
-#RedIta this text should be red and italic. #BluBold this text should be blue
-<span class="text-red-500 italic">this text should be red and italic</span>&space<span class="text-blue-500 weight-bold">this text should be blue and bold</span>
-
-
-
-#BluBold
-
-
 
 === Current ===
 

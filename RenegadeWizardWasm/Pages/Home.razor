@@ -79,12 +79,11 @@
     public async Task HandleSubmit(EventArgs e)
     {
         List<string> response = _terminal.EnterInput(UserInput).Text;
-        
-        //ConsoleLines.AddRange(response);
-        
+
         foreach (string line in response)
         {
-            string html = (_mml.Html(line));
+            string words = _mml.WordReplacement(line);
+            string html = _mml.Html(words);
             ConsoleLines.Add(html);
         }
 

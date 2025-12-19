@@ -34,7 +34,7 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
             if (action.Damage is { } damage)
             {
                 target.Hitpoints -= damage;
-                actionLines.Add($"{target.Name} took {damage} damage from {actor.Name}.");
+                actionLines.Add($"{actor.Name} <powerfully> attacks {target.Name} for {damage}hp");
             }
 
             if (action.Heal is { } heal)
