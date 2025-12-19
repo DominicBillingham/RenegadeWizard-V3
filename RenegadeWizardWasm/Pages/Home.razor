@@ -3,6 +3,7 @@
 
 @using RenegadeWizardWasm.Core
 @inject Terminal _terminal;
+@inject MML _mml;
 
 <PageTitle>Home</PageTitle>
 <div class="d-flex flex-wrap justify-content-center">
@@ -34,10 +35,9 @@
                                                                        ///  .   V        .         .  \\\  
 
                 </pre>
-
                 @foreach (var line in ConsoleLines)
                 {
-                    <div class="console-line">@line</div>
+                    <div class="console-line">@((MarkupString)line)</div>
                 }
 
 
@@ -78,11 +78,17 @@
 
     public async Task HandleSubmit(EventArgs e)
     {
-        
         List<string> response = _terminal.EnterInput(UserInput).Text;
-        UserInput = string.Empty;
+        
+        //ConsoleLines.AddRange(response);
+        
+        foreach (string line in response)
+        {
+            string html = (_mml.Html(line));
+            ConsoleLines.Add(html);
+        }
 
-        ConsoleLines.AddRange(response);
+        UserInput = "";
         _shouldScroll = true;
         StateHasChanged();
     }

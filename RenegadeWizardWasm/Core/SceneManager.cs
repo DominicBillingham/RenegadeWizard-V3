@@ -22,7 +22,7 @@ public class SceneManager
         List<string> sceneLines = new List<string>();
         foreach (Entity entity in Entities)
         {
-            sceneLines.Add($"[{entity.Name}] {entity.Hitpoints}hp.");
+            sceneLines.Add($"[{entity.Name}] #rd {entity.Hitpoints}hp. # Some text afterwards. ");
         }
         return sceneLines;
     }
