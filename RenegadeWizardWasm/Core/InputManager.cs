@@ -3,14 +3,17 @@
 public class InputManager
 {
     public string rawInput { get; set; }
+    public string[] inputArray { get; set; }
 
-    public string action { get; set; }
+public string action { get; set; }
 
     public List<string> targets { get; set; }
 
-    public string[] ProcessInput(string userInput)
+    public void ProcessInput(string userInput)
     {
-        return new string(userInput
+        rawInput = userInput;
+        
+        inputArray = new string(userInput
                 .Where(c => !char.IsPunctuation(c))
                 .ToArray())
             .Trim()

@@ -1,9 +1,8 @@
 ﻿@page "/"
 @inject IJSRuntime JS
 
-@using RenegadeWizard.Classes
-@using RenegadeWizard.Classes.Data
-@inject CoreGame _gameLoop;
+@using RenegadeWizardWasm.Core
+@inject Terminal _terminal;
 
 <PageTitle>Home</PageTitle>
 <div class="d-flex flex-wrap justify-content-center">
@@ -38,7 +37,7 @@
 
                 @foreach (var line in ConsoleLines)
                 {
-                    <div>@((MarkupString)line)</div>
+                    <div class="console-line">@line</div>
                 }
 
 
@@ -72,6 +71,7 @@
 @code {
 
     private List<string> ConsoleLines { get; set; } = new();
+    
     public string UserInput { get; set; } = string.Empty;
     public string Animations { get; set; } = string.Empty;
     private bool _shouldScroll = false;
@@ -79,20 +79,12 @@
     public async Task HandleSubmit(EventArgs e)
     {
         
-        CommandResponse response = _gameLoop.GetResponse(UserInput);
+        List<string> response = _terminal.EnterInput(UserInput).Text;
         UserInput = string.Empty;
 
-        ConsoleLines.AddRange(response.ConsoleLines);
+        ConsoleLines.AddRange(response);
         _shouldScroll = true;
-
-        if (response.Audio != string.Empty)
-        {
-            await PlaySound(response.Audio, response.OverrideAudio);
-        }
-
-        Animations = response.ConsoleAnimation;
-        await Task.Delay(750);
-        Animations = string.Empty;
+        StateHasChanged();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
