@@ -12,6 +12,8 @@ public abstract class GameAction()
     public TargetType TargetType { get; set; } = TargetType.Self;
     
     // This ONLY describes the effect, NOT the target(s) as this is resolved by Interaction.cs
+    
+    public bool CanUseItem { get; set; } = false;
     public abstract string Effect(Entity actor, Entity target, Entity? item = null);
 }
 

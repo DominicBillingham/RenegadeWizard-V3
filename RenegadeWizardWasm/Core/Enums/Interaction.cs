@@ -1,6 +1,6 @@
 ﻿namespace RenegadeWizardWasm.Core.Enums;
 
-public class Interaction(List<Entity> allEntities, List<Entity> chosenTargets, Entity actor, GameAction action, Entity? item = null)
+public class Interaction(List<Entity> allEntities, List<Entity> chosenTargets, Entity actor, GameAction action)
 {
     // Interaction is the fundamental core of the game.
     // All data flows into this class, then this runs the logic and applies any side effects.
@@ -13,33 +13,51 @@ public class Interaction(List<Entity> allEntities, List<Entity> chosenTargets, E
     // order of execution:
     // First the interaction resolves which entities will be affected.
     // Then it will apply the effects of the action to every single entity.
-    private List<Entity> AllEntities { get; set; } = allEntities;
-    private List<Entity> ChosenTargets { get; set; } = chosenTargets;
+    private readonly List<Entity> AllEntities = allEntities;
+    private readonly List<Entity> ChosenTargets = chosenTargets;
     private Entity Actor { get; set; } = actor;
     private GameAction Action { get; set; } = action;
-    private Entity? Item { get; set; } = item;
 
     public string Resolve()
     {
         string result = "";
-        foreach (Entity target in GetActualTargets())
+
+        if (Action.CanUseItem)
         {
-            result += $" {Action.Effect(Actor, target, Item)}";
+            Entity item = ChosenTargets.First();
+            AllEntities.Remove(item);
+            all
+            
+            foreach (Entity target in GetActualTargets())
+            {
+                result += $" {Action.Effect(Actor, target)}";
+            }
         }
+        else
+        {
+            foreach (Entity target in GetActualTargets())
+            {
+                result += $" {Action.Effect(Actor, target)}";
+            }
+        }
+        
+        
+
         return result;
     }
     private List<Entity> GetActualTargets()
     {
+        // This is creating a new LISTS but with the old class references.
+        
         if (Action.TargetType == TargetType.Self) 
             return [Actor];
         
         if (Action.TargetType  == TargetType.All) 
-            return AllEntities;
+            return [..AllEntities];
         
         if (Action.TargetType == TargetType.Single) 
             return [ChosenTargets.First()];
         
-        // This is a fallback for safety reasons. Ideally this shouldn't trigger.
         return ChosenTargets;
 
     }
