@@ -1,36 +1,43 @@
-﻿namespace RenegadeWizardWasm.Core;
+﻿using RenegadeWizardWasm.Core.Enums;
 
-public abstract class GameAction
+namespace RenegadeWizardWasm.Core;
+
+public abstract class GameAction()
 {
     
     // Metadata
-    public string  Name { get; set; }
+    public string Name { get; set; }
     public virtual List<string> Aka { get; set; } = new();
     public List<string> Names => Aka.Append(Name).ToList();
+    public TargetType TargetType { get; set; } = TargetType.Self;
     
-    // Effects
-    public int? Damage { get; set; } 
-    public int? Heal { get; set; }
-
+    // This ONLY describes the effect, NOT the target(s) as this is resolved by Interaction.cs
+    public abstract string Effect(Entity actor, Entity target, Entity? item = null);
 }
 
 
-
-
-public class Punch : GameAction
+public class Throw : GameAction
 {
-    public Punch()
+
+    public Throw() 
     {
-        Name = "Punch";
-        Damage = 3;
+        Name = "Throw";
+    }
+
+    public override string Effect(Entity actor, Entity target , Entity? item = null)
+    {
+        if (item == null) 
+            return "Well you managed to some how throw [NULL] so uh, fuck you.";
+
+        if (item.Weight is { } weight && actor.Strength > weight)
+        {
+            target.Hitpoints -= weight;
+            return $"{actor.Name} throws {item.Name} at {target.Name} for {weight}hp.";
+        }
+        else
+        {
+            return $"{actor.Name} fails to lift {item.Name}!";
+        }
     }
 }
 
-public class Heal : GameAction
-{
-    public Heal()
-    {
-        Name = "Heal";
-        Heal = 3;
-    }
-}

@@ -4,11 +4,12 @@ namespace RenegadeWizardWasm.Core;
 
 public class SceneManager
 {
+    public List<Entity> Entities { get; set; } = new();
     public Entity Player => Entities.First(x => x.Controller == Controller.Player);
     public List<Entity> Npcs => Entities.Where(x => x.Controller == Controller.Npc).ToList();
-
-    public List<Entity> Entities { get; set; } = new();
-
+    
+    public List<Entity> Objects => Entities.Where(x => x.Controller == Controller.Object).ToList();
+    
     public SceneManager()
     {
         var player = new Player();

@@ -3,5 +3,6 @@
 public enum Controller
 {
     Npc,
-    Player
+    Player,
+    Object
 }
