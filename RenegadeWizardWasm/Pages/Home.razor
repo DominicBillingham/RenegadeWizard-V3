@@ -9,34 +9,21 @@
 <div class="d-flex flex-wrap justify-content-center gap-1">
 
     <!-- Left Wing - Items -->
-    @foreach (var item in Objects)
-    {
-        <div class="card shadow border-0 m-4 me-0" style="width: 200px; max-width: 200px;">
-            <div class="card-header">@item.Name</div>
-            <div class="card-body p-2" style="overflow-y: auto; max-height: calc(100vh - 230px);">
-                <div class="card mb-2 bg-dark text-white">
-                    <div class="card-body p-2">
-                        <small>@item.Name</small>
-                    </div>
+    <div class="d-flex flex-column gap-2 justify-content-center" style="width: 200px;">
+        @foreach (var item in Objects)
+        {
+            <div class="card shadow border-0">
+                <div class="card-header fw-bold">@item.Name | @item.Hitpoints hp</div>
+                <div class="card-body p-2">
+                    <small>@item.Description</small>
                 </div>
             </div>
-        </div>
-    }
-
-    <!-- Right Wing - Creatures -->
-    @foreach (var creature in Creatures)
-    {
-        <div class="card shadow border-0 m-4 ms-0" style="order: 2;">
-            <div class="card-header">@creature.Name</div>
-            <div class="card-body p-2" style="overflow-y: auto;">
-                This is a creature!
-            </div>
-        </div>
-    }
+        }
+    </div>
 
     <!-- Main Terminal -->
-    <div class="card shadow border-0 m-4"
-         style="width:950px; max-width: 950px; flex: 1 1 48; ">
+    <div class="card shadow border-0 mt-4 m-2"
+         style="width:950px; max-width: 950px; flex: 1 1 auto; ">
         <h1 class="card-header mobile-hide">RENEGADE WIZARD</h1>
         <div class="card-body">
             <div class="form-control bg-body mb-3 text-white pb-5 position-relative mobile-max-height mobile-text-size"
@@ -82,6 +69,19 @@
 
 
         </div>
+    </div>
+
+    <!-- Right Wing - Creatures -->
+    <div class="d-flex flex-column gap-2 justify-content-center" style="width: 200px;">
+        @foreach (var creature in Creatures)
+        {
+            <div class="card shadow border-0">
+                <div class="card-header fw-bold">@creature.Name | @creature.Hitpoints hp</div>
+                <div class="card-body p-2">
+                    <small>@creature.Description</small>
+                </div>
+            </div>
+        }
     </div>
 
 
