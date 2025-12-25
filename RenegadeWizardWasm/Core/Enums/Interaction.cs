@@ -26,6 +26,12 @@ public class Interaction(List<Entity> allEntities, List<Entity> chosenTargets, E
         if (Action.UsesItem)
         {
             List<Entity> targets = GetActualTargets();
+
+            if (targets.Count < 2)
+            {
+                result += "You need at least 2 targets to use an item.";
+            }
+            
             var item = targets.First();
             targets.Remove(item);
             

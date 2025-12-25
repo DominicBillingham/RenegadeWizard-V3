@@ -73,14 +73,23 @@
     private List<string> ConsoleLines { get; set; } = new();
     
     public string UserInput { get; set; } = string.Empty;
-    public string Animations { get; set; } = string.Empty;
     private bool _shouldScroll = false;
 
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdateTerminal(_terminal.GetBaseText());
+    }
+    
     public async Task HandleSubmit(EventArgs e)
     {
-        List<string> response = _terminal.EnterInput(UserInput).Text;
+        await UpdateTerminal(_terminal.EnterInput(UserInput));
+    }
 
-        foreach (string line in response)
+    public async Task UpdateTerminal(TerminalResponse response)
+    {
+        List<string> lines = response.Text;
+
+        foreach (string line in lines)
         {
             string words = _mml.WordReplacement(line);
             string html = _mml.Html(words);

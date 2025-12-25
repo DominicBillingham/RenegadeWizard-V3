@@ -7,21 +7,29 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
     
     public TerminalResponse EnterInput(string playerInput)
     {
-        inputManager.ProcessInput(playerInput);
+        TerminalResponse terminalResponse = GetBaseText();
         
-        TerminalResponse terminalResponse = new TerminalResponse();
+        inputManager.ProcessInput(playerInput);
         terminalResponse.PlayerInput  = playerInput;
 
         if (inputManager.chosenAction == null) 
             return terminalResponse;
         
-       // terminalResponse.Debug.Add($"Action: {inputManager.chosenAction?.Name ?? ""} | Targets: {string.Join(", ", inputManager.chosenAction?.Targets.Select(entity => entity.Name) ?? [])}" );
-        
+        terminalResponse.DebugLines.Add($"Action: {inputManager.chosenAction?.Name ?? ""} | Targets: {string.Join(", ", inputManager.Targets.Select(entity => entity.Name) ?? [])}" );
         terminalResponse.CombatLines.AddRange(combatManager.PlayRound());
-        terminalResponse.SceneLines.AddRange(sceneManager.GetSceneDescription());
         
         return terminalResponse;
     }
+
+    public TerminalResponse GetBaseText()
+    {
+        TerminalResponse terminalResponse = new TerminalResponse();
+        terminalResponse.Creatures = sceneManager.Npcs;
+        terminalResponse.Objects = sceneManager.Objects;
+        terminalResponse.SceneLines.AddRange(sceneManager.GetSceneDescription());
+        return terminalResponse;
+    }
+    
 }
 
 
@@ -34,30 +42,42 @@ public class TerminalResponse()
         get
         {
             List<string> _text = new List<string>();
-            _text.Add(" ");
-            _text.Add($"> {PlayerInput}");
-            _text.AddRange(Debug);
+
+            if (string.IsNullOrWhiteSpace(PlayerInput) == false)
+            {
+                _text.Add(" ");
+                _text.Add($"> {PlayerInput}");
+            }
+
+            if (DebugLines.Any())
+            {
+                _text.AddRange(DebugLines);
+            }
             
             if (SceneLines.Any())
             {
-                _text.Add(" ");
                 _text.AddRange(CombatLines);
             }
 
             if (SceneLines.Any())
-            {
-                _text.Add(" ");
-                _text.AddRange(SceneLines);
+            { _text.AddRange(SceneLines);
             }
 
             return _text;
         }
     }
-    public string PlayerInput { get; set; }
 
-    public List<string> Debug { get; set; } = new();
+    public string PlayerInput { get; set; } = "";
+    public List<string> DebugLines { get; set; } = new();
     public List<string> CombatLines { get; set; } = new();
     public List<string> SceneLines { get; set; } = new();
+
+    public List<Entity> Objects = new();
+    public List<Entity> Creatures = new();
+    
+
+
+
 
 
 }

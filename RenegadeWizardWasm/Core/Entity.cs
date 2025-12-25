@@ -45,6 +45,7 @@ public class Player : Entity
         Controller = Controller.Player;
         Hitpoints = 10;
         Actions.Add(new Punch());
+        Actions.Add(new Throw());
     }
 }
 
