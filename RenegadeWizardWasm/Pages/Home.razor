@@ -59,8 +59,8 @@
             <div class="row">
                 <div class="col">
                     <form @onsubmit="HandleSubmit" class="d-flex">
-                        <input class="fs-5 form-control bg-white mobile-text-size" autocomplete="off" @bind="UserInput"
-                               onkeydown="ConsoleSound(event)"
+                        <input class="fs-5 form-control bg-white mobile-text-size" autocomplete="off" @bind="UserInput" @bind:event="oninput"
+                               @onkeydown="HandleKeyDown"
                                id="mainTextInput" placeholder="I wonder what to do next..."/>
                     </form>
 
@@ -103,6 +103,10 @@
     public string UserInput { get; set; } = string.Empty;
     private bool _shouldScroll = false;
 
+    private List<string> _commandHistory = new();
+    private int _historyIndex = -1;
+    private string _tempInput = string.Empty;
+
     protected override async Task OnInitializedAsync()
     {
         await UpdateTerminal(_terminal.GetBaseText());
@@ -110,7 +114,56 @@
     
     public async Task HandleSubmit(EventArgs e)
     {
+        if (string.IsNullOrWhiteSpace(UserInput))
+            return;
+        
+        _commandHistory.Add(UserInput);
+        _historyIndex = -1;
+        _tempInput = string.Empty;
+
         await UpdateTerminal(_terminal.EnterInput(UserInput));
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+
+         if (e.Key == "Enter")
+         {
+             await JS.InvokeVoidAsync("playEnterSound");
+         }
+         else
+         {
+             await JS.InvokeVoidAsync("playTypingSound");
+         }
+         
+        if (e.Key == "ArrowUp")
+        {
+            if (_commandHistory.Count == 0) return;
+
+            if (_historyIndex == -1)
+            {
+                _tempInput = UserInput;
+            }
+
+            if (_historyIndex < _commandHistory.Count - 1)
+            {
+                _historyIndex++;
+                UserInput = _commandHistory[_commandHistory.Count - 1 - _historyIndex];
+            }
+        }
+        else if (e.Key == "ArrowDown")
+        {
+            if (_historyIndex > 0)
+            {
+                _historyIndex--;
+                UserInput = _commandHistory[_commandHistory.Count - 1 - _historyIndex];
+            }
+            else if (_historyIndex == 0)
+            {
+                _historyIndex = -1;
+                UserInput = _tempInput;
+            }
+        }
     }
 
     public async Task UpdateTerminal(TerminalResponse response)
