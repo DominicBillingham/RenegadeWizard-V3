@@ -8,7 +8,7 @@ public abstract class GameAction()
     
     // Metadata
     public string Name { get; set; }
-    public virtual List<string> Aka { get; set; } = new();
+    public List<string> Aka { get; set; } = new();
     public List<string> Names => Aka.Append(Name).ToList();
     public TargetType TargetType { get; set; }
     
@@ -25,6 +25,7 @@ public class Throw : GameAction
     public Throw() 
     {
         Name = "Throw";
+        Aka = ["Hurl", "Yeet", "Toss"];
         UsesItem = true;
         TargetType = TargetType.Chosen;
     }
@@ -51,6 +52,7 @@ public class Punch : GameAction
     public Punch()
     {
         Name = "Punch";
+        Aka = ["Hit", "Slap", "Whack"];
         UsesItem = false;
         TargetType = TargetType.Chosen;
     }

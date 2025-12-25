@@ -33,7 +33,23 @@ public abstract class Entity
     // Tool usage
     public int? Weight { get; set; } = 3;
     public int? Sharpness { get; set; }
-    
+
+    // public virtual string ApplyDamage(int damage)
+    // {
+    //     
+    // }
+    //
+    // public virtual string ApplyHealing(int healing)
+    // {
+    //     
+    // }
+
+    public virtual string WhenShoved()
+    {
+        return "";
+    }
+
+
 
 }
 
