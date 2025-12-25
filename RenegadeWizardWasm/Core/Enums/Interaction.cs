@@ -37,14 +37,14 @@ public class Interaction(List<Entity> allEntities, List<Entity> chosenTargets, E
             
             foreach (Entity target in targets)
             {
-                result += $" {Action.Effect(Actor, target)}";
+                result += $"{Action.Effect(Actor, target)}";
             }
         }
         else
         {
             foreach (Entity target in GetActualTargets())
             {
-                result += $" {Action.Effect(Actor, target)}";
+                result += $"{Action.Effect(Actor, target)}";
             }
         }
         
