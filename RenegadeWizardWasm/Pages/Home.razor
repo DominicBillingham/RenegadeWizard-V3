@@ -6,8 +6,35 @@
 @inject MML _mml;
 
 <PageTitle>Home</PageTitle>
-<div class="d-flex flex-wrap justify-content-center">
+<div class="d-flex flex-wrap justify-content-center gap-1">
 
+    <!-- Left Wing - Items -->
+    @foreach (var item in Objects)
+    {
+        <div class="card shadow border-0 m-4 me-0" style="width: 200px; max-width: 200px;">
+            <div class="card-header">@item.Name</div>
+            <div class="card-body p-2" style="overflow-y: auto; max-height: calc(100vh - 230px);">
+                <div class="card mb-2 bg-dark text-white">
+                    <div class="card-body p-2">
+                        <small>@item.Name</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Right Wing - Creatures -->
+    @foreach (var creature in Creatures)
+    {
+        <div class="card shadow border-0 m-4 ms-0" style="order: 2;">
+            <div class="card-header">@creature.Name</div>
+            <div class="card-body p-2" style="overflow-y: auto;">
+                This is a creature!
+            </div>
+        </div>
+    }
+
+    <!-- Main Terminal -->
     <div class="card shadow border-0 m-4"
          style="width:950px; max-width: 950px; flex: 1 1 48; ">
         <h1 class="card-header mobile-hide">RENEGADE WIZARD</h1>
@@ -71,7 +98,8 @@
 @code {
 
     private List<string> ConsoleLines { get; set; } = new();
-    
+    private List<Entity> Objects { get; set; } = new();
+    private List<Entity> Creatures { get; set; } = new();
     public string UserInput { get; set; } = string.Empty;
     private bool _shouldScroll = false;
 
@@ -95,6 +123,9 @@
             string html = _mml.Html(words);
             ConsoleLines.Add(html);
         }
+
+        Objects = response.Objects;
+        Creatures = response.Creatures;
 
         UserInput = "";
         _shouldScroll = true;

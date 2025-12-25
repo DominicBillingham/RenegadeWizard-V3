@@ -14,10 +14,15 @@ public class SceneManager
     {
         var player = new Player();
         var goblin = new Goblin();
+        var goblin2 = new Goblin();
+        var table = new Table();
+        var chair = new Chair();
         Entities.Add(player);
-        Entities.Add(goblin);
+        Entities.Add(goblin); 
+        Entities.Add(goblin2);
+        Entities.Add(table);
+        Entities.Add(chair);
     }
-    
     public List<string> GetSceneDescription()
     {
         List<string> sceneLines = new List<string>();

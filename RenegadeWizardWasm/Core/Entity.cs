@@ -10,6 +10,7 @@ public class Entity
     // Ideally, all fields should be private to prevent mistakes from being made.
     
     public string  Name { get; set; }
+    public string Description { get; set; } = "";
     public List<string> Aka { get; set; } = new List<string>();
     public List<string> Names => Aka.Append(Name).ToList();
     public int Hitpoints { get; set; }
@@ -42,6 +43,7 @@ public class Player : Entity
     public Player()
     {
         Name = "Player";
+        Description = "You are the wizard.";
         Controller = Controller.Player;
         Hitpoints = 10;
         Actions.Add(new Punch());
@@ -49,11 +51,35 @@ public class Player : Entity
     }
 }
 
+public class Table : Entity
+{
+    public Table()
+    {
+        Name = "Table";
+        Description = "A sturdy wooden table.";
+        Controller = Controller.Object;
+        Weight = 10;
+        Hitpoints = 5;
+    }
+}
+
+public class Chair : Entity
+{
+    public Chair()
+    {
+        Name = "Chair";
+        Description = "A simple wooden chair.";
+        Controller = Controller.Object; 
+        Weight = 5;
+        Hitpoints = 3;
+    }
+}
 public class Goblin : Entity
 {
     public Goblin()
     {
         Name = "Goblin";
+        Description = "A rather wretched little creature.";
         Controller = Controller.Npc;
         Hitpoints = 5;
         Actions.Add(new Punch());
