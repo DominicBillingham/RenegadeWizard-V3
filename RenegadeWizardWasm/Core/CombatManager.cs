@@ -8,8 +8,9 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
     {
         List<string> CombatLines = new List<string>();
         
-        Interaction interaction = new Interaction(sceneManager.Entities, inputManager.Targets, sceneManager.Player, inputManager.chosenAction, );
-
+        
+        Interaction playerInteraction = new Interaction(sceneManager.Entities, inputManager.Targets, sceneManager.Player, inputManager.chosenAction);
+        CombatLines.Add(playerInteraction.Resolve());
         
         foreach (Entity entity in sceneManager.Npcs)
         {

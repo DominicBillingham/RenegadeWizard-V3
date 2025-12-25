@@ -13,6 +13,7 @@ public class Interaction(List<Entity> allEntities, List<Entity> chosenTargets, E
     // order of execution:
     // First the interaction resolves which entities will be affected.
     // Then it will apply the effects of the action to every single entity.
+    
     private readonly List<Entity> AllEntities = allEntities;
     private readonly List<Entity> ChosenTargets = chosenTargets;
     private Entity Actor { get; set; } = actor;
@@ -22,13 +23,13 @@ public class Interaction(List<Entity> allEntities, List<Entity> chosenTargets, E
     {
         string result = "";
 
-        if (Action.CanUseItem)
+        if (Action.UsesItem)
         {
-            Entity item = ChosenTargets.First();
-            AllEntities.Remove(item);
-            all
+            List<Entity> targets = GetActualTargets();
+            var item = targets.First();
+            targets.Remove(item);
             
-            foreach (Entity target in GetActualTargets())
+            foreach (Entity target in targets)
             {
                 result += $" {Action.Effect(Actor, target)}";
             }

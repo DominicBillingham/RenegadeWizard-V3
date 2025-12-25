@@ -3,6 +3,7 @@
 public enum TargetType
 {
     Single,
+    Chosen,
     All,
     AllHostiles,
     AllAllies,
