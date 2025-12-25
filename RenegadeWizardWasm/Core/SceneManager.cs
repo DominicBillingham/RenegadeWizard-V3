@@ -14,7 +14,10 @@ public class SceneManager
     {
         var player = new Player();
         var goblin = new Goblin();
-        var goblin2 = new Goblin();
+        var goblin2 = new Goblin
+        {
+            Name = "John"
+        };
         var table = new Table();
         var chair = new Chair();
         Entities.Add(player);
