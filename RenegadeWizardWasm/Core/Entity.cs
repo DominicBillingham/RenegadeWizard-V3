@@ -2,7 +2,7 @@
 
 namespace RenegadeWizardWasm.Core;
 
-public class Entity
+public abstract class Entity
 {
     
     // All modifications to any entity shoud go through their setter, in case if they have something like ignore fire damage.
@@ -33,6 +33,7 @@ public class Entity
     // Tool usage
     public int? Weight { get; set; } = 3;
     public int? Sharpness { get; set; }
+    
 
 }
 

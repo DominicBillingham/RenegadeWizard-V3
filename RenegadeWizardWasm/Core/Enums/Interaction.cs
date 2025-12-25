@@ -47,8 +47,6 @@ public class Interaction(List<Entity> allEntities, List<Entity> chosenTargets, E
                 result += $"{Action.Effect(Actor, target)}";
             }
         }
-        
-        
 
         return result;
     }

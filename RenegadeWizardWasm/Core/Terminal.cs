@@ -43,7 +43,7 @@ public class TerminalResponse()
         {
             List<string> _text = new List<string>();
 
-            if (string.IsNullOrWhiteSpace(PlayerInput) == false)
+            if (!string.IsNullOrWhiteSpace(PlayerInput))
             {
                 _text.Add(" ");
                 _text.Add($"> {PlayerInput}");
@@ -54,13 +54,14 @@ public class TerminalResponse()
                 _text.AddRange(DebugLines);
             }
             
-            if (SceneLines.Any())
+            if (CombatLines.Any())
             {
                 _text.AddRange(CombatLines);
             }
 
             if (SceneLines.Any())
-            { _text.AddRange(SceneLines);
+            {
+                _text.AddRange(SceneLines);
             }
 
             return _text;

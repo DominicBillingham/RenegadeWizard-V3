@@ -20,8 +20,11 @@ public class InputManager(SceneManager sceneManager)
         
         if (chosenAction == null) return;
         
+        userInputChunks = userInputChunks.Where(x => x != chosenAction.Name).ToArray();
+        
         Targets = sceneManager.Entities
             .Where(entity => FuzzyMatch(entity.Names, userInputChunks))
+            .Reverse()
             .ToList();
         
         if (!Targets.Any())
