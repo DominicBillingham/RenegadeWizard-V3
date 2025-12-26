@@ -1,4 +1,4 @@
-﻿namespace RenegadeWizardWasm.Core.Enums;
+﻿namespace RenegadeWizardWasm.Core;
 
 public enum Controller
 {

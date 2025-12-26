@@ -2,7 +2,7 @@
 
 public class InputManager(SceneManager sceneManager)
 {
-    public List<Entity> Targets { get; set; } = new();
+    public List<Entities> Targets { get; set; } = new();
     public GameAction? chosenAction { get; set; }
     public void ProcessInput(string userInput)
     {

@@ -1,5 +1,4 @@
-﻿using RenegadeWizardWasm.Core.Enums;
-
+﻿
 namespace RenegadeWizardWasm.Core;
 
 public class CombatManager(SceneManager sceneManager, InputManager inputManager)
@@ -14,11 +13,11 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
         if (result.AllowRetry)
             return CombatLines;
         
-        foreach (Entity entity in sceneManager.Npcs)
+        foreach (Entities entity in sceneManager.Npcs)
         {
             var random = new Random();
             var action = entity.Actions[random.Next(entity.Actions.Count)];
-            var targets = new List<Entity> { sceneManager.Player };
+            var targets = new List<Entities> { sceneManager.Player };
             
         }
         
