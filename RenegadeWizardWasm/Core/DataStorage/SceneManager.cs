@@ -4,7 +4,9 @@ namespace RenegadeWizardWasm.Core;
 
 public class SceneManager
 {
-    public List<Entity> Entities { get; set; } = new();
+    // To prevent the list from being accidently modified, the get returns a new list that can be freely modified.
+    private List<Entity> _entities = new();
+    public IReadOnlyList<Entity> Entities => _entities;
     public Entity Player => Entities.First(x => x.Controller == Controller.Player);
     public List<Entity> Npcs => Entities.Where(x => x.Controller == Controller.Npc).ToList();
     public List<Entity> Objects => Entities.Where(x => x.Controller == Controller.Object).ToList();
@@ -20,12 +22,12 @@ public class SceneManager
         var ironGolem = new IronGolem();
         var table = new Table();
         var chair = new Chair();
-        Entities.Add(player);
-        Entities.Add(goblin); 
-        Entities.Add(goblin2);
-        Entities.Add(ironGolem);
-        Entities.Add(table);
-        Entities.Add(chair);
+        _entities.Add(player);
+        _entities.Add(goblin); 
+        _entities.Add(goblin2);
+        _entities.Add(ironGolem);
+        _entities.Add(table);
+        _entities.Add(chair);
     }
     public List<string> GetSceneDescription()
     {

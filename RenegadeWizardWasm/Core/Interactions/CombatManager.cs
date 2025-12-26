@@ -7,14 +7,12 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
     public List<string> PlayRound()
     {
         List<string> CombatLines = new List<string>();
-        
-        Interaction playerInteraction = new Interaction(sceneManager.Entities, inputManager.Targets, sceneManager.Player, inputManager.chosenAction);
-        InteractionResult result = playerInteraction.Resolve();
+
+        GameActionResult result = inputManager.chosenAction.Resolve(sceneManager.Player, sceneManager.Entities, inputManager.Targets);
         CombatLines.Add(result.Text);
-        if (result.WasFailedAction)
-        {
+        
+        if (result.AllowRetry)
             return CombatLines;
-        }
         
         foreach (Entity entity in sceneManager.Npcs)
         {

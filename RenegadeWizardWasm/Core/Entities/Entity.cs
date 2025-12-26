@@ -1,5 +1,4 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
-using RenegadeWizardWasm.Core.Interactions.Actions;
 
 namespace RenegadeWizardWasm.Core;
 
@@ -20,32 +19,31 @@ public abstract class Entity
     
     
     // Skills
-    public int? Strength { get; set; } = 10;
-    public int? Dexterity { get; set; } = 10;
-    public int? Constitution { get; set; } = 10;
-    public int? Intelligence { get; set; } = 10;
-    public int? Wisdom { get; set; } = 10;
-    public int? Charisma { get; set; } = 10;
+    public int Strength { get; set; } = 10;
+    public int Dexterity { get; set; } = 10;
+    public int Constitution { get; set; } = 10;
+    public int Intelligence { get; set; } = 10;
+    public int Wisdom { get; set; } = 10;
+    public int Charisma { get; set; } = 10;
     
     // Senses
-    public int? Smell { get; set; }
-    public int? Taste { get; set; }
+    public int Smell { get; set; }
+    public int Taste { get; set; }
     
     // Tool usage
-    public int? Weight { get; set; } = 3;
-    public int? Sharpness { get; set; }
+    public int Weight { get; set; } = 3;
+    public int Sharpness { get; set; }
 
-    public virtual string ApplyDamage(int damage)
+    public virtual void ApplyDamage(GameActionResult result, int damage)
     {
         Hitpoints -= damage;
-        return $"{Name} takes {damage} damage.";
-
+        result.Strands.Add($"{Name} takes {damage} damage.");
     }
     
-    public virtual string ApplyHealing(int healing)
+    public virtual void ApplyHealing(GameActionResult result, int healing)
     {
         Hitpoints += healing;
-        return $"{Name} heals {healing} damage.";
+        result.Strands.Add($"{Name} heals by {healing}.");
     }
 
     public virtual string WhenShoved()
@@ -66,9 +64,9 @@ public class IronGolem : Entity
         Actions.Add(new Punch());
     }
 
-    public override string ApplyDamage(int damage)
+    public override void ApplyDamage(GameActionResult result, int damage)
     {
-        return $"{Name} is immune to damage!";
+        result.Strands.Add($"{Name} is immune to damage!");
     }
 }
 

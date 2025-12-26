@@ -7,6 +7,7 @@
 === Future Features ===
 
 Add a sarcastic introduction.
+
 Add a door as an introduction into the gameplay.
 
 Add an adjective system.
@@ -21,7 +22,6 @@ Add a compendium that can easily list actions a player can take an example use c
 
 Add a fall back message that displays how to use an action if it fails to work.
 
-Don't move on from a players turn if it fails to do anything due to a typo or unclear instructros. 
 
 Clean up dead creatures from a scene after all interactions are complete.
 
@@ -36,6 +36,7 @@ Add a MiniMarkup language for styling console lines, e.g #blue this text becomes
 Create a word generator that fetches "types" of words. E.G synonyms for powerful, dangerous, etc.
 Add an item wing to the left of the terminal that displays all items in the scene.
 Add an enemy wing to the right of the terminal that displays all enemies in the scene.
+Don't move on from a players turn if it fails to do anything due to a typo or unclear instructros. 
 
 
 
