@@ -1,5 +1,11 @@
 ﻿namespace RenegadeWizardWasm.Core.Enums;
 
+public class InteractionResult()
+{
+    public string Text { get; set; } = "";
+    public bool WasFailedAction { get; set; } = false;
+}
+
 public class Interaction(List<Entity> allEntities, List<Entity> chosenTargets, Entity actor, GameAction action)
 {
     // Interaction is the fundamental core of the game.
@@ -19,9 +25,16 @@ public class Interaction(List<Entity> allEntities, List<Entity> chosenTargets, E
     private Entity Actor { get; set; } = actor;
     private GameAction Action { get; set; } = action;
 
-    public string Resolve()
+    public InteractionResult Resolve()
     {
-        string result = "";
+        InteractionResult result = new();
+
+        if (actor.Hitpoints <= 0)
+        {
+            result.Text = $"{actor.Name} is chilling in the underworld...";
+            result.WasFailedAction = true;
+            return result;
+        }
 
         if (Action.UsesItem)
         {
@@ -29,7 +42,9 @@ public class Interaction(List<Entity> allEntities, List<Entity> chosenTargets, E
 
             if (targets.Count < 2)
             {
-                result += "You need at least 2 targets to use an item.";
+                result.Text = $"You need at least 2 targets to use an item. Targets selected: {targets.Count}";
+                result.WasFailedAction = true;
+                return result;
             }
             
             var item = targets.First();
@@ -37,14 +52,14 @@ public class Interaction(List<Entity> allEntities, List<Entity> chosenTargets, E
             
             foreach (Entity target in targets)
             {
-                result += $"{Action.Effect(Actor, target, item)}";
+                result.Text += $"{Action.Perform(Actor, target, item)}";
             }
         }
         else
         {
             foreach (Entity target in GetActualTargets())
             {
-                result += $"{Action.Effect(Actor, target)}";
+                result.Text += $"{Action.Perform(Actor, target)}";
             }
         }
 

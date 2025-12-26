@@ -10,7 +10,12 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
         
         
         Interaction playerInteraction = new Interaction(sceneManager.Entities, inputManager.Targets, sceneManager.Player, inputManager.chosenAction);
-        CombatLines.Add(playerInteraction.Resolve());
+        InteractionResult result = playerInteraction.Resolve();
+        if (result.WasFailedAction)
+        {
+            CombatLines.Add(result.Text);
+            return CombatLines;
+        }
         
         foreach (Entity entity in sceneManager.Npcs)
         {

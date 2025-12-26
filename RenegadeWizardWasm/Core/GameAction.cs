@@ -15,7 +15,7 @@ public abstract class GameAction()
     // This ONLY describes the effect, NOT the target(s) as this is resolved by Interaction.cs
     
     public bool UsesItem { get; set; } = false;
-    public abstract string Effect(Entity actor, Entity target, Entity? item = null);
+    public abstract string Perform(Entity actor, Entity target, Entity? item = null);
 }
 
 
@@ -30,7 +30,7 @@ public class Throw : GameAction
         TargetType = TargetType.Chosen;
     }
 
-    public override string Effect(Entity actor, Entity target , Entity? item = null)
+    public override string Perform(Entity actor, Entity target , Entity? item = null)
     {
         if (item == null) 
             return "Well you managed to some how throw [NULL] so uh, fuck you.";
@@ -57,7 +57,7 @@ public class Punch : GameAction
         TargetType = TargetType.Chosen;
     }
 
-    public override string Effect(Entity actor, Entity target, Entity? item = null)
+    public override string Perform(Entity actor, Entity target, Entity? item = null)
     {
         target.Hitpoints -= 3;
         return $"{actor.Name} punches {target.Name} for 3hp.";

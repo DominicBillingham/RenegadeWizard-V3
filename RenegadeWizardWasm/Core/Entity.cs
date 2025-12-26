@@ -34,22 +34,23 @@ public abstract class Entity
     public int? Weight { get; set; } = 3;
     public int? Sharpness { get; set; }
 
-    // public virtual string ApplyDamage(int damage)
-    // {
-    //     
-    // }
-    //
-    // public virtual string ApplyHealing(int healing)
-    // {
-    //     
-    // }
+    public virtual string ApplyDamage(int damage)
+    {
+        Hitpoints -= damage;
+        return $"{Name} takes {damage} damage .";
+
+    }
+    
+    public virtual string ApplyHealing(int healing)
+    {
+        Hitpoints += healing;
+        return $"{Name} heals {healing} damage .";
+    }
 
     public virtual string WhenShoved()
     {
         return "";
     }
-
-
 
 }
 
