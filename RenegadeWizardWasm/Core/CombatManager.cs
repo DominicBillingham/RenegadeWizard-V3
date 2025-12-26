@@ -8,12 +8,11 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
     {
         List<string> CombatLines = new List<string>();
         
-        
         Interaction playerInteraction = new Interaction(sceneManager.Entities, inputManager.Targets, sceneManager.Player, inputManager.chosenAction);
         InteractionResult result = playerInteraction.Resolve();
+        CombatLines.Add(result.Text);
         if (result.WasFailedAction)
         {
-            CombatLines.Add(result.Text);
             return CombatLines;
         }
         

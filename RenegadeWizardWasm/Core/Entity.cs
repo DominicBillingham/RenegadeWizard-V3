@@ -37,14 +37,14 @@ public abstract class Entity
     public virtual string ApplyDamage(int damage)
     {
         Hitpoints -= damage;
-        return $"{Name} takes {damage} damage .";
+        return $"{Name} takes {damage} damage.";
 
     }
     
     public virtual string ApplyHealing(int healing)
     {
         Hitpoints += healing;
-        return $"{Name} heals {healing} damage .";
+        return $"{Name} heals {healing} damage.";
     }
 
     public virtual string WhenShoved()

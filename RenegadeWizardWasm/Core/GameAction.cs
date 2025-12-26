@@ -37,8 +37,7 @@ public class Throw : GameAction
 
         if (item.Weight is { } weight && actor.Strength > weight)
         {
-            target.Hitpoints -= weight;
-            return $"{actor.Name} throws {item.Name} at {target.Name} for {weight}hp.";
+            return $"{actor.Name} throws {item.Name} at {target.Name}. {target.ApplyDamage(weight)}";
         }
         else
         {
