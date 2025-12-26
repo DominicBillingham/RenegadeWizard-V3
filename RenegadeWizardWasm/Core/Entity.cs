@@ -54,7 +54,22 @@ public abstract class Entity
 
 }
 
+public class IronGolem : Entity
+{
+    public IronGolem()
+    {
+        Name = "IronGolem";
+        Description = "A hulking monster, immune to most damage.";
+        Controller = Controller.Npc;
+        Hitpoints = 10;
+        Actions.Add(new Punch());
+    }
 
+    public override string ApplyDamage(int damage)
+    {
+        return $"{Name} is immune to damage!";
+    }
+}
 
 public class Player : Entity
 {

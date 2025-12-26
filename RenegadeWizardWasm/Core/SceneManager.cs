@@ -17,11 +17,13 @@ public class SceneManager
         {
             Name = "John"
         };
+        var ironGolem = new IronGolem();
         var table = new Table();
         var chair = new Chair();
         Entities.Add(player);
         Entities.Add(goblin); 
         Entities.Add(goblin2);
+        Entities.Add(ironGolem);
         Entities.Add(table);
         Entities.Add(chair);
     }
