@@ -74,8 +74,8 @@ public class TerminalResponse()
     public List<string> SceneLines { get; set; } = new();
     // This is a list of data that can be used to populate the main view with information.
 
-    public List<Entities> Objects = new();
-    public List<Entities> Creatures = new();
+    public List<Entity> Objects = new();
+    public List<Entity> Creatures = new();
     
     // Used for the auto complete when pressing tab
     public List<string> EntityNames = new();

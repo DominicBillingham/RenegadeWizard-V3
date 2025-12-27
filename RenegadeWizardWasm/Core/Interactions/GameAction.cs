@@ -16,7 +16,7 @@ public abstract class GameAction()
     public string Name { get; set; }
     public List<string> Aka { get; set; } = new();
     public List<string> Names => Aka.Append(Name).ToList();
-    public abstract GameActionResult Resolve(Entities actor, IReadOnlyCollection<Entities> allTargets, List<Entities> desiredTargets);
+    public abstract GameActionResult Resolve(Entity actor, IReadOnlyCollection<Entity> allTargets, List<Entity> desiredTargets);
 }
 
 
@@ -28,7 +28,7 @@ public class Punch : GameAction
         Aka = ["Hit", "Slap", "Whack"];
     }
 
-    public override GameActionResult Resolve(Entities actor, IReadOnlyCollection<Entities> allTargets, List<Entities> desiredTargets)
+    public override GameActionResult Resolve(Entity actor, IReadOnlyCollection<Entity> allTargets, List<Entity> desiredTargets)
     {
         var result = new GameActionResult();
         
@@ -48,7 +48,7 @@ public class Throw : GameAction
         Aka = ["Hurl", "Yeet", "Toss"];
     }
 
-    public override GameActionResult Resolve(Entities actor, IReadOnlyCollection<Entities> allTargets, List<Entities> desiredTargets)
+    public override GameActionResult Resolve(Entity actor, IReadOnlyCollection<Entity> allTargets, List<Entity> desiredTargets)
     {
         var result = new GameActionResult();
 

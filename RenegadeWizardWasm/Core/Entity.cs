@@ -1,7 +1,7 @@
 ﻿
 namespace RenegadeWizardWasm.Core;
 
-public abstract class Entities
+public abstract class Entity
 {
     
     // All modifications to any entity shoud go through their setter, in case if they have something like ignore fire damage.
@@ -52,7 +52,7 @@ public abstract class Entities
 
 }
 
-public class IronGolem : Entities
+public class IronGolem : Entity
 {
     public IronGolem()
     {
@@ -69,7 +69,7 @@ public class IronGolem : Entities
     }
 }
 
-public class Player : Entities
+public class Player : Entity
 {
     public Player()
     {
@@ -82,7 +82,7 @@ public class Player : Entities
     }
 }
 
-public class Table : Entities
+public class Table : Entity
 {
     public Table()
     {
@@ -94,7 +94,7 @@ public class Table : Entities
     }
 }
 
-public class Chair : Entities
+public class Chair : Entity
 {
     public Chair()
     {
@@ -105,7 +105,7 @@ public class Chair : Entities
         Hitpoints = 3;
     }
 }
-public class Goblin : Entities
+public class Goblin : Entity
 {
     public Goblin()
     {
@@ -117,7 +117,7 @@ public class Goblin : Entities
     }
 }
 
-public class HealingPotion : Entities
+public class HealingPotion : Entity
 {
     public HealingPotion()
     {

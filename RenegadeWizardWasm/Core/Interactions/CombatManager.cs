@@ -13,11 +13,11 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
         if (result.AllowRetry)
             return CombatLines;
         
-        foreach (Entities entity in sceneManager.Npcs)
+        foreach (Entity entity in sceneManager.Npcs)
         {
             var random = new Random();
             var action = entity.Actions[random.Next(entity.Actions.Count)];
-            var targets = new List<Entities> { sceneManager.Player };
+            var targets = new List<Entity> { sceneManager.Player };
             
         }
         
