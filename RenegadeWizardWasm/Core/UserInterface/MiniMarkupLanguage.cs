@@ -66,7 +66,7 @@ public class MML
 
         if (input.First() != '#')
         {
-            input = "#" + input;
+            input = "# " + input;
         }
 
         //var pattern = @"#([a-z]*)\s*([^#]*)";

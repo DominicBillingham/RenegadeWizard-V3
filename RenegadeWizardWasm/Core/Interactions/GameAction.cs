@@ -74,7 +74,7 @@ public class Throw : GameAction
 
         if (actor.Strength > item.Weight)
         {
-            result.Strands.Add($"{actor.Name} throws {item.Name} at {target.Name}");
+            result.Strands.Add($"{actor.Name} <powerfully> throws #gn {item.Name} # at {target.Name}");
             target.ApplyDamage(result, item.Weight);
         }
         else
