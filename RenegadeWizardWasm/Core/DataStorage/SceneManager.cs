@@ -3,7 +3,6 @@ namespace RenegadeWizardWasm.Core;
 
 public class SceneManager
 {
-    // To prevent the list from being accidently modified, the get returns a new list that can be freely modified.
     private List<Entity> _entities = new();
     public IReadOnlyList<Entity> Entities => _entities;
     public Entity Player => Entities.First(x => x.Controller == Controller.Player);
@@ -16,7 +15,9 @@ public class SceneManager
         var goblin = new Goblin();
         var goblin2 = new Goblin
         {
-            Name = "John"
+            Hitpoints = 54,
+            Name = "Adam",
+            Description = "King of the goblins"
         };
         var ironGolem = new IronGolem();
         var table = new Table();

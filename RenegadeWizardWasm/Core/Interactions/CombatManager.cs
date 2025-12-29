@@ -7,7 +7,7 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
     {
         List<string> CombatLines = new List<string>();
 
-        GameActionResult result = inputManager.chosenAction.Resolve(sceneManager.Player, sceneManager.Entities, inputManager.Targets);
+        GameActionResult result = inputManager.chosenAction.GetEvents(sceneManager.Player, sceneManager.Entities, inputManager.Targets);
         CombatLines.Add(result.Text);
         
         if (result.AllowRetry)

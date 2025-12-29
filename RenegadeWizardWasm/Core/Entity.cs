@@ -33,22 +33,16 @@ public abstract class Entity
     public int Weight { get; set; } = 3;
     public int Sharpness { get; set; }
 
-    public virtual void ApplyDamage(GameActionResult result, int damage)
+
+    private List<Mod> Modifiers { get; set; } = [];
+    public virtual void ModifyEvent(InteractionEvent gameEvent)
     {
-        Hitpoints -= damage;
-        result.Strands.Add($"{Name} takes {damage} damage.");
+        foreach (Mod mod in Modifiers)
+        {
+            mod.ModifyEvent(gameEvent);
+        }
     }
     
-    public virtual void ApplyHealing(GameActionResult result, int healing)
-    {
-        Hitpoints += healing;
-        result.Strands.Add($"{Name} heals by {healing}.");
-    }
-
-    public virtual string WhenShoved()
-    {
-        return "";
-    }
 
 }
 
@@ -61,11 +55,6 @@ public class IronGolem : Entity
         Controller = Controller.Npc;
         Hitpoints = 10;
         Actions.Add(new Punch());
-    }
-
-    public override void ApplyDamage(GameActionResult result, int damage)
-    {
-        result.Strands.Add($"{Name} is immune to damage!");
     }
 }
 

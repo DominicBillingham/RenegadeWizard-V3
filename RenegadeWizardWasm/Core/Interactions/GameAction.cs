@@ -2,13 +2,6 @@
 namespace RenegadeWizardWasm.Core;
 
 
-public class GameActionResult
-{
-    public string Text => string.Join(". ", Strands);
-    
-    public List<string> Strands = [];
-    public bool AllowRetry { get; set; } = false;
-}
 
 public abstract class GameAction()
 {
@@ -16,7 +9,10 @@ public abstract class GameAction()
     public string Name { get; set; }
     public List<string> Aka { get; set; } = new();
     public List<string> Names => Aka.Append(Name).ToList();
-    public abstract GameActionResult Resolve(Entity actor, IReadOnlyCollection<Entity> allTargets, List<Entity> desiredTargets);
+    
+    public abstract void GetTargets(Interaction context);
+
+    public abstract void GetEvents(Interaction context);
 }
 
 
@@ -28,60 +24,38 @@ public class Punch : GameAction
         Aka = ["Hit", "Slap", "Whack"];
     }
 
-    public override GameActionResult Resolve(Entity actor, IReadOnlyCollection<Entity> allTargets, List<Entity> desiredTargets)
+    public override void GetTargets(Interaction context)
     {
-        var result = new GameActionResult();
+        Entity? target = context.DesiredTargets.FirstOrDefault();
+        if (target is null)
+        {
+            context.Result = $"{context.Actor.Name} fails to find a target to {context.GameAction.Name}.";
+            return;
+        }
+        context.ActualTargets.Add(target);
+    }
+    
+    
+    public override void GetEvents(Interaction context)
+    {
         
-        var target = desiredTargets.FirstOrDefault();
-        result.Strands.Add($"{actor.Name} punches {target.Name}");
-        target.ApplyDamage(result, 3);
-        return result;
+        
+        foreach (Entity ent in context.ActualTargets)
+        {
+            context.Result += $"{context.Actor.Name} punches {ent.Name}.";
+            
+            var dEvent = new DamageEvent
+            {
+                Damage = 1,
+                Target = ent,
+                Text = $"{ent.Name} takes 1 damage."
+            };
+            
+            ent
+
+        }
+        
+        
     }
 }
 
-public class Throw : GameAction
-{
-
-    public Throw() 
-    {
-        Name = "Throw";
-        Aka = ["Hurl", "Yeet", "Toss"];
-    }
-
-    public override GameActionResult Resolve(Entity actor, IReadOnlyCollection<Entity> allTargets, List<Entity> desiredTargets)
-    {
-        var result = new GameActionResult();
-
-        var item = desiredTargets.FirstOrDefault();
-
-        if (item == null)
-        {
-            result.AllowRetry = true;
-            result.Strands.Add($"{actor.Name} tries to an throw an item, but no item is found.");
-            return result;
-        }
-        
-        desiredTargets.Remove(item);
-        
-        var target = desiredTargets.FirstOrDefault();
-        
-        if (target == null)
-        {
-            result.AllowRetry = true;
-            result.Strands.Add($"{actor.Name} tries to an throw an item, but no target is found.");
-            return result;
-        }
-
-        if (actor.Strength > item.Weight)
-        {
-            result.Strands.Add($"{actor.Name} <powerfully> throws #gn {item.Name} # at {target.Name}");
-            target.ApplyDamage(result, item.Weight);
-        }
-        else
-        {
-            result.Strands.Add($"{actor.Name} fails to lift {item.Name}!");
-        }
-        
-        return result;
-    }
-}
