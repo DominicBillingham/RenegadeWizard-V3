@@ -13,18 +13,20 @@ public class Interaction(Entity? actor, GameAction? gameAction, IReadOnlyCollect
     public readonly List<Entity> DesiredTargets = desiredTargets;
 
     // Takes the readonly values, and uses them to calculate WHAT would happen.
-    public void CalculateResult()
+    public void GetEffects()
     {
 
         if (Actor is null)
         {
             Result = "No actor selected.";
+            AllowRetry = true;
             return;
         }
         
         if (GameAction is null)
         {
             Result = "No action selected.";
+            AllowRetry = true;
             return;
         }
         
@@ -32,10 +34,11 @@ public class Interaction(Entity? actor, GameAction? gameAction, IReadOnlyCollect
 
         if (ActualTargets.Count == 0)
         {
+            AllowRetry = true;
             return;
         }
         
-        GameAction.GetEvents(this);
+        GameAction.GetEffects(this);
         
         
     }
@@ -48,7 +51,7 @@ public class Interaction(Entity? actor, GameAction? gameAction, IReadOnlyCollect
     public bool AllowRetry { get; set; } = false;
     public string Result { get; set; } = "";
     
-    public string ApplyEvents()
+    public string ApplyEffects()
     {
         foreach (InteractionEffects effect in Effects)
         {

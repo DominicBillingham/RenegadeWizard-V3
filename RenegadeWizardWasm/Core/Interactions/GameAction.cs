@@ -12,7 +12,7 @@ public abstract class GameAction()
     
     public abstract void GetTargets(Interaction context);
 
-    public abstract void GetEvents(Interaction context);
+    public abstract void GetEffects(Interaction context);
 }
 
 
@@ -36,7 +36,7 @@ public class Punch : GameAction
     }
     
     
-    public override void GetEvents(Interaction context)
+    public override void GetEffects(Interaction context)
     {
         
         

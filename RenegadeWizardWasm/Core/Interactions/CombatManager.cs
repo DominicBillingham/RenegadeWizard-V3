@@ -8,8 +8,8 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
         List<string> CombatLines = new List<string>();
 
         Interaction interaction = new Interaction(sceneManager.Player, inputManager.chosenAction, sceneManager.Entities, inputManager.Targets);
-        interaction.CalculateResult();
-        string actionResult = interaction.ApplyEvents();
+        interaction.GetEffects();
+        string actionResult = interaction.ApplyEffects();
         CombatLines.Add(actionResult);
             
         
