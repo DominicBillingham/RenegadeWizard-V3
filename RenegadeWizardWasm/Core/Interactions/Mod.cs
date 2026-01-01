@@ -16,3 +16,19 @@ public abstract class Mod
 }
 
 
+public class Armour : Mod
+{
+    public int DamageReduction { get; set; }
+    public override void ModifyEvent(InteractionEvent gameEvent)
+    {
+        if (gameEvent is DamageEvent damageEvent)
+        {
+            damageEvent.Damage -= DamageReduction;
+            if (damageEvent.Damage < 0)
+            {
+                damageEvent.Damage = 0;
+            }
+            damageEvent.Text += $"({Name} reduces the damage by {DamageReduction} to {damageEvent.Damage})";
+        }
+    }
+}

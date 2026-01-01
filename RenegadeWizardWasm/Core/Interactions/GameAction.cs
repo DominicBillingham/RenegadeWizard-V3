@@ -51,6 +51,8 @@ public class Punch : GameAction
                 Text = $"{ent.Name} takes 1 damage."
             };
             
+            ent.ModifyEvent(dEvent);
+            
             context.Events.Add(dEvent);
         }
         
