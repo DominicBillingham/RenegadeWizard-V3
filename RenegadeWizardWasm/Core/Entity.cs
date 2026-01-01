@@ -32,7 +32,7 @@ public abstract class Entity
     // Tool usage
     public int Weight { get; set; } = 3;
     public int Sharpness { get; set; }
-    public List<Mod> Modifiers { get; set; } = [];
+    public List<Modifier> Modifiers { get; set; } = [];
 
 }
 

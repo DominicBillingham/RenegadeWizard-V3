@@ -5,7 +5,7 @@ public enum ModType
     DamageReduction,
 }
 
-public abstract class Mod
+public abstract class Modifier
 {
     public string Name { get; set; } = "";
     
@@ -15,7 +15,7 @@ public abstract class Mod
 }
 
 
-public class Armour : Mod
+public class Armour : Modifier
 {
     public Armour(int armour)
     {

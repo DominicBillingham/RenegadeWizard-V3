@@ -1,20 +1,13 @@
-﻿
-namespace RenegadeWizardWasm.Core;
-
-
+﻿namespace RenegadeWizardWasm.Core;
 
 public abstract class GameAction()
 {
-    
     public string Name { get; set; }
     public List<string> Aka { get; set; } = new();
     public List<string> Names => Aka.Append(Name).ToList();
-    
     public abstract void GetTargets(Interaction context);
-
     public abstract void GetEffects(Interaction context);
 }
-
 
 public class Punch : GameAction
 {
@@ -32,17 +25,14 @@ public class Punch : GameAction
             context.Result = $"{context.Actor.Name} fails to find a target to {context.GameAction.Name}.";
             return;
         }
+
         context.ActualTargets.Add(target);
     }
     
-    
     public override void GetEffects(Interaction context)
     {
-        
-        
         foreach (Entity target in context.ActualTargets)
         {
-            
             var dEvent = new DamageEffects
             {
                 Damage = 1,
@@ -51,8 +41,5 @@ public class Punch : GameAction
             };
             context.Effects.Add(dEvent);
         }
-        
-        
     }
 }
-
