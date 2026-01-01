@@ -7,19 +7,12 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
     {
         List<string> CombatLines = new List<string>();
 
-        GameActionResult result = inputManager.chosenAction.GetEvents(sceneManager.Player, sceneManager.Entities, inputManager.Targets);
-        CombatLines.Add(result.Text);
-        
-        if (result.AllowRetry)
-            return CombatLines;
-        
-        foreach (Entity entity in sceneManager.Npcs)
-        {
-            var random = new Random();
-            var action = entity.Actions[random.Next(entity.Actions.Count)];
-            var targets = new List<Entity> { sceneManager.Player };
+        Interaction interaction = new Interaction(sceneManager.Player, inputManager.chosenAction, sceneManager.Entities, inputManager.Targets);
+        interaction.CalculateResult();
+        string actionResult = interaction.ApplyEvents();
+        CombatLines.Add(actionResult);
             
-        }
+        
         
         return CombatLines;
 

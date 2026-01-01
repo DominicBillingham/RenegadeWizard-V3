@@ -4,12 +4,12 @@
 // Essentially, the interaction object is a command object (made from smaller command objects, called events!)
 // Events can be ANYTHING, they are the smallest piece of the game (like taking damage, being moved, etc).
 // The interaction object gets the action, and slowly builds up a list of events that will happen.
-public class Interaction(Entity? actor, GameAction? gameAction, List<Entity> allEntities, List<Entity> desiredTargets)
+public class Interaction(Entity? actor, GameAction? gameAction, IReadOnlyCollection<Entity> allEntities, List<Entity> desiredTargets)
 {
     // This data should never be modified, because then the command pattern would be broken.
     public readonly Entity? Actor = actor;
     public readonly GameAction? GameAction = gameAction;
-    public readonly List<Entity> AllEntities = allEntities;
+    public readonly IReadOnlyCollection<Entity> AllEntities = allEntities;
     public readonly List<Entity> DesiredTargets = desiredTargets;
 
     // Takes the readonly values, and uses them to calculate WHAT would happen.
@@ -49,6 +49,16 @@ public class Interaction(Entity? actor, GameAction? gameAction, List<Entity> all
     public bool AllowRetry { get; set; } = false;
     public string Result { get; set; } = "";
     
+    public string ApplyEvents()
+    {
+        foreach (InteractionEvent gameEvent in Events)
+        {
+            gameEvent.Apply(gameEvent.Target);
+            Result += gameEvent.Text;
+        }
+        return Result;
+    }
+    
 
 
 
@@ -58,6 +68,7 @@ public class Interaction(Entity? actor, GameAction? gameAction, List<Entity> all
 public abstract class InteractionEvent()
 {
     public Entity Target { get; set; } 
+    public Entity Actor { get; set; }
     
     public string Text { get; set; } = "";
     public abstract void Apply(Entity target);
