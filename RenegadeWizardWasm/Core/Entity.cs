@@ -32,17 +32,7 @@ public abstract class Entity
     // Tool usage
     public int Weight { get; set; } = 3;
     public int Sharpness { get; set; }
-
-
     public List<Mod> Modifiers { get; set; } = [];
-    public virtual void ModifyEvent(InteractionEvent gameEvent)
-    {
-        foreach (Mod mod in Modifiers)
-        {
-            mod.ModifyEvent(gameEvent);
-        }
-    }
-    
 
 }
 
@@ -55,12 +45,7 @@ public class IronGolem : Entity
         Controller = Controller.Npc;
         Hitpoints = 10;
         Actions.Add(new Punch());
-        
-        Modifiers.Add(new Armour
-        {
-            Name = "Armour",
-            DamageReduction = 5,
-        });
+        Modifiers.Add(new Armour(5));
     }
 }
 

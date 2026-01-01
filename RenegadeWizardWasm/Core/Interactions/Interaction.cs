@@ -43,43 +43,52 @@ public class Interaction(Entity? actor, GameAction? gameAction, IReadOnlyCollect
     // Results of the interaction.
 
     public List<Entity> ActualTargets { get; set; } = [];
-
-    public List<InteractionEvent> Events { get; set; } = [];
+    public List<InteractionEffects> Effects { get; set; } = [];
     
     public bool AllowRetry { get; set; } = false;
     public string Result { get; set; } = "";
     
     public string ApplyEvents()
     {
-        foreach (InteractionEvent gameEvent in Events)
+        foreach (InteractionEffects effect in Effects)
         {
-            gameEvent.Apply(gameEvent.Target);
-            Result += gameEvent.Text;
+            effect.Apply(effect.Target);
+            Result += effect.Text;
         }
         return Result;
     }
-    
-
-
-
 
 }
 
-public abstract class InteractionEvent()
+public abstract class InteractionEffects()
 {
     public Entity Target { get; set; } 
     public Entity Actor { get; set; }
-    
+    public List<Mod> Modifiers { get; set; } = [];
     public string Text { get; set; } = "";
     public abstract void Apply(Entity target);
     
 }
 
-public class DamageEvent() : InteractionEvent()
+public class DamageEffects() : InteractionEffects()
 {
     public int Damage { get; set; }
+    
     public override void Apply(Entity target)
     {
+        
+        foreach (var mod in Modifiers)
+        {
+            mod.ModifyEffect(this);
+        }
+        
+        Text += $"{target.Name} takes {Damage} damage";
+        
+        if (Modifiers.Any())
+        {
+            Text += $", modifed by [{string.Join(", ", Modifiers.Select(mod => mod.Name))}].";
+        }
+        
         target.Hitpoints -= Damage;
     }
 }

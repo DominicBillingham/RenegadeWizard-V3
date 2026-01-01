@@ -1,34 +1,38 @@
 ﻿namespace RenegadeWizardWasm.Core;
 
+public enum ModType
+{
+    DamageReduction,
+}
+
 public abstract class Mod
 {
     public string Name { get; set; } = "";
     
-    public int Duration { get; set; }
-    
-    public int Priority { get; set; } = 0;
+    public ModType Type { get; set; }
+    public abstract void ModifyEffect(InteractionEffects effect);
 
-    public virtual void ModifyEvent(InteractionEvent gameEvent) 
-    {
-        
-    }
-    
 }
 
 
 public class Armour : Mod
 {
-    public int DamageReduction { get; set; }
-    public override void ModifyEvent(InteractionEvent gameEvent)
+    public Armour(int armour)
     {
-        if (gameEvent is DamageEvent damageEvent)
+        Type = ModType.DamageReduction;
+        Name = "Armour";
+        DamageReduction = armour;
+    }
+    public int DamageReduction { get; set; }
+    public override void ModifyEffect(InteractionEffects effect)
+    {
+        if (effect is DamageEffects damageEvent)
         {
             damageEvent.Damage -= DamageReduction;
             if (damageEvent.Damage < 0)
             {
                 damageEvent.Damage = 0;
             }
-            damageEvent.Text += $"({Name} reduces the damage by {DamageReduction} to {damageEvent.Damage})";
         }
     }
 }

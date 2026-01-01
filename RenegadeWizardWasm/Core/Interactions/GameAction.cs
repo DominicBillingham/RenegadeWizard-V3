@@ -40,20 +40,16 @@ public class Punch : GameAction
     {
         
         
-        foreach (Entity ent in context.ActualTargets)
+        foreach (Entity target in context.ActualTargets)
         {
-            context.Result += $"{context.Actor.Name} punches {ent.Name}.";
             
-            var dEvent = new DamageEvent
+            var dEvent = new DamageEffects
             {
                 Damage = 1,
-                Target = ent,
-                Text = $"{ent.Name} takes 1 damage."
+                Target = target,
+                Modifiers = target.Modifiers.Where(mod => mod.Type == ModType.DamageReduction).ToList()
             };
-            
-            ent.ModifyEvent(dEvent);
-            
-            context.Events.Add(dEvent);
+            context.Effects.Add(dEvent);
         }
         
         
