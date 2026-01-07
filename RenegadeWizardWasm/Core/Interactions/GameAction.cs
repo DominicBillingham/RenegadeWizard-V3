@@ -31,15 +31,11 @@ public class Punch : GameAction
     
     public override void GetEffects(Interaction context)
     {
-        foreach (Entity target in context.ActualTargets)
+        var dEvent = new DamageEffects
         {
-            var dEvent = new DamageEffects
-            {
-                Damage = 1,
-                Target = target,
-                Modifiers = target.Modifiers.Where(mod => mod.Type == ModType.DamageReduction).ToList()
-            };
-            context.Effects.Add(dEvent);
-        }
+            Damage = 1,
+            Targets = context.ActualTargets, 
+        };
+        context.Effects.Add(dEvent);
     }
 }

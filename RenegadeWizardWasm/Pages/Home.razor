@@ -9,7 +9,8 @@
 <div class="d-flex flex-wrap justify-content-center gap-1">
 
     <!-- Left Wing - Items -->
-    <div class="d-flex flex-column gap-2 justify-content-center" style="width: 200px;">
+    <div class="d-flex flex-column gap-2 justify-content-center p-2 mb-5 rounded-3"
+         style="width: 200px; background: rgba(91,93,103,0.4); height: calc(100vh - 230px); margin-top: 110px;">
         @foreach (var item in Objects)
         {
             <div class="card shadow border-0">
@@ -22,7 +23,7 @@
     </div>
 
     <!-- Main Terminal -->
-    <div class="card shadow border-0 mt-4 m-2"
+    <div class="card shadow border-0 mt-4 "
          style="width:950px; max-width: 950px; flex: 1 1 auto; ">
         <h1 class="card-header mobile-hide">RENEGADE WIZARD</h1>
         <div class="card-body">
@@ -72,7 +73,8 @@
     </div>
 
     <!-- Right Wing - Creatures -->
-    <div class="d-flex flex-column gap-2 justify-content-center" style="width: 200px;">
+    <div class="d-flex flex-column gap-2 justify-content-center p-2 mb-5 rounded-3"
+         style="width: 200px; background: rgba(91,93,103,0.4); height: calc(100vh - 230px); margin-top: 110px;">
         @foreach (var creature in Creatures)
         {
             <div class="card shadow border-0">
@@ -102,7 +104,7 @@
     private List<Entity> Creatures { get; set; } = new();
     public string UserInput { get; set; } = string.Empty;
     private bool _shouldScroll = false;
-
+    
     private List<string> _commandHistory = new();
     private int _historyIndex = -1;
     private string _tempInput = string.Empty;

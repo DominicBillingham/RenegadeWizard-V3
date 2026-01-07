@@ -54,7 +54,7 @@ public class Interaction(
     {
         foreach (InteractionEffects effect in Effects)
         {
-            effect.Apply(effect.Target);
+            effect.Apply();
             Result += effect.Text;
         }
 
