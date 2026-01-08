@@ -33,26 +33,26 @@ public class Interaction(
             return;
         }
 
-        GameAction.GetTargets(this);
 
-        if (ActualTargets.Count == 0)
+        if (!GameAction.TryGetTargets(this))
         {
             AllowRetry = true;
             return;
         }
 
-        GameAction.GetEffects(this);
+        GameAction.StackEffects(this);
     }
 
     // Results of the interaction.
     public List<Entity> ActualTargets { get; set; } = [];
-    public List<InteractionEffects> Effects { get; set; } = [];
+    public List<InteractionEffect> Effects { get; set; } = [];
     public bool AllowRetry { get; set; } = false;
     public string Result { get; set; } = "";
 
+    
     public string ApplyEffects()
     {
-        foreach (InteractionEffects effect in Effects)
+        foreach (InteractionEffect effect in Effects)
         {
             effect.Apply();
             Result += effect.Text;

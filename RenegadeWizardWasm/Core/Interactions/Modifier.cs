@@ -10,7 +10,7 @@ public abstract class Modifier
     public string Name { get; set; } = "";
     
     public ModType Type { get; set; }
-    public abstract void ModifyEffect(InteractionEffects effect);
+    public abstract void ModifyEffect(InteractionEffect effect);
 
 }
 
@@ -24,15 +24,16 @@ public class Armour : Modifier
         DamageReduction = armour;
     }
     public int DamageReduction { get; set; }
-    public override void ModifyEffect(InteractionEffects effect)
+    public override void ModifyEffect(InteractionEffect effect)
     {
-        if (effect is DamageEffects damageEvent)
+        if (effect is DamageEffect damageEvent)
         {
             damageEvent.Damage -= DamageReduction;
             if (damageEvent.Damage < 0)
             {
                 damageEvent.Damage = 0;
             }
+            effect.Text = $"{effect.Target} reduces the damage by {DamageReduction} to just {damageEvent.Damage}.";
         }
     }
 }
