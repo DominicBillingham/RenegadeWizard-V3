@@ -36,10 +36,11 @@ public class Punch : GameAction
         var damage = new DamageEffect
         {
             Actor = context.Actor,
-            Target = context.ActualTargets.First(), 
+            Target = context.ActualTargets.First(),
             Context = context,
             Damage = 1,
         };
+        damage.Calculate();
         context.Effects.Add(damage);
     }
 }
@@ -75,6 +76,7 @@ public class Throw : GameAction
             Target = context.ActualTargets[0], 
             Context = context,
         };
+        lift.Calculate();
         context.Effects.Add(lift);
 
 
@@ -87,6 +89,7 @@ public class Throw : GameAction
                 Context = context,
                 Damage = lift.LiftOverflow,
             };
+            damage.Calculate();
             context.Effects.Add(damage);
             
         }

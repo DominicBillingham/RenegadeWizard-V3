@@ -33,7 +33,7 @@ public class Armour : Modifier
             {
                 damageEvent.Damage = 0;
             }
-            effect.Text = $"{effect.Target} reduces the damage by {DamageReduction} to just {damageEvent.Damage}.";
+            effect.Text = $"{effect.Target.Name} reduces the damage by {DamageReduction} to just {damageEvent.Damage}.";
         }
     }
 }

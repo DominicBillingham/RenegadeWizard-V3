@@ -7,6 +7,7 @@ public abstract class InteractionEffect
     public required Interaction Context { get; set; }
     public string Text { get; set; } = "";
 
+    public abstract void Calculate();
     public abstract string Apply();
 }
 
@@ -14,7 +15,7 @@ public class DamageEffect : InteractionEffect
 {
     public int Damage { get; set; }
 
-    public DamageEffect()
+    public override void Calculate()
     {
         Text += $"{Target.Name} takes {Damage} damage";
         
@@ -37,7 +38,7 @@ public class LiftEffect : InteractionEffect
 
     public int LiftOverflow { get; set; }
     
-    public LiftEffect()
+    public override void Calculate()
     {
 
         LiftOverflow = Actor.Strength - Target.Weight;
