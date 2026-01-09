@@ -23,6 +23,8 @@ public abstract class Entity
 
     public Faction Faction { get; set; }
     
+    // Dimensions
+    public int Size { get; set; } = 1;
     
     // Skills
     public int Strength { get; set; } = 10;
@@ -32,13 +34,14 @@ public abstract class Entity
     public int Wisdom { get; set; } = 10;
     public int Charisma { get; set; } = 10;
     
+    
     // Senses
     public int Smell { get; set; }
     public int Taste { get; set; }
     
     // Tool usage
-    public int Weight { get; set; } = 3;
-    public int Sharpness { get; set; }
+    public int Weight { get; set; }
+    public int FoodValue { get; set; } 
 
 }
 

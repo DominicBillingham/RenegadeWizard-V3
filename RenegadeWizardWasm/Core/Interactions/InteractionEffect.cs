@@ -63,38 +63,35 @@ public class LiftEffect : InteractionEffect
 
 public class CharmEffect : InteractionEffect
 {
-    public int LiftOverflow { get; set; }
     protected override void Core()
     {
-        LiftOverflow = Actor.Strength - Target.Weight;
-        if (LiftOverflow > 0)
-        {
-            Result = $"{Actor.Name} lifts {Target.Name} ";
-        }
-        else
-        {
-            Result = $"{Actor.Name} tries to lift {Target.Name} but fails.";
-        }
+        Target.Faction = Actor.Faction;
+        Result = $"{Actor.Name} charms {Target.Name}.";
     }
 }
 
 public class ContactEffect : InteractionEffect
 {
-    public int LiftOverflow { get; set; }
     protected override void Core()
     {
-        LiftOverflow = Actor.Strength - Target.Weight;
-        if (LiftOverflow > 0)
-        {
-            Result = $"{Actor.Name} lifts {Target.Name} ";
-        }
-        else
-        {
-            Result = $"{Actor.Name} tries to lift {Target.Name} but fails.";
-        }
+        // This effect doesn't do anything by itself.
     }
 }
 
+
+public class ConsumeEffect : InteractionEffect
+{
+    protected override void Core()
+    {
+        if (Actor.Size > Target.Size)
+        {
+            Target.Hitpoints = 0;
+            Actor.Hitpoints += Target.FoodValue;
+            Result = $"{Actor.Name} consumes {Target.Name} for {Target.FoodValue} hitpoints.";
+        }
+        
+    }
+}
 
 
 
