@@ -5,6 +5,7 @@ public abstract class GameAction()
     public string Name { get; set; }
     public List<string> Aka { get; set; } = new();
     public List<string> Names => Aka.Append(Name).ToList();
+    public string TargetHelpText { get; init; }
     public abstract bool TryGetTargets(Interaction context);
     public abstract void StackEffects(Interaction context);
 }
@@ -15,6 +16,7 @@ public class Punch : GameAction
     {
         Name = "Punch";
         Aka = ["Hit", "Slap", "Whack"];
+        TargetHelpText = "Punch [name]";
     }
 
     public override bool TryGetTargets(Interaction context)
@@ -40,8 +42,7 @@ public class Punch : GameAction
             Context = context,
             Damage = 1,
         };
-        damage.Calculate();
-        context.Effects.Add(damage);
+        damage.Apply();
     }
 }
 
@@ -51,6 +52,7 @@ public class Throw : GameAction
     {
         Name = "Throw";
         Aka = ["Hurl", "Yeet", "Toss"];
+        TargetHelpText = "I throw [name] at [name2]";
     }
 
     public override bool TryGetTargets(Interaction context)
@@ -76,9 +78,7 @@ public class Throw : GameAction
             Target = context.ActualTargets[0], 
             Context = context,
         };
-        lift.Calculate();
-        context.Effects.Add(lift);
-
+        lift.Apply();
 
         if (lift.LiftOverflow > 0)
         {
@@ -89,8 +89,7 @@ public class Throw : GameAction
                 Context = context,
                 Damage = lift.LiftOverflow,
             };
-            damage.Calculate();
-            context.Effects.Add(damage);
+            damage.Apply();
             
         }
         

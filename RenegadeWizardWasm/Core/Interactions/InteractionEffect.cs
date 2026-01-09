@@ -5,32 +5,43 @@ public abstract class InteractionEffect
     public required Entity Target { get; set; }
     public required Entity Actor { get; set; }
     public required Interaction Context { get; set; }
-    public string Text { get; set; } = "";
+    public string Result { get; set; } = "";
 
-    public abstract void Calculate();
-    public abstract string Apply();
-}
-
-public class DamageEffect : InteractionEffect
-{
-    public int Damage { get; set; }
-
-    public override void Calculate()
+    public void Apply()
     {
-        Text += $"{Target.Name} takes {Damage} damage";
+        Context.EffectLog.Add(this);
         
+        foreach (var mod in Actor.Boosters)
+        {
+            mod.ModifyEffect(this);
+        }
+
         foreach (var mod in Target.Modifiers)
         {
             mod.ModifyEffect(this);
         }
 
-    }
-    public override string Apply()
-    {
+        if (Target.Replacer != null)
+        {
+            Target.Replacer.ModifyEffect(this);
+            return;
+        }
         
-        Target.Hitpoints -= Damage;
-        return Text;
+        Core();
+        
     }
+    protected abstract void Core();
+}
+
+public class DamageEffect : InteractionEffect
+{
+    public int Damage { get; set; }
+    protected override void Core()
+    {
+        Result += $"{Target.Name} takes {Damage} damage";
+        Target.Hitpoints -= Damage;
+    }
+
 }
 
 public class LiftEffect : InteractionEffect
@@ -38,55 +49,23 @@ public class LiftEffect : InteractionEffect
 
     public int LiftOverflow { get; set; }
     
-    public override void Calculate()
+    protected override void Core()
     {
 
         LiftOverflow = Actor.Strength - Target.Weight;
             
         if (LiftOverflow > 0)
         {
-            Text = $"{Actor.Name} lifts {Target.Name} ";
+            Result = $"{Actor.Name} lifts {Target.Name} ";
         }
         else
         {
-            Text = $"{Actor.Name} tries to lift {Target.Name} but fails.";
-        }
-        
-        foreach (var mod in Target.Modifiers)
-        {
-            mod.ModifyEffect(this);
+            Result = $"{Actor.Name} tries to lift {Target.Name} but fails.";
         }
         
     }
-    public override string Apply()
-    {
-        return Text;
-    }
+
 }
 
 
 
-
-
-// public class ThrowEffect() : InteractionEffects()
-// {
-//     
-//     public int Damage { get; set; }
-//
-//     public override void Apply(Entity target)
-//     {
-//         foreach (var mod in Modifiers)
-//         {
-//             mod.ModifyEffect(this);
-//         }
-//
-//         Text += $"{target.Name} takes {Damage} damage";
-//
-//         if (Modifiers.Any())
-//         {
-//             Text += $", modifed by [{string.Join(", ", Modifiers.Select(mod => mod.Name))}].";
-//         }
-//
-//         target.Hitpoints -= Damage;
-//     }
-// }

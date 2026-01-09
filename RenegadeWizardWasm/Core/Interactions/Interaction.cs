@@ -1,64 +1,59 @@
 ﻿namespace RenegadeWizardWasm.Core;
 
-// Essentially, the interaction object is a giant command object (made from smaller command objects, called effects!)
-// Effects can be ANYTHING, they are the smallest piece of the game (like taking damage, being moved, etc).
-// An effect is one actor, one entity, and the modifers that change the results of the effect.
-// Finally, the effects can then be applied after everything has settled down.
+// Every action is broken down into effects. Each effect is the smallest possible operation, such as healing, knockback, etc.
+// This means actions essentially orchestrate effects, such as a lift effect succeeding before dealing damage for throw.
+// Every effect has a core, for example, a damage effect the core is actually dealing damage.
+// Every effect is then modified by boosters (from the actor), modifiers (from the target) and a potential replacer.
+// Boosters improve the effect, modifiers add / modify the effect; replaces change the effects result.
+// For example, the damage effect has a core that deals damage, booster may double the damage, modifer may reduce it by -5, replace may reflect the damage instead.
+
 public class Interaction(
     Entity? actor,
     GameAction? gameAction,
     IReadOnlyCollection<Entity> allEntities,
     List<Entity> desiredTargets)
 {
-    // This data should never be modified, because then the command pattern would be broken.
     public readonly Entity? Actor = actor;
     public readonly GameAction? GameAction = gameAction;
     public readonly IReadOnlyCollection<Entity> AllEntities = allEntities;
     public readonly List<Entity> DesiredTargets = desiredTargets;
 
-    // Takes the readonly values, and uses them to calculate WHAT would happen.
-    public void GetEffects()
+    public string Resolve()
     {
         if (Actor is null)
         {
             Result = "No actor selected.";
             AllowRetry = true;
-            return;
+            return Result;
         }
 
         if (GameAction is null)
         {
             Result = "No action selected.";
             AllowRetry = true;
-            return;
+            return Result;
         }
-
 
         if (!GameAction.TryGetTargets(this))
         {
             AllowRetry = true;
-            return;
+            return Result;
         }
 
         GameAction.StackEffects(this);
-    }
-
-    // Results of the interaction.
-    public List<Entity> ActualTargets { get; set; } = [];
-    public List<InteractionEffect> Effects { get; set; } = [];
-    public bool AllowRetry { get; set; } = false;
-    public string Result { get; set; } = "";
-
-    
-    public string ApplyEffects()
-    {
-        foreach (InteractionEffect effect in Effects)
+        
+        foreach (var effect in EffectLog)
         {
-            effect.Apply();
-            Result += effect.Text;
+            Result += effect.Result;
         }
 
         return Result;
     }
+
+    public List<Entity> ActualTargets { get; set; } = [];
+    public List<InteractionEffect> EffectLog { get; set; } = [];
+    public bool AllowRetry { get; set; } = false;
+    public string Result { get; set; } = "";
+    
 }
 

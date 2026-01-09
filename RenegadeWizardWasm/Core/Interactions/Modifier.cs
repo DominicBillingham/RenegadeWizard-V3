@@ -1,15 +1,9 @@
 ﻿namespace RenegadeWizardWasm.Core;
 
-public enum ModType
-{
-    DamageReduction,
-}
 
 public abstract class Modifier
 {
     public string Name { get; set; } = "";
-    
-    public ModType Type { get; set; }
     public abstract void ModifyEffect(InteractionEffect effect);
 
 }
@@ -19,7 +13,6 @@ public class Armour : Modifier
 {
     public Armour(int armour)
     {
-        Type = ModType.DamageReduction;
         Name = "Armour";
         DamageReduction = armour;
     }
@@ -33,7 +26,7 @@ public class Armour : Modifier
             {
                 damageEvent.Damage = 0;
             }
-            effect.Text = $"{effect.Target.Name} reduces the damage by {DamageReduction} to just {damageEvent.Damage}.";
+            effect.Result += $"{effect.Target.Name} reduces damage by {DamageReduction}.";
         }
     }
 }

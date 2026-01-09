@@ -17,6 +17,11 @@ public abstract class Entity
     public List<GameAction> Actions { get; set; } = new List<GameAction>();
     
     
+    public List<Modifier> Boosters { get; set; } = [];
+    public List<Modifier> Modifiers { get; set; } = [];
+    public Modifier? Replacer { get; set; } 
+
+    
     // Skills
     public int Strength { get; set; } = 10;
     public int Dexterity { get; set; } = 10;
@@ -32,7 +37,6 @@ public abstract class Entity
     // Tool usage
     public int Weight { get; set; } = 3;
     public int Sharpness { get; set; }
-    public List<Modifier> Modifiers { get; set; } = [];
 
 }
 
