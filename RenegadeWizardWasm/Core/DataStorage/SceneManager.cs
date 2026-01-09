@@ -1,4 +1,6 @@
 ﻿
+using RenegadeWizardWasm.Core.Enums;
+
 namespace RenegadeWizardWasm.Core;
 
 public class SceneManager

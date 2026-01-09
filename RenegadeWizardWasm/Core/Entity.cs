@@ -1,4 +1,6 @@
 ﻿
+using RenegadeWizardWasm.Core.Enums;
+
 namespace RenegadeWizardWasm.Core;
 
 public abstract class Entity
@@ -15,12 +17,12 @@ public abstract class Entity
     public int Hitpoints { get; set; }
     public Controller Controller { get; set; }
     public List<GameAction> Actions { get; set; } = new List<GameAction>();
-    
-    
     public List<Modifier> Boosters { get; set; } = [];
     public List<Modifier> Modifiers { get; set; } = [];
-    public Modifier? Replacer { get; set; } 
+    public Modifier? Replacer { get; set; }
 
+    public Faction Faction { get; set; }
+    
     
     // Skills
     public int Strength { get; set; } = 10;

@@ -44,6 +44,7 @@ public class Interaction(
         
         foreach (var effect in EffectLog)
         {
+            if (effect.HideResult) continue;
             Result += effect.Result;
         }
 
