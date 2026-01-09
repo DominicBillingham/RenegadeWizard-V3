@@ -45,7 +45,6 @@ public class Punch : GameAction
         damage.Apply();
     }
 }
-
 public class Throw : GameAction
 {
     public Throw()
@@ -119,13 +118,13 @@ public class Charm : GameAction
     
     public override void StackEffects(Interaction context)
     {
-        var lift = new CharmEffect()
+        var charm = new CharmEffect()
         {
             Actor = context.Actor,
             Target = context.ActualTargets[0], 
             Context = context,
         };
-        lift.Apply();
+        charm.Apply();
 
 
         

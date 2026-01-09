@@ -78,17 +78,37 @@ public class ContactEffect : InteractionEffect
     }
 }
 
-
 public class ConsumeEffect : InteractionEffect
 {
     protected override void Core()
     {
+        if (Actor == Target)
+        {
+            Result = $"{Actor.Name} tries to eat themselves. <wtf>";
+            return;
+        }
+        
         if (Actor.Size > Target.Size)
         {
             Target.Hitpoints = 0;
             Actor.Hitpoints += Target.FoodValue;
-            Result = $"{Actor.Name} consumes {Target.Name} for {Target.FoodValue} hitpoints.";
+            Result = $"{Actor.Name} <powerfully> consumes {Target.Name}, healing {Target.FoodValue}.";
+
+            if (Target.Taste < 5)
+            {
+                Result += $" <gross>";
+            }
+            else if (Target.Taste < 10)
+            {
+                Result += $" <wtf>";
+            }
         }
+        else
+        {
+            Result = $"{Target.Name} is too big to eat. <obvious>";
+        }
+        
+        
         
     }
 }
