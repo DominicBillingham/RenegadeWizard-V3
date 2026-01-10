@@ -61,7 +61,7 @@
                 <div class="col">
                     <form @onsubmit="HandleSubmit" class="d-flex">
                         <input class="fs-5 form-control bg-white mobile-text-size" autocomplete="off" @bind="UserInput" @bind:event="oninput"
-                               @onkeydown="HandleKeyDown"
+                               @onkeydown="HandleKeyDown" @onkeydown:preventDefault="_preventTabDefault"
                                id="mainTextInput" placeholder="I wonder what to do next..."/>
                     </form>
 
@@ -108,6 +108,7 @@
     private List<string> _commandHistory = new();
     private int _historyIndex = -1;
     private string _tempInput = string.Empty;
+    private bool _preventTabDefault = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -128,6 +129,7 @@
 
     private async Task HandleKeyDown(KeyboardEventArgs e)
     {
+        _preventTabDefault = e.Key == "Tab";
 
          if (e.Key == "Enter")
          {
@@ -137,6 +139,11 @@
          {
              await JS.InvokeVoidAsync("playTypingSound");
          }
+
+        if (e.Key == "Tab")
+        {
+            AutoComplete();
+        }
          
         if (e.Key == "ArrowUp")
         {
@@ -198,6 +205,54 @@
     private async Task PlaySound(string audio, bool overrideAudio)
     {
         await JS.InvokeVoidAsync("PlaySound", audio, overrideAudio);
+    }
+
+    private void AutoComplete()
+    {
+        string[] parts = UserInput.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        bool hasTrailingSpace = UserInput.EndsWith(" ");
+    
+        if (parts.Length == 0 || hasTrailingSpace) return;
+
+        string lastPart = parts.Last();
+        
+        foreach (string name in LastResponse.ActionNames)
+        { 
+            if (name == lastPart)
+            {
+                int currentIndex = LastResponse.ActionNames.IndexOf(name);
+                int nextIndex = (currentIndex + 1) % LastResponse.ActionNames.Count;
+                parts[^1] = LastResponse.ActionNames[nextIndex];
+                UserInput = string.Join(" ", parts);
+                return;
+            }
+
+            if (name.StartsWith(lastPart))
+            {
+                parts[^1] = name;
+                UserInput = string.Join(" ", parts);
+                return;
+            }
+        }
+
+        foreach (string name in LastResponse.EntityNames)
+        {
+            if (name == lastPart)
+            {
+                int currentIndex = LastResponse.EntityNames.IndexOf(name);
+                int nextIndex = (currentIndex + 1) % LastResponse.EntityNames.Count;
+                parts[^1] = LastResponse.EntityNames[nextIndex];
+                UserInput = string.Join(" ", parts);
+                return;
+            }
+
+            if (name.StartsWith(lastPart))
+            {
+                parts[^1] = name;
+                UserInput = string.Join(" ", parts);
+                return;
+            }
+        }
     }
 
 }

@@ -27,8 +27,8 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
         terminalResponse.Creatures = sceneManager.Npcs;
         terminalResponse.Objects = sceneManager.Objects;
         
-        terminalResponse.ActionNames = sceneManager.Player.Actions.Select(action => action.Name).ToList();
-        terminalResponse.EntityNames = sceneManager.Entities.Select(entity => entity.Name).ToList();
+        terminalResponse.ActionNames = sceneManager.Player.Actions.Select(action => action.Name.ToLower()).ToList();
+        terminalResponse.EntityNames = sceneManager.Entities.Select(entity => entity.Name.ToLower()).ToList();
         
         terminalResponse.SceneLines.AddRange(sceneManager.GetSceneDescription());
         return terminalResponse;
