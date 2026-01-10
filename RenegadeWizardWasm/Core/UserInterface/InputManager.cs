@@ -24,11 +24,8 @@ public class InputManager(SceneManager sceneManager)
         
         Targets = sceneManager.Entities
             .Where(entity => FuzzyMatch(entity.Names, userInputChunks))
-            .Reverse()
             .ToList();
         
-        if (!Targets.Any())
-            Targets.Add(sceneManager.Player);
     }
 
     public bool FuzzyMatch(string keyword, IEnumerable<string> input)
