@@ -114,8 +114,6 @@ public class ConsumeEffect : InteractionEffect
             Result = $"{Target.Name} is too big to eat. <obvious>";
         }
         
-        
-        
     }
 }
 
