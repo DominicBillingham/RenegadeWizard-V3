@@ -11,7 +11,7 @@
     <!-- Left Wing - Items -->
     <div class="d-flex flex-column gap-2 justify-content-center p-2 mb-5 rounded-3"
          style="width: 200px; background: rgba(91,93,103,0.4); height: calc(100vh - 230px); margin-top: 110px;">
-        @foreach (var item in Objects)
+        @foreach (var item in LastResponse.Objects)
         {
             <div class="card shadow border-0">
                 <div class="card-header fw-bold">@item.Name | @item.Hitpoints hp</div>
@@ -75,7 +75,7 @@
     <!-- Right Wing - Creatures -->
     <div class="d-flex flex-column gap-2 justify-content-center p-2 mb-5 rounded-3"
          style="width: 200px; background: rgba(91,93,103,0.4); height: calc(100vh - 230px); margin-top: 110px;">
-        @foreach (var creature in Creatures)
+        @foreach (var creature in LastResponse.Creatures)
         {
             <div class="card shadow border-0">
                 <div class="card-header fw-bold">@creature.Name | @creature.Hitpoints hp</div>
@@ -100,8 +100,8 @@
 @code {
 
     private List<string> ConsoleLines { get; set; } = new();
-    private List<Entity> Objects { get; set; } = new();
-    private List<Entity> Creatures { get; set; } = new();
+    private TerminalResponse LastResponse { get; set; } = new();
+    
     public string UserInput { get; set; } = string.Empty;
     private bool _shouldScroll = false;
     
@@ -179,8 +179,7 @@
             ConsoleLines.Add(html);
         }
 
-        Objects = response.Objects;
-        Creatures = response.Creatures;
+        LastResponse = response;
 
         UserInput = "";
         _shouldScroll = shouldScroll;
