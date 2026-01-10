@@ -1,4 +1,5 @@
 ﻿
+using System.Diagnostics.CodeAnalysis;
 using RenegadeWizardWasm.Core.Enums;
 
 namespace RenegadeWizardWasm.Core;
@@ -24,19 +25,12 @@ public abstract class Entity
     public Faction Faction { get; set; }
     
     // Dimensions
-    public int Size { get; set; } = 1;
+    public int Size { get; set; } 
     
     // Skills
-    public int Strength { get; set; } = 10;
-    public int Dexterity { get; set; } = 10;
-    public int Constitution { get; set; } = 10;
-    public int Intelligence { get; set; } = 10;
-    public int Wisdom { get; set; } = 10;
-    public int Charisma { get; set; } = 10;
-    
+    public int Strength { get; set; } 
     
     // Senses
-    public int Smell { get; set; }
     public int Taste { get; set; }
     
     // Tool usage
@@ -52,11 +46,25 @@ public class IronGolem : Entity
         Name = "IronGolem";
         Description = "A hulking monster, immune to most damage.";
         Controller = Controller.Npc;
-        Hitpoints = 10;
+        
         Actions.Add(new Punch());
         Modifiers.Add(new Armour(5));
+        
+        // Attributes        
+        Hitpoints = 10;
+        Strength = 10;
+
+        // Dimensions
+        Size = 15;
+        Weight = 15;
+        
+        // Senses
+        FoodValue = 0;
+        Taste = 0;
+        
     }
 }
+
 
 public class Player : Entity
 {
@@ -65,9 +73,23 @@ public class Player : Entity
         Name = "Player";
         Description = "You are the wizard.";
         Controller = Controller.Player;
-        Hitpoints = 10;
+        
         Actions.Add(new Punch());
         Actions.Add(new Throw());
+        Actions.Add(new Consume());
+        Actions.Add(new Charm());
+        
+        // Attributes        
+        Hitpoints = 10;
+        Strength = 10;
+
+        // Dimensions
+        Size = 3;
+        Weight = 3;
+        
+        // Senses
+        FoodValue = 2;
+        Taste = 3;
     }
 }
 
@@ -78,8 +100,19 @@ public class Table : Entity
         Name = "Table";
         Description = "A sturdy wooden table.";
         Controller = Controller.Object;
+        
+        // Attributes        
+        Hitpoints = 10;
+        Strength = 10;
+
+        // Dimensions
+        Size = 4;
         Weight = 10;
-        Hitpoints = 5;
+        
+        // Senses
+        FoodValue = 0;
+        Taste = 1;
+        
     }
 }
 
@@ -90,8 +123,18 @@ public class Chair : Entity
         Name = "Chair";
         Description = "A simple wooden chair.";
         Controller = Controller.Object; 
-        Weight = 5;
+        
+        // Attributes        
         Hitpoints = 3;
+        Strength = 3;
+
+        // Dimensions
+        Size = 2;
+        Weight = 3;
+        
+        // Senses
+        FoodValue = 0;
+        Taste = 1;
     }
 }
 public class Goblin : Entity
@@ -101,16 +144,19 @@ public class Goblin : Entity
         Name = "Goblin";
         Description = "A rather wretched little creature.";
         Controller = Controller.Npc;
-        Hitpoints = 5;
         Actions.Add(new Punch());
-    }
-}
+        
+        // Attributes        
+        Hitpoints = 6;
+        Strength = 7;
 
-public class HealingPotion : Entity
-{
-    public HealingPotion()
-    {
-        Name = "Healing Potion";
-        Hitpoints = 10;
+        // Dimensions
+        Size = 2;
+        Weight = 5;
+        
+        // Senses
+        FoodValue = 2;
+        Taste = 4;
+        
     }
 }

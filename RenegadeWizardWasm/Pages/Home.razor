@@ -111,7 +111,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await UpdateTerminal(_terminal.GetBaseText());
+        await UpdateTerminal(_terminal.GetBaseText(), false);
     }
     
     public async Task HandleSubmit(EventArgs e)
@@ -123,7 +123,7 @@
         _historyIndex = -1;
         _tempInput = string.Empty;
 
-        await UpdateTerminal(_terminal.EnterInput(UserInput));
+        await UpdateTerminal(_terminal.EnterInput(UserInput), true);
     }
 
     private async Task HandleKeyDown(KeyboardEventArgs e)
@@ -168,7 +168,7 @@
         }
     }
 
-    public async Task UpdateTerminal(TerminalResponse response)
+    public async Task UpdateTerminal(TerminalResponse response, bool shouldScroll)
     {
         List<string> lines = response.Text;
 
@@ -183,7 +183,7 @@
         Creatures = response.Creatures;
 
         UserInput = "";
-        _shouldScroll = true;
+        _shouldScroll = shouldScroll;
         StateHasChanged();
     }
 

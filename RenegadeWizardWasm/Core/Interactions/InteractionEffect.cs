@@ -6,7 +6,7 @@ public abstract class InteractionEffect
     public required Entity Actor { get; set; }
     public required Interaction Context { get; set; }
     public string Result { get; set; } = "";
-    public bool HideResult { get; set; } = true;
+    public bool HideResult { get; set; } = false;
 
     public void Apply()
     {
@@ -52,11 +52,11 @@ public class LiftEffect : InteractionEffect
         LiftOverflow = Actor.Strength - Target.Weight;
         if (LiftOverflow > 0)
         {
-            Result = $"{Actor.Name} lifts {Target.Name} ";
+            Result = $"{Actor.Name} <powerfully> lifts {Target.Name} ";
         }
         else
         {
-            Result = $"{Actor.Name} tries to lift {Target.Name} but fails.";
+            Result = $"{Actor.Name} tries to lift {Target.Name} <fails>.";
         }
     }
 }
@@ -92,16 +92,22 @@ public class ConsumeEffect : InteractionEffect
         {
             Target.Hitpoints = 0;
             Actor.Hitpoints += Target.FoodValue;
-            Result = $"{Actor.Name} <powerfully> consumes {Target.Name}, healing {Target.FoodValue}.";
+            Result = $"{Actor.Name} <powerfully> consumes {Target.Name}.";
 
-            if (Target.Taste < 5)
+            if (Target.FoodValue > 0)
+            {
+                Result += $" {Actor.Name} heals {Target.FoodValue}hp.";
+            }
+
+            if (Target.Taste < 2)
+            {
+                Result += $" <wtf>";
+            } 
+            else if (Target.Taste < 5)
             {
                 Result += $" <gross>";
             }
-            else if (Target.Taste < 10)
-            {
-                Result += $" <wtf>";
-            }
+            
         }
         else
         {
