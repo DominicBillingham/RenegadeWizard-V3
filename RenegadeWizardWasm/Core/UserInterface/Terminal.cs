@@ -11,6 +11,10 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
         
         inputManager.ProcessInput(playerInput);
         terminalResponse.PlayerInput  = playerInput;
+        
+        
+        terminalResponse.SceneLines.Add("This is a test of animations. #shk shake! #pls pulse! #bnc bounce! #glw glow! #flk flicker! #spn spin! #wbl wobble! #fad fade! #sld slide! #wav wave! #rnb rainbow! #grw grow! #jtr jitter! #blk blink! #");
+
 
         if (inputManager.chosenAction == null) 
             return terminalResponse;

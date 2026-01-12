@@ -1,0 +1,158 @@
+/* Text Animation Classes */
+
+/* Shaking effect */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+.shake {
+    animation: shake 0.5s infinite;
+}
+
+/* Pulsing/breathing effect */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Bouncing effect */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.bounce {
+    animation: bounce 0.6s infinite;
+}
+
+/* Glowing effect */
+@keyframes glow {
+    0%, 100% { text-shadow: 0 0 5px currentColor; }
+    50% { text-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
+}
+
+.glow {
+    animation: glow 1.5s infinite;
+}
+
+/* Flickering effect */
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    41%, 43% { opacity: 0.4; }
+    45%, 47% { opacity: 0.8; }
+    49% { opacity: 0.5; }
+    51% { opacity: 1; }
+}
+
+.flicker {
+    animation: flicker 3s infinite;
+}
+
+/* Spinning effect */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.spin {
+    display: inline-block;
+    animation: spin 2s linear infinite;
+}
+
+/* Wobble effect */
+@keyframes wobble {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+.wobble {
+    display: inline-block;
+    animation: wobble 0.8s infinite;
+}
+
+/* Fade in/out effect */
+@keyframes fade {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.fade {
+    animation: fade 2s infinite;
+}
+
+/* Sliding left-right effect */
+@keyframes slide {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+}
+
+.slide {
+    animation: slide 1s infinite;
+}
+
+/* Wave effect */
+@keyframes wave {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-3px) rotate(2deg); }
+    75% { transform: translateY(3px) rotate(-2deg); }
+}
+
+.wave {
+    display: inline-block;
+    animation: wave 1s infinite;
+}
+
+/* Rainbow color cycling */
+@keyframes rainbow {
+    0% { color: #ff0000; }
+    16% { color: #ff7f00; }
+    33% { color: #ffff00; }
+    50% { color: #00ff00; }
+    66% { color: #0000ff; }
+    83% { color: #8b00ff; }
+    100% { color: #ff0000; }
+}
+
+.rainbow {
+    animation: rainbow 3s linear infinite;
+}
+
+/* Growing/shrinking effect */
+@keyframes grow {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.grow {
+    display: inline-block;
+    animation: grow 1s infinite;
+}
+
+/* Jitter effect */
+@keyframes jitter {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-1px, 1px); }
+    50% { transform: translate(1px, -1px); }
+    75% { transform: translate(-1px, -1px); }
+}
+
+.jitter {
+    animation: jitter 0.3s infinite;
+}
+
+/* Blink effect */
+@keyframes blink {
+    0%, 49%, 100% { opacity: 1; }
+    50%, 99% { opacity: 0; }
+}
+
+.blink {
+    animation: blink 1s infinite;
+}

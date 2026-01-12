@@ -72,15 +72,20 @@ public class MML
     
     private readonly Dictionary<string, string> ClassMap = new()
     {
-        { "pk", "color:#FF77D1;" },
-        { "gn", "color:#77FFAA;" },
-        { "yw", "color:#FFFF99;" },
-        { "be", "color:#77DDFF;" },
-        { "og", "color:#FFBB66;" },
-        { "pe", "color:#C488FF;" },
-        { "rd", "color:#FF7777;" },
-        { "ic", "font-style:italic;" },
-        { "bd", "font-weight:bold;" },
+        { "shk", "shake" },
+        { "pls", "pulse" },
+        { "bnc", "bounce" },
+        { "glw", "glow" },
+        { "flk", "flicker" },
+        { "spn", "spin" },
+        { "wbl", "wobble" },
+        { "fad", "fade" },
+        { "sld", "slide" },
+        { "wav", "wave" },
+        { "rnb", "rainbow" },
+        { "grw", "grow" },
+        { "jtr", "jitter" },
+        { "blk", "blink" },
         
     };
     
