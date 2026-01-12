@@ -13,8 +13,8 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
         terminalResponse.PlayerInput  = playerInput;
         
         
-        terminalResponse.SceneLines.Add("This is a test of animations. #shk shake! #pls pulse! #bnc bounce! #glw glow! #flk flicker! #spn spin! #wbl wobble! #fad fade! #sld slide! #wav wave! #rnb rainbow! #grw grow! #jtr jitter! #blk blink! #");
-
+        
+        terminalResponse.SceneLines.Add("This is a test of animations. #shk shake! #pls pulse! #bnc bounce! #glw glow! #flk flicker! #spn spin! #wbl wobble! #fad fade! #sld slide! #wav wave! #rnb rainbow! #grw grow! #jtr jitter! #blk blink! #flt float! #swg swing! #flp flip! #vbr vibrate! #zm zoom! #sqz squeeze! #skw skew! #els elastic! #crs cursor! #shm shimmer! #nen neon! #glt glitch! #");
 
         if (inputManager.chosenAction == null) 
             return terminalResponse;

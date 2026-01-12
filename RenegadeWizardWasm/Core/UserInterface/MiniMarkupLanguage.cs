@@ -86,6 +86,18 @@ public class MML
         { "grw", "grow" },
         { "jtr", "jitter" },
         { "blk", "blink" },
+        { "flt", "float" },
+        { "swg", "swing" },
+        { "flp", "flip" },
+        { "vbr", "vibrate" },
+        { "zm", "zoom" },
+        { "sqz", "squeeze" },
+        { "skw", "skew" },
+        { "els", "elastic" },
+        { "crs", "cursor" },
+        { "shm", "shimmer" },
+        { "nen", "neon" },
+        { "glt", "glitch" },
         
     };
     
