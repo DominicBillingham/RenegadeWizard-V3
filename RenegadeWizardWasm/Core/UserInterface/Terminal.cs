@@ -4,13 +4,12 @@
 
 public class Terminal(InputManager inputManager, SceneManager sceneManager, CombatManager combatManager)
 {
-
+    
     public TerminalResponse BeginGame()
     {
         TerminalResponse terminalResponse = new();
         List<string> text =
         [
-            
             "#jtrnarr W-W-W-WELCOME!",
             "#narr Welcome back all you lovely #narrrnb Warlocks and Witches!",
             "#narr After that brutal display - can anyone possibly die in a more horrific way?",
@@ -18,17 +17,48 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
             "#narr It's the one! The only! The #jtrnarr legendary...",
             "#narr ...",
             "#narr Fuckin' crystalprompter.",
-            "#narr Hey kid, not that it's gonna matter in 5 but what's yer name?",
-            "",
+            "#narr Hey kid, not that it's gonna matter in 5 but what's ya name?",
             "#gnic Please type your name in the textbox below."
-            
-
-
         ];
         terminalResponse.NarrationLines.AddRange(text);
         return terminalResponse;
     }
-    
+
+    public TerminalResponse EnterName(string playerInput) {
+        
+        TerminalResponse terminalResponse = new();
+        
+        inputManager.ProcessInput(playerInput);
+        terminalResponse.PlayerInput  = playerInput;
+        
+        sceneManager.Player.Name = playerInput;
+        
+        List<string> text =
+        [
+            $"#narr Well, it's fucking awful to meet ya {playerInput}",
+            "#narr Hope you like ya name, you'll be hearin' it a fuck ton. ",
+            "#narr Right, you know the rules and so do I. IT'S TIME FOR- ",
+            "#narrnenbg RENEGADE WIZZZZZZZZZAAAAARRRRRRRRDDDDD",
+            "",
+            "",
+            ""
+        ];
+        
+        terminalResponse.NarrationLines.AddRange(text);
+        
+        List<string> text2 =
+        [
+            $"#narr {playerInput} stands at the wizard tower's base.",
+            "#narr A flimsy, weak, old and pathetic wooden door prevents access!",
+            "#narr How will our contestant ever fare?",
+            "#gnic Type any action, along with a target, such as 'I [punch] the [door]",
+        ];
+
+        terminalResponse.NarrationLines.AddRange(text2);
+
+        return terminalResponse;
+        
+    }
     
     
     public TerminalResponse EnterInput(string playerInput)

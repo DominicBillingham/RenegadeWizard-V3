@@ -110,6 +110,7 @@
     private int _historyIndex = -1;
     private string _tempInput = string.Empty;
     private bool _preventTabDefault = false;
+    private bool _nameEntered = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -125,7 +126,15 @@
         _historyIndex = -1;
         _tempInput = string.Empty;
 
-        await UpdateTerminal(_terminal.EnterInput(UserInput), true);
+        if (_nameEntered)
+        {
+            await UpdateTerminal(_terminal.EnterInput(UserInput), true);
+        }
+        else
+        {
+            await UpdateTerminal(_terminal.EnterName(UserInput), true);
+        }
+        
     }
 
     private async Task HandleKeyDown(KeyboardEventArgs e)
