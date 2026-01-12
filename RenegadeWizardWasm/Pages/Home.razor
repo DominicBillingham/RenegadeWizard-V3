@@ -123,6 +123,11 @@
         if (_pendingLines.Count > 0)
         {
             bool paused = false;
+            if (ConsoleLines.Any())
+            {
+                var lastLineIndex = ConsoleLines.Count - 1;
+                ConsoleLines[lastLineIndex] = ConsoleLines[lastLineIndex].Replace("▼", "").Replace("[press enter]", "");
+            }
             
             while (_pendingLines.Count > 0 && !paused)
             {
