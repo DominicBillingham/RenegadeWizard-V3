@@ -32,6 +32,7 @@ public class MML
             string content = match.Groups[2].Value.TrimStart();
 
             var styles = new StringBuilder();
+            var classes = new StringBuilder();
 
             foreach (var tag in StyleMap)
             {
@@ -40,14 +41,36 @@ public class MML
                     styles.Append(tag.Value);
                 }
             }
-
-            sb.Append($"<span  style='{styles}'>{content}</span>");
+            
+            foreach (var tag in ClassMap)
+            {
+                if (tags.Contains(tag.Key))
+                {
+                    classes.Append(tag.Value);
+                }
+            }
+            
+            sb.Append($"<span class='{classes}'  style='{styles}'>{content}</span>");
         }
 
         return sb.ToString();
     }
     
     private readonly Dictionary<string, string> StyleMap = new()
+    {
+        { "pk", "color:#FF77D1;" },
+        { "gn", "color:#77FFAA;" },
+        { "yw", "color:#FFFF99;" },
+        { "be", "color:#77DDFF;" },
+        { "og", "color:#FFBB66;" },
+        { "pe", "color:#C488FF;" },
+        { "rd", "color:#FF7777;" },
+        { "ic", "font-style:italic;" },
+        { "bd", "font-weight:bold;" },
+        
+    };
+    
+    private readonly Dictionary<string, string> ClassMap = new()
     {
         { "pk", "color:#FF77D1;" },
         { "gn", "color:#77FFAA;" },
