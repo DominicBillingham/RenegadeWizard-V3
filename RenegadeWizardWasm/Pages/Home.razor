@@ -101,6 +101,7 @@
 @code {
 
     private List<string> ConsoleLines { get; set; } = new();
+    private List<string> _pendingLines = new();
     private TerminalResponse LastResponse { get; set; } = new();
     
     public string UserInput { get; set; } = string.Empty;
@@ -119,6 +120,31 @@
     
     public async Task HandleSubmit(EventArgs e)
     {
+        if (_pendingLines.Count > 0)
+        {
+            bool paused = false;
+            
+            while (_pendingLines.Count > 0 && !paused)
+            {
+                string line = _pendingLines[0];
+                _pendingLines.RemoveAt(0);
+                
+                string words = _mml.WordReplacement(line);
+                string html = _mml.Html(words);
+                ConsoleLines.Add(html);
+                
+                if (line.Contains("▼"))
+                {
+                    paused = true;
+                }
+            }
+            
+            UserInput = "";
+            _shouldScroll = true;
+            StateHasChanged();
+            return;
+        }
+
         if (string.IsNullOrWhiteSpace(UserInput))
             return;
         
@@ -133,6 +159,7 @@
         else
         {
             await UpdateTerminal(_terminal.EnterName(UserInput), true);
+            _nameEntered = true;
         }
         
     }
@@ -188,12 +215,25 @@
     public async Task UpdateTerminal(TerminalResponse response, bool shouldScroll)
     {
         List<string> lines = response.Text;
+        bool paused = false;
 
-        foreach (string line in lines)
+        for (int i = 0; i < lines.Count; i++)
         {
+            if (paused)
+            {
+                _pendingLines.Add(lines[i]);
+                continue;
+            }
+
+            string line = lines[i];
             string words = _mml.WordReplacement(line);
             string html = _mml.Html(words);
             ConsoleLines.Add(html);
+
+            if (line.Contains("▼"))
+            {
+                paused = true;
+            }
         }
 
         LastResponse = response;

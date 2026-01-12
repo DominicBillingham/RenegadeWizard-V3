@@ -6,16 +6,19 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
 {
     
     public TerminalResponse BeginGame()
-    {
+    {        
         TerminalResponse terminalResponse = new();
+
+        //terminalResponse.NarrationLines.Add("This is a test of animations. #shk shake! #pls pulse! #bnc bounce! #glw glow! #flk flicker! #spn spin! #wbl wobble! #fad fade! #sld slide! #wav wave! #rnb rainbow! #grw grow! #jtr jitter! #blk blink! #flt float! #swg swing! #flp flip! #vbr vibrate! #zm zoom! #sqz squeeze! #skw skew! #els elastic! #crs cursor! #shm shimmer! #nen neon! #glt glitch! #");
+        
         List<string> text =
         [
             "#jtrnarr W-W-W-WELCOME!",
             "#narr Welcome back all you lovely #narrrnb Warlocks and Witches!",
             "#narr After that brutal display - can anyone possibly die in a more horrific way?",
             "#narr Well we've got ourselves a new contender, straight out of failing wizard college.",
-            "#narr It's the one! The only! The #jtrnarr legendary...",
-            "#narr ...",
+            "#narr It's the one! The only! The #jtrnarr legendary- #pls ▼ # [press enter] ",
+            "#narr ... #pls ▼",
             "#narr Fuckin' crystalprompter.",
             "#narr Hey kid, not that it's gonna matter in 5 but what's ya name?",
             "#gnic Please type your name in the textbox below."
@@ -37,8 +40,8 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
         [
             $"#narr Well, it's fucking awful to meet ya {playerInput}",
             "#narr Hope you like ya name, you'll be hearin' it a fuck ton. ",
-            "#narr Right, you know the rules and so do I. IT'S TIME FOR- ",
-            "#narrnenbg RENEGADE WIZZZZZZZZZAAAAARRRRRRRRDDDDD",
+            $"#narr Well {playerInput}... you know the rules and so do I. IT'S TIME FOR- ",
+            "#narrnenbg RENEGADE WIZZZZZZZZZAAAAARRRRRRRRDDDDD #pls ▼",
             "",
             "",
             ""
@@ -68,10 +71,6 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
         inputManager.ProcessInput(playerInput);
         terminalResponse.PlayerInput  = playerInput;
         
-        
-        
-        //terminalResponse.SceneLines.Add("This is a test of animations. #shk shake! #pls pulse! #bnc bounce! #glw glow! #flk flicker! #spn spin! #wbl wobble! #fad fade! #sld slide! #wav wave! #rnb rainbow! #grw grow! #jtr jitter! #blk blink! #flt float! #swg swing! #flp flip! #vbr vibrate! #zm zoom! #sqz squeeze! #skw skew! #els elastic! #crs cursor! #shm shimmer! #nen neon! #glt glitch! #");
-
         if (inputManager.chosenAction == null) 
             return terminalResponse;
         
