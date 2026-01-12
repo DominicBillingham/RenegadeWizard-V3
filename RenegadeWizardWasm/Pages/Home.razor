@@ -32,25 +32,25 @@
                  disabled id="mainDisplay"
                  style=" overflow-y: auto; white-space: pre-wrap; font-size: 18px; height: calc(100vh - 230px); ">
 
-                <pre class="text-center m-auto ascii-art mobile-hide" style="font-size: 14px">
-
-                                                                                        /\         *         
-[][]    [][][]  []  []  [][][]  [][][]    []    [][]    [][][]                        //  \\               * 
-[]  []  []      [][ []  []      []       [][]   []  []  []                          ///    \\ =====    *     
-[][]    [][][]  [] ][]  [][][]  []  []  []  []  []  []  [][][]                     //       \\     ==        
-[]  []  []      []  []  []      []  []  []  []  []  []  []                        //  /\  /\/\\     ==  *   *
-[]  []  [][][]  []  []  [][][]  [][][]  []  []  [][]    [][][]                    |/\/  \/    \\     =       
-                                                                                 //        .  \\    ==  *    
-                                                                                //    .         \ ==       * 
-                      W  W  W  WWWWW   WWWW     WW    WWWW    WWWW            //         V      \\         
-                      W  W  W    |         W   WWWW   W   WW  W   W          //     V         .  ||        
-                      W  W  W    |     WWWW   W    W  WWWWW   W   W         ||         .          \\       
-                      W  W  W    |    W       W    W  W    W  W   W        //      V        V     \\       
-                       WW WW   WWWWWW  WWWW   W    W  W    W  WWWW        //    .      .            \\     
-                                                                        ///                    V     \\\   
-                                                                       ///  .   V        .         .  \\\  
-
-                </pre>
+@*                 <pre class="text-center m-auto ascii-art mobile-hide" style="font-size: 14px"> *@
+@* *@
+@*                                                                                         /\         *          *@
+@* [][]    [][][]  []  []  [][][]  [][][]    []    [][]    [][][]                        //  \\               *  *@
+@* []  []  []      [][ []  []      []       [][]   []  []  []                          ///    \\ =====    *      *@
+@* [][]    [][][]  [] ][]  [][][]  []  []  []  []  []  []  [][][]                     //       \\     ==         *@
+@* []  []  []      []  []  []      []  []  []  []  []  []  []                        //  /\  /\/\\     ==  *   * *@
+@* []  []  [][][]  []  []  [][][]  [][][]  []  []  [][]    [][][]                    |/\/  \/    \\     =        *@
+@*                                                                                  //        .  \\    ==  *     *@
+@*                                                                                 //    .         \ ==       *  *@
+@*                       W  W  W  WWWWW   WWWW     WW    WWWW    WWWW            //         V      \\          *@
+@*                       W  W  W    |         W   WWWW   W   WW  W   W          //     V         .  ||         *@
+@*                       W  W  W    |     WWWW   W    W  WWWWW   W   W         ||         .          \\        *@
+@*                       W  W  W    |    W       W    W  W    W  W   W        //      V        V     \\        *@
+@*                        WW WW   WWWWWW  WWWW   W    W  W    W  WWWW        //    .      .            \\      *@
+@*                                                                         ///                    V     \\\    *@
+@*                                                                        ///  .   V        .         .  \\\   *@
+@* *@
+@*                 </pre> *@
                 @foreach (var line in ConsoleLines)
                 {
                     <div class="console-line">@((MarkupString)line)</div>
@@ -113,7 +113,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await UpdateTerminal(_terminal.GetBaseText(), false);
+        await UpdateTerminal(_terminal.BeginGame(), false);
     }
     
     public async Task HandleSubmit(EventArgs e)

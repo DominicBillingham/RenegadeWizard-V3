@@ -22,6 +22,11 @@ public class TerminalResponse()
                 //_text.AddRange(DebugLines);
             }
             
+            if (NarrationLines.Any()) 
+            {
+                _text.AddRange(NarrationLines);
+            }
+            
             if (CombatLines.Any())
             {
                 _text.AddRange(CombatLines);
@@ -40,8 +45,10 @@ public class TerminalResponse()
     public List<string> DebugLines { get; set; } = new();
     public List<string> CombatLines { get; set; } = new();
     public List<string> SceneLines { get; set; } = new();
+    public List<string> NarrationLines { get; set; } = new();
+    
+    
     // This is a list of data that can be used to populate the main view with information.
-
     public List<Entity> Objects = new();
     public List<Entity> Creatures = new();
     

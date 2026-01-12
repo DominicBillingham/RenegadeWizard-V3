@@ -1,5 +1,37 @@
 /* Text Animation Classes */
 
+/*
+ * Available Animation Classes:
+ * 
+ * .shake      - Rapid horizontal shaking motion
+ * .pulse      - Fading in and out (breathing effect)
+ * .bounce     - Vertical bouncing motion
+ * .glow       - Pulsing glow/shadow effect
+ * .flicker    - Random flickering like a faulty light
+ * .spin       - 360-degree continuous rotation
+ * .wobble     - Tilting left and right
+ * .fade       - Gentle fade in and out
+ * .slide      - Horizontal sliding motion
+ * .wave       - Wave-like movement with slight rotation
+ * .rainbow    - Cycles through rainbow colors
+ * .grow       - Growing and shrinking scale effect
+ * .jitter     - Small rapid random movements
+ * .blink      - On/off blinking effect
+ * .float      - Smooth vertical floating motion
+ * .swing      - Pendulum-like swinging motion
+ * .flip       - 3D flip rotation on Y-axis
+ * .vibrate    - Intense rapid shaking in all directions
+ * .zoom       - Zooming in and out
+ * .squeeze    - Horizontal squeeze with vertical stretch
+ * .skew       - Horizontal skewing transformation
+ * .elastic    - Elastic bounce with multiple rebounds
+ * .cursor     - Blinking cursor border effect
+ * .shimmer    - Shine/shimmer light sweep effect
+ * .neon       - Neon sign flickering with glow
+ * .glitch     - Digital glitch distortion effect
+ */
+
+
 /* Shaking effect */
 @keyframes shake {
     0%, 100% { transform: translateX(0); }

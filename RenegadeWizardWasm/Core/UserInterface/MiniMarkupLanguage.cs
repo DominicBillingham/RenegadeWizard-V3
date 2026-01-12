@@ -46,7 +46,7 @@ public class MML
             {
                 if (tags.Contains(tag.Key))
                 {
-                    classes.Append(tag.Value);
+                    classes.Append($"{tag.Value} ");
                 }
             }
             
@@ -98,6 +98,7 @@ public class MML
         { "shm", "shimmer" },
         { "nen", "neon" },
         { "glt", "glitch" },
+        { "narr", "narration"}
         
     };
     
