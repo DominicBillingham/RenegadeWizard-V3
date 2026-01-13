@@ -7,89 +7,6 @@
 
 
 <PageTitle>Home</PageTitle>
-<div class="d-flex flex-wrap justify-content-center gap-1">
-
-    <!-- Left Wing - Items -->
-    <div class="d-flex flex-column gap-2 justify-content-center p-2 mb-5 rounded-3"
-         style="width: 200px; background: rgba(91,93,103,0.4); height: calc(100vh - 230px); margin-top: 110px;">
-        @foreach (var item in LastResponse.Objects)
-        {
-            <div class="card shadow border-0">
-                <div class="card-header fw-bold">@item.Name | @item.Hitpoints hp</div>
-                <div class="card-body p-2">
-                    <small>@item.Description</small>
-                </div>
-            </div>
-        }
-    </div>
-
-    <!-- Main Terminal -->
-    <div class="card shadow border-0 mt-4 "
-         style="width:950px; max-width: 950px; flex: 1 1 auto; ">
-        <h1 class="card-header mobile-hide">RENEGADE WIZARD</h1>
-        <div class="card-body">
-            <div class="form-control bg-body mb-3 text-white pb-5 position-relative mobile-max-height mobile-text-size"
-                 disabled id="mainDisplay"
-                 style=" overflow-y: auto; white-space: pre-wrap; font-size: 18px; height: calc(100vh - 230px); ">
-
-@*                 <pre class="text-center m-auto ascii-art mobile-hide" style="font-size: 14px"> *@
-@* *@
-@*                                                                                         /\         *          *@
-@* [][]    [][][]  []  []  [][][]  [][][]    []    [][]    [][][]                        //  \\               *  *@
-@* []  []  []      [][ []  []      []       [][]   []  []  []                          ///    \\ =====    *      *@
-@* [][]    [][][]  [] ][]  [][][]  []  []  []  []  []  []  [][][]                     //       \\     ==         *@
-@* []  []  []      []  []  []      []  []  []  []  []  []  []                        //  /\  /\/\\     ==  *   * *@
-@* []  []  [][][]  []  []  [][][]  [][][]  []  []  [][]    [][][]                    |/\/  \/    \\     =        *@
-@*                                                                                  //        .  \\    ==  *     *@
-@*                                                                                 //    .         \ ==       *  *@
-@*                       W  W  W  WWWWW   WWWW     WW    WWWW    WWWW            //         V      \\          *@
-@*                       W  W  W    |         W   WWWW   W   WW  W   W          //     V         .  ||         *@
-@*                       W  W  W    |     WWWW   W    W  WWWWW   W   W         ||         .          \\        *@
-@*                       W  W  W    |    W       W    W  W    W  W   W        //      V        V     \\        *@
-@*                        WW WW   WWWWWW  WWWW   W    W  W    W  WWWW        //    .      .            \\      *@
-@*                                                                         ///                    V     \\\    *@
-@*                                                                        ///  .   V        .         .  \\\   *@
-@* *@
-@*                 </pre> *@
-                @foreach (var line in ConsoleLines)
-                {
-                    <div class="console-line">@((MarkupString)line)</div>
-                }
-
-
-            </div>
-            <div class="row">
-                <div class="col">
-                    <form @onsubmit="HandleSubmit" class="d-flex">
-                        <input class="fs-5 form-control bg-white mobile-text-size" autocomplete="off" @bind="UserInput" @bind:event="oninput"
-                               @onkeydown="HandleKeyDown" @onkeydown:preventDefault="_preventTabDefault"
-                               id="mainTextInput" placeholder="I wonder what to do next..."/>
-                    </form>
-
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-
-    <!-- Right Wing - Creatures -->
-    <div class="d-flex flex-column gap-2 justify-content-center p-2 mb-5 rounded-3"
-         style="width: 200px; background: rgba(91,93,103,0.4); height: calc(100vh - 230px); margin-top: 110px;">
-        @foreach (var creature in LastResponse.Creatures)
-        {
-            <div class="card shadow border-0">
-                <div class="card-header fw-bold">@creature.Name | @creature.Hitpoints hp</div>
-                <div class="card-body p-2">
-                    <small>@creature.Description</small>
-                </div>
-            </div>
-        }
-    </div>
-
-
-</div>
-
 
 <div class="bg-animation">
     <div id='stars'></div>
@@ -97,6 +14,27 @@
     <div id='stars3'></div>
     <div id='stars4'></div>
 </div><!-- / STAR ANIMATION -->
+
+<div class="console-container">
+    <div class="console-column">
+        <div class="console-output" id="consoleOutput">
+            @foreach (var line in ConsoleLines)
+            {
+                <div class="console-line">@((MarkupString)line)</div>
+            }
+        </div>
+        <form @onsubmit="HandleSubmit" class="console-input-form">
+            <span class="prompt">&gt;</span>
+            <input type="text"
+                   class="console-input"
+                   @bind="UserInput"
+                   @bind:event="oninput"
+                   @onkeydown="HandleKeyDown"
+                   autocomplete="off"
+                   autofocus />
+        </form>
+    </div>
+</div>
 
 @code {
 
@@ -316,12 +254,82 @@
 
 <style>
 
-    .ascii-art {
-        animation: fade 15s ease forwards;
+    .console-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 15%;
+        pointer-events: none;
+    }
+
+    .console-column {
+        width: 50%;
+        height: 100vh;
+        background-color: rgba(50, 50, 50, 0.85);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        pointer-events: auto;
+        padding: 20px;
+    }
+
+    .console-output {
+        overflow-y: auto;
+        color: #e0e0e0;
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .console-output::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .console-output::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+    }
+
+    .console-output::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+    }
+
+    .console-output::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+    }
+
+    .console-input-form {
+        display: flex;
+        align-items: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 10px;
+        margin-top: 10px;
+        flex-shrink: 0;
+    }
+
+    .prompt {
+        font-size: 16px;
+        margin-right: 8px;
+        font-weight: bold;
+    }
+
+    .console-input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: #e0e0e0;
     }
 
     .console-line {
         animation: fade 3s ease forwards;
+        margin-bottom: 4px;
+        flex-shrink: 0;
     }
     
     @@keyframes fade {
@@ -333,5 +341,5 @@
             opacity: 1;
         }
     }
-    
+
 </style>

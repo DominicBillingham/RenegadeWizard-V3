@@ -1,6 +1,23 @@
 ﻿
+                <pre class="text-center m-auto ascii-art mobile-hide" style="font-size: 14px">
 
+                                                                                        /\         *
+[][]    [][][]  []  []  [][][]  [][][]    []    [][]    [][][]                        //  \\               *
+[]  []  []      [][ []  []      []       [][]   []  []  []                          ///    \\ =====    *
+[][]    [][][]  [] ][]  [][][]  []  []  []  []  []  []  [][][]                     //       \\     ==
+[]  []  []      []  []  []      []  []  []  []  []  []  []                        //  /\  /\/\\     ==  *   *
+[]  []  [][][]  []  []  [][][]  [][][]  []  []  [][]    [][][]                    |/\/  \/    \\     =
+                                                                                 //        .  \\    ==  *
+                                                                                //    .         \ ==       *
+                      W  W  W  WWWWW   WWWW     WW    WWWW    WWWW            //         V      \\
+                      W  W  W    |         W   WWWW   W   WW  W   W          //     V         .  ||
+                      W  W  W    |     WWWW   W    W  WWWWW   W   W         ||         .          \\
+                      W  W  W    |    W       W    W  W    W  W   W        //      V        V     \\
+                       WW WW   WWWWWW  WWWW   W    W  W    W  WWWW        //    .      .            \\
+                                                                        ///                    V     \\\
+                                                                       ///  .   V        .         .  \\\
 
+                </pre>
 
 === Current ===
 
