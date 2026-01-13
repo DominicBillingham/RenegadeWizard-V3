@@ -1,7 +1,9 @@
 ﻿
 function ScrollToBottom() {
-    const display = document.getElementById('mainDisplay');
-    display.scrollTop = display.scrollHeight;
+    const display = document.getElementById('consoleOutput');
+    if (display) {
+        display.scrollTop = display.scrollHeight;
+    }
 }
 
 

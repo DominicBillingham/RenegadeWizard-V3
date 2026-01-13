@@ -17,7 +17,7 @@
 </div><!-- / STAR ANIMATION -->
 
 <div class="console-container">
-    <div class="console-column">
+    <div class="console-column" id="mainDisplay">
         <div class="console-output" id="consoleOutput">
             @foreach (var line in ConsoleLines)
             {
@@ -283,10 +283,12 @@
     .console-output {
         overflow-y: auto;
         color: #d1d1ff;
-        padding-bottom: 10px;
         display: flex;
         flex-direction: column;
         text-shadow: 0 0 5px rgba(150, 150, 255, 0.5);
+        mask-image: linear-gradient(to bottom, transparent, black 15%);
+        -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%);
+        flex: 1;
     }
 
     .console-output::-webkit-scrollbar {
@@ -314,21 +316,22 @@
         padding-top: 10px;
         margin-top: 10px;
         flex-shrink: 0;
+        margin-bottom: 25vh;
     }
 
     .prompt {
         font-size: 20px;
         margin-right: 8px;
         font-weight: bold;
-        color: #fefcd7;
-        text-shadow: 0 0 10px #fefcd7;
+        color: #d1d1ff;
+        text-shadow: 0 0 10px rgba(150, 150, 255, 0.5);
     }
 
     .console-input {
         flex: 1;
         background: transparent;
         border: none;
-        color: #fefcd7;
+        color: #d1d1ff;
         font-size: 16px;
         outline: none;
     }
