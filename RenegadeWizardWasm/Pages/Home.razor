@@ -13,6 +13,7 @@
     <div id='stars2'></div>
     <div id='stars3'></div>
     <div id='stars4'></div>
+    <div class="moon"></div>
 </div><!-- / STAR ANIMATION -->
 
 <div class="console-container">
@@ -24,7 +25,7 @@
             }
         </div>
         <form @onsubmit="HandleSubmit" class="console-input-form">
-            <span class="prompt">&gt;</span>
+            <span class="prompt">☾</span>
             <input type="text"
                    class="console-input"
                    @bind="UserInput"
@@ -270,8 +271,9 @@
     .console-column {
         width: 50%;
         height: 100vh;
-        background-color: rgba(50, 50, 50, 0.85);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        background-color: rgba(20, 20, 40, 0.85);
+        box-shadow: 0 0 30px rgba(100, 100, 255, 0.2);
+        border-right: 1px solid rgba(150, 150, 255, 0.3);
         display: flex;
         flex-direction: column;
         pointer-events: auto;
@@ -280,10 +282,11 @@
 
     .console-output {
         overflow-y: auto;
-        color: #e0e0e0;
+        color: #d1d1ff;
         padding-bottom: 10px;
         display: flex;
         flex-direction: column;
+        text-shadow: 0 0 5px rgba(150, 150, 255, 0.5);
     }
 
     .console-output::-webkit-scrollbar {
@@ -291,43 +294,47 @@
     }
 
     .console-output::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.3);
         border-radius: 4px;
     }
 
     .console-output::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(150, 150, 255, 0.3);
         border-radius: 4px;
     }
 
     .console-output::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(150, 150, 255, 0.5);
     }
 
     .console-input-form {
         display: flex;
         align-items: center;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        border-top: 1px solid rgba(150, 150, 255, 0.3);
         padding-top: 10px;
         margin-top: 10px;
         flex-shrink: 0;
     }
 
     .prompt {
-        font-size: 16px;
+        font-size: 20px;
         margin-right: 8px;
         font-weight: bold;
+        color: #fefcd7;
+        text-shadow: 0 0 10px #fefcd7;
     }
 
     .console-input {
         flex: 1;
         background: transparent;
         border: none;
-        color: #e0e0e0;
+        color: #fefcd7;
+        font-size: 16px;
+        outline: none;
     }
 
     .console-line {
-        animation: fade 3s ease forwards;
+        animation: fade 2s ease forwards;
         margin-bottom: 4px;
         flex-shrink: 0;
     }
@@ -335,10 +342,12 @@
     @@keyframes fade {
         from {
             opacity: 0;
+            transform: translateY(5px);
         }
 
         to {
             opacity: 1;
+            transform: translateY(0);
         }
     }
 
