@@ -24,6 +24,8 @@ public class SceneManager
         var ironGolem = new IronGolem();
         var table = new Table();
         var chair = new Chair();
+        var door = new Door();
+        _entities.Add(door);
         _entities.Add(player);
         _entities.Add(goblin); 
         _entities.Add(goblin2);

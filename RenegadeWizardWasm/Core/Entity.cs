@@ -160,3 +160,27 @@ public class Goblin : Entity
         
     }
 }
+
+public class Door : Entity
+{
+    public Door()
+    {
+        Name = "Door";
+        Description = "A door made of wood.";
+        Controller = Controller.Object;
+        Actions.Add(new Punch());
+        
+        // Attributes        
+        Hitpoints = 6;
+        Strength = 7;
+
+        // Dimensions
+        Size = 2;
+        Weight = 5;
+        
+        // Senses
+        FoodValue = 2;
+        Taste = 4;
+        
+    }
+}
