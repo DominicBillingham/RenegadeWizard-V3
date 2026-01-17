@@ -77,7 +77,7 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
         if (inputManager.chosenAction == null) 
             return terminalResponse;
         
-        //terminalResponse.DebugLines.Add($"Action: {inputManager.chosenAction?.Name ?? ""} | Targets: {string.Join(", ", inputManager.Targets.Select(entity => entity.Name) ?? [])}" );
+        terminalResponse.DebugLines.Add($"Action: {inputManager.chosenAction?.Name ?? ""} | Targets: {string.Join(", ", inputManager.Targets.Select(entity => entity.Name) ?? [])}" );
         terminalResponse.CombatLines.AddRange(combatManager.PlayRound());
         
         return terminalResponse;

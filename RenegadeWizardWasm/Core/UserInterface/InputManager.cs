@@ -25,9 +25,14 @@ public class InputManager(SceneManager sceneManager)
         
         userInputChunks = userInputChunks.Where(x => x != chosenAction.Name).ToArray();
         
-        Targets = sceneManager.Entities
-            .Where(entity => FuzzyMatch(entity.Names, userInputChunks))
-            .ToList();
+        Targets.Clear();
+
+        foreach (var chunk in userInputChunks)
+        {
+            var target = sceneManager.Entities.FirstOrDefault(x => FuzzyMatch(chunk, x.Names));
+            if (target != null)
+                Targets.Add(target);
+        }
         
     }
 

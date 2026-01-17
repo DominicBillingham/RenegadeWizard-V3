@@ -19,7 +19,7 @@ public class TerminalResponse()
 
             if (DebugLines.Any())
             {
-                //_text.AddRange(DebugLines);
+                _text.AddRange(DebugLines);
             }
             
             if (NarrationLines.Any()) 
