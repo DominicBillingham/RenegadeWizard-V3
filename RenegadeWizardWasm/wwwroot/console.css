@@ -19,7 +19,7 @@
     flex-direction: column;
     pointer-events: auto;
     padding: 2vh; /* Changed from 20px */
-    font-size: 1.8vh; /* Set a base font size relative to VH */
+    font-size: 2.1vh; /* Set a base font size relative to VH */
 }
 
 #mainDisplay {
@@ -29,6 +29,57 @@
 .secondary-column {
     grid-column: 4;
     border-left: 1px solid rgba(150, 150, 255, 0.3);
+    overflow-y: auto;
+}
+
+.entity-mosaic {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5vh;
+    padding: 1vh;
+}
+
+.entity-card {
+    background: rgba(40, 40, 80, 0.6);
+    border: 1px solid rgba(150, 150, 255, 0.4);
+    border-radius: 8px;
+    padding: 1.5vh;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.entity-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(100, 100, 255, 0.3);
+    border-color: rgba(150, 150, 255, 0.8);
+}
+
+.entity-name {
+    font-weight: bold;
+    color: #fff;
+    font-size: 2vh;
+    margin-bottom: 0.5vh;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.entity-description {
+    color: #b0b0ff;
+    font-size: 1.6vh;
+    line-height: 1.4;
+}
+
+.secondary-column::-webkit-scrollbar {
+    width: 6px;
+}
+
+.secondary-column::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.secondary-column::-webkit-scrollbar-thumb {
+    background: rgba(150, 150, 255, 0.2);
+    border-radius: 3px;
 }
 
 .console-output {
@@ -71,7 +122,7 @@
 }
 
 .prompt {
-    font-size: 1.2em; /* Relative to .console-column font-size */
+    font-size: 1em; /* Relative to .console-column font-size */
     margin-right: 0.5em; /* Relative to .console-column font-size */
     font-weight: bold;
     color: #d1d1ff;

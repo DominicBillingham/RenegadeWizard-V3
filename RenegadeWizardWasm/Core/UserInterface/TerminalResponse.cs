@@ -49,8 +49,8 @@ public class TerminalResponse()
     
     
     // This is a list of data that can be used to populate the main view with information.
-    public List<Entity> Objects = new();
     public List<Entity> Creatures = new();
+    public List<Entity> Objects = new();
     
     // Used for the auto complete when pressing tab
     public List<string> EntityNames = new();

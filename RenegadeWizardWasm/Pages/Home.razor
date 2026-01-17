@@ -35,7 +35,26 @@
         </form>
     </div>
     <div class="console-column secondary-column">
-        <!-- Second column content -->
+        <div class="entity-mosaic">
+            
+            @foreach (var creature in LastResponse.Creatures)
+            {
+                <div class="entity-card">
+                    <div class="entity-name">@creature.Name</div>
+                    <div class="entity-description">@creature.Description</div>
+                </div>
+            }
+            <br/>
+
+            @foreach (var obj in LastResponse.Objects)
+            {
+                <div class="entity-card">
+                    <div class="entity-name">@obj.Name</div>
+                    <div class="entity-description">@obj.Description</div>
+                </div>
+            }
+            
+        </div>
     </div>
 </div>
 

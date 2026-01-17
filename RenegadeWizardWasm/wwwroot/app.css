@@ -42,10 +42,10 @@ body::before {
 
 .moon {
     position: absolute;
-    top: 10%;
+    top: 18%;
     right: 15%;
-    width: 100px;
-    height: 100px;
+    width: 15%;
+    height: 30%;
     border-radius: 50%;
     background: #fefcd7;
     box-shadow: 0 0 40px rgba(254, 252, 215, 0.4);
@@ -56,12 +56,10 @@ body::before {
 .moon::after {
     content: '';
     position: absolute;
-    top: -15px;
-    left: -15px;
-    width: 100px;
-    height: 100px;
+    top: -10%;
+    right: 30%;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     background: #0a0a1a; /* Match background for cut-out effect */
 }
-
-

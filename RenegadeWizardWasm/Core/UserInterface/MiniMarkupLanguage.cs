@@ -67,7 +67,7 @@ public class MML
         { "rd", "color:#FF7777;" },
         { "ic", "font-style:italic;" },
         { "bd", "font-weight:bold;" },
-        {  "bg", "font-size:42px;"}
+        {  "bg", "font-size:5vh;"}
         
     };
     
