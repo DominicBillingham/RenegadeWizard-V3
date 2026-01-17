@@ -19,27 +19,9 @@
 
                 </pre>
 
-=== Current ===
-
 === Future Features ===
-
-Add a sarcastic introduction.
-
-Add a door as an introduction into the gameplay.
-
-Add an adjective system.
-
-Add tab auto complete and suggestions based on
-1. If no action can be found, suggest the closest action. If on a valid action, suggest the next action.
-2. If an action is written, suggest an entity to target in the same method.
-
-Add a compendium that can easily list actions a player can take an example use case.
-
 Add a fall back message that displays how to use an action if it fails to work.
-
-
 Clean up dead creatures from a scene after all interactions are complete.
-
 Add different rooms etc.
 
 === Finished ===
@@ -53,10 +35,13 @@ Add an item wing to the left of the terminal that displays all items in the scen
 Add an enemy wing to the right of the terminal that displays all enemies in the scene.
 Don't move on from a players turn if it fails to do anything due to a typo or unclear instructros. 
 Change each action to have it's own preferred order of interepting entities.
-
-
-
-
+Add a sarcastic introduction.
+Add a door as an introduction into the gameplay.
+Add an adjective system.
+Add a compendium that can easily list actions a player can take an example use case.
+Add tab auto complete and suggestions based on
+1. If no action can be found, suggest the closest action. If on a valid action, suggest the next action.
+2. If an action is written, suggest an entity to target in the same method.
 
 
 
