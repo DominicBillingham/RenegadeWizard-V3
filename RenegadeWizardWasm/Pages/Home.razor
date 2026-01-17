@@ -35,6 +35,9 @@
                    autofocus />
         </form>
     </div>
+    <div class="console-column secondary-column">
+        <!-- Second column content -->
+    </div>
 </div>
 
 @code {
@@ -259,17 +262,15 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
+        width: 100vw;
         height: 100vh;
-        display: flex;
-        justify-content: flex-start;
+        display: grid;
+        grid-template-columns: 5vw 35vw 5vw 50vw 5vw;
         align-items: center;
-        padding-left: 15%;
         pointer-events: none;
     }
 
     .console-column {
-        width: 30%;
         height: 100vh;
         background-color: rgba(20, 20, 40, 0.85);
         box-shadow: 0 0 30px rgba(100, 100, 255, 0.2);
@@ -277,7 +278,17 @@
         display: flex;
         flex-direction: column;
         pointer-events: auto;
-        padding: 20px;
+        padding: 2vh; /* Changed from 20px */
+        font-size: 1.8vh; /* Set a base font size relative to VH */
+    }
+
+    #mainDisplay {
+        grid-column: 2;
+    }
+
+    .secondary-column {
+        grid-column: 4;
+        border-left: 1px solid rgba(150, 150, 255, 0.3);
     }
 
     .console-output {
@@ -287,8 +298,7 @@
         flex-direction: column;
         justify-content: flex-end;
         text-shadow: 0 0 5px rgba(150, 150, 255, 0.5);
-        mask-image: linear-gradient(to bottom, transparent, black 15%);
-        -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%);
+
         flex: 1;
     }
 
@@ -314,15 +324,15 @@
         display: flex;
         align-items: center;
         border-top: 1px solid rgba(150, 150, 255, 0.3);
-        padding-top: 10px;
-        margin-top: 10px;
+        padding-top: 1vh; /* Changed from 10px */
+        margin-top: 1vh; /* Changed from 10px */
         flex-shrink: 0;
         margin-bottom: 25vh;
     }
 
     .prompt {
-        font-size: 20px;
-        margin-right: 8px;
+        font-size: 1.2em; /* Relative to .console-column font-size */
+        margin-right: 0.5em; /* Relative to .console-column font-size */
         font-weight: bold;
         color: #d1d1ff;
         text-shadow: 0 0 10px rgba(150, 150, 255, 0.5);
@@ -333,14 +343,15 @@
         background: transparent;
         border: none;
         color: #d1d1ff;
-        font-size: 16px;
+        font-size: 1em; /* Relative to .console-column font-size */
         outline: none;
     }
 
     .console-line {
         animation: fade 2s ease forwards;
-        margin-bottom: 4px;
+        margin-bottom: 0.4vh; /* Changed from 4px */
         flex-shrink: 0;
+        line-height: 1.4; /* Ensures text spacing scales */
     }
     
     @@keyframes fade {
