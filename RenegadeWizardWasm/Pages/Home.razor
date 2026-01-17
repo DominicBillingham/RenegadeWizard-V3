@@ -265,7 +265,7 @@
         width: 100vw;
         height: 100vh;
         display: grid;
-        grid-template-columns: 5vw 35vw 5vw 50vw 5vw;
+        grid-template-columns: 5vw 50vw 5vw 35vw 5vw;
         align-items: center;
         pointer-events: none;
     }
@@ -348,22 +348,12 @@
     }
 
     .console-line {
-        animation: fade 2s ease forwards;
+        animation: console-line-fade 2s ease forwards;
         margin-bottom: 0.4vh; /* Changed from 4px */
         flex-shrink: 0;
-        line-height: 1.4; /* Ensures text spacing scales */
+        line-height: 1.2; /* Ensures text spacing scales */
     }
     
-    @@keyframes fade {
-        from {
-            opacity: 0;
-            transform: translateY(5px);
-        }
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
 
 </style>
