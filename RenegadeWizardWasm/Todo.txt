@@ -19,7 +19,14 @@
 
                 </pre>
 
+
 === Future Features ===
+add achievements
+add secrets
+add 10 enemies
+add 10 items
+add 10 actions
+
 Add a fall back message that displays how to use an action if it fails to work.
 Clean up dead creatures from a scene after all interactions are complete.
 Add different rooms etc.

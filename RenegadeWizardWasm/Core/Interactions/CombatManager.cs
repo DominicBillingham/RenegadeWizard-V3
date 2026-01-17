@@ -1,5 +1,8 @@
 ﻿
-namespace RenegadeWizardWasm.Core;
+using RenegadeWizardWasm.Core.DataStorage;
+using RenegadeWizardWasm.Core.UserInterface;
+
+namespace RenegadeWizardWasm.Core.Interactions;
 
 public class CombatManager(SceneManager sceneManager, InputManager inputManager)
 {

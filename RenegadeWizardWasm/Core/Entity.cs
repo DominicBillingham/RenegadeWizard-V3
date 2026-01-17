@@ -1,6 +1,9 @@
 ﻿
 using System.Diagnostics.CodeAnalysis;
 using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Interactions;
+using RenegadeWizardWasm.Core.Interactions.Actions;
+using RenegadeWizardWasm.Core.Interactions.Modifiers;
 
 namespace RenegadeWizardWasm.Core;
 

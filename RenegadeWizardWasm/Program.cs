@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using RenegadeWizardWasm;
 using RenegadeWizardWasm.Core;
+using RenegadeWizardWasm.Core.DataStorage;
+using RenegadeWizardWasm.Core.Interactions;
+using RenegadeWizardWasm.Core.UserInterface;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

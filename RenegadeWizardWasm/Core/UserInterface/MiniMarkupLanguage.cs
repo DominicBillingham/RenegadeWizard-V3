@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 
-namespace RenegadeWizardWasm.Core;
+namespace RenegadeWizardWasm.Core.UserInterface;
 
 public class MML
 {

@@ -1,4 +1,4 @@
-﻿namespace RenegadeWizardWasm.Core;
+﻿namespace RenegadeWizardWasm.Core.Interactions;
 
 // Every action is broken down into effects. Each effect is the smallest possible operation, such as healing, knockback, etc.
 // This means actions essentially orchestrate effects, such as a lift effect succeeding before dealing damage for throw.

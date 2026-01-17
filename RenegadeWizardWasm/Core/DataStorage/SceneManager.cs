@@ -1,7 +1,7 @@
 ﻿
 using RenegadeWizardWasm.Core.Enums;
 
-namespace RenegadeWizardWasm.Core;
+namespace RenegadeWizardWasm.Core.DataStorage;
 
 public class SceneManager
 {

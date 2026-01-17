@@ -1,4 +1,7 @@
-﻿namespace RenegadeWizardWasm.Core;
+﻿using RenegadeWizardWasm.Core.DataStorage;
+using RenegadeWizardWasm.Core.Interactions;
+
+namespace RenegadeWizardWasm.Core.UserInterface;
 
 public class InputManager(SceneManager sceneManager)
 {

@@ -1,4 +1,4 @@
-﻿namespace RenegadeWizardWasm.Core;
+﻿namespace RenegadeWizardWasm.Core.Interactions;
 
 public abstract class InteractionEffect
 {
@@ -32,89 +32,6 @@ public abstract class InteractionEffect
         
     }
     protected abstract void Core();
-}
-
-public class DamageEffect : InteractionEffect
-{
-    public int Damage { get; set; }
-    protected override void Core()
-    {
-        Result += $"{Target.Name} takes {Damage} damage";
-        Target.Hitpoints -= Damage;
-    }
-}
-
-public class LiftEffect : InteractionEffect
-{
-    public int LiftOverflow { get; set; }
-    protected override void Core()
-    {
-        LiftOverflow = Actor.Strength - Target.Weight;
-        if (LiftOverflow > 0)
-        {
-            Result = $"{Actor.Name} <powerfully> lifts {Target.Name} ";
-        }
-        else
-        {
-            Result = $"{Actor.Name} tries to lift {Target.Name} <fails>.";
-        }
-    }
-}
-
-public class CharmEffect : InteractionEffect
-{
-    protected override void Core()
-    {
-        Target.Faction = Actor.Faction;
-        Result = $"{Actor.Name} charms {Target.Name}.";
-    }
-}
-
-public class ContactEffect : InteractionEffect
-{
-    protected override void Core()
-    {
-        // This effect doesn't do anything by itself.
-    }
-}
-
-public class ConsumeEffect : InteractionEffect
-{
-    protected override void Core()
-    {
-        if (Actor == Target)
-        {
-            Result = $"{Actor.Name} tries to eat themselves. <wtf>";
-            return;
-        }
-        
-        if (Actor.Size > Target.Size)
-        {
-            Target.Hitpoints = 0;
-            Actor.Hitpoints += Target.FoodValue;
-            Result = $"{Actor.Name} <powerfully> consumes {Target.Name}.";
-
-            if (Target.FoodValue > 0)
-            {
-                Result += $" {Actor.Name} heals {Target.FoodValue}hp.";
-            }
-
-            if (Target.Taste < 2)
-            {
-                Result += $" <wtf>";
-            } 
-            else if (Target.Taste < 5)
-            {
-                Result += $" <gross>";
-            }
-            
-        }
-        else
-        {
-            Result = $"{Target.Name} is too big to eat. <obvious>";
-        }
-        
-    }
 }
 
 

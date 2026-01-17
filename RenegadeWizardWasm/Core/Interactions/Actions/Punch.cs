@@ -1,0 +1,39 @@
+﻿using RenegadeWizardWasm.Core.Interactions.Effects;
+
+namespace RenegadeWizardWasm.Core.Interactions.Actions;
+
+public class Punch : GameAction
+{
+    public Punch()
+    {
+        Name = "Punch";
+        Aka = ["Hit", "Slap", "Whack"];
+        TargetHelpText = "Punch [name]";
+    }
+
+    public override bool TryGetTargets(Interaction context)
+    {
+        try
+        {
+            context.ActualTargets.Add(context.DesiredTargets[0]);
+            return true;
+        }
+        catch
+        {
+            context.Result = $"{context.Actor.Name} fails to find targets for {context.GameAction.Name}.";
+            return false;
+        }
+    }
+    
+    public override void StackEffects(Interaction context)
+    {
+        var damage = new DamageEffect
+        {
+            Actor = context.Actor,
+            Target = context.ActualTargets.First(),
+            Context = context,
+            Damage = 1,
+        };
+        damage.Apply();
+    }
+}

@@ -1,4 +1,4 @@
-﻿namespace RenegadeWizardWasm.Core;
+﻿namespace RenegadeWizardWasm.Core.UserInterface;
 
 
 public class TerminalResponse()
