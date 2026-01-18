@@ -1,5 +1,6 @@
 ﻿
 using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Entities;
 
 namespace RenegadeWizardWasm.Core.DataStorage;
 
