@@ -11,20 +11,15 @@ public abstract class InteractionEffect
     public void Apply()
     {
         Context.EffectLog.Add(this);
-        
-        foreach (var mod in Actor.Boosters)
-        {
-            mod.ModifyEffect(this);
-        }
 
         foreach (var mod in Target.Modifiers)
         {
-            mod.ModifyEffect(this);
+            mod.ModifyEffects(this);
         }
 
         if (Target.Replacer != null)
         {
-            Target.Replacer.ModifyEffect(this);
+            Target.Replacer.ModifyEffects(this);
             return;
         }
         

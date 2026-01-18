@@ -10,7 +10,7 @@ public class Armour : Modifier
         DamageReduction = armour;
     }
     public int DamageReduction { get; set; }
-    public override void ModifyEffect(InteractionEffect effect)
+    public override void ModifyEffects(InteractionEffect effect)
     {
         if (effect is DamageEffect damageEvent)
         {

@@ -1,31 +1,39 @@
-﻿namespace RenegadeWizardWasm.Core.Interactions.Effects;
+﻿using RenegadeWizardWasm.Core.Enums;
+
+namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
 public class ConsumeEffect : InteractionEffect
 {
     protected override void Core()
     {
+        int actorSize = Actor.GetStat(Stat.Size);
+        int targetFoodValue = Target.GetStat(Stat.FoodValue);
+        int targetTaste = Target.GetStat(Stat.Taste);
+        int targetSize = Target.GetStat(Stat.Size);
+        
         if (Actor == Target)
         {
             Result = $"{Actor.Name} tries to eat themselves. <wtf>";
             return;
         }
         
-        if (Actor.Size > Target.Size)
+        if (actorSize >targetSize)
         {
+            
             Target.Hitpoints = 0;
-            Actor.Hitpoints += Target.FoodValue;
+            Actor.Hitpoints += targetFoodValue;
             Result = $"{Actor.Name} <powerfully> consumes {Target.Name}.";
 
-            if (Target.FoodValue > 0)
+            if (targetFoodValue > 0)
             {
-                Result += $" {Actor.Name} heals {Target.FoodValue}hp.";
+                Result += $" {Actor.Name} heals {targetFoodValue}hp.";
             }
 
-            if (Target.Taste < 2)
+            if (targetTaste < 2)
             {
                 Result += $" <wtf>";
             } 
-            else if (Target.Taste < 5)
+            else if (targetTaste < 5)
             {
                 Result += $" <gross>";
             }

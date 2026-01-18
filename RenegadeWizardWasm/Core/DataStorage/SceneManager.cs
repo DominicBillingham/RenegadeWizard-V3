@@ -13,25 +13,20 @@ public class SceneManager
     
     public SceneManager()
     {
-        var player = new Player();
-        var goblin = new Goblin();
-        var goblin2 = new Goblin
+        _entities.Add(new Player());
+        
+        _entities.Add(new Goblin()); 
+        _entities.Add(new Goblin()
         {
-            Hitpoints = 54,
-            Name = "Adam",
-            Description = "King of the goblins"
-        };
-        var ironGolem = new IronGolem();
-        var table = new Table();
-        var chair = new Chair();
-        var door = new Door();
-        _entities.Add(door);
-        _entities.Add(player);
-        _entities.Add(goblin); 
-        _entities.Add(goblin2);
-        _entities.Add(ironGolem);
-        _entities.Add(table);
-        _entities.Add(chair);
+            Name = "Goblin Lord Adam",
+            Description = "A goblin lord, but still just as ugly!",
+            Controller = Controller.Npc,
+        }); 
+        
+        _entities.Add(new IronGolem());
+        
+        _entities.Add(new Door());
+        _entities.Add(new Chair());
     }
     public List<string> GetSceneDescription()
     {
