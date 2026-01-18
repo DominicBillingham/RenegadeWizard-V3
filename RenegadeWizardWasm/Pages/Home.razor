@@ -1,10 +1,8 @@
 ﻿@page "/"
 @inject IJSRuntime JS
 
-@using RenegadeWizardWasm.Core
 @using RenegadeWizardWasm.Core.UserInterface
 @inject Terminal _terminal;
-@inject MML _mml;
 
 <PageTitle>Home</PageTitle>
 
@@ -96,10 +94,7 @@
             {
                 string line = _pendingLines[0];
                 _pendingLines.RemoveAt(0);
-                
-                string words = _mml.WordReplacement(line);
-                string html = _mml.Html(words);
-                ConsoleLines.Add(html);
+                ConsoleLines.Add(MiniMarkup.ConvertString(line));
                 
                 if (line.Contains("▼"))
                 {
@@ -194,9 +189,7 @@
             }
 
             string line = lines[i];
-            string words = _mml.WordReplacement(line);
-            string html = _mml.Html(words);
-            ConsoleLines.Add(html);
+            ConsoleLines.Add(MiniMarkup.ConvertString(line));
 
             if (line.Contains("▼"))
             {

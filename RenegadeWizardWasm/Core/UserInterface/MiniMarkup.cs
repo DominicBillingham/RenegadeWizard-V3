@@ -3,24 +3,40 @@ using System.Text.RegularExpressions;
 
 namespace RenegadeWizardWasm.Core.UserInterface;
 
-public class MML
+static class MiniMarkup
 {
-    public string Html(string input)
+
+    public static string ConvertString(string input)
     {
-        if (string.IsNullOrWhiteSpace(input))
-            return string.Empty;
+        input = FormatString(input);
+        input = ReplaceWords(input);
+        input = AddHtml(input);
+        return input;
+    }
 
-        if (!input.Contains('#'))
-        {
-            return input;
-        }
-
-        if (input.First() != '#')
-        {
+    private static string FormatString(string input)
+    {
+        if (input.Length > 0 && input.First() != '#') 
             input = "# " + input;
+        
+        for (int j = 0; j < input.Length - 1; j++)
+        {
+            char current = input[j];
+            char next = input[j + 1];
+                
+            if ((current == '.' || current == '!' || current == '?') && next != ' ')
+            {
+                input = input.Insert(j + 1, " ");
+                j++; // Skip the space we just inserted
+            }
         }
 
-        //var pattern = @"#([a-z]*)\s*([^#]*)";
+        return input;
+    }
+    
+    private static string AddHtml(string input)
+    {
+        
         var pattern = @"#([a-z0-9]*)\s*([^#]*)";
 
         var matches = Regex.Matches(input, pattern, RegexOptions.IgnoreCase);
@@ -56,7 +72,7 @@ public class MML
         return sb.ToString();
     }
     
-    private readonly Dictionary<string, string> StyleMap = new()
+    private static Dictionary<string, string> StyleMap = new()
     {
         { "pk", "color:#FF77D1;" },
         { "gn", "color:#77FFAA;" },
@@ -71,7 +87,7 @@ public class MML
         
     };
     
-    private readonly Dictionary<string, string> ClassMap = new()
+    private static readonly Dictionary<string, string> ClassMap = new()
     {
         { "shk", "shake" },
         { "pls", "pulse" },
@@ -103,7 +119,7 @@ public class MML
         
     };
     
-    public string WordReplacement(string input)
+    private static string ReplaceWords(string input)
     {
         var random = new Random();
         var pattern = @"<([^>]+)>";
