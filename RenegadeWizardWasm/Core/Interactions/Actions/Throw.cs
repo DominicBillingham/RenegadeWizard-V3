@@ -28,7 +28,7 @@ public class Throw : GameAction
     
     public override void StackEffects(Interaction context)
     {
-        var lift = new LiftEffect()
+        var lift = new ThrowEffect()
         {
             Actor = context.Actor,
             Target = context.ActualTargets[0], 
@@ -44,6 +44,18 @@ public class Throw : GameAction
                 Target = context.ActualTargets[1], 
                 Context = context,
                 Damage = lift.LiftOverflow,
+            };
+            damage.Apply();
+        }
+        else
+        {
+            var damage = new DamageEffect
+            {
+                Result = $" {context.Actor.Name} drops the item on their foot!",
+                Actor = context.Actor,
+                Target = context.Actor, 
+                Context = context,
+                Damage = 1,
             };
             damage.Apply();
         }

@@ -1,6 +1,6 @@
 ﻿namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
-public class LiftEffect : InteractionEffect
+public class ThrowEffect : InteractionEffect
 {
     public int LiftOverflow { get; set; }
     protected override void Core()
@@ -8,11 +8,11 @@ public class LiftEffect : InteractionEffect
         LiftOverflow = Actor.Strength - Target.Weight;
         if (LiftOverflow > 0)
         {
-            Result = $"{Actor.Name} <powerfully> lifts {Target.Name} ";
+            Result = $"{Actor.Name} <powerfully> <throws> {Target.Name}. ";
         }
         else
         {
-            Result = $"{Actor.Name} tries to lift {Target.Name} <fails>.";
+            Result = $"{Actor.Name} tries to lift {Target.Name} - <fails>.";
         }
     }
 }

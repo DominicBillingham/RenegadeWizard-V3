@@ -76,7 +76,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await UpdateTerminal(_terminal.BeginGame(), false);
+        //await UpdateTerminal(_terminal.BeginGame(), false);
+        _nameEntered = true;
+        await UpdateTerminal(_terminal.GetBaseText(), false);
     }
     
     public async Task HandleSubmit(EventArgs e)

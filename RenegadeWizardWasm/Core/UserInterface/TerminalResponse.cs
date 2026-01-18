@@ -36,6 +36,24 @@ public class TerminalResponse()
             {
                 _text.AddRange(SceneLines);
             }
+            
+            // Sanity check for punctuation spacing
+            for (int i = 0; i < _text.Count; i++)
+            {
+                string line = _text[i];
+                for (int j = 0; j < line.Length - 1; j++)
+                {
+                    char current = line[j];
+                    char next = line[j + 1];
+                    
+                    if ((current == '.' || current == '!' || current == '?') && next != ' ')
+                    {
+                        line = line.Insert(j + 1, " ");
+                        j++; // Skip the space we just inserted
+                    }
+                }
+                _text[i] = line;
+            }
 
             return _text;
         }
