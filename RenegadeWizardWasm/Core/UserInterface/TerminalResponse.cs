@@ -65,7 +65,6 @@ public class TerminalCard
 {
     public string Description { get; set; } = "";
     public string Name { get; set; } = "";
-    
     public int? Hitpoints { get; set; }
     
     public TerminalCard(Entity entity)
@@ -77,7 +76,7 @@ public class TerminalCard
 
     public TerminalCard(GameAction action)
     {
-        Name = action.Name;
+        Name = action.Name + (action.Aka.Any() ? $" ({string.Join(", ", action.Aka)})" : "");
         Description = action.Description;
     }
     
