@@ -40,7 +40,7 @@
     <div class="console-column secondary-column">
         <div class="entity-mosaic">
             
-            @foreach (var card in LastResponse.Cards)
+            @foreach (var card in LastResponse.CreatureCards)
             {
                 <div class="entity-card">
                     <div
@@ -48,7 +48,28 @@
                     <div class="entity-description">@card.Description</div>
                 </div>
             }
+            
             <br/>
+            
+            @foreach (var card in LastResponse.ObjectCards)
+            {
+                <div class="entity-card">
+                    <div
+                        class="entity-name">@card.Name@(card.Hitpoints != null ? $" ({card.Hitpoints}hp)" : "")</div>
+                    <div class="entity-description">@card.Description</div>
+                </div>
+            }
+            
+            <br/>
+            
+            @foreach (var card in LastResponse.ActionCards)
+            {
+                <div class="entity-card">
+                    <div
+                        class="entity-name">@card.Name</div>
+                    <div class="entity-description">@card.Description</div>
+                </div>
+            }
             
         </div>
     </div>
@@ -87,7 +108,10 @@
     {
         //await UpdateTerminal(_terminal.BeginGame(), false);
         _nameEntered = true;
-        await UpdateTerminal(_terminal.GetBaseText(), false);
+
+        TerminalResponse response = new();
+        _terminal.PopulateTerminal(response);
+        await UpdateTerminal(response, false);
     }
     
     public async Task HandleSubmit(EventArgs e)

@@ -69,7 +69,7 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
     
     public TerminalResponse EnterInput(string playerInput)
     {
-        TerminalResponse terminalResponse = GetBaseText();
+        TerminalResponse terminalResponse = new ();
         
         inputManager.ProcessInput(playerInput);
         terminalResponse.PlayerInput  = playerInput;
@@ -80,24 +80,19 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
         terminalResponse.DebugLines.Add($"Action: {inputManager.chosenAction?.Name ?? ""} | Targets: {string.Join(", ", inputManager.Targets.Select(entity => entity.Name) ?? [])}" );
         terminalResponse.CombatLines.AddRange(combatManager.PlayRound());
         
+        PopulateTerminal(terminalResponse);
+        
         return terminalResponse;
     }
 
-    public TerminalResponse GetBaseText()
+    public void PopulateTerminal(TerminalResponse terminalResponse)
     {
-        TerminalResponse terminalResponse = new TerminalResponse();
-        
-        List<TerminalCard> actionCards = sceneManager.Player.Actions.Select(action => new TerminalCard(action)).ToList();
-        List<TerminalCard> npcCards = sceneManager.Npcs.Select(entity => new TerminalCard(entity)).ToList();
-        List<TerminalCard> objectCards = sceneManager.Objects.Select(entity => new TerminalCard(entity)).ToList();
-        
-        terminalResponse.Cards = actionCards.Concat(npcCards).Concat(objectCards).ToList();
+        terminalResponse.ActionCards = sceneManager.Player.Actions.Select(action => new TerminalCard(action)).ToList();
+        terminalResponse.CreatureCards = sceneManager.Npcs.Select(entity => new TerminalCard(entity)).ToList();
+        terminalResponse.ObjectCards = sceneManager.Objects.Select(entity => new TerminalCard(entity)).ToList();
         
         terminalResponse.ActionNames = sceneManager.Player.Actions.Select(action => action.Name.ToLower()).ToList();
         terminalResponse.EntityNames = sceneManager.Entities.Select(entity => entity.Name.ToLower()).ToList();
-        
-        terminalResponse.SceneLines.AddRange(sceneManager.GetSceneDescription());
-        return terminalResponse;
     }
     
 }

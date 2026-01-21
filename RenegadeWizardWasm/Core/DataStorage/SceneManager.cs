@@ -34,15 +34,4 @@ public class SceneManager
     {
         _entities.RemoveAll(x => x.Hitpoints <= 0);
     }
-    
-    public List<string> GetSceneDescription()
-    {
-        List<string> sceneLines = new List<string>();
-        foreach (Entity entity in Entities)
-        {
-            //sceneLines.Add($"[{entity.Name}] #rd {entity.Hitpoints}hp. # Some text afterwards. ");
-        }
-        return sceneLines;
-    }
-    
 }
