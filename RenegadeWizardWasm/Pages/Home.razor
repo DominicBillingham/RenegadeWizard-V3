@@ -24,13 +24,17 @@
         </div>
         <form @onsubmit="HandleSubmit" class="console-input-form">
             <span class="prompt">&gt;</span>
-            <input type="text"
-                   class="console-input"
-                   @bind="UserInput"
-                   @bind:event="oninput"
-                   @onkeydown="HandleKeyDown"
-                   autocomplete="off"
-                   autofocus />
+            <div class="input-wrapper">
+                <input type="text"
+                       class="console-input"
+                       @bind="UserInput"
+                       @bind:event="oninput"
+                       @onkeydown="HandleKeyDown"
+                       @onkeydown:preventDefault="_preventTabDefault"
+                       autocomplete="off"
+                       autofocus />
+                <div class="console-input-ghost">@GhostInput</div>
+            </div>
         </form>
     </div>
     <div class="console-column secondary-column">
@@ -63,7 +67,21 @@
     private List<string> _pendingLines = new();
     private TerminalResponse LastResponse { get; set; } = new();
     
-    public string UserInput { get; set; } = string.Empty;
+    public string UserInput
+    {
+        get => _userInput;
+        set
+        {
+            if (_userInput != value)
+            {
+                _userInput = value;
+                UpdateGhostInput();
+            }
+        }
+    }
+
+    private string _userInput = string.Empty;
+    public string GhostInput { get; set; } = string.Empty;
     private bool _shouldScroll = false;
     
     private List<string> _commandHistory = new();
@@ -81,6 +99,7 @@
     
     public async Task HandleSubmit(EventArgs e)
     {
+        GhostInput = "";
         if (_pendingLines.Count > 0)
         {
             bool paused = false;
@@ -135,7 +154,7 @@
          {
              await JS.InvokeVoidAsync("playEnterSound");
          }
-         else
+         else if (e.Key != "Tab" && e.Key != "Shift" && e.Key != "Control" && e.Key != "Alt")
          {
              await JS.InvokeVoidAsync("playTypingSound");
          }
@@ -200,6 +219,7 @@
         LastResponse = response;
 
         UserInput = "";
+        GhostInput = "";
         _shouldScroll = shouldScroll;
         StateHasChanged();
     }
@@ -220,6 +240,12 @@
 
     private void AutoComplete()
     {
+        if (!string.IsNullOrEmpty(GhostInput) && GhostInput.Length > UserInput.Length)
+        {
+            UserInput = GhostInput;
+            return;
+        }
+
         string[] parts = UserInput.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
         bool hasTrailingSpace = UserInput.EndsWith(" ");
     
@@ -263,6 +289,66 @@
                 UserInput = string.Join(" ", parts);
                 return;
             }
+        }
+    }
+
+    private void UpdateGhostInput()
+    {
+        if (string.IsNullOrWhiteSpace(UserInput))
+        {
+            GhostInput = string.Empty;
+            return;
+        }
+
+        string[] parts = UserInput.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        bool hasTrailingSpace = UserInput.EndsWith(" ");
+
+        if (parts.Length == 0 || hasTrailingSpace)
+        {
+            GhostInput = string.Empty;
+            return;
+        }
+
+        string lastPart = parts.Last();
+        string suggestion = string.Empty;
+
+        foreach (string name in LastResponse.ActionNames)
+        {
+            if (name.StartsWith(lastPart) && name != lastPart)
+            {
+                suggestion = name;
+                break;
+            }
+        }
+
+        if (string.IsNullOrEmpty(suggestion))
+        {
+            foreach (string name in LastResponse.EntityNames)
+            {
+                if (name.StartsWith(lastPart) && name != lastPart)
+                {
+                    suggestion = name;
+                    break;
+                }
+            }
+        }
+
+        if (!string.IsNullOrEmpty(suggestion))
+        {
+            parts[^1] = suggestion;
+            GhostInput = string.Join(" ", parts);
+            
+            // Match casing of UserInput for the prefix if needed, 
+            // but the game seems to use lowercase for input mostly.
+            // Let's at least make sure the ghost input starts with exactly what the user typed.
+            if (GhostInput.StartsWith(UserInput, StringComparison.OrdinalIgnoreCase))
+            {
+                GhostInput = UserInput + GhostInput.Substring(UserInput.Length);
+            }
+        }
+        else
+        {
+            GhostInput = string.Empty;
         }
     }
 

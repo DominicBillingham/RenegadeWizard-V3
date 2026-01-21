@@ -119,6 +119,14 @@
     margin-top: 1vh; /* Changed from 10px */
     flex-shrink: 0;
     margin-bottom: 25vh;
+    position: relative;
+}
+
+.input-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
 
 .prompt {
@@ -129,13 +137,32 @@
     text-shadow: 0 0 10px rgba(150, 150, 255, 0.5);
 }
 
-.console-input {
-    flex: 1;
+.console-input, .console-input-ghost {
+    width: 100%;
     background: transparent;
     border: none;
-    color: #d1d1ff;
     font-size: 1em; /* Relative to .console-column font-size */
     outline: none;
+    font-family: inherit;
+    line-height: normal;
+    padding: 0;
+    margin: 0;
+}
+
+.console-input {
+    color: #d1d1ff;
+    position: relative;
+    z-index: 2;
+}
+
+.console-input-ghost {
+    color: rgba(209, 209, 255, 0.3);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    pointer-events: none;
+    white-space: pre;
 }
 
 .console-line {
