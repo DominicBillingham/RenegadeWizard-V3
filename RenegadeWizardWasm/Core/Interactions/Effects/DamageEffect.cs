@@ -7,5 +7,12 @@ public class DamageEffect : InteractionEffect
     {
         Result += $" {Target.Name} takes {Damage} damage.";
         Target.Hitpoints -= Damage;
+
+        if (Target.Hitpoints < 0)
+        {
+            Result += $"{Target.Name} <destroyed>";
+        }
+        
+        
     }
 }

@@ -146,6 +146,9 @@ static class MiniMarkup
             // Actions
             { "fails", ["flops completely", "it's a complete disaster", "fails miserably", "it end's up failing, like everything they do", "naturally they fuck it up"] },
             { "throws", ["tosses",  "yeets", "hurls", "chucks", ] },
+            
+            { "destroyed", ["is completely totalled.",  "explodes violently.", "departs this world.", "was claimed by death.",  "is sleeping with the fishes", "totally annihilated"] },
+
 
             
             { "template", ["template1",  "template2", "template3", "template4", "template5"] },
