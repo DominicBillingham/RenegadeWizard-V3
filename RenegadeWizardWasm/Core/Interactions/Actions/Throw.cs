@@ -7,6 +7,7 @@ public class Throw : GameAction
     public Throw()
     {
         Name = "Throw";
+        Description = "Use your strength to throw an object at another object.";
         Aka = ["Hurl", "Yeet", "Toss"];
         TargetHelpText = "I throw [name] at [name2]";
     }

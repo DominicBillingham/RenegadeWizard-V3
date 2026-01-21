@@ -29,6 +29,12 @@ public class SceneManager
         _entities.Add(new Door());
         _entities.Add(new Chair());
     }
+    
+    public void RemoveDestroyedEntities()
+    {
+        _entities.RemoveAll(x => x.Hitpoints <= 0);
+    }
+    
     public List<string> GetSceneDescription()
     {
         List<string> sceneLines = new List<string>();

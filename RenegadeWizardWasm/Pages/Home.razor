@@ -40,22 +40,15 @@
     <div class="console-column secondary-column">
         <div class="entity-mosaic">
             
-            @foreach (var creature in LastResponse.Creatures)
+            @foreach (var card in LastResponse.Cards)
             {
                 <div class="entity-card">
-                    <div class="entity-name">@creature.Name</div>
-                    <div class="entity-description">@creature.Description</div>
+                    <div
+                        class="entity-name">@card.Name@(card.Hitpoints != null ? $" ({card.Hitpoints}hp)" : "")</div>
+                    <div class="entity-description">@card.Description</div>
                 </div>
             }
             <br/>
-
-            @foreach (var obj in LastResponse.Objects)
-            {
-                <div class="entity-card">
-                    <div class="entity-name">@obj.Name</div>
-                    <div class="entity-description">@obj.Description</div>
-                </div>
-            }
             
         </div>
     </div>

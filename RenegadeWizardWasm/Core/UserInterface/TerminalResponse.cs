@@ -1,4 +1,6 @@
-﻿namespace RenegadeWizardWasm.Core.UserInterface;
+﻿using RenegadeWizardWasm.Core.Interactions;
+
+namespace RenegadeWizardWasm.Core.UserInterface;
 
 
 public class TerminalResponse()
@@ -49,11 +51,32 @@ public class TerminalResponse()
     
     
     // This is a list of data that can be used to populate the main view with information.
-    public List<Entity> Creatures = new();
-    public List<Entity> Objects = new();
+    public List<TerminalCard> Cards = new();
     
     // Used for the auto complete when pressing tab
     public List<string> EntityNames = new();
     public List<string> ActionNames = new();
 
+}
+
+public class TerminalCard
+{
+    public string Description { get; set; } = "";
+    public string Name { get; set; } = "";
+    
+    public int? Hitpoints { get; set; }
+    
+    public TerminalCard(Entity entity)
+    {
+        Name = entity.Name;
+        Description = entity.Description;
+        Hitpoints = entity.Hitpoints;
+    }
+
+    public TerminalCard(GameAction action)
+    {
+        Name = action.Name;
+        Description = action.Description;
+    }
+    
 }

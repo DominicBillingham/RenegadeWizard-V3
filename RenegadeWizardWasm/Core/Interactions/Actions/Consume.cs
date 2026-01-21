@@ -7,6 +7,7 @@ public class Consume : GameAction
     public Consume()
     {
         Name = "Consume";
+        Description = "Attempt to devour literally anything - regardless of if it's a good idea or not.";
         Aka = ["Eat", "Drink", "Devour", "Ingest", "Swallow", "Digest"];
         TargetHelpText = "I consume [name]";
     }

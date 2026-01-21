@@ -86,8 +86,12 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
     public TerminalResponse GetBaseText()
     {
         TerminalResponse terminalResponse = new TerminalResponse();
-        terminalResponse.Creatures = sceneManager.Npcs;
-        terminalResponse.Objects = sceneManager.Objects;
+        
+        List<TerminalCard> actionCards = sceneManager.Player.Actions.Select(action => new TerminalCard(action)).ToList();
+        List<TerminalCard> npcCards = sceneManager.Npcs.Select(entity => new TerminalCard(entity)).ToList();
+        List<TerminalCard> objectCards = sceneManager.Objects.Select(entity => new TerminalCard(entity)).ToList();
+        
+        terminalResponse.Cards = actionCards.Concat(npcCards).Concat(objectCards).ToList();
         
         terminalResponse.ActionNames = sceneManager.Player.Actions.Select(action => action.Name.ToLower()).ToList();
         terminalResponse.EntityNames = sceneManager.Entities.Select(entity => entity.Name.ToLower()).ToList();
