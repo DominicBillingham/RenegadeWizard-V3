@@ -28,6 +28,20 @@ public class Throw : GameAction
     
     public override void StackEffects(Interaction context)
     {
+
+        var detach = new DetachEffect()
+        {
+            Actor = context.Actor,
+            Target = context.ActualTargets[0],
+            Context = context,
+        };
+        detach.Apply();
+
+        if (detach.DetachOverflow < 1)
+        {
+            return;
+        }
+        
         var lift = new ThrowEffect()
         {
             Actor = context.Actor,
