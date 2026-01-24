@@ -31,6 +31,7 @@ public abstract class Entity
         foreach (Modifier mod in Modifiers)
         {
             mod.ModifyStats(stat , ref temp);
+            temp = Math.Clamp(temp, 1, 10);
         }
         return temp;
     }
@@ -42,6 +43,9 @@ public abstract class Entity
 
     public Dictionary<Stat, int> Stats { get; init; } = new()
     {
+        // All stats range between 1 and 10.
+        // 5 is the human baseline.
+        
         // Gameplay
         { Stat.Strength, 5 },
         { Stat.Dexterity, 5 },
