@@ -38,7 +38,7 @@ public class Throw : GameAction
         };
         detach.Apply();
 
-        if (detach.DetachOverflow < 1)
+        if (detach.DetachOverflow < 1 && detach.AttachmentStrength > 0 )
         {
             return;
         }
