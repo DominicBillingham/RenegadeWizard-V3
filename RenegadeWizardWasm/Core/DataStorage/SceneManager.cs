@@ -15,19 +15,6 @@ public class SceneManager
     public SceneManager()
     {
         _entities.Add(new Player());
-        
-        _entities.Add(new Goblin()); 
-        _entities.Add(new Goblin()
-        {
-            Name = "Goblin Lord Adam",
-            Description = "A goblin lord, but still just as ugly!",
-            Controller = Controller.Npc,
-        }); 
-        
-        _entities.Add(new IronGolem());
-        
-        _entities.Add(new Door());
-        _entities.Add(new Chair());
     }
 
     public string Level1()
