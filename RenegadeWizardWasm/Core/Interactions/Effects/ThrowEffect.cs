@@ -4,7 +4,7 @@ namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
 public class ThrowEffect : InteractionEffect
 {
-    private int LiftOverflow { get; set; } = 0;
+    public int LiftOverflow { get; set; } = 0;
     public ThrowEffect(ActionContext context) : base(context)
     {
         var actor = context.Actor;

@@ -30,49 +30,22 @@ public class Throw : GameAction
     public override void StackEffects(ActionContext context)
     {
 
-        var detach = new DetachEffect()
-        {
-            Actor = context.Actor,
-            Target = context.ActualTargets[0],
-            Context = context,
-        };
-        detach.Apply();
+        var detach = new DetachEffect(context);
 
         if (detach.DetachOverflow < 1 && detach.AttachmentStrength > 0 )
         {
             return;
         }
         
-        var lift = new ThrowEffect()
-        {
-            Actor = context.Actor,
-            Target = context.ActualTargets[0], 
-            Context = context,
-        };
-        lift.Apply();
+        var lift = new ThrowEffect(context);
 
         if (lift.LiftOverflow > 0)
         {
-            var damage = new DamageEffect
-            {
-                Actor = context.Actor,
-                Target = context.ActualTargets[1], 
-                Context = context,
-                Damage = lift.LiftOverflow,
-            };
-            damage.Apply();
+            var damage = new DamageEffect(context, lift.LiftOverflow);
         }
         else
         {
-            var damage = new DamageEffect
-            {
-                Result = $" {context.Actor.Name} drops the item on their foot!",
-                Actor = context.Actor,
-                Target = context.Actor, 
-                Context = context,
-                Damage = 1,
-            };
-            damage.Apply();
+            var damage = new DamageEffect(context, 1);
         }
     }
 }

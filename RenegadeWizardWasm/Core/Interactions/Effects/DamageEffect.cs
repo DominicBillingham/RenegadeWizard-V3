@@ -2,9 +2,7 @@
 
 public class DamageEffect : InteractionEffect
 {
-    public int Damage { get; set; }
-
-    public DamageEffect(ActionContext context) : base(context)
+    public DamageEffect(ActionContext context, int damage) : base(context)
     {
         var actor = context.Actor;
         var target = context.DesiredTargets.FirstOrDefault();
@@ -15,8 +13,8 @@ public class DamageEffect : InteractionEffect
             return;
         }
         
-        Result += $" {target.Name} takes {Damage} damage.";
-        target.Hitpoints -= Damage;
+        Result += $" {target.Name} takes {damage} damage.";
+        target.Hitpoints -= damage;
 
         if (target.Hitpoints <= 0)
         {

@@ -28,12 +28,6 @@ public class Charm : GameAction
     
     public override void StackEffects(ActionContext context)
     {
-        var charm = new CharmEffect()
-        {
-            Actor = context.Actor,
-            Target = context.ActualTargets[0], 
-            Context = context,
-        };
-        charm.Apply();
+        var charm = new CharmEffect(context);
     }
 }

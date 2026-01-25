@@ -28,20 +28,7 @@ public class Consume : GameAction
     
     public override void StackEffects(ActionContext context)
     {
-        var touch = new ContactEffect()
-        {
-            Actor = context.Actor,
-            Target = context.ActualTargets[0],
-            Context = context,
-        };
-        touch.Apply();
-        
-        var eat = new ConsumeEffect()
-        {
-            Actor = context.Actor,
-            Target = context.ActualTargets[0], 
-            Context = context,
-        };
-        eat.Apply();
+        var touch = new ContactEffect(context);
+        var eat = new ConsumeEffect(context);
     }
 }
