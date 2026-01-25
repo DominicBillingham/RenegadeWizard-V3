@@ -18,14 +18,13 @@ public abstract class Entity
     public int Hitpoints { get; set; }
     public Controller Controller { get; set; }
     public List<GameAction> Actions { get; set; } = new List<GameAction>();
-    public List<Modifier> Modifiers { get; set; } = [];
-    public Modifier? Replacer { get; set; }
+    public List<Tag> Tags { get; set; } = [];
     public Faction Faction { get; set; }
 
     public int GetStat(Stat stat)
     {
         int temp = Stats[stat];
-        foreach (Modifier mod in Modifiers)
+        foreach (Tag mod in Tags)
         {
             //mod.ModifyStats(stat , ref temp);
             temp = Math.Clamp(temp, 1, 10);
@@ -59,7 +58,7 @@ public abstract class Entity
 
 }
 
-public abstract class Modifier
+public abstract class Tag
 {
     public string Name { get; set; } = "";
     public Duration Duration { get; set; } = Duration.Permanent;

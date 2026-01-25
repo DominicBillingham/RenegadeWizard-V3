@@ -15,6 +15,7 @@ public class SceneManager
     public SceneManager()
     {
         _entities.Add(new Player());
+        Level1();
     }
 
     public string Level1()

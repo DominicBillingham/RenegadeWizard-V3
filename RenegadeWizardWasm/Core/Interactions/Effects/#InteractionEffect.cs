@@ -11,6 +11,7 @@ public abstract class InteractionEffect
     public InteractionEffect(ActionContext context)
     {
         context.CombatLog.Add(this);
+        Context = context;
     }
     
 }
