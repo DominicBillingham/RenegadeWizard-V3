@@ -4,20 +4,24 @@ namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
 public class ThrowEffect : InteractionEffect
 {
-    public int LiftOverflow { get; set; }
-    protected override void Core()
+    private int LiftOverflow { get; set; } = 0;
+    public ThrowEffect(ActionContext context) : base(context)
     {
-        int actorStrength = Actor.GetStat(Stat.Strength);
-        int targetWeight = Target.GetStat(Stat.Weight);
+        var actor = context.Actor;
+        var target = context.DesiredTargets.FirstOrDefault();
+        
+        int actorStrength = actor.GetStat(Stat.Strength);
+        int targetWeight = target.GetStat(Stat.Weight);
         
         LiftOverflow = actorStrength - targetWeight;
         if (LiftOverflow > 0)
         {
-            Result = $"{Actor.Name} <powerfully> <throws> {Target.Name}. ";
+            Result = $"{actor.Name} <powerfully> <throws> {target.Name}. ";
         }
         else
         {
-            Result = $"{Actor.Name} tries to lift {Target.Name} - <fails>.";
+            Result = $"{actor.Name} tries to lift {target.Name} - <fails>.";
         }
     }
+    
 }

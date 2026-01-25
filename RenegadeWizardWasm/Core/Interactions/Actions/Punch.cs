@@ -12,7 +12,7 @@ public class Punch : GameAction
         TargetHelpText = "Punch [name]";
     }
 
-    public override bool TryGetTargets(Interaction context)
+    public override bool TryGetTargets(ActionContext context)
     {
         try
         {
@@ -26,7 +26,7 @@ public class Punch : GameAction
         }
     }
     
-    public override void StackEffects(Interaction context)
+    public override void StackEffects(ActionContext context)
     {
         var damage = new DamageEffect
         {

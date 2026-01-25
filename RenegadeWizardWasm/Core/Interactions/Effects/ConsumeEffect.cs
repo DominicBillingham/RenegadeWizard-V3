@@ -4,29 +4,32 @@ namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
 public class ConsumeEffect : InteractionEffect
 {
-    protected override void Core()
+    public ConsumeEffect(ActionContext context) : base(context)
     {
-        int actorSize = Actor.GetStat(Stat.Size);
-        int targetFoodValue = Target.GetStat(Stat.FoodValue);
-        int targetTaste = Target.GetStat(Stat.Taste);
-        int targetSize = Target.GetStat(Stat.Size);
+        var actor = context.Actor;
+        var target = context.DesiredTargets.FirstOrDefault();
         
-        if (Actor == Target)
+        int actorSize = actor.GetStat(Stat.Size);
+        int targetFoodValue = target.GetStat(Stat.FoodValue);
+        int targetTaste = target.GetStat(Stat.Taste);
+        int targetSize = target.GetStat(Stat.Size);
+        
+        if (actor == target)
         {
-            Result = $"{Actor.Name} tries to eat themselves. <wtf>";
+            Result = $"{actor.Name} tries to eat themselves. <wtf>";
             return;
         }
         
         if (actorSize >targetSize)
         {
             
-            Target.Hitpoints = 0;
-            Actor.Hitpoints += targetFoodValue;
-            Result = $"{Actor.Name} <powerfully> consumes {Target.Name}.";
+            target.Hitpoints = 0;
+            actor.Hitpoints += targetFoodValue;
+            Result = $"{actor.Name} <powerfully> consumes {target.Name}.";
 
             if (targetFoodValue > 0)
             {
-                Result += $" {Actor.Name} heals {targetFoodValue}hp.";
+                Result += $" {actor.Name} heals {targetFoodValue}hp.";
             }
 
             if (targetTaste < 2)
@@ -41,7 +44,7 @@ public class ConsumeEffect : InteractionEffect
         }
         else
         {
-            Result = $"{Target.Name} is too big to eat. <obvious>";
+            Result = $"{target.Name} is too big to eat. <obvious>";
         }
         
     }

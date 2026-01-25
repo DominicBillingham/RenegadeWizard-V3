@@ -3,22 +3,25 @@
 public class DamageEffect : InteractionEffect
 {
     public int Damage { get; set; }
-    protected override void Core()
+
+    public DamageEffect(ActionContext context) : base(context)
     {
-        if (Target.Hitpoints < 1)
+        var actor = context.Actor;
+        var target = context.DesiredTargets.FirstOrDefault();
+        
+        if (target.Hitpoints < 1)
         {
-            Result = $"but {Target.Name} has already been destroyed!";
+            Result = $"but {target.Name} has already been destroyed!";
             return;
         }
         
-        Result += $" {Target.Name} takes {Damage} damage.";
-        Target.Hitpoints -= Damage;
+        Result += $" {target.Name} takes {Damage} damage.";
+        target.Hitpoints -= Damage;
 
-        if (Target.Hitpoints <= 0)
+        if (target.Hitpoints <= 0)
         {
-            Result += $"{Target.Name} <destroyed>";
+            Result += $"{target.Name} <destroyed>";
         }
-        
-        
     }
+
 }

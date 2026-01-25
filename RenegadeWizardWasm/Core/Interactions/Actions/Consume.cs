@@ -12,7 +12,7 @@ public class Consume : GameAction
         TargetHelpText = "I consume [name]";
     }
 
-    public override bool TryGetTargets(Interaction context)
+    public override bool TryGetTargets(ActionContext context)
     {
         try
         {
@@ -26,7 +26,7 @@ public class Consume : GameAction
         }
     }
     
-    public override void StackEffects(Interaction context)
+    public override void StackEffects(ActionContext context)
     {
         var touch = new ContactEffect()
         {

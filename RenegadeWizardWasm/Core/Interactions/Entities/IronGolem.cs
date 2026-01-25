@@ -1,6 +1,5 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Interactions.Actions;
-using RenegadeWizardWasm.Core.Interactions.Modifiers;
 
 namespace RenegadeWizardWasm.Core.Entities;
 
@@ -14,7 +13,6 @@ public class IronGolem : Entity
         Hitpoints = 25;
 
         Actions.Add(new Punch());
-        Modifiers.Add(new Armour(5));
 
         Stats[Stat.Strength] = 8;
         Stats[Stat.Dexterity] = 4;

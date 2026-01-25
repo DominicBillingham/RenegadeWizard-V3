@@ -1,10 +1,13 @@
-﻿namespace RenegadeWizardWasm.Core.Interactions.Effects;
+﻿using RenegadeWizardWasm.Core.Enums;
+
+namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
 public class CharmEffect : InteractionEffect
 {
-    protected override void Core()
+    public CharmEffect(ActionContext context) : base(context)
     {
-        Target.Faction = Actor.Faction;
-        Result = $"{Actor.Name} charms {Target.Name}.";
+        Faction faction = context.Actor.Faction;
+        context.ActualTargets.ForEach(target => target.Faction = faction);
     }
+
 }

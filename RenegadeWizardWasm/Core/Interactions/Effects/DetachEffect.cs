@@ -7,22 +7,26 @@ public class DetachEffect : InteractionEffect
     public int AttachmentStrength { get; set; } = 0;
     public int DetachOverflow { get; set; } = 0;
     
-    protected override void Core()
+    public DetachEffect(ActionContext context) : base(context)
     {
         if (AttachmentStrength == 0)
             return;
         
-        int actorStrength = Actor.GetStat(Stat.Strength);
+        var actor = context.Actor;
+        var target = context.DesiredTargets.FirstOrDefault();
+        
+        int actorStrength = actor.GetStat(Stat.Strength);
         
         DetachOverflow = actorStrength - AttachmentStrength;
         
         if (DetachOverflow > 0)
         {
-            Result = $"{Actor.Name} <powerfully> rips {Target.Name} away. ";
+            Result = $"{actor.Name} <powerfully> rips {target.Name} away. ";
         }
         else
         {
-            Result = $"{Actor.Name} tries to detach {Target.Name} - <fails>.";
+            Result = $"{actor.Name} tries to detach {target.Name} - <fails>.";
         }
     }
+
 }

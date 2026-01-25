@@ -10,8 +10,8 @@ public abstract class GameAction()
     public List<string> Names => Aka.Append(Name).ToList();
     public string TargetHelpText { get; init; }
     
-    public abstract bool TryGetTargets(Interaction context);
-    public abstract void StackEffects(Interaction context);
+    public abstract bool TryGetTargets(ActionContext context);
+    public abstract void StackEffects(ActionContext context);
 
     // Allows the NPCs to know how to actually use actions rather than just assuming the player.
     public virtual List<Entity> NpcGetTargets(IReadOnlyCollection<Entity> possibleTargets)

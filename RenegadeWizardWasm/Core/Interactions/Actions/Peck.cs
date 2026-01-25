@@ -11,7 +11,7 @@ public class Peck : GameAction
         TargetHelpText = "Peck [name]";
     }
 
-    public override bool TryGetTargets(Interaction context)
+    public override bool TryGetTargets(ActionContext context)
     {
         try
         {
@@ -25,7 +25,7 @@ public class Peck : GameAction
         }
     }
     
-    public override void StackEffects(Interaction context)
+    public override void StackEffects(ActionContext context)
     {
         var damage = new DamageEffect
         {

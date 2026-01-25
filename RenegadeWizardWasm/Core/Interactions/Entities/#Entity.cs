@@ -30,7 +30,7 @@ public abstract class Entity
         int temp = Stats[stat];
         foreach (Modifier mod in Modifiers)
         {
-            mod.ModifyStats(stat , ref temp);
+            //mod.ModifyStats(stat , ref temp);
             temp = Math.Clamp(temp, 1, 10);
         }
         return temp;
@@ -61,3 +61,11 @@ public abstract class Entity
     };
 
 }
+
+public abstract class Modifier
+{
+    public string Name { get; set; } = "";
+    public Duration Duration { get; set; } = Duration.Permanent;
+    
+}
+

@@ -7,16 +7,16 @@ namespace RenegadeWizardWasm.Core.Interactions;
 public class CombatManager(SceneManager sceneManager, InputManager inputManager)
 {
 
-    public List<Interaction> GetEnemyIntentions()
+    public List<ActionContext> GetEnemyIntentions()
     {
-        List<Interaction> EnemyIntentions = new ();
+        List<ActionContext> EnemyIntentions = new ();
 
         foreach (var ent in sceneManager.Npcs)
         {
             var random = new Random();
             GameAction action = ent.Actions[random.Next(ent.Actions.Count)];
             List<Entity> targets = action.NpcGetTargets(sceneManager.Entities);
-            EnemyIntentions.Add(new Interaction(ent, action, sceneManager.Entities, targets));
+            EnemyIntentions.Add(new ActionContext(ent, action, sceneManager.Entities, targets));
         }
         
         return EnemyIntentions;
@@ -26,8 +26,8 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
     {
         List<string> CombatLines = new List<string>();
         
-        Interaction interaction = new Interaction(sceneManager.Player, inputManager.chosenAction, sceneManager.Entities, inputManager.Targets);
-        string actionResult = interaction.Resolve();
+        ActionContext actionContext = new ActionContext(sceneManager.Player, inputManager.chosenAction, sceneManager.Entities, inputManager.Targets);
+        string actionResult = actionContext.Resolve();
         CombatLines.Add(actionResult);
         
         

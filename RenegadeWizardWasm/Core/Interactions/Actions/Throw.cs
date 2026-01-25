@@ -12,7 +12,7 @@ public class Throw : GameAction
         TargetHelpText = "I throw [name] at [name2]";
     }
 
-    public override bool TryGetTargets(Interaction context)
+    public override bool TryGetTargets(ActionContext context)
     {
         try
         {
@@ -27,7 +27,7 @@ public class Throw : GameAction
         }
     }
     
-    public override void StackEffects(Interaction context)
+    public override void StackEffects(ActionContext context)
     {
 
         var detach = new DetachEffect()

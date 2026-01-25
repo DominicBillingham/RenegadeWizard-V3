@@ -12,7 +12,7 @@ public class Charm : GameAction
         TargetHelpText = "I charm [name]";
     }
 
-    public override bool TryGetTargets(Interaction context)
+    public override bool TryGetTargets(ActionContext context)
     {
         try
         {
@@ -26,7 +26,7 @@ public class Charm : GameAction
         }
     }
     
-    public override void StackEffects(Interaction context)
+    public override void StackEffects(ActionContext context)
     {
         var charm = new CharmEffect()
         {

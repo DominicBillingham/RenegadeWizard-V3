@@ -1,5 +1,4 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
-using RenegadeWizardWasm.Core.Interactions.Modifiers;
 
 namespace RenegadeWizardWasm.Core.Entities;
 
@@ -22,7 +21,6 @@ public class Door : Entity
         Stats[Stat.Taste] = 3;
         Stats[Stat.FoodValue] = 0;
         
-        Modifiers.Add(new Attached(10));
         
     }
 }

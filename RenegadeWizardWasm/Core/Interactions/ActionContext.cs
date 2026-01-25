@@ -7,7 +7,7 @@
 // Boosters improve the effect, modifiers add / modify the effect; replaces change the effects result.
 // For example, the damage effect has a core that deals damage, booster may double the damage, modifer may reduce it by -5, replace may reflect the damage instead.
 
-public class Interaction(
+public class ActionContext(
     Entity? actor,
     GameAction? gameAction,
     IReadOnlyCollection<Entity> allEntities,
@@ -42,7 +42,7 @@ public class Interaction(
 
         GameAction.StackEffects(this);
         
-        foreach (var effect in EffectLog)
+        foreach (var effect in CombatLog)
         {
             if (effect.HideResult) continue;
             Result += effect.Result;
@@ -52,7 +52,7 @@ public class Interaction(
     }
 
     public List<Entity> ActualTargets { get; set; } = [];
-    public List<InteractionEffect> EffectLog { get; set; } = [];
+    public List<InteractionEffect> CombatLog { get; set; } = [];
     public bool AllowRetry { get; set; } = false;
     public string Result { get; set; } = "";
     

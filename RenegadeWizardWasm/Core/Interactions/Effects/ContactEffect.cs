@@ -2,8 +2,8 @@
 
 public class ContactEffect : InteractionEffect
 {
-    protected override void Core()
+    public ContactEffect(ActionContext context) : base(context)
     {
-        // This effect doesn't do anything by itself.
+        
     }
 }
