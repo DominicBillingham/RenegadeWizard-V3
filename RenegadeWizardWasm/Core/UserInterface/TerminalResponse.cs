@@ -74,20 +74,21 @@ public class TerminalCard
     public string Description { get; set; } = "";
     public string Name { get; set; } = "";
     public int? Hitpoints { get; set; }
+    public List<string> Tags { get; set; }
     
     public TerminalCard(Entity entity)
     {
         Name = entity.Name;
         Description = $"{entity.Description}";
         Hitpoints = entity.Hitpoints;
-        // List of tags go here!
+        Tags = entity.Tags.Select(x => x.Name).ToList();
     }
 
     public TerminalCard(GameAction action)
     {
         Name = action.Name + (action.Aka.Any() ? $" ({string.Join(", ", action.Aka)})" : "");
         Description = action.Description;
-        // List of tags go here!
+        Tags = action.ActionTags;
     }
     
 }

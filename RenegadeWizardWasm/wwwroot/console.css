@@ -67,6 +67,33 @@
     color: #b0b0ff;
     font-size: 1.6vh;
     line-height: 1.4;
+    margin-top: 1vh;
+}
+
+.entity-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8vh;
+    margin-bottom: 0.5vh;
+}
+
+.tag-item {
+    background: rgba(100, 100, 255, 0.15);
+    border: 1px solid rgba(150, 150, 255, 0.3);
+    border-radius: 4px;
+    padding: 0.2vh 0.6vh;
+    font-size: 1.4vh;
+    color: #e0e0ff; /* Light color for visibility */
+    display: flex;
+    align-items: center;
+}
+
+.tag-icon {
+    width: 1.4vh;
+    height: 1.4vh;
+    margin-right: 0.4vh;
+    stroke: #ffffff; /* White outlines */
+    stroke-width: 2px;
 }
 
 .secondary-column::-webkit-scrollbar {

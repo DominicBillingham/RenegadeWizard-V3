@@ -45,6 +45,15 @@
                 <div class="entity-card">
                     <div
                         class="entity-name">@card.Name@(card.Hitpoints != null ? $" ({card.Hitpoints}hp)" : "")</div>
+                    @if (card.Tags != null && card.Tags.Any())
+                    {
+                        <div class="entity-tags">
+                            @foreach (var tag in card.Tags)
+                            {
+                                <span class="tag-item"><i data-lucide="tag" class="tag-icon"></i> @tag</span>
+                            }
+                        </div>
+                    }
                     <div class="entity-description">@card.Description</div>
                 </div>
             }
@@ -56,6 +65,15 @@
                 <div class="entity-card">
                     <div
                         class="entity-name">@card.Name@(card.Hitpoints != null ? $" ({card.Hitpoints}hp)" : "")</div>
+                    @if (card.Tags != null && card.Tags.Any())
+                    {
+                        <div class="entity-tags">
+                            @foreach (var tag in card.Tags)
+                            {
+                                <span class="tag-item"><i data-lucide="tag" class="tag-icon"></i> @tag</span>
+                            }
+                        </div>
+                    }
                     <div class="entity-description">@card.Description</div>
                 </div>
             }
@@ -67,6 +85,15 @@
                 <div class="entity-card">
                     <div
                         class="entity-name">@card.Name</div>
+                    @if (card.Tags != null && card.Tags.Any())
+                    {
+                        <div class="entity-tags">
+                            @foreach (var tag in card.Tags)
+                            {
+                                <span class="tag-item"><i data-lucide="tag" class="tag-icon"></i> @tag</span>
+                            }
+                        </div>
+                    }
                     <div class="entity-description">@card.Description</div>
                 </div>
             }
@@ -112,6 +139,9 @@
         TerminalResponse response = new();
         _terminal.PopulateTerminal(response);
         await UpdateTerminal(response, false);
+        
+        await Task.Delay(100);
+        await JS.InvokeVoidAsync("createLucideIcons");
     }
     
     public async Task HandleSubmit(EventArgs e)
@@ -141,6 +171,9 @@
             UserInput = "";
             _shouldScroll = true;
             StateHasChanged();
+            
+            await Task.Delay(10);
+            await JS.InvokeVoidAsync("createLucideIcons");
             return;
         }
 
@@ -239,6 +272,9 @@
         GhostInput = "";
         _shouldScroll = shouldScroll;
         StateHasChanged();
+        
+        await Task.Delay(10);
+        await JS.InvokeVoidAsync("createLucideIcons");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
