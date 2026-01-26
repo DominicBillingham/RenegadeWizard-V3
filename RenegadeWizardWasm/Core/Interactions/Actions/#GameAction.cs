@@ -1,4 +1,5 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Interactions.Tags;
 
 namespace RenegadeWizardWasm.Core.Interactions;
 
@@ -9,6 +10,8 @@ public abstract class GameAction()
     public List<string> Aka { get; set; } = new();
     public List<string> Names => Aka.Append(Name).ToList();
     public string TargetHelpText { get; init; }
+    
+    public List<string> ActionTags { get; set; } = [];
     
     public abstract bool TryGetTargets(ActionContext context);
     public abstract void Perform(ActionContext context);

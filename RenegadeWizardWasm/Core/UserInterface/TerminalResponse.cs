@@ -78,14 +78,16 @@ public class TerminalCard
     public TerminalCard(Entity entity)
     {
         Name = entity.Name;
-        Description = $"[{entity.GetStat(Stat.Strength)} Str]  [{entity.GetStat(Stat.Dexterity)} Dex]  [{entity.GetStat(Stat.Intelligence)} Int] - {entity.Description}";
+        Description = $"{entity.Description}";
         Hitpoints = entity.Hitpoints;
+        // List of tags go here!
     }
 
     public TerminalCard(GameAction action)
     {
         Name = action.Name + (action.Aka.Any() ? $" ({string.Join(", ", action.Aka)})" : "");
         Description = action.Description;
+        // List of tags go here!
     }
     
 }

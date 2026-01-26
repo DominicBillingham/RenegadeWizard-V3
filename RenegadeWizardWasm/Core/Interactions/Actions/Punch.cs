@@ -10,6 +10,7 @@ public class Punch : GameAction
         Description = "Use your fists to strike an enemy. A tad boring though...";
         Aka = ["Hit", "Slap", "Whack"];
         TargetHelpText = "Punch [name]";
+        ActionTags = ["Contact", "Damage"];
     }
 
     public override bool TryGetTargets(ActionContext context)

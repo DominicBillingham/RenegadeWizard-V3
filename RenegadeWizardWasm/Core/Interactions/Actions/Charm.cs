@@ -10,6 +10,7 @@ public class Charm : GameAction
         Description = "Use your wits to change an enemy's allegiance to your own.";
         Aka = ["Flirt", "Inspire", "Convince", "Wink", "Hug", "Kiss"];
         TargetHelpText = "I charm [name]";
+        ActionTags = ["Charm"];
     }
 
     public override bool TryGetTargets(ActionContext context)
