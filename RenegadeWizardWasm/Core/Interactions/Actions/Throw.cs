@@ -38,8 +38,8 @@ public class Throw : GameAction
         
         var collision = new CollisionEffect(
             context, 
-            thrownee,
-            throwntoo
+            throwntoo,
+            thrownee
         );
 
         if (throwntoo.Hitpoints > 0)
