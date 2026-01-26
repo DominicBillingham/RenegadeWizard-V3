@@ -1,4 +1,6 @@
-﻿namespace RenegadeWizardWasm.Core.Interactions;
+﻿using RenegadeWizardWasm.Core.Enums;
+
+namespace RenegadeWizardWasm.Core.Interactions;
 
 // Every action is broken down into effects. Each effect is the smallest possible operation, such as healing, knockback, etc.
 // This means actions essentially orchestrate effects, such as a lift effect succeeding before dealing damage for throw.
@@ -11,12 +13,13 @@ public class ActionContext(
     Entity? actor,
     GameAction? gameAction,
     IReadOnlyCollection<Entity> allEntities,
-    List<Entity> desiredTargets)
+    List<Entity> intendedTargets
+    )
 {
     public readonly Entity? Actor = actor;
     public readonly GameAction? GameAction = gameAction;
     public readonly IReadOnlyCollection<Entity> AllEntities = allEntities;
-    public readonly List<Entity> DesiredTargets = desiredTargets;
+    public readonly List<Entity> IntendedTargets = intendedTargets;
 
     public string Resolve()
     {
@@ -33,12 +36,27 @@ public class ActionContext(
             AllowRetry = true;
             return Result;
         }
-
-        if (!GameAction.TryGetTargets(this))
+        
+        // Allows the target methods to be unsafe
+        try
+        {
+            GameAction.GetTargetsFromContext(this);
+        }
+        catch
         {
             AllowRetry = true;
-            return Result;
+            if (Actor.Controller == Controller.Npc)
+            {
+                Result = $"{Actor.Name} faffs about confused";
+            }
+
+            if (Actor.Controller == Controller.Player)
+            {
+                Result = $"To use {GameAction.Name}: {GameAction.TargetHelpText}";
+                return Result;
+            }
         }
+    
 
         GameAction.Perform(this);
         
@@ -51,7 +69,6 @@ public class ActionContext(
         return Result;
     }
 
-    public List<Entity> ActualTargets { get; set; } = [];
     public List<InteractionEffect> CombatLog { get; set; } = [];
     public bool AllowRetry { get; set; } = false;
     public string Result { get; set; } = "";

@@ -5,16 +5,19 @@ namespace RenegadeWizardWasm.Core.Interactions;
 
 public abstract class GameAction()
 {
+    
+    // Action information
     public string Name { get; set; }
     public string Description { get; set; }
     public List<string> Aka { get; set; } = new();
     public List<string> Names => Aka.Append(Name).ToList();
+    public List<string> ActionTags { get; set; } = [];
+
+    
+    // Target Methods
     public string TargetHelpText { get; init; }
     
-    public List<string> ActionTags { get; set; } = [];
-    
-    public abstract bool TryGetTargets(ActionContext context);
-    public abstract void Perform(ActionContext context);
+    public abstract void GetTargetsFromContext(ActionContext context);
 
     // Allows the NPCs to know how to actually use actions rather than just assuming the player.
     public virtual List<Entity> NpcGetTargets(IReadOnlyCollection<Entity> possibleTargets)
@@ -27,4 +30,6 @@ public abstract class GameAction()
         }
         return targets;
     }
+    
+    public abstract void Perform(ActionContext context);
 }

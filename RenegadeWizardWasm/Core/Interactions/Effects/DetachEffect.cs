@@ -7,13 +7,10 @@ public class DetachEffect : InteractionEffect
     public int AttachmentStrength { get; set; } = 0;
     public int DetachOverflow { get; set; } = 0;
     
-    public DetachEffect(ActionContext context) : base(context)
+    public DetachEffect(ActionContext context, Entity actor, Entity target) : base(context)
     {
         if (AttachmentStrength == 0)
             return;
-        
-        var actor = context.Actor;
-        var target = context.DesiredTargets.FirstOrDefault();
         
         int actorStrength = actor.GetStat(Stat.Strength);
         

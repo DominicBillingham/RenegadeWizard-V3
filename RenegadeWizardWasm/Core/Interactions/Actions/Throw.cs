@@ -14,19 +14,13 @@ public class Throw : GameAction
         ActionTags = ["Contact", "Push", "Damage"];
     }
 
-    public override bool TryGetTargets(ActionContext context)
+    public Entity thrownee { get; set; }
+    public Entity throwntoo { get; set; }
+
+    public override void GetTargetsFromContext(ActionContext context)
     {
-        try
-        {
-            context.ActualTargets.Add(context.DesiredTargets[0]);
-            context.ActualTargets.Add(context.DesiredTargets[1]);
-            return true;
-        }
-        catch
-        {
-            context.Result = $"{context.Actor.Name} fails to find targets for {context.GameAction.Name}.";
-            return false;
-        }
+        thrownee = context.IntendedTargets[0];
+        throwntoo = context.IntendedTargets[1];
     }
     
     public override void Perform(ActionContext context)
@@ -34,7 +28,7 @@ public class Throw : GameAction
         
         var forceMove = new ForceMoveEffect(context,
             context.Actor, 
-            context.DesiredTargets[0]
+            thrownee
         );
 
         if (forceMove.ActorCanMoveTarget == false)
@@ -44,16 +38,16 @@ public class Throw : GameAction
         
         var collision = new CollisionEffect(
             context, 
-            context.DesiredTargets[0], 
-            context.DesiredTargets[1]
+            thrownee,
+            throwntoo
         );
 
-        if (context.DesiredTargets[0].Hitpoints > 0)
+        if (throwntoo.Hitpoints > 0)
         {
             var damage = new DamageEffect(context, 
                 context.Actor, 
-                context.DesiredTargets[1] , 
-                context.DesiredTargets[0].GetStat(Stat.Weight)
+                throwntoo, 
+                thrownee.GetStat(Stat.Weight)
             );
         }
     }

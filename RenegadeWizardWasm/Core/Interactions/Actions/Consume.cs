@@ -13,23 +13,16 @@ public class Consume : GameAction
         ActionTags = ["Contact", "Damage", "Healing"];
     }
 
-    public override bool TryGetTargets(ActionContext context)
+    public Entity target { get; set; }
+
+    public override void GetTargetsFromContext(ActionContext context)
     {
-        try
-        {
-            context.ActualTargets.Add(context.DesiredTargets[0]);
-            return true;
-        }
-        catch
-        {
-            context.Result = $"{context.Actor.Name} fails to find targets for {context.GameAction.Name}.";
-            return false;
-        }
+        target = context.IntendedTargets[0];
     }
     
     public override void Perform(ActionContext context)
     {
-        var touch = new ContactEffect(context);
-        var eat = new ConsumeEffect(context);
+        var touch = new ContactEffect(context, context.Actor, target);
+        var eat = new ConsumeEffect(context, context.Actor, target);
     }
 }

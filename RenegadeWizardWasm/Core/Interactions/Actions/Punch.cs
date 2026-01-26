@@ -13,18 +13,11 @@ public class Punch : GameAction
         ActionTags = ["Contact", "Damage"];
     }
 
-    public override bool TryGetTargets(ActionContext context)
+    public Entity target { get; set; }
+
+    public override void GetTargetsFromContext(ActionContext context)
     {
-        try
-        {
-            context.ActualTargets.Add(context.DesiredTargets[0]);
-            return true;
-        }
-        catch
-        {
-            context.Result = $"{context.Actor.Name} fails to find targets for {context.GameAction.Name}.";
-            return false;
-        }
+        target = context.IntendedTargets[0];
     }
     
     public override void Perform(ActionContext context)
@@ -32,7 +25,7 @@ public class Punch : GameAction
         var damage = new DamageEffect(
             context, 
             context.Actor, 
-            context.DesiredTargets[0], 
+            target,
             1
         );
     }

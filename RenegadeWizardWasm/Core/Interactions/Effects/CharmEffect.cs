@@ -4,10 +4,10 @@ namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
 public class CharmEffect : InteractionEffect
 {
-    public CharmEffect(ActionContext context) : base(context)
+    public CharmEffect(ActionContext context, Entity actor, Entity target) : base(context)
     {
-        Faction faction = context.Actor.Faction;
-        context.ActualTargets.ForEach(target => target.Faction = faction);
+        Faction faction = actor.Faction;
+        target.Faction = faction;
     }
 
 }

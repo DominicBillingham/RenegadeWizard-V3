@@ -4,11 +4,8 @@ namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
 public class ConsumeEffect : InteractionEffect
 {
-    public ConsumeEffect(ActionContext context) : base(context)
+    public ConsumeEffect(ActionContext context, Entity actor, Entity target) : base(context)
     {
-        var actor = context.Actor;
-        var target = context.DesiredTargets.FirstOrDefault();
-        
         int actorSize = actor.GetStat(Stat.Size);
         int targetFoodValue = target.GetStat(Stat.FoodValue);
         int targetTaste = target.GetStat(Stat.Taste);

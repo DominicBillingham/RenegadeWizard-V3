@@ -12,23 +12,20 @@ public class Charm : GameAction
         TargetHelpText = "I charm [name]";
         ActionTags = ["Charm"];
     }
+    
+    public Entity target { get; set; }
 
-    public override bool TryGetTargets(ActionContext context)
+    public override void GetTargetsFromContext(ActionContext context)
     {
-        try
-        {
-            context.ActualTargets.Add(context.DesiredTargets[0]);
-            return true;
-        }
-        catch
-        {
-            context.Result = $"{context.Actor.Name} fails to find targets for {context.GameAction.Name}.";
-            return false;
-        }
+        target = context.IntendedTargets[0];
     }
     
     public override void Perform(ActionContext context)
     {
-        var charm = new CharmEffect(context);
+        var charm = new CharmEffect(
+            context,
+            context.Actor, 
+            target
+        );
     }
 }
