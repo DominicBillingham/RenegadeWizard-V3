@@ -42,11 +42,19 @@ public class Throw : GameAction
             return;
         }
         
-        var damage = new DamageEffect(context, 
-            context.Actor, 
-            context.DesiredTargets[1] , 
-            context.DesiredTargets[0].GetStat(Stat.Weight)
+        var collision = new CollisionEffect(
+            context, 
+            context.DesiredTargets[0], 
+            context.DesiredTargets[1]
         );
-        
+
+        if (context.DesiredTargets[0].Hitpoints > 0)
+        {
+            var damage = new DamageEffect(context, 
+                context.Actor, 
+                context.DesiredTargets[1] , 
+                context.DesiredTargets[0].GetStat(Stat.Weight)
+            );
+        }
     }
 }

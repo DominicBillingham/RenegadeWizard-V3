@@ -17,29 +17,6 @@ public abstract class InteractionEffect
     
 }
 
-public class TestEffect : InteractionEffect
-{
-    public int LiftOverflow { get; set; } = 0;
-    public TestEffect(ActionContext context) : base(context)
-    {
-        var actor = context.Actor;
-        var target = context.DesiredTargets.FirstOrDefault();
-        
-        int actorStrength = actor.GetStat(Stat.Strength);
-        int targetWeight = target.GetStat(Stat.Weight);
-        
-        LiftOverflow = actorStrength - targetWeight;
-        if (LiftOverflow > 0)
-        {
-            Result = $"{actor.Name} <powerfully> <throws> {target.Name}. ";
-        }
-        else
-        {
-            Result = $"{actor.Name} tries to lift {target.Name} - <fails>.";
-        }
-    }
-}
-
 public class ForceMoveEffect : InteractionEffect
 {
     public bool ActorCanMoveTarget { get; set; } = false;
@@ -53,21 +30,22 @@ public class ForceMoveEffect : InteractionEffect
         {
             if (actorStrength > attached.AttachmentStrength)
             {
-                Result = $"{actor.Name} rips {target.Name} from {attached.AttachedTo.Name}.";
+                Result += $"{actor.Name} rips {target.Name} from {attached.AttachedTo.Name}.";
             }
             else
             {
-                Result = $"{actor.Name} tries to pull apart {target.Name} and {attached.AttachedTo.Name} - <fails>.";
+                Result += $"{actor.Name} tries to pull apart {target.Name} and {attached.AttachedTo.Name} - <fails>.";
                 return;
             }
         }
 
         if (targetWeight > actorStrength)
         {
-            Result = $"{actor.Name} tries to lift {target.Name} - <fails>.";
+            Result += $"{actor.Name} tries to lift {target.Name} - <fails>.";
+            return;
         }
         
-        Result = $"{actor.Name} <powerfully> <throws> {target.Name}. ";
+        Result += $"{actor.Name} <powerfully> <throws> {target.Name}. ";
         ActorCanMoveTarget = true;
         
     }
@@ -77,15 +55,17 @@ public class CollisionEffect : InteractionEffect
 {
     public CollisionEffect(ActionContext context, Entity target1, Entity target2) : base(context)
     {
-        if (target1.Tags.FirstOrDefault(tag => tag is FallHazard) is Attached FallHazard)
+        if (target1.Tags.FirstOrDefault(tag => tag is FallHazard) is FallHazard fallHazard)
         {
-            Result = $"{target1.Name} falls off the map...";
+            Result += $"{target2.Name} falls off the map...";
+            target2.Hitpoints = 0;
             return;
         }
 
-        if (target2.Tags.FirstOrDefault(tag => tag is FallHazard) is Attached FallHazard2)
+        if (target2.Tags.FirstOrDefault(tag => tag is FallHazard) is FallHazard fallHazard2)
         {
-            Result = $"{target2.Name} never stops falling...";
+            Result += $"{target1.Name} never stops falling...";
+            target1.Hitpoints = 0;
             return;
         }
     }

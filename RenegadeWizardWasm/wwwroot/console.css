@@ -19,7 +19,7 @@
     flex-direction: column;
     pointer-events: auto;
     padding: 2vh; /* Changed from 20px */
-    font-size: 2.1vh; /* Set a base font size relative to VH */
+    font-size: 2.3vh; /* Set a base font size relative to VH */
 }
 
 #mainDisplay {

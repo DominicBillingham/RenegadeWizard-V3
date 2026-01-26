@@ -23,6 +23,24 @@ public abstract class Tag
 
 }
 
+public class Burning : Tag
+{
+    
+    public Entity target;
+    
+    public Burning(Duration duration) : base(duration)
+    {
+        Name = "Burning";
+    }
+
+    public override void StatusEffect(ActionContext context)
+    {
+        
+        
+    }
+}
+
+
 public class Huge : Tag
 {
     public Huge(Duration duration) : base(duration)

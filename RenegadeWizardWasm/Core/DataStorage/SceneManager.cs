@@ -27,26 +27,26 @@ public class SceneManager
         
         _entities.Add(new Goblin()
         {
-            Name = "Adam the Eternal Gremlin",
+            Name = "EternalAdam",
             Description = "A wise old gremlin with a long beard and a staff.",
             Tags = [new Immortal(Duration.Permanent)]
         });
         
         _entities.Add(new Goblin()
         {
-            Name = "Garry the Giant",
+            Name = "GiantGarry",
             Description = "A giant goblin with a huge head.",
             Tags = [new Huge(Duration.Permanent), new Tenacious(Duration.Permanent)]
         });
         
         _entities.Add(new Goblin()
         {
-            Name = "Pathetic Penny",
+            Name = "PatheticPenny",
             Description = "She's trying - probably harder than you.",
             Tags = [new Vulnerable(Duration.Permanent), new  Terrified(Duration.Permanent)]
         });
         
-        
+        _entities.Add(new Window()); 
         _entities.Add(new Door()); 
         
         
