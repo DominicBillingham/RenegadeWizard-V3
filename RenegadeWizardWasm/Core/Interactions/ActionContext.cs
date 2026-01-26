@@ -40,7 +40,7 @@ public class ActionContext(
             return Result;
         }
 
-        GameAction.StackEffects(this);
+        GameAction.Perform(this);
         
         foreach (var effect in CombatLog)
         {

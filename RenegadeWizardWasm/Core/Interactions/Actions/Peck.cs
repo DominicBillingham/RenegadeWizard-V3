@@ -25,8 +25,13 @@ public class Peck : GameAction
         }
     }
     
-    public override void StackEffects(ActionContext context)
+    public override void Perform(ActionContext context)
     {
-        var damage = new DamageEffect(context, 2);
+        var damage = new DamageEffect(
+            context, 
+            context.Actor, 
+            context.DesiredTargets[0], 
+            1
+        );
     }
 }

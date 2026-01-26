@@ -26,7 +26,7 @@ public class Charm : GameAction
         }
     }
     
-    public override void StackEffects(ActionContext context)
+    public override void Perform(ActionContext context)
     {
         var charm = new CharmEffect(context);
     }

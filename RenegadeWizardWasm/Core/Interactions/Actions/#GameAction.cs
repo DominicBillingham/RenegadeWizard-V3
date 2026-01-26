@@ -11,7 +11,7 @@ public abstract class GameAction()
     public string TargetHelpText { get; init; }
     
     public abstract bool TryGetTargets(ActionContext context);
-    public abstract void StackEffects(ActionContext context);
+    public abstract void Perform(ActionContext context);
 
     // Allows the NPCs to know how to actually use actions rather than just assuming the player.
     public virtual List<Entity> NpcGetTargets(IReadOnlyCollection<Entity> possibleTargets)

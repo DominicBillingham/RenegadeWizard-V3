@@ -27,7 +27,7 @@ public class Throw : GameAction
         }
     }
     
-    public override void StackEffects(ActionContext context)
+    public override void Perform(ActionContext context)
     {
 
         var detach = new DetachEffect(context);

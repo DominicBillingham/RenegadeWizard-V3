@@ -26,7 +26,7 @@ public class Consume : GameAction
         }
     }
     
-    public override void StackEffects(ActionContext context)
+    public override void Perform(ActionContext context)
     {
         var touch = new ContactEffect(context);
         var eat = new ConsumeEffect(context);
