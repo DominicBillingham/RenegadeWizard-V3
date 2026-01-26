@@ -1,4 +1,5 @@
-﻿using RenegadeWizardWasm.Core.Interactions.Effects;
+﻿using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Interactions.Effects;
 
 namespace RenegadeWizardWasm.Core.Interactions.Actions;
 
@@ -29,23 +30,22 @@ public class Throw : GameAction
     
     public override void Perform(ActionContext context)
     {
+        
+        var forceMove = new ForceMoveEffect(context,
+            context.Actor, 
+            context.DesiredTargets[0]
+        );
 
-        var detach = new DetachEffect(context);
-
-        if (detach.DetachOverflow < 1 && detach.AttachmentStrength > 0 )
+        if (forceMove.ActorCanMoveTarget == false)
         {
             return;
         }
         
-        var lift = new ThrowEffect(context);
-
-        if (lift.LiftOverflow > 0)
-        {
-            var damage = new DamageEffect(context, lift.LiftOverflow);
-        }
-        else
-        {
-            var damage = new DamageEffect(context, 1);
-        }
+        var damage = new DamageEffect(context, 
+            context.Actor, 
+            context.DesiredTargets[1] , 
+            context.DesiredTargets[0].GetStat(Stat.Weight)
+        );
+        
     }
 }

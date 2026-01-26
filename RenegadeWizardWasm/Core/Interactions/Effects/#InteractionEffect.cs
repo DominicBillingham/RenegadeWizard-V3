@@ -42,6 +42,7 @@ public class TestEffect : InteractionEffect
 
 public class ForceMoveEffect : InteractionEffect
 {
+    public bool ActorCanMoveTarget { get; set; } = false;
     public ForceMoveEffect(ActionContext context, Entity actor, Entity target) : base(context)
     {
         
@@ -67,6 +68,7 @@ public class ForceMoveEffect : InteractionEffect
         }
         
         Result = $"{actor.Name} <powerfully> <throws> {target.Name}. ";
+        ActorCanMoveTarget = true;
         
     }
 }
