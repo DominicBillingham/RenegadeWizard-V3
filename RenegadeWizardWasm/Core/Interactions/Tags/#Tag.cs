@@ -7,9 +7,8 @@ public abstract class Tag
     public string Name { get; set; }
     public Duration Duration { get; set; } 
 
-    public Tag(string name, Duration duration)
+    public Tag(Duration duration)
     {
-        Name = name;
         Duration = duration;
     }
     public virtual void ModifyStats(Stat stat, ref int value)
@@ -26,8 +25,7 @@ public abstract class Tag
 
 public class Huge : Tag
 {
-
-    public Huge(string name, Duration duration) : base(name, duration)
+    public Huge(Duration duration) : base(duration)
     {
         Name = "Huge";
     }
@@ -38,13 +36,26 @@ public class Huge : Tag
         if (stat == Stat.Weight) value += 3;
         if (stat == Stat.Strength) value += 3;
     }
-    
-
 }
+
+
+public class Attached : Tag
+{
+    public Entity AttachedTo { get; set; }
+    public int AttachmentStrength { get; set; }
+    
+    public Attached(Duration duration, Entity attachedTo, int attachmentStrength) : base(duration)
+    {
+        Name = "Attached";
+        AttachedTo = attachedTo;
+        AttachmentStrength = attachmentStrength;
+    }
+}
+
 
 public class Tenacious : Tag
 {
-    public Tenacious(string name, Duration duration) : base(name, duration)
+    public Tenacious(Duration duration) : base(duration)
     {
         Name = "Tenacious";
     }
@@ -52,7 +63,7 @@ public class Tenacious : Tag
 
 public class Vulnerable : Tag
 {
-    public Vulnerable(string name, Duration duration) : base(name, duration)
+    public Vulnerable(Duration duration) : base(duration)
     {
         Name = "Vulnerable";
     }
@@ -60,7 +71,7 @@ public class Vulnerable : Tag
 
 public class Immortal : Tag
 {
-    public Immortal(string name, Duration duration) : base(name, duration)
+    public Immortal(Duration duration) : base(duration)
     {
         Name = "Immortal";
     }
@@ -68,8 +79,16 @@ public class Immortal : Tag
 
 public class Deflecting : Tag
 {
-    public Deflecting(string name, Duration duration) : base(name, duration)
+    public Deflecting(Duration duration) : base(duration)
     {
         Name = "Deflecting";
+    }
+}
+
+public class FallHazard : Tag
+{
+    public FallHazard(Duration duration) : base(duration)
+    {
+        Name = "FallHazard";
     }
 }

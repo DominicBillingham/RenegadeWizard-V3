@@ -13,8 +13,6 @@ public class Player : Entity
         Controller = Controller.Player;
         Hitpoints = 10;
         
-        Tags.Add(new Huge());
-        
         Actions.Add(new Punch());
         Actions.Add(new Throw());
         Actions.Add(new Consume());

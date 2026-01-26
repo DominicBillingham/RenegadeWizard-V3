@@ -5,11 +5,8 @@ namespace RenegadeWizardWasm.Core.Interactions.Effects;
 public class ThrowEffect : InteractionEffect
 {
     public int LiftOverflow { get; set; } = 0;
-    public ThrowEffect(ActionContext context) : base(context)
+    public ThrowEffect(ActionContext context, Entity actor, Entity target) : base(context)
     {
-        var actor = context.Actor;
-        var target = context.DesiredTargets.FirstOrDefault();
-        
         int actorStrength = actor.GetStat(Stat.Strength);
         int targetWeight = target.GetStat(Stat.Weight);
         

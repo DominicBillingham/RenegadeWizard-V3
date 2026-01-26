@@ -5,12 +5,8 @@ namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
 public class DamageEffect : InteractionEffect
 {
-    public DamageEffect(ActionContext context, int damage) : base(context)
+    public DamageEffect(ActionContext context, Entity actor, Entity target, int damage) : base(context)
     {
-        var actor = context.Actor;
-        var target = context.DesiredTargets.FirstOrDefault();
-
-
         if (target.Hitpoints < 1)
         {
             Result = $"but {target.Name} has already been destroyed!";
@@ -21,7 +17,6 @@ public class DamageEffect : InteractionEffect
         {
             damage *= 2;
         }
-        
         
         if (target.Tags.FirstOrDefault(tag => tag is Deflecting) is Deflecting deflecting)
         {
