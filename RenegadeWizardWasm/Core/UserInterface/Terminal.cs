@@ -92,7 +92,7 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
     public void PopulateTerminal(TerminalResponse terminalResponse)
     {
         terminalResponse.ActionCards = sceneManager.Player.Actions.Select(action => new TerminalCard(action)).ToList();
-        terminalResponse.CreatureCards = sceneManager.Npcs.Select(entity => new TerminalCard(entity)).ToList();
+        terminalResponse.CreatureCards = sceneManager.Npcs.Append(sceneManager.Player).Select(entity => new TerminalCard(entity)).ToList();
         terminalResponse.ObjectCards = sceneManager.Objects.Select(entity => new TerminalCard(entity)).ToList();
         
         terminalResponse.ActionNames = sceneManager.Player.Actions.Select(action => action.Name.ToLower()).ToList();

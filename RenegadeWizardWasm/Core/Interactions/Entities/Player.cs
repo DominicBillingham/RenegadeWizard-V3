@@ -1,5 +1,6 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Interactions.Actions;
+using RenegadeWizardWasm.Core.Interactions.Tags;
 
 namespace RenegadeWizardWasm.Core.Entities;
 
@@ -8,9 +9,11 @@ public class Player : Entity
     public Player()
     {
         Name = "Player";
-        Description = "You are the wizard.";
+        Description = "You are the wizard";
         Controller = Controller.Player;
         Hitpoints = 10;
+        
+        Tags.Add(new Huge());
         
         Actions.Add(new Punch());
         Actions.Add(new Throw());

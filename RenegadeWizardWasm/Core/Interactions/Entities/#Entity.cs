@@ -1,6 +1,7 @@
 ﻿
 using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Interactions;
+using RenegadeWizardWasm.Core.Interactions.Tags;
 
 namespace RenegadeWizardWasm.Core;
 
@@ -24,24 +25,14 @@ public abstract class Entity
     public int GetStat(Stat stat)
     {
         int temp = Stats[stat];
-        foreach (Tag mod in Tags)
+        foreach (Tag tag in Tags)
         {
-            //mod.ModifyStats(stat , ref temp);
-            temp = Math.Clamp(temp, 1, 10);
+            tag.ModifyStats(stat , ref temp);
         }
         return temp;
     }
-    
-    public void SetStat(Stat stat, int value)
-    {
-        Stats[stat] = value;
-    }
-
     public Dictionary<Stat, int> Stats { get; init; } = new()
     {
-        // All stats range between 1 and 10.
-        // 5 is the human baseline.
-        
         // Gameplay
         { Stat.Strength, 5 },
         { Stat.Dexterity, 5 },
@@ -58,10 +49,5 @@ public abstract class Entity
 
 }
 
-public abstract class Tag
-{
-    public string Name { get; set; } = "";
-    public Duration Duration { get; set; } = Duration.Permanent;
-    
-}
+
 

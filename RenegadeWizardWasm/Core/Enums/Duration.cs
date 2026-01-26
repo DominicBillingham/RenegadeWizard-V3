@@ -3,5 +3,6 @@
 public enum Duration
 {
     Permanent,
-    SingleCombat
+    SingleCombat,
+    Round
 }

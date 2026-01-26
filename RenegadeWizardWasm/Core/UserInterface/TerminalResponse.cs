@@ -1,4 +1,5 @@
-﻿using RenegadeWizardWasm.Core.Interactions;
+﻿using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Interactions;
 
 namespace RenegadeWizardWasm.Core.UserInterface;
 
@@ -77,7 +78,7 @@ public class TerminalCard
     public TerminalCard(Entity entity)
     {
         Name = entity.Name;
-        Description = entity.Description;
+        Description = $"[{entity.GetStat(Stat.Strength)} Str]  [{entity.GetStat(Stat.Dexterity)} Dex]  [{entity.GetStat(Stat.Intelligence)} Int] - {entity.Description}";
         Hitpoints = entity.Hitpoints;
     }
 
