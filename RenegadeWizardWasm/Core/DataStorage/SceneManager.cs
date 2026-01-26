@@ -1,6 +1,7 @@
 ﻿
 using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Entities;
+using RenegadeWizardWasm.Core.Interactions.Tags;
 
 namespace RenegadeWizardWasm.Core.DataStorage;
 
@@ -23,7 +24,32 @@ public class SceneManager
         var tempPlayer = Player;
         _entities.Clear();
         _entities.Add(tempPlayer);
+        
+        _entities.Add(new Goblin()
+        {
+            Name = "Adam the Eternal Gremlin",
+            Description = "A wise old gremlin with a long beard and a staff.",
+            Tags = [new Immortal(Duration.Permanent)]
+        });
+        
+        _entities.Add(new Goblin()
+        {
+            Name = "Garry the Giant",
+            Description = "A giant goblin with a huge head.",
+            Tags = [new Huge(Duration.Permanent), new Tenacious(Duration.Permanent)]
+        });
+        
+        _entities.Add(new Goblin()
+        {
+            Name = "Pathetic Penny",
+            Description = "She's trying - probably harder than you.",
+            Tags = [new Vulnerable(Duration.Permanent), new  Terrified(Duration.Permanent)]
+        });
+        
+        
         _entities.Add(new Door()); 
+        
+        
         return "Level 1 loaded";
     }
     
