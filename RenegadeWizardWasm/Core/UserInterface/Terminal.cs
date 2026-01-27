@@ -81,8 +81,15 @@ public class Terminal(InputManager inputManager, SceneManager sceneManager, Comb
         }
         
         terminalResponse.DebugLines.Add($"Action: {inputManager.chosenAction?.Name ?? ""} | Targets: {string.Join(", ", inputManager.Targets.Select(entity => entity.Name) ?? [])}" );
-        
-        terminalResponse.CombatLines.AddRange(combatManager.PlayRound());
+
+        if (combatManager.CombatRoundCount > 0)
+        {
+            terminalResponse.CombatLines.AddRange(combatManager.PlayRound());
+        }
+        else
+        {
+            terminalResponse.CombatLines.AddRange(combatManager.StartCombat());
+        }
         
         PopulateTerminal(terminalResponse);
         
