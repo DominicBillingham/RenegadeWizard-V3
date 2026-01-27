@@ -9,7 +9,7 @@ It's mostly a combat simulator, where every action can have a truly cascading se
 
 > I <eat> the [huge] [immortal] {goose} -> Normally eating a goose would instantly kill it (and heal you!), but the huge modifier prevent this!
 
-### BUT HOW ?!?!?
+### BUT HOW ?!?!? (See GameContext.cs, InteractionEffect.cs and GameAction.cs)
 In order to solve the problem, I first had to break it down very carefully. At the core, an <action> is actually a series of smaller "effects"
 The <kick> action is actually a ForceMoveEffect, DamageEffect, and then a CollisionEffect if it hits another entity.
 This allows me to combine together effects, for example, a <shoot> action could use a new ProjectileEffect and a Damage Effect.
@@ -35,10 +35,17 @@ To resolve these UX considerations, I did the following:
 ### Fun stuff
 Text is a bit boring, nowadays people want animations, sparks, flashing lights. So that's why the terminal uses a mix of fonts, CSS animations, and pretty gradients to give a more "dynamic" and "alive" feel to the experience.
 To accomplish this, I created MINI MARKUP LANGUAGE. The idea's probably been done 1000x time but I had fun making my own shorthand string to HTML converter.
+
 A sentence like this can suddenly have #blu blue text with just these pair of hastags # before going back to normal!
 (Pretend it's blue, this is a readme)
+
 I expanded this MML to handle replacing words with a variety of synonyms, a commentator on the players actions, and text animiations.
 I'm working on adding sound effects, and more UX JUICE to make it feel just right.
 
 ### Why Blazor WASM
 I wanted to use C# for the project but wanted a fully client based solution. This ideally should be a react application that can then be turned into a static, but I wanted to refine my C# skills some more.
+
+### Was AI Used?
+Mostly autocomplete, I found most AI models not very helpful at solving the really difficult challenges regarding the interaction engine. Autocomplete helped with writing more boilerplate code.
+Junie (Rider's in built AI Agent) was useful for refactoring, like moving files around.
+Finally in-line prompts were used for generating small functions, like the regexes used in MML.
