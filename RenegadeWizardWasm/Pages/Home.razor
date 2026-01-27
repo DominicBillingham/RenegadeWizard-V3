@@ -1,8 +1,9 @@
 ﻿@page "/"
 @inject IJSRuntime JS
 
+@using RenegadeWizardWasm.Core
 @using RenegadeWizardWasm.Core.UserInterface
-@inject Terminal _terminal;
+@inject GameCoordinator GameCoordinator;
 
 <PageTitle>Home</PageTitle>
 
@@ -30,7 +31,7 @@
                        @bind="UserInput"
                        @bind:event="oninput"
                        @onkeydown="HandleKeyDown"
-                       @onkeydown:preventDefault="_preventTabDefault"
+                       @onkeydown:preventDefault="PreventTabDefault"
                        autocomplete="off"
                        autofocus />
                 <div class="console-input-ghost">@GhostInput</div>
@@ -103,11 +104,19 @@
 </div>
 
 @code {
-
-    private List<string> ConsoleLines { get; set; } = new();
-    private List<string> _pendingLines = new();
-    private TerminalResponse LastResponse { get; set; } = new();
     
+    private List<string> ConsoleLines { get; set; } = new();
+    private List<string> PendingLines { get; set; } = new();
+    private GameResponse LastResponse { get; set; } = new();
+    private string GhostInput { get; set; } = string.Empty;
+    private List<string> CommandHistory { get; set; } = new();
+    private int HistoryIndex { get; set; } = -1;
+    private string TempInput { get; set; } = string.Empty;
+    private bool ShouldScroll { get; set; } = false;
+    private bool PreventTabDefault { get; set; } = false;
+    
+    private string _userInput = string.Empty;
+
     public string UserInput
     {
         get => _userInput;
@@ -120,26 +129,11 @@
             }
         }
     }
-
-    private string _userInput = string.Empty;
-    public string GhostInput { get; set; } = string.Empty;
-    private bool _shouldScroll = false;
     
-    private List<string> _commandHistory = new();
-    private int _historyIndex = -1;
-    private string _tempInput = string.Empty;
-    private bool _preventTabDefault = false;
-    private bool _nameEntered = false;
-
     protected override async Task OnInitializedAsync()
     {
-        //await UpdateTerminal(_terminal.BeginGame(), false);
-        _nameEntered = true;
-
-        TerminalResponse response = new();
-        _terminal.PopulateTerminal(response);
+        GameResponse response = GameCoordinator.StartGame();
         await UpdateTerminal(response, false);
-        
         await Task.Delay(100);
         await JS.InvokeVoidAsync("createLucideIcons");
     }
@@ -147,7 +141,7 @@
     public async Task HandleSubmit(EventArgs e)
     {
         GhostInput = "";
-        if (_pendingLines.Count > 0)
+        if (PendingLines.Count > 0)
         {
             bool paused = false;
             if (ConsoleLines.Any())
@@ -156,10 +150,10 @@
                 ConsoleLines[lastLineIndex] = ConsoleLines[lastLineIndex].Replace("▼", "").Replace("[press enter]", "");
             }
             
-            while (_pendingLines.Count > 0 && !paused)
+            while (PendingLines.Count > 0 && !paused)
             {
-                string line = _pendingLines[0];
-                _pendingLines.RemoveAt(0);
+                string line = PendingLines[0];
+                PendingLines.RemoveAt(0);
                 ConsoleLines.Add(MiniMarkup.ConvertString(line));
                 
                 if (line.Contains("▼"))
@@ -169,7 +163,7 @@
             }
             
             UserInput = "";
-            _shouldScroll = true;
+            ShouldScroll = true;
             StateHasChanged();
             
             await Task.Delay(10);
@@ -180,26 +174,19 @@
         if (string.IsNullOrWhiteSpace(UserInput))
             return;
         
-        _commandHistory.Add(UserInput);
-        _historyIndex = -1;
-        _tempInput = string.Empty;
-
-        if (_nameEntered)
-        {
-            await UpdateTerminal(_terminal.EnterInput(UserInput), true);
-        }
-        else
-        {
-            await UpdateTerminal(_terminal.EnterName(UserInput), true);
-            _nameEntered = true;
-        }
+        CommandHistory.Add(UserInput);
+        HistoryIndex = -1;
+        TempInput = string.Empty;
+        
+        GameResponse response = GameCoordinator.EnterInput(UserInput);
+        await UpdateTerminal(response, true);
         
     }
 
     private async Task HandleKeyDown(KeyboardEventArgs e)
     {
-        _preventTabDefault = e.Key == "Tab";
-
+        PreventTabDefault = e.Key == "Tab";
+        
          if (e.Key == "Enter")
          {
              await JS.InvokeVoidAsync("playEnterSound");
@@ -216,35 +203,35 @@
          
         if (e.Key == "ArrowUp")
         {
-            if (_commandHistory.Count == 0) return;
+            if (CommandHistory.Count == 0) return;
 
-            if (_historyIndex == -1)
+            if (HistoryIndex == -1)
             {
-                _tempInput = UserInput;
+                TempInput = UserInput;
             }
 
-            if (_historyIndex < _commandHistory.Count - 1)
+            if (HistoryIndex < CommandHistory.Count - 1)
             {
-                _historyIndex++;
-                UserInput = _commandHistory[_commandHistory.Count - 1 - _historyIndex];
+                HistoryIndex++;
+                UserInput = CommandHistory[CommandHistory.Count - 1 - HistoryIndex];
             }
         }
         else if (e.Key == "ArrowDown")
         {
-            if (_historyIndex > 0)
+            if (HistoryIndex > 0)
             {
-                _historyIndex--;
-                UserInput = _commandHistory[_commandHistory.Count - 1 - _historyIndex];
+                HistoryIndex--;
+                UserInput = CommandHistory[CommandHistory.Count - 1 - HistoryIndex];
             }
-            else if (_historyIndex == 0)
+            else if (HistoryIndex == 0)
             {
-                _historyIndex = -1;
-                UserInput = _tempInput;
+                HistoryIndex = -1;
+                UserInput = TempInput;
             }
         }
     }
 
-    public async Task UpdateTerminal(TerminalResponse response, bool shouldScroll)
+    public async Task UpdateTerminal(GameResponse response, bool shouldScroll)
     {
         List<string> lines = response.Text;
         bool paused = false;
@@ -253,7 +240,7 @@
         {
             if (paused)
             {
-                _pendingLines.Add(lines[i]);
+                PendingLines.Add(lines[i]);
                 continue;
             }
 
@@ -270,7 +257,7 @@
 
         UserInput = "";
         GhostInput = "";
-        _shouldScroll = shouldScroll;
+        ShouldScroll = shouldScroll;
         StateHasChanged();
         
         await Task.Delay(10);
@@ -279,10 +266,10 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (_shouldScroll)
+        if (ShouldScroll)
         {
             await JS.InvokeVoidAsync("ScrollToBottom");
-            _shouldScroll = false;
+            ShouldScroll = false;
         }
     }
 

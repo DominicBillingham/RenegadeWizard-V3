@@ -4,7 +4,7 @@ using RenegadeWizardWasm.Core.Interactions;
 namespace RenegadeWizardWasm.Core.UserInterface;
 
 
-public class TerminalResponse()
+public class GameResponse()
 {
     // This get is used to format the list of strings for the terminal
     // This way, strings can be added in any order and still formatted correctlys
