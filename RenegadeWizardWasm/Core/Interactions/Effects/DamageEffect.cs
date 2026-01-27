@@ -26,21 +26,21 @@ public class DamageEffect : InteractionEffect
         {
             Result = $"but {target.Name} is completely immortal.";
         }
-        else if (target.Tags.FirstOrDefault(tag => tag is Tenacious) is Tenacious tenacious)
-        {
-            int remainingHealth = target.Hitpoints - damage;
-            if (remainingHealth <= 0)
-            {
-                target.Hitpoints = 1;
-                Result += $"{target.Name} takes {damage} damage, but clings onto life!";
-            }
-        }
         else
         {
             Result += $"{target.Name} takes {damage} damage.";
             target.Hitpoints -= damage;
         }
-
+        
+        if (target.Tags.FirstOrDefault(tag => tag is Tenacious) is Tenacious tenacious)
+        {
+            if (target.Hitpoints <= 0 && target.Hitpoints != 1)
+            {
+                target.Hitpoints = 1;
+                Result += $"{target.Name} takes {damage} damage, but clings onto life!";
+            }
+        }
+        
         if (target.Hitpoints <= 0)
         {
             Result += $"{target.Name} <destroyed>";

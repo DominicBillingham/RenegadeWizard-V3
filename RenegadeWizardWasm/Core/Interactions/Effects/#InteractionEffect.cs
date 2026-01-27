@@ -28,13 +28,15 @@ public class ForceMoveEffect : InteractionEffect
 
         if (target.Tags.FirstOrDefault(tag => tag is Attached) is Attached attached)
         {
+            string attachedTo = attached.AttachedTo?.Name ?? "The structure";
+            
             if (actorStrength > attached.AttachmentStrength)
             {
-                Result += $"{actor.Name} rips {target.Name} from {attached.AttachedTo.Name}.";
+                Result += $"{actor.Name} rips {target.Name} from {attachedTo}.";
             }
             else
             {
-                Result += $"{actor.Name} tries to pull apart {target.Name} and {attached.AttachedTo.Name} - <fails>.";
+                Result += $"{actor.Name} tries to pull apart {target.Name} and {attachedTo} - <fails>.";
                 return;
             }
         }
