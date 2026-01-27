@@ -29,6 +29,11 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
         ActionContext actionContext = new ActionContext(sceneManager.Player, inputManager.chosenAction, sceneManager.Entities, inputManager.Targets);
         string actionResult = actionContext.Resolve();
         CombatLines.Add(actionResult);
+
+        if (actionContext.AllowRetry)
+        {
+            return CombatLines;
+        }
         
         
         
