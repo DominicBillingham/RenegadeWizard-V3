@@ -17,6 +17,7 @@ public class Player : Entity
         Actions.Add(new Throw());
         Actions.Add(new Consume());
         Actions.Add(new Charm());
+        Actions.Add(new Kick());
         
         Stats[Stat.Strength] = 5;
         Stats[Stat.Dexterity] = 5;
