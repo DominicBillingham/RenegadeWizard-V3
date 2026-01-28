@@ -20,12 +20,18 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
         List<string> CombatLines = new List<string>();
         
         ActionContext actionContext = new ActionContext(sceneManager.Player, inputManager.chosenAction, sceneManager.Entities, inputManager.Targets);
-        string actionResult = actionContext.Resolve();
-        CombatLines.Add(actionResult);
+        actionContext.Resolve();
+        CombatLines.Add(actionContext.Result);
 
         if (actionContext.AllowRetry)
         {
             return CombatLines;
+        }
+
+        foreach (var intent in EnemyIntentions)
+        {
+            intent.Resolve();
+            CombatLines.Add(intent.Result);
         }
         
         sceneManager.RemoveDestroyedEntities();
