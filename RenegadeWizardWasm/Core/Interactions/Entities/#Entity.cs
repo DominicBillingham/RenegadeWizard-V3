@@ -21,6 +21,7 @@ public abstract class Entity
     public List<GameAction> Actions { get; set; } = new List<GameAction>();
     public List<Tag> Tags { get; set; } = [];
     public Faction Faction { get; set; }
+    public string? IntentionIcon { get; set; }
 
     public int GetStat(Stat stat)
     {

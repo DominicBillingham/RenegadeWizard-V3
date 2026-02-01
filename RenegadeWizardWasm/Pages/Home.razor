@@ -31,8 +31,14 @@
             @foreach (var card in LastResponse.CreatureCards)
             {
                 <div class="entity-card">
-                    <div
-                        class="entity-name">@card.Name@(card.Hitpoints != null ? $" ({card.Hitpoints}hp)" : "")</div>
+                    <div class="entity-header">
+                        <div
+                            class="entity-name">@card.Name@(card.Hitpoints != null ? $" ({card.Hitpoints}hp)" : "")</div>
+                        @if (card.IntentionIcon != null)
+                        {
+                            <i class="fa-solid fa-@card.IntentionIcon intention-icon"></i>
+                        }
+                    </div>
                     @if (card.Tags != null && card.Tags.Any())
                     {
                         <div class="entity-tags">

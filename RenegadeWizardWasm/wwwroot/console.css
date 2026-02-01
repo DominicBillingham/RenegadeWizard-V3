@@ -55,11 +55,23 @@
     border-color: rgba(150, 150, 255, 0.8);
 }
 
+.entity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5vh;
+}
+
 .entity-name {
     font-weight: bold;
     color: #fff;
     font-size: 2vh;
-    margin-bottom: 0.5vh;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.intention-icon {
+    font-size: 1.8vh;
+    color: #ffffff;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 

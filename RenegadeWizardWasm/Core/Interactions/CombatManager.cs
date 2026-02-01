@@ -8,11 +8,10 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
     public int CombatRoundCount { get; set; } = 0;
     private List<ActionContext> EnemyIntentions { get; set; } = new();
     
-    public List<string> StartCombat()
+    public void StartCombat()
     {
         CombatRoundCount = 1;
         RefreshNpcsIntentions();
-        return ReadEnemyIntentions();
     }
     
     public List<string> PlayRound()
@@ -32,6 +31,7 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
         {
             intent.Resolve();
             CombatLines.Add(intent.Result);
+            if (intent.Actor != null) intent.Actor.IntentionIcon = null;
         }
         
         sceneManager.RemoveDestroyedEntities();
@@ -43,23 +43,11 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
         }
         
         RefreshNpcsIntentions();
-        CombatLines.AddRange(ReadEnemyIntentions());
         CombatRoundCount++;
         
         return CombatLines;
     }
     
-    public List<string> ReadEnemyIntentions()
-    {
-        List<string> actionList = new();
-        foreach (var context in EnemyIntentions)
-        {
-            string targetList = string.Join(", ", context.IntendedTargets.Select(x => x.Name));
-            string action = context.GameAction.Name;
-            actionList.Add($"{context.Actor.Name} intends to {action} at {targetList}");
-        }   
-        return actionList;
-    }
     
     public void RefreshNpcsIntentions()
     {
@@ -70,6 +58,7 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
             GameAction action = ent.Actions[random.Next(ent.Actions.Count)];
             List<Entity> targets = action.NpcGetTargets(sceneManager.Entities);
             EnemyIntentions.Add(new ActionContext(ent, action, sceneManager.Entities, targets));
+            ent.IntentionIcon = action.Icon;
         }
     }
 

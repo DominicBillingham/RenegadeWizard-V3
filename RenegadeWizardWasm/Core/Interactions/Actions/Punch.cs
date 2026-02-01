@@ -9,6 +9,7 @@ public class Punch : GameAction
         Name = "Punch";
         Description = "Use your fists to strike an enemy. A tad boring though...";
         Aka = ["Hit", "Slap", "Whack"];
+        Icon = "hand-back-fist";
         TargetHelpText = "Punch [name]";
         ActionTags = ["Contact", "Damage"];
     }

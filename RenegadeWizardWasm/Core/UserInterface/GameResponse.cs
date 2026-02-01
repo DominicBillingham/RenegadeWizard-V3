@@ -75,6 +75,7 @@ public class TerminalCard
     public string Name { get; set; } = "";
     public int? Hitpoints { get; set; }
     public List<string> Tags { get; set; }
+    public string? IntentionIcon { get; set; }
     
     public TerminalCard(Entity entity)
     {
@@ -82,6 +83,7 @@ public class TerminalCard
         Description = $"{entity.Description}";
         Hitpoints = entity.Hitpoints;
         Tags = entity.Tags.Select(x => x.Name).ToList();
+        IntentionIcon = entity.IntentionIcon;
     }
 
     public TerminalCard(GameAction action)

@@ -55,13 +55,11 @@ public class GameCoordinator(InputManager inputManager, SceneManager sceneManage
             if (combatManager.CombatRoundCount > 0)
             {
                 gameResponse.CombatLines.AddRange(combatManager.PlayRound());
-                return PopulateTerminal(gameResponse);
             }
             else
             {
                 sceneManager.Level1();
-                gameResponse.CombatLines.AddRange(combatManager.StartCombat());
-                return PopulateTerminal(gameResponse);
+                combatManager.StartCombat();
             }
         }
         

@@ -8,6 +8,7 @@ public class Peck : GameAction
     {
         Name = "Peck";
         Description = "A rather painful bite attack from a beaked creature.";
+        Icon = "crow";
         TargetHelpText = "Peck [name]";
     }
 
