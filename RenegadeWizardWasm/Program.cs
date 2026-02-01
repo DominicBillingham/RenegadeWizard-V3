@@ -5,6 +5,7 @@ using RenegadeWizardWasm.Core;
 using RenegadeWizardWasm.Core.DataStorage;
 using RenegadeWizardWasm.Core.Interactions;
 using RenegadeWizardWasm.Core.UserInterface;
+using RenegadeWizardWasm.Pages;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

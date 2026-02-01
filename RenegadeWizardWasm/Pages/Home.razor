@@ -23,20 +23,7 @@
                 <div class="console-line">@((MarkupString)line)</div>
             }
         </div>
-        <form @onsubmit="HandleSubmit" class="console-input-form">
-            <span class="prompt">&gt;</span>
-            <div class="input-wrapper">
-                <input type="text"
-                       class="console-input"
-                       @bind="UserInput"
-                       @bind:event="oninput"
-                       @onkeydown="HandleKeyDown"
-                       @onkeydown:preventDefault="PreventTabDefault"
-                       autocomplete="off"
-                       autofocus />
-                <div class="console-input-ghost">@GhostInput</div>
-            </div>
-        </form>
+        <TerminalInput LastResponse="@LastResponse" PendingLines="@PendingLines" OnSubmit="HandleInputSubmit" OnAdvancePending="HandleAdvancePending" />
     </div>
     <div class="console-column secondary-column">
         <div class="entity-mosaic">
@@ -108,28 +95,8 @@
     private List<string> ConsoleLines { get; set; } = new();
     private List<string> PendingLines { get; set; } = new();
     private GameResponse LastResponse { get; set; } = new();
-    private string GhostInput { get; set; } = string.Empty;
-    private List<string> CommandHistory { get; set; } = new();
-    private int HistoryIndex { get; set; } = -1;
-    private string TempInput { get; set; } = string.Empty;
     private bool ShouldScroll { get; set; } = false;
-    private bool PreventTabDefault { get; set; } = false;
-    
-    private string _userInput = string.Empty;
 
-    public string UserInput
-    {
-        get => _userInput;
-        set
-        {
-            if (_userInput != value)
-            {
-                _userInput = value;
-                UpdateGhostInput();
-            }
-        }
-    }
-    
     protected override async Task OnInitializedAsync()
     {
         // GameResponse response = GameCoordinator.StartGame();
@@ -137,10 +104,9 @@
         // await Task.Delay(100);
         // await JS.InvokeVoidAsync("createLucideIcons");
     }
-    
-    public async Task HandleSubmit(EventArgs e)
+
+    private async Task HandleAdvancePending()
     {
-        GhostInput = "";
         if (PendingLines.Count > 0)
         {
             bool paused = false;
@@ -149,86 +115,31 @@
                 var lastLineIndex = ConsoleLines.Count - 1;
                 ConsoleLines[lastLineIndex] = ConsoleLines[lastLineIndex].Replace("▼", "").Replace("[press enter]", "");
             }
-            
+
             while (PendingLines.Count > 0 && !paused)
             {
                 string line = PendingLines[0];
                 PendingLines.RemoveAt(0);
                 ConsoleLines.Add(MiniMarkup.ConvertString(line));
-                
+
                 if (line.Contains("▼"))
                 {
                     paused = true;
                 }
             }
-            
-            UserInput = "";
+
             ShouldScroll = true;
             StateHasChanged();
-            
+
             await Task.Delay(10);
             await JS.InvokeVoidAsync("createLucideIcons");
-            return;
         }
-
-        if (string.IsNullOrWhiteSpace(UserInput))
-            return;
-        
-        CommandHistory.Add(UserInput);
-        HistoryIndex = -1;
-        TempInput = string.Empty;
-        
-        GameResponse response = GameCoordinator.EnterInput(UserInput);
-        await UpdateTerminal(response, true);
-        
     }
 
-    private async Task HandleKeyDown(KeyboardEventArgs e)
+    private async Task HandleInputSubmit(string userInput)
     {
-        PreventTabDefault = e.Key == "Tab";
-        
-         if (e.Key == "Enter")
-         {
-             await JS.InvokeVoidAsync("playEnterSound");
-         }
-         else if (e.Key != "Tab" && e.Key != "Shift" && e.Key != "Control" && e.Key != "Alt")
-         {
-             await JS.InvokeVoidAsync("playTypingSound");
-         }
-
-        if (e.Key == "Tab")
-        {
-            AutoComplete();
-        }
-         
-        if (e.Key == "ArrowUp")
-        {
-            if (CommandHistory.Count == 0) return;
-
-            if (HistoryIndex == -1)
-            {
-                TempInput = UserInput;
-            }
-
-            if (HistoryIndex < CommandHistory.Count - 1)
-            {
-                HistoryIndex++;
-                UserInput = CommandHistory[CommandHistory.Count - 1 - HistoryIndex];
-            }
-        }
-        else if (e.Key == "ArrowDown")
-        {
-            if (HistoryIndex > 0)
-            {
-                HistoryIndex--;
-                UserInput = CommandHistory[CommandHistory.Count - 1 - HistoryIndex];
-            }
-            else if (HistoryIndex == 0)
-            {
-                HistoryIndex = -1;
-                UserInput = TempInput;
-            }
-        }
+        GameResponse response = GameCoordinator.EnterInput(userInput);
+        await UpdateTerminal(response, true);
     }
 
     public async Task UpdateTerminal(GameResponse response, bool shouldScroll)
@@ -255,8 +166,6 @@
 
         LastResponse = response;
 
-        UserInput = "";
-        GhostInput = "";
         ShouldScroll = shouldScroll;
         StateHasChanged();
         
@@ -277,121 +186,6 @@
     {
         await JS.InvokeVoidAsync("PlaySound", audio, overrideAudio);
     }
-
-    private void AutoComplete()
-    {
-        if (!string.IsNullOrEmpty(GhostInput) && GhostInput.Length > UserInput.Length)
-        {
-            UserInput = GhostInput;
-            return;
-        }
-
-        string[] parts = UserInput.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        bool hasTrailingSpace = UserInput.EndsWith(" ");
-    
-        if (parts.Length == 0 || hasTrailingSpace) return;
-
-        string lastPart = parts.Last();
-        
-        foreach (string name in LastResponse.ActionNames)
-        { 
-            if (name == lastPart)
-            {
-                int currentIndex = LastResponse.ActionNames.IndexOf(name);
-                int nextIndex = (currentIndex + 1) % LastResponse.ActionNames.Count;
-                parts[^1] = LastResponse.ActionNames[nextIndex];
-                UserInput = string.Join(" ", parts);
-                return;
-            }
-
-            if (name.StartsWith(lastPart))
-            {
-                parts[^1] = name;
-                UserInput = string.Join(" ", parts);
-                return;
-            }
-        }
-
-        foreach (string name in LastResponse.EntityNames)
-        {
-            if (name == lastPart)
-            {
-                int currentIndex = LastResponse.EntityNames.IndexOf(name);
-                int nextIndex = (currentIndex + 1) % LastResponse.EntityNames.Count;
-                parts[^1] = LastResponse.EntityNames[nextIndex];
-                UserInput = string.Join(" ", parts);
-                return;
-            }
-
-            if (name.StartsWith(lastPart))
-            {
-                parts[^1] = name;
-                UserInput = string.Join(" ", parts);
-                return;
-            }
-        }
-    }
-
-    private void UpdateGhostInput()
-    {
-        if (string.IsNullOrWhiteSpace(UserInput))
-        {
-            GhostInput = string.Empty;
-            return;
-        }
-
-        string[] parts = UserInput.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        bool hasTrailingSpace = UserInput.EndsWith(" ");
-
-        if (parts.Length == 0 || hasTrailingSpace)
-        {
-            GhostInput = string.Empty;
-            return;
-        }
-
-        string lastPart = parts.Last();
-        string suggestion = string.Empty;
-
-        foreach (string name in LastResponse.ActionNames)
-        {
-            if (name.StartsWith(lastPart) && name != lastPart)
-            {
-                suggestion = name;
-                break;
-            }
-        }
-
-        if (string.IsNullOrEmpty(suggestion))
-        {
-            foreach (string name in LastResponse.EntityNames)
-            {
-                if (name.StartsWith(lastPart) && name != lastPart)
-                {
-                    suggestion = name;
-                    break;
-                }
-            }
-        }
-
-        if (!string.IsNullOrEmpty(suggestion))
-        {
-            parts[^1] = suggestion;
-            GhostInput = string.Join(" ", parts);
-            
-            // Match casing of UserInput for the prefix if needed, 
-            // but the game seems to use lowercase for input mostly.
-            // Let's at least make sure the ghost input starts with exactly what the user typed.
-            if (GhostInput.StartsWith(UserInput, StringComparison.OrdinalIgnoreCase))
-            {
-                GhostInput = UserInput + GhostInput.Substring(UserInput.Length);
-            }
-        }
-        else
-        {
-            GhostInput = string.Empty;
-        }
-    }
-
 }
 
 <script src="/javascript/terminal.js"></script>

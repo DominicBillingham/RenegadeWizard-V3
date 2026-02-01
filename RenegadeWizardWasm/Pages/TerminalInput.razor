@@ -1,0 +1,226 @@
+﻿@using RenegadeWizardWasm.Core.UserInterface
+@inject IJSRuntime JS
+
+<form @onsubmit="InternalHandleSubmit" class="console-input-form">
+    <span class="prompt">&gt;</span>
+    <div class="input-wrapper">
+        <input type="text"
+               class="console-input"
+               @bind="UserInput"
+               @bind:event="oninput"
+               @onkeydown="HandleKeyDown"
+               @onkeydown:preventDefault="PreventTabDefault"
+               autocomplete="off"
+               autofocus />
+        <div class="console-input-ghost">@GhostInput</div>
+    </div>
+</form>
+
+@code {
+    [Parameter] public GameResponse LastResponse { get; set; } = new();
+    [Parameter] public List<string> PendingLines { get; set; } = new();
+    [Parameter] public EventCallback<string> OnSubmit { get; set; }
+    [Parameter] public EventCallback OnAdvancePending { get; set; }
+
+    private string GhostInput { get; set; } = string.Empty;
+    private List<string> CommandHistory { get; set; } = new();
+    private int HistoryIndex { get; set; } = -1;
+    private string TempInput { get; set; } = string.Empty;
+    private bool PreventTabDefault { get; set; } = false;
+
+    private string _userInput = string.Empty;
+
+    public string UserInput
+    {
+        get => _userInput;
+        set
+        {
+            if (_userInput != value)
+            {
+                _userInput = value;
+                UpdateGhostInput();
+            }
+        }
+    }
+
+    private async Task InternalHandleSubmit()
+    {
+        GhostInput = "";
+        if (PendingLines.Count > 0)
+        {
+            await OnAdvancePending.InvokeAsync();
+            UserInput = "";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(UserInput))
+            return;
+
+        CommandHistory.Add(UserInput);
+        HistoryIndex = -1;
+        TempInput = string.Empty;
+
+        var input = UserInput;
+        UserInput = "";
+        await OnSubmit.InvokeAsync(input);
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        PreventTabDefault = e.Key == "Tab";
+
+        if (e.Key == "Enter")
+        {
+            await JS.InvokeVoidAsync("playEnterSound");
+        }
+        else if (e.Key != "Tab" && e.Key != "Shift" && e.Key != "Control" && e.Key != "Alt")
+        {
+            await JS.InvokeVoidAsync("playTypingSound");
+        }
+
+        if (e.Key == "Tab")
+        {
+            AutoComplete();
+        }
+
+        if (e.Key == "ArrowUp")
+        {
+            if (CommandHistory.Count == 0) return;
+
+            if (HistoryIndex == -1)
+            {
+                TempInput = UserInput;
+            }
+
+            if (HistoryIndex < CommandHistory.Count - 1)
+            {
+                HistoryIndex++;
+                UserInput = CommandHistory[CommandHistory.Count - 1 - HistoryIndex];
+            }
+        }
+        else if (e.Key == "ArrowDown")
+        {
+            if (HistoryIndex > 0)
+            {
+                HistoryIndex--;
+                UserInput = CommandHistory[CommandHistory.Count - 1 - HistoryIndex];
+            }
+            else if (HistoryIndex == 0)
+            {
+                HistoryIndex = -1;
+                UserInput = TempInput;
+            }
+        }
+    }
+
+    private void AutoComplete()
+    {
+        if (!string.IsNullOrEmpty(GhostInput) && GhostInput.Length > UserInput.Length)
+        {
+            UserInput = GhostInput;
+            return;
+        }
+
+        string[] parts = UserInput.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        bool hasTrailingSpace = UserInput.EndsWith(" ");
+
+        if (parts.Length == 0 || hasTrailingSpace) return;
+
+        string lastPart = parts.Last();
+
+        foreach (string name in LastResponse.ActionNames)
+        {
+            if (name == lastPart)
+            {
+                int currentIndex = LastResponse.ActionNames.IndexOf(name);
+                int nextIndex = (currentIndex + 1) % LastResponse.ActionNames.Count;
+                parts[^1] = LastResponse.ActionNames[nextIndex];
+                UserInput = string.Join(" ", parts);
+                return;
+            }
+
+            if (name.StartsWith(lastPart))
+            {
+                parts[^1] = name;
+                UserInput = string.Join(" ", parts);
+                return;
+            }
+        }
+
+        foreach (string name in LastResponse.EntityNames)
+        {
+            if (name == lastPart)
+            {
+                int currentIndex = LastResponse.EntityNames.IndexOf(name);
+                int nextIndex = (currentIndex + 1) % LastResponse.EntityNames.Count;
+                parts[^1] = LastResponse.EntityNames[nextIndex];
+                UserInput = string.Join(" ", parts);
+                return;
+            }
+
+            if (name.StartsWith(lastPart))
+            {
+                parts[^1] = name;
+                UserInput = string.Join(" ", parts);
+                return;
+            }
+        }
+    }
+
+    private void UpdateGhostInput()
+    {
+        if (string.IsNullOrWhiteSpace(UserInput))
+        {
+            GhostInput = string.Empty;
+            return;
+        }
+
+        string[] parts = UserInput.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        bool hasTrailingSpace = UserInput.EndsWith(" ");
+
+        if (parts.Length == 0 || hasTrailingSpace)
+        {
+            GhostInput = string.Empty;
+            return;
+        }
+
+        string lastPart = parts.Last();
+        string suggestion = string.Empty;
+
+        foreach (string name in LastResponse.ActionNames)
+        {
+            if (name.StartsWith(lastPart) && name != lastPart)
+            {
+                suggestion = name;
+                break;
+            }
+        }
+
+        if (string.IsNullOrEmpty(suggestion))
+        {
+            foreach (string name in LastResponse.EntityNames)
+            {
+                if (name.StartsWith(lastPart) && name != lastPart)
+                {
+                    suggestion = name;
+                    break;
+                }
+            }
+        }
+
+        if (!string.IsNullOrEmpty(suggestion))
+        {
+            parts[^1] = suggestion;
+            GhostInput = string.Join(" ", parts);
+
+            if (GhostInput.StartsWith(UserInput, StringComparison.OrdinalIgnoreCase))
+            {
+                GhostInput = UserInput + GhostInput.Substring(UserInput.Length);
+            }
+        }
+        else
+        {
+            GhostInput = string.Empty;
+        }
+    }
+}

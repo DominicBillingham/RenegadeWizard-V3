@@ -52,7 +52,6 @@ public class GameCoordinator(InputManager inputManager, SceneManager sceneManage
         
         if (GameState == GameState.Combat)
         {
-            sceneManager.Level1();
             if (combatManager.CombatRoundCount > 0)
             {
                 gameResponse.CombatLines.AddRange(combatManager.PlayRound());
@@ -60,6 +59,7 @@ public class GameCoordinator(InputManager inputManager, SceneManager sceneManage
             }
             else
             {
+                sceneManager.Level1();
                 gameResponse.CombatLines.AddRange(combatManager.StartCombat());
                 return PopulateTerminal(gameResponse);
             }
