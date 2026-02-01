@@ -132,10 +132,10 @@
     
     protected override async Task OnInitializedAsync()
     {
-        GameResponse response = GameCoordinator.StartGame();
-        await UpdateTerminal(response, false);
-        await Task.Delay(100);
-        await JS.InvokeVoidAsync("createLucideIcons");
+        // GameResponse response = GameCoordinator.StartGame();
+        // await UpdateTerminal(response, false);
+        // await Task.Delay(100);
+        // await JS.InvokeVoidAsync("createLucideIcons");
     }
     
     public async Task HandleSubmit(EventArgs e)

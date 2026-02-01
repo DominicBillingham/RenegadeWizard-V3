@@ -15,8 +15,8 @@ public enum GameState
 }
 public class GameCoordinator(InputManager inputManager, SceneManager sceneManager, CombatManager combatManager)
 {
-    
-    private GameState GameState { get; set; } = GameState.Introduction;
+
+    private GameState GameState { get; set; } = GameState.Combat;
 
     public GameResponse StartGame()
     {

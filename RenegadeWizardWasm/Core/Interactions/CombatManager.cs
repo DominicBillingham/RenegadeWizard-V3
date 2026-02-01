@@ -35,6 +35,13 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
         }
         
         sceneManager.RemoveDestroyedEntities();
+
+        if (sceneManager.Npcs.Count == 0)
+        {
+            CombatLines.Add("All enemies have been defeated!");
+            return CombatLines;
+        }
+        
         RefreshNpcsIntentions();
         CombatLines.AddRange(ReadEnemyIntentions());
         CombatRoundCount++;
