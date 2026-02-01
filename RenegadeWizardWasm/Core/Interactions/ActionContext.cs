@@ -31,6 +31,12 @@ public class ActionContext(
             return Result;
         }
 
+        if (Actor.Hitpoints <= 0)
+        {
+            Result = $"{Actor.Name} died before they could do anything!";
+            return Result;
+        }
+
         if (GameAction is null)
         {
             Result = "No action selected.";
