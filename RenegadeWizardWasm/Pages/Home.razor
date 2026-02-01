@@ -38,7 +38,10 @@
                         <div class="entity-tags">
                             @foreach (var tag in card.Tags)
                             {
-                                <span class="tag-item"><i data-lucide="tag" class="tag-icon"></i> @tag</span>
+                                <span class="tag-item">
+                                    <svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                                    @tag
+                                </span>
                             }
                         </div>
                     }
@@ -58,7 +61,10 @@
                         <div class="entity-tags">
                             @foreach (var tag in card.Tags)
                             {
-                                <span class="tag-item"><i data-lucide="tag" class="tag-icon"></i> @tag</span>
+                                <span class="tag-item">
+                                    <svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                                    @tag
+                                </span>
                             }
                         </div>
                     }
@@ -78,7 +84,10 @@
                         <div class="entity-tags">
                             @foreach (var tag in card.Tags)
                             {
-                                <span class="tag-item"><i data-lucide="tag" class="tag-icon"></i> @tag</span>
+                                <span class="tag-item">
+                                    <svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                                    @tag
+                                </span>
                             }
                         </div>
                     }
@@ -102,7 +111,6 @@
         // GameResponse response = GameCoordinator.StartGame();
         // await UpdateTerminal(response, false);
         // await Task.Delay(100);
-        // await JS.InvokeVoidAsync("createLucideIcons");
     }
 
     private async Task HandleAdvancePending()
@@ -130,9 +138,6 @@
 
             ShouldScroll = true;
             StateHasChanged();
-
-            await Task.Delay(10);
-            await JS.InvokeVoidAsync("createLucideIcons");
         }
     }
 
@@ -168,9 +173,6 @@
 
         ShouldScroll = shouldScroll;
         StateHasChanged();
-        
-        await Task.Delay(10);
-        await JS.InvokeVoidAsync("createLucideIcons");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
