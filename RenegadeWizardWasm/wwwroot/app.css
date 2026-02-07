@@ -42,10 +42,10 @@ body::before {
 
 .moon {
     position: absolute;
-    top: 18%;
-    right: 15%;
-    width: 15%;
-    height: 30%;
+    top: 10%;
+    right: 10%;
+    width: 23vh;
+    height: 23vh;
     border-radius: 50%;
     background: #fefcd7;
     box-shadow: 0 0 40px rgba(254, 252, 215, 0.4);
