@@ -90,14 +90,16 @@ body::before {
 .sun {
     position: absolute;
     top: 28%;
-    left: 60%;
-    transform: translateX(-50%);
+    left: 59.5%;
+    transform: translateX(-50%) rotate(58.4deg);
     width: 30vh;
     height: 30vh;
     border-radius: 50%;
     background: radial-gradient(circle, #ffd700, #ff8c00);
-    box-shadow: 0 0 60px rgba(255, 140, 0, 0.4);
+    
+    text-shadow: 0 60px rgba(255, 140, 0, 0.4);
     z-index: 1;
+    clip-path: inset(0 0 50% 0); /* Cut the sun in half (keep top half) */
 }
 
 .mountain {
@@ -108,8 +110,7 @@ body::before {
     width: 54vw; /* Just inside the 50vw console-column */
     height: 88vh; /* Peak is 15% away from top */
 
-    background: #0a0a1a;
-    background: linear-gradient(to bottom, rgba(254, 252, 215, 1), transparent);
+    background: linear-gradient(to bottom, rgb(120, 120, 120), transparent);
     
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     z-index: 2;
