@@ -31,7 +31,7 @@
 
 .entity-bubble-wrapper:hover .entity-card-popup {
     visibility: visible;
-    opacity: 1;
+    opacity: 0.95;
 }
 
 .entity-bubble {
@@ -83,4 +83,87 @@
 
 .item-bubble:hover {
     box-shadow: 0 0 15px rgba(150, 255, 150, 0.5);
+}
+
+.entity-card {
+    background: rgba(20, 20, 40, 0.95);
+    border: 1px solid rgba(150, 150, 255, 0.6);
+    border-radius: 8px;
+    padding: 1.5vh;
+    min-width: 30vh;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(100, 100, 255, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    pointer-events: auto; /* Re-enable pointer events for the card content if needed, though parent has none */
+}
+
+.entity-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(100, 100, 255, 0.3);
+    border-color: rgba(150, 150, 255, 0.8);
+}
+
+.entity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5vh;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1vh;
+}
+
+.entity-name {
+    font-weight: bold;
+    color: #fff;
+    font-size: 2vh;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
+}
+
+.intention-icon {
+    font-size: 1.8vh;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.entity-hp {
+    font-size: 1.6vh;
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.entity-description {
+    color: #b0b0ff;
+    font-size: 1.6vh;
+    line-height: 1.4;
+    margin-top: 1vh;
+}
+
+.entity-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8vh;
+    margin-bottom: 0.5vh;
+}
+
+.tag-item {
+    background: rgba(100, 100, 255, 0.15);
+    border: 1px solid rgba(150, 150, 255, 0.3);
+    border-radius: 4px;
+    padding: 0.2vh 0.6vh;
+    font-size: 1.4vh;
+    color: #e0e0ff; /* Light color for visibility */
+    display: flex;
+    align-items: center;
+}
+
+.tag-icon {
+    width: 1.4vh;
+    height: 1.4vh;
+    margin-right: 0.4vh;
+    stroke: #ffffff;
+    stroke-width: 2px;
 }
