@@ -8,8 +8,30 @@
 .bubble-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 1vh;
+    gap: 1.5vh;
     justify-content: center;
+}
+
+.entity-bubble-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.entity-card-popup {
+    visibility: hidden;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+    pointer-events: none; /* Prevents the popup from interfering with hovering the bubble */
+}
+
+.entity-bubble-wrapper:hover .entity-card-popup {
+    visibility: visible;
+    opacity: 1;
 }
 
 .entity-bubble {

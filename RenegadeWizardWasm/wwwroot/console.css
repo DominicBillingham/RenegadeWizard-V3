@@ -38,13 +38,14 @@
 }
 
 .entity-card {
-    background: rgba(40, 40, 80, 0.6);
-    border: 1px solid rgba(150, 150, 255, 0.4);
+    background: rgba(20, 20, 40, 0.95);
+    border: 1px solid rgba(150, 150, 255, 0.6);
     border-radius: 8px;
     padding: 1.5vh;
-    width: 100%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    min-width: 25vh;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(100, 100, 255, 0.2);
     transition: transform 0.2s, box-shadow 0.2s;
+    pointer-events: auto; /* Re-enable pointer events for the card content if needed, though parent has none */
 }
 
 .entity-card:hover {
@@ -60,17 +61,30 @@
     margin-bottom: 0.5vh;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1vh;
+}
+
 .entity-name {
     font-weight: bold;
     color: #fff;
     font-size: 2vh;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
 }
 
 .intention-icon {
     font-size: 1.8vh;
     color: #ffffff;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.entity-hp {
+    font-size: 1.6vh;
+    color: #ff6b6b;
+    font-weight: bold;
 }
 
 .entity-description {

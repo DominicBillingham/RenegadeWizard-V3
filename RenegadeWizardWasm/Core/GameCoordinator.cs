@@ -68,7 +68,6 @@ public class GameCoordinator(InputManager inputManager, SceneManager sceneManage
     
     public GameResponse PopulateTerminal(GameResponse gameResponse)
     {
-        gameResponse.ActionCards = sceneManager.Player.Actions.Select(action => new TerminalCard(action)).ToList();
         gameResponse.CreatureCards = sceneManager.Npcs.Append(sceneManager.Player).Select(entity => new TerminalCard(entity)).ToList();
         gameResponse.ObjectCards = sceneManager.Objects.Select(entity => new TerminalCard(entity)).ToList();
         

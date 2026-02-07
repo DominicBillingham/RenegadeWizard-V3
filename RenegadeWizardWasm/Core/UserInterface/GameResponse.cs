@@ -88,12 +88,5 @@ public class TerminalCard
         IntentionIcon = entity.IntentionIcon;
         Faction = entity.Faction;
     }
-
-    public TerminalCard(GameAction action)
-    {
-        Name = action.Name + (action.Aka.Any() ? $" ({string.Join(", ", action.Aka)})" : "");
-        Description = action.Description;
-        Tags = action.ActionTags;
-    }
     
 }

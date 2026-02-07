@@ -5,15 +5,82 @@
     <div class="bubble-list">
         @foreach (var creature in CreatureCards)
         {
-            var factionClass = creature.Faction == Faction.Player ? "player-bubble" : "hostile-bubble";
-            <div class="entity-bubble creature-bubble @factionClass">
-                @creature.Name
+            <div class="entity-bubble-wrapper">
+                <div class="entity-bubble creature-bubble">
+                    @creature.Name
+                </div>
+                <div class="entity-card-popup">
+                    <div class="entity-card">
+                        <div class="entity-header">
+                            <div class="entity-name">@creature.Name</div>
+                            <div class="header-right">
+                                @if (creature.Hitpoints.HasValue)
+                                {
+                                    <span class="entity-hp">@creature.Hitpoints HP</span>
+                                }
+                                @if (!string.IsNullOrEmpty(creature.IntentionIcon))
+                                {
+                                    <span class="intention-icon">
+                                        <i class="fa-solid @creature.IntentionIcon"></i>
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                        
+                        @if (creature.Tags != null && creature.Tags.Any())
+                        {
+                            <div class="entity-tags">
+                                @foreach (var tag in creature.Tags)
+                                {
+                                    <span class="tag-item">@tag</span>
+                                }
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(creature.Description))
+                        {
+                            <div class="entity-description">
+                                @creature.Description
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
         }
         @foreach (var item in ObjectCards)
         {
-            <div class="entity-bubble item-bubble">
-                @item.Name
+            <div class="entity-bubble-wrapper">
+                <div class="entity-bubble item-bubble">
+                    @item.Name
+                </div>
+                <div class="entity-card-popup">
+                    <div class="entity-card">
+                        <div class="entity-header">
+                            <div class="entity-name">@item.Name</div>
+                            @if (item.Hitpoints.HasValue)
+                            {
+                                <span class="entity-hp">@item.Hitpoints HP</span>
+                            }
+                        </div>
+
+                        @if (item.Tags != null && item.Tags.Any())
+                        {
+                            <div class="entity-tags">
+                                @foreach (var tag in item.Tags)
+                                {
+                                    <span class="tag-item">@tag</span>
+                                }
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(item.Description))
+                        {
+                            <div class="entity-description">
+                                @item.Description
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
         }
     </div>
