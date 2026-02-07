@@ -77,6 +77,16 @@ body::before {
     background: #0a0a1a; /* Match background for cut-out effect */
 }
 
+.mountain-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    z-index: 1;
+}
+
 .sun {
     position: absolute;
     top: 28%;
@@ -87,8 +97,7 @@ body::before {
     border-radius: 50%;
     background: radial-gradient(circle, #ffd700, #ff8c00);
     box-shadow: 0 0 60px rgba(255, 140, 0, 0.4);
-    opacity: 0.5;
-    z-index: 2;
+    z-index: 1;
 }
 
 .mountain {
@@ -98,8 +107,10 @@ body::before {
     transform: translateX(-50%);
     width: 54vw; /* Just inside the 50vw console-column */
     height: 88vh; /* Peak is 15% away from top */
-    background: linear-gradient(to bottom, rgba(254, 252, 215, 0.2), transparent);
+
+    background: #0a0a1a;
+    background: linear-gradient(to bottom, rgba(254, 252, 215, 1), transparent);
+    
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    opacity: 1;
-    z-index: 5; /* At the back like the moon */
+    z-index: 2;
 }
