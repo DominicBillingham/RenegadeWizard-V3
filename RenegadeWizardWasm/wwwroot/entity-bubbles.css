@@ -1,0 +1,64 @@
+﻿.entity-bubble-container {
+    width: 90%;
+    margin: 0 auto 20vh auto;
+    display: flex;
+    justify-content: center;
+}
+
+.bubble-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vh;
+    justify-content: center;
+}
+
+.entity-bubble {
+    opacity: 0.65;
+    padding: 0.5vh 1.5vh;
+    background-color: rgba(20, 20, 40, 0.85);
+    border: 1px solid rgba(150, 150, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(100, 100, 255, 0.2);
+    color: #d1d1ff;
+    font-size: 1.8vh;
+    text-shadow: 0 0 5px rgba(150, 150, 255, 0.5);
+    white-space: nowrap;
+    transition: all 0.2s ease-in-out;
+    cursor: default;
+}
+
+.entity-bubble:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 15px rgba(150, 150, 255, 0.5);
+    text-shadow: 0 0 8px rgba(150, 150, 255, 0.8);
+    transform: translateY(-1px);
+}
+
+.creature-bubble {
+    border-color: rgba(255, 150, 150, 0.4);
+}
+
+.player-bubble {
+    border-color: rgba(150, 150, 255, 0.6);
+    color: #ffffff;
+}
+
+.player-bubble:hover {
+    box-shadow: 0 0 15px rgba(150, 150, 255, 0.6);
+}
+
+.hostile-bubble {
+    border-color: rgba(255, 100, 100, 0.6);
+}
+
+.hostile-bubble:hover {
+    box-shadow: 0 0 15px rgba(255, 100, 100, 0.5);
+}
+
+.item-bubble {
+    border-color: rgba(150, 255, 150, 0.4);
+}
+
+.item-bubble:hover {
+    box-shadow: 0 0 15px rgba(150, 255, 150, 0.5);
+}
