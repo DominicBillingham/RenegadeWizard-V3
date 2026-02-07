@@ -40,16 +40,28 @@ body::before {
     }
 }
 
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
 .moon {
     position: absolute;
-    top: 10%;
-    right: 10%;
-    width: 23vh;
-    height: 23vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vh;
+    height: 80vh;
     border-radius: 50%;
     background: #fefcd7;
-    box-shadow: 0 0 40px rgba(254, 252, 215, 0.4);
+    box-shadow: 0 0 100px rgba(254, 252, 215, 0.2);
     overflow: hidden; /* To ensure the ::after 'shadow' works correctly for a crescent */
+    opacity: 0.15;
 }
 
 /* Crescent moon effect */
@@ -57,7 +69,7 @@ body::before {
     content: '';
     position: absolute;
     top: -10%;
-    right: 30%;
+    right: 25%;
     width: 100%;
     height: 100%;
     border-radius: 50%;
