@@ -28,6 +28,7 @@
             }
         </div>
         <TerminalInput LastResponse="@LastResponse" PendingLines="@PendingLines" OnSubmit="HandleInputSubmit" OnAdvancePending="HandleAdvancePending" />
+        <EntityBubbleContainer CreatureCards="@LastResponse.CreatureCards" ObjectCards="@LastResponse.ObjectCards" />
     </div>
 </div>
 

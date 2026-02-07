@@ -1,0 +1,25 @@
+﻿@using RenegadeWizardWasm.Core.UserInterface
+@using RenegadeWizardWasm.Core.Enums
+
+<div class="entity-bubble-container">
+    <div class="bubble-list">
+        @foreach (var creature in CreatureCards)
+        {
+            var factionClass = creature.Faction == Faction.Player ? "player-bubble" : "hostile-bubble";
+            <div class="entity-bubble creature-bubble @factionClass">
+                @creature.Name
+            </div>
+        }
+        @foreach (var item in ObjectCards)
+        {
+            <div class="entity-bubble item-bubble">
+                @item.Name
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public List<TerminalCard> CreatureCards { get; set; } = new();
+    [Parameter] public List<TerminalCard> ObjectCards { get; set; } = new();
+}
