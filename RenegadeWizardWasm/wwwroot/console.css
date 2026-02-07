@@ -106,18 +106,6 @@
     stroke-width: 2px;
 }
 
-.secondary-column::-webkit-scrollbar {
-    width: 6px;
-}
-
-.secondary-column::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.secondary-column::-webkit-scrollbar-thumb {
-    background: rgba(150, 150, 255, 0.2);
-    border-radius: 3px;
-}
 
 .console-output {
     overflow-y: auto;
@@ -133,27 +121,31 @@
 
 .console-output::-webkit-scrollbar {
     width: 8px;
+    opacity: 0.0;
 }
 
 .console-output::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 4px;
+    opacity: 0.0;
 }
 
 .console-output::-webkit-scrollbar-thumb {
     background: rgba(150, 150, 255, 0.3);
     border-radius: 4px;
+    opacity: 0.0;
 }
 
 .console-output::-webkit-scrollbar-thumb:hover {
     background: rgba(150, 150, 255, 0.5);
+    opacity: 0.0;
 }
 
 .console-input-form {
 
     /*border-top: 1px solid rgba(150, 150, 255, 0.3);*/
 
-
+    opacity: 0.6;
     display: flex;
     align-items: center;
     padding: 1vh 1.5vh;
