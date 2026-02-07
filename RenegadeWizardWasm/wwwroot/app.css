@@ -100,6 +100,6 @@ body::before {
     height: 88vh; /* Peak is 15% away from top */
     background: linear-gradient(to bottom, rgba(254, 252, 215, 0.2), transparent);
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    opacity: 0.45;
+    opacity: 1;
     z-index: 5; /* At the back like the moon */
 }
