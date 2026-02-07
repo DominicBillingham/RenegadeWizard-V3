@@ -145,10 +145,8 @@
 }
 
 .console-input-form {
-
-    /*border-top: 1px solid rgba(150, 150, 255, 0.3);*/
-
-    opacity: 0.6;
+    
+    opacity: 0.65;
     display: flex;
     align-items: center;
     padding: 1vh 1.5vh;
@@ -164,7 +162,7 @@
 
 .entity-bubble-container {
     width: 90%;
-    margin: 0 auto 25vh auto;
+    margin: 0 auto 20vh auto;
     display: flex;
     justify-content: center;
 }
@@ -177,7 +175,7 @@
 }
 
 .entity-bubble {
-    opacity: 0.6;
+    opacity: 0.65;
     padding: 0.5vh 1.5vh;
     background-color: rgba(20, 20, 40, 0.85);
     border: 1px solid rgba(150, 150, 255, 0.3);
