@@ -16,7 +16,7 @@
 </div><!-- / STAR ANIMATION -->
 
 <div class="console-container">
-    <div class="console-column" id="mainDisplay">
+    <div class="console-column m-auto" id="mainDisplay">
         <div class="console-output" id="consoleOutput">
             @foreach (var line in ConsoleLines)
             {
@@ -24,84 +24,6 @@
             }
         </div>
         <TerminalInput LastResponse="@LastResponse" PendingLines="@PendingLines" OnSubmit="HandleInputSubmit" OnAdvancePending="HandleAdvancePending" />
-    </div>
-    <div class="console-column secondary-column">
-        <div class="entity-mosaic">
-            
-            @foreach (var card in LastResponse.CreatureCards)
-            {
-                <div class="entity-card">
-                    <div class="entity-header">
-                        <div
-                            class="entity-name">@card.Name@(card.Hitpoints != null ? $" ({card.Hitpoints}hp)" : "")</div>
-                        @if (card.IntentionIcon != null)
-                        {
-                            <i class="fa-solid fa-@card.IntentionIcon intention-icon"></i>
-                        }
-                    </div>
-                    @if (card.Tags != null && card.Tags.Any())
-                    {
-                        <div class="entity-tags">
-                            @foreach (var tag in card.Tags)
-                            {
-                                <span class="tag-item">
-                                    <svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                                    @tag
-                                </span>
-                            }
-                        </div>
-                    }
-                    <div class="entity-description">@card.Description</div>
-                </div>
-            }
-            
-            <br/>
-            
-            @foreach (var card in LastResponse.ObjectCards)
-            {
-                <div class="entity-card">
-                    <div
-                        class="entity-name">@card.Name@(card.Hitpoints != null ? $" ({card.Hitpoints}hp)" : "")</div>
-                    @if (card.Tags != null && card.Tags.Any())
-                    {
-                        <div class="entity-tags">
-                            @foreach (var tag in card.Tags)
-                            {
-                                <span class="tag-item">
-                                    <svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                                    @tag
-                                </span>
-                            }
-                        </div>
-                    }
-                    <div class="entity-description">@card.Description</div>
-                </div>
-            }
-            
-            <br/>
-            
-            @foreach (var card in LastResponse.ActionCards)
-            {
-                <div class="entity-card">
-                    <div
-                        class="entity-name">@card.Name</div>
-                    @if (card.Tags != null && card.Tags.Any())
-                    {
-                        <div class="entity-tags">
-                            @foreach (var tag in card.Tags)
-                            {
-                                <span class="tag-item">
-                                    <svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                                    @tag
-                                </span>
-                            }
-                        </div>
-                    }
-                    <div class="entity-description">@card.Description</div>
-                </div>
-            }
-            
-        </div>
     </div>
 </div>
 
