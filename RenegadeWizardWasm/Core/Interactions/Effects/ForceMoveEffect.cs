@@ -8,6 +8,12 @@ public class ForceMoveEffect : InteractionEffect
     public bool ActorCanMoveTarget { get; set; } = false;
     public ForceMoveEffect(ActionContext context, Entity actor, Entity target) : base(context)
     {
+
+        if (target.Tags.FirstOrDefault(tag => tag is Immovable) is Immovable immovable)
+        {
+            Result += $"{target.Name} cannot be moved.";
+            return;
+        }
         
         int actorStrength = actor.GetStat(Stat.Strength);
         int targetWeight = target.GetStat(Stat.Weight);

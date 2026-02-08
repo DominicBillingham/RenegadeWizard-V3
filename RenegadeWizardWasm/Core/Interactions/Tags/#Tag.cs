@@ -32,3 +32,11 @@ public class Explosive : Tag
         Damage = damage;
     }
 }
+
+public class Immovable : Tag
+{
+    public Immovable(Duration duration) : base(duration)
+    {
+        Name = "Immovable";
+    }
+}

@@ -10,7 +10,7 @@ public class CollisionEffect : InteractionEffect
     {
         if (target2.Tags.FirstOrDefault(tag => tag is FallHazard) is FallHazard fallHazard2)
         {
-            Result += $"{target1.Name} falls out the tower...";
+            Result += $"{target1.Name} falls to their demise...";
             target1.Hitpoints = 0;
             PerformFollowupDamage = false;
             return;
@@ -18,7 +18,7 @@ public class CollisionEffect : InteractionEffect
         
         if (target1.Tags.FirstOrDefault(tag => tag is FallHazard) is FallHazard fallHazard)
         {
-            Result += $"{target2.Name} falls out the tower...";
+            Result += $"{target2.Name} falls to their demise...";
             target2.Hitpoints = 0;
             PerformFollowupDamage = false;
             return;
