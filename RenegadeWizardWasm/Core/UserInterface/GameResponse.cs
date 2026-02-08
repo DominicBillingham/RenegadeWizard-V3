@@ -86,7 +86,7 @@ public class TerminalCard
         Description = $"{entity.Description}";
         Hitpoints = entity.Hitpoints;
         Tags = entity.Tags.Select(x => x.Name).ToList();
-        Intent = entity.Intent;
+        Intent = entity?.IntendedAction?.GameAction?.Intent;
         Faction = entity.Faction;
     }
     

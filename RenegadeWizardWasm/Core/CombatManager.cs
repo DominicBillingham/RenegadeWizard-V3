@@ -9,8 +9,6 @@ namespace RenegadeWizardWasm.Core;
 public class CombatManager(SceneManager sceneManager, InputManager inputManager)
 {
     public int CombatRoundCount { get; set; } = 0;
-    private List<ActionContext> EnemyIntentions { get; set; } = new();
-    
     public void StartCombat()
     {
         CombatRoundCount = 1;
@@ -30,14 +28,12 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
             return CombatLines;
         }
 
-        foreach (var intent in EnemyIntentions)
+        foreach (Entity ent in sceneManager.Npcs)
         {
-            intent.Resolve();
-            CombatLines.Add(intent.Result);
-            if (intent.Actor != null)
-            {
-                intent.Actor.Intent = null;
-            }
+            if (ent.IntendedAction == null) continue;
+            ent.IntendedAction.Resolve();
+            CombatLines.Add(ent.IntendedAction.Result);
+            ent.IntendedAction = null;
         }
         
         sceneManager.RemoveDestroyedEntities();
@@ -57,14 +53,12 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
     
     public void RefreshNpcsIntentions()
     {
-        EnemyIntentions.Clear();
         foreach (var ent in sceneManager.Npcs)
         {
             var random = new Random();
             GameAction action = ent.Actions[random.Next(ent.Actions.Count)];
             List<Entity> targets = action.NpcGetTargets(sceneManager.Entities);
-            EnemyIntentions.Add(new ActionContext(ent, action, sceneManager.Entities, targets));
-            ent.Intent = action.Intent;
+            ent.IntendedAction = new ActionContext(ent, action, sceneManager.Entities, targets);
         }
     }
 
