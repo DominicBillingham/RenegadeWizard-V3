@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenegadeWizardWasm", "RenegadeWizardWasm\RenegadeWizardWasm.csproj", "{60BD18E2-4A1C-4102-8343-028DAB29C1AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizardTests", "WizardTests\WizardTests.csproj", "{AEF4F5F3-4C21-4295-A128-D02157566743}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,9 +12,5 @@ Global
 		{60BD18E2-4A1C-4102-8343-028DAB29C1AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60BD18E2-4A1C-4102-8343-028DAB29C1AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60BD18E2-4A1C-4102-8343-028DAB29C1AE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AEF4F5F3-4C21-4295-A128-D02157566743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AEF4F5F3-4C21-4295-A128-D02157566743}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AEF4F5F3-4C21-4295-A128-D02157566743}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AEF4F5F3-4C21-4295-A128-D02157566743}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

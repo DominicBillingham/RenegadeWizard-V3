@@ -16,7 +16,8 @@ static class MiniMarkup
 
     private static string FormatString(string input)
     {
-        if (input.Length > 0 && input.First() != '#') 
+
+        if (input.First() != '#') 
             input = "# " + input;
         
         for (int j = 0; j < input.Length - 1; j++)
@@ -49,6 +50,11 @@ static class MiniMarkup
 
             var styles = new StringBuilder();
             var classes = new StringBuilder();
+            
+            if (string.IsNullOrEmpty(content))
+            {
+                content = "&nbsp;";
+            }
 
             foreach (var tag in StyleMap)
             {
