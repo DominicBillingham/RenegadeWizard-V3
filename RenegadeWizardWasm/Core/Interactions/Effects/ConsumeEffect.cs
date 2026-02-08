@@ -1,4 +1,5 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Interactions.Tags;
 
 namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
@@ -17,7 +18,7 @@ public class ConsumeEffect : InteractionEffect
             return;
         }
         
-        if (actorSize >targetSize)
+        if (actorSize > targetSize)
         {
             
             target.Hitpoints = 0;
@@ -26,16 +27,22 @@ public class ConsumeEffect : InteractionEffect
 
             if (targetFoodValue > 0)
             {
-                Result += $" {actor.Name} heals {targetFoodValue}hp.";
+                Result += $"{actor.Name} heals {targetFoodValue}hp.";
             }
 
             if (targetTaste < 2)
             {
-                Result += $" <wtf>";
+                Result += $"<wtf>";
             } 
             else if (targetTaste < 5)
             {
-                Result += $" <gross>";
+                Result += $"<gross>";
+            }
+
+            if (target.Tags.FirstOrDefault(tag => tag is Explosive) is Explosive explosive)
+            {
+                Result += $"{actor.Name} is now explosive! <wtf>";
+                actor.Tags.Add(new Explosive(Duration.Permanent));
             }
             
         }
