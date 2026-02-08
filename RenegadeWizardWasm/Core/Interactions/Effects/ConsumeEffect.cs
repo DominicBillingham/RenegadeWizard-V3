@@ -42,7 +42,7 @@ public class ConsumeEffect : InteractionEffect
             if (target.Tags.FirstOrDefault(tag => tag is Explosive) is Explosive explosive)
             {
                 Result += $"{actor.Name} is now explosive! <wtf>";
-                actor.Tags.Add(new Explosive(Duration.Permanent));
+                actor.Tags.Add(new Explosive(explosive.Duration, explosive.Damage));
             }
             
         }

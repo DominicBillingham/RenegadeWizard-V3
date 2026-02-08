@@ -25,8 +25,10 @@ public abstract class Tag
 
 public class Explosive : Tag
 {
-    public Explosive(Duration duration) : base(duration)
+    public int Damage { get; set; } 
+    public Explosive(Duration duration, int damage) : base(duration)
     {
         Name = "Explosive";
+        Damage = damage;
     }
 }
