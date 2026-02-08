@@ -8,6 +8,7 @@ public class Warhead : Entity
     public Warhead() 
     {
         Name = "Warhead";
+        Aka = ["Nuke"];
         Description = "Hmm, I'm fairly sure this is an OSHA violation.";
         Controller = Controller.Object;
         Hitpoints = 5;

@@ -16,3 +16,13 @@ public abstract class InteractionEffect
     }
     
 }
+
+
+public class UseEffect : InteractionEffect
+{
+    public UseEffect(ActionContext context, Entity actor, Entity item) : base(context)
+    {
+        
+        
+    }
+}
