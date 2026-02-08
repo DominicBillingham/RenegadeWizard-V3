@@ -13,36 +13,23 @@ namespace RenegadeWizardWasm.Core.Interactions;
 // For example, the damage effect has a core that deals damage, booster may double the damage, modifer may reduce it by -5, replace may reflect the damage instead.
 
 public class ActionContext(
-    Entity? actor,
-    GameAction? gameAction,
+    Entity actor,
+    GameAction gameAction,
     IReadOnlyCollection<Entity> allEntities,
     List<Entity> intendedTargets
     )
 {
-    public readonly Entity? Actor = actor;
-    public readonly GameAction? GameAction = gameAction;
+    public readonly Entity Actor = actor;
+    public readonly GameAction GameAction = gameAction;
     public readonly IReadOnlyCollection<Entity> AllEntities = allEntities;
     public readonly List<Entity> IntendedTargets = intendedTargets;
 
     public string Resolve()
     {
-        if (Actor is null)
-        {
-            Result = "No actor selected.";
-            AllowRetry = true;
-            return Result;
-        }
 
         if (Actor.Hitpoints <= 0)
         {
             Result = $"{Actor.Name} died before they could do anything!";
-            return Result;
-        }
-
-        if (GameAction is null)
-        {
-            Result = "No action selected.";
-            AllowRetry = true;
             return Result;
         }
         
@@ -68,8 +55,7 @@ public class ActionContext(
             return Result;
 
         }
-    
-
+        
         GameAction.Perform(this);
         
         foreach (var effect in CombatLog)

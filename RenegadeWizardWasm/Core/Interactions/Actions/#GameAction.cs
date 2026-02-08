@@ -65,6 +65,9 @@ public class Reaper : GameAction
         
         foreach (Entity target in livingCreatures)
         {
+            DamageEffect damage = new(context, context.Actor, target, 1);
+            
+            
         }
     }
 }
