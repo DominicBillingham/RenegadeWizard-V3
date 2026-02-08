@@ -22,9 +22,8 @@ public class GameCoordinator(InputManager inputManager, SceneManager sceneManage
     {
         // This should be the only other place where GameResponse is created.
         GameResponse gameResponse = new();
-        StaticResponses.BeginGame(gameResponse);
-        
-        GameState = GameState.NameSelect;
+        // StaticResponses.BeginGame(gameResponse);
+        // GameState = GameState.NameSelect;
         return PopulateTerminal(gameResponse);
     }
     

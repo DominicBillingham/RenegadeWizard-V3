@@ -41,9 +41,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // GameResponse response = GameCoordinator.StartGame();
-        // await UpdateTerminal(response, false);
-        // await Task.Delay(100);
+        GameResponse response = GameCoordinator.StartGame();
+        await UpdateTerminal(response, false);
     }
 
     private async Task HandleAdvancePending()
