@@ -6,7 +6,10 @@ public abstract class Tag
 {
     public string Name { get; set; }
     public string Description { get; set; }
-    public Duration Duration { get; set; } 
+    public Duration Duration { get; set; }
+
+    public DisplayPriority DisplayPriority { get; set; } = DisplayPriority.Normal;
+
 
     public Tag(Duration duration)
     {
@@ -40,5 +43,23 @@ public class Immovable : Tag
     public Immovable(Duration duration) : base(duration)
     {
         Name = "Immovable";
+    }
+}
+
+public class Mechanical : Tag
+{
+    public Mechanical(Duration duration) : base(duration)
+    {
+        Name = "Mechanical";
+        DisplayPriority = DisplayPriority.Low;
+    }
+}
+
+public class Organic : Tag
+{
+    public Organic(Duration duration) : base(duration)
+    {
+        Name = "Organic";
+        DisplayPriority = DisplayPriority.Low;
     }
 }

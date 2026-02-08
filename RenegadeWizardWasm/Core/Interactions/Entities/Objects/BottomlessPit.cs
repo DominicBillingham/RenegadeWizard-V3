@@ -23,8 +23,8 @@ public class BottomlessPit : Entity
         Stats[Stat.Taste] = 0;
         Stats[Stat.FoodValue] = 0;
         
-        Tags.Add(new FallHazard(Duration.Permanent));
-        Tags.Add(new Immovable(Duration.Permanent));
+        Tags.Add(new FallHazard(Duration.Infinite));
+        Tags.Add(new Immovable(Duration.Infinite));
         
     }
 }

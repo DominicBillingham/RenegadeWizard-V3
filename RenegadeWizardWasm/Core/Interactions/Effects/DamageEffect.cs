@@ -6,6 +6,7 @@ namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
 public class DamageEffect : InteractionEffect
 {
+    public int DamageDealt { get; set; } = 0;
     public DamageEffect(ActionContext context, Entity actor, Entity target, int damage) : base(context)
     {
         if (target.Hitpoints < 1)
@@ -50,6 +51,8 @@ public class DamageEffect : InteractionEffect
             }
             
         }
+        
+        DamageDealt = damage;
     }
 
 }

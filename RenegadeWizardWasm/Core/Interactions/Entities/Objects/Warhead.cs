@@ -22,6 +22,6 @@ public class Warhead : Entity
         Stats[Stat.Taste] = 0;
         Stats[Stat.FoodValue] = 0;
         
-        Tags.Add(new Explosive(Duration.Permanent, 9999));
+        Tags.Add(new Explosive(Duration.Infinite, 9999));
     }
 }

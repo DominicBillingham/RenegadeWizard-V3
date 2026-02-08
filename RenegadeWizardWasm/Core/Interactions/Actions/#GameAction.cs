@@ -1,5 +1,9 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Interactions;
+using RenegadeWizardWasm.Core.Interactions.Actions;
+using RenegadeWizardWasm.Core.Interactions.Effects;
 using RenegadeWizardWasm.Core.Interactions.Entities;
+using RenegadeWizardWasm.Core.Interactions.Tags;
 
 namespace RenegadeWizardWasm.Core.Interactions.Actions;
 
@@ -33,4 +37,62 @@ public abstract class GameAction()
     }
     
     public abstract void Perform(ActionContext context);
+}
+
+
+
+
+public class Reaper : GameAction
+{
+    
+    public Reaper()
+    {
+        Name = "SoulReaper";
+        Description = "Drains the souls of every living creature for your own gain.";
+        TargetHelpText = "I use SoulReaper";
+        ActionTags = ["Damage", "AoE"];
+    }
+    
+    List<Entity> livingCreatures = [];
+    
+    public override void GetTargetsFromContext(ActionContext context)
+    {
+        livingCreatures = context.AllEntities.Where(ent => ent.Tags.Any(tag => tag is Organic)).ToList();
+    }
+    
+    public override void Perform(ActionContext context)
+    {
+        
+        foreach (Entity target in livingCreatures)
+        {
+        }
+    }
+}
+
+    
+
+
+
+
+public class Summon : GameAction
+{
+    public Summon()
+    {
+        Name = "Summon";
+        Description = "Conjure a portal, reach into it's depths and pull *something* out...";
+        Aka = ["Conjure"];
+        TargetHelpText = "I summon [name]";
+        ActionTags = ["Summoning"];
+    }
+
+    public override void GetTargetsFromContext(ActionContext context)
+    {
+    }
+
+    public override void Perform(ActionContext context)
+    {
+
+
+
+    }
 }

@@ -2,7 +2,7 @@
 
 public enum Duration
 {
-    Permanent,
+    Infinite,
     SingleCombat,
     Round
 }

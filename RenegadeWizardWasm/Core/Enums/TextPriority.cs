@@ -1,8 +1,8 @@
 ﻿namespace RenegadeWizardWasm.Core.Enums;
 
-public enum TextPriority
+public enum DisplayPriority
 {
-    Low,
-    Medium,
-    High,
+    Low = 2,
+    Normal = 1,
+    High = 0,
 }

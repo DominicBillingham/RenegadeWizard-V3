@@ -1,5 +1,6 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Interactions.Actions;
+using RenegadeWizardWasm.Core.Interactions.Tags;
 
 namespace RenegadeWizardWasm.Core.Interactions.Entities.Creatures;
 
@@ -23,5 +24,7 @@ public class Goose : Entity
     
         Stats[Stat.Taste] = 7;
         Stats[Stat.FoodValue] = 6;
+        
+        Tags.Add(new Organic(Duration.Infinite));
     }
 }

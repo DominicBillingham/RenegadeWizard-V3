@@ -54,6 +54,7 @@ public class ActionContext(
         catch
         {
             AllowRetry = true;
+            
             if (Actor.Controller == Controller.Npc)
             {
                 Result = $"{Actor.Name} faffs about confused";
@@ -62,8 +63,10 @@ public class ActionContext(
             if (Actor.Controller == Controller.Player)
             {
                 Result = $"To use {GameAction.Name}: {GameAction.TargetHelpText}";
-                return Result;
             }
+            
+            return Result;
+
         }
     
 

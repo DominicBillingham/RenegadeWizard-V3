@@ -15,6 +15,8 @@ public class GrimGooser : Entity
         
         Actions.Add(new Peck());
         
+        
+        
         Stats[Stat.Strength] = 2;
         Stats[Stat.Dexterity] = 2;
         Stats[Stat.Intelligence] = 2;

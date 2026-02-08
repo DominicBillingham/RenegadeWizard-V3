@@ -22,7 +22,7 @@ public class Door : Entity
         Stats[Stat.Taste] = 3;
         Stats[Stat.FoodValue] = 0;
         
-        Tags.Add(new Attached(Duration.Permanent, 10));
+        Tags.Add(new Attached(Duration.Infinite, 10));
         
     }
 }
