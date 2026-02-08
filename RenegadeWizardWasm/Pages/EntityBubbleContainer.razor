@@ -45,9 +45,10 @@
                         <div class="entity-header">
                             <div class="entity-name">@creature.Name</div>
                             <div class="header-right">
-                                @if (creature.Hitpoints.HasValue)
+                                
+                                @if (creature.Intent != null)
                                 {
-                                    <span class="entity-hp">@creature.Hitpoints HP</span>
+                                    <span class="entity-name">@creature.Intent.ToString()</span>
                                 }
 
                             </div>

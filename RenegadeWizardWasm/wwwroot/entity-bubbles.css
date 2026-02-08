@@ -129,11 +129,6 @@
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-.entity-hp {
-    font-size: 1.6vh;
-    color: #ff6b6b;
-    font-weight: bold;
-}
 
 .entity-description {
     color: #b0b0ff;
