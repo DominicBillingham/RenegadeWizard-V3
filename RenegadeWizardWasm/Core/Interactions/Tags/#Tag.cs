@@ -5,6 +5,7 @@ namespace RenegadeWizardWasm.Core.Interactions.Tags;
 public abstract class Tag
 {
     public string Name { get; set; }
+    public string Description { get; set; }
     public Duration Duration { get; set; } 
 
     public Tag(Duration duration)
@@ -29,6 +30,7 @@ public class Explosive : Tag
     public Explosive(Duration duration, int damage) : base(duration)
     {
         Name = "Explosive";
+        Description = $"Any entity with the explosive damage will explode when they reach 0 hit points.";
         Damage = damage;
     }
 }
