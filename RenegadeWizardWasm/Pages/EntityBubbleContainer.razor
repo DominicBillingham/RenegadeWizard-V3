@@ -2,13 +2,17 @@
 @using RenegadeWizardWasm.Core.Enums
 
 <div class="entity-bubble-container">
+    
     <div class="bubble-list">
+
         @foreach (var creature in CreatureCards)
         {
             <div class="entity-bubble-wrapper">
+
                 <div class="entity-bubble creature-bubble">
-                    @creature.Name
+                    @($"{creature.Name} ({creature.Hitpoints}hp)")
                 </div>
+
                 <div class="entity-card-popup">
                     <div class="entity-card">
                         <div class="entity-header">
@@ -26,7 +30,7 @@
                                 }
                             </div>
                         </div>
-                        
+
                         @if (creature.Tags != null && creature.Tags.Any())
                         {
                             <div class="entity-tags">
@@ -47,6 +51,7 @@
                 </div>
             </div>
         }
+
         @foreach (var item in ObjectCards)
         {
             <div class="entity-bubble-wrapper">

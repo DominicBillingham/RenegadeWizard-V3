@@ -59,6 +59,7 @@ public class GameCoordinator(InputManager inputManager, SceneManager sceneManage
             {
                 sceneManager.Level1();
                 combatManager.StartCombat();
+                gameResponse.CombatLines.AddRange(combatManager.PlayRound());
             }
         }
         
@@ -67,7 +68,12 @@ public class GameCoordinator(InputManager inputManager, SceneManager sceneManage
     
     public GameResponse PopulateTerminal(GameResponse gameResponse)
     {
-        gameResponse.CreatureCards = sceneManager.Npcs.Append(sceneManager.Player).Select(entity => new TerminalCard(entity)).ToList();
+
+        List<Entity> NpcsAndPlayer = new();
+        NpcsAndPlayer.Add(sceneManager.Player);
+        NpcsAndPlayer.AddRange(sceneManager.Npcs);
+
+        gameResponse.CreatureCards = NpcsAndPlayer.Select(entity => new TerminalCard(entity)).ToList();
         gameResponse.ObjectCards = sceneManager.Objects.Select(entity => new TerminalCard(entity)).ToList();
         
         gameResponse.ActionNames = sceneManager.Player.Actions.Select(action => action.Name.ToLower()).ToList();
