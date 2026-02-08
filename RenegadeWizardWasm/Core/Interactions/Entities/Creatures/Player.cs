@@ -1,5 +1,6 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Interactions.Actions;
+using RenegadeWizardWasm.Core.Interactions.Tags;
 
 namespace RenegadeWizardWasm.Core.Interactions.Entities.Creatures;
 
@@ -17,6 +18,8 @@ public class Player : Entity
         Actions.Add(new Consume());
         Actions.Add(new Charm());
         Actions.Add(new Kick());
+        
+        Tags.Add(new Organic(Duration.Infinite));
         
         Stats[Stat.Strength] = 5;
         Stats[Stat.Dexterity] = 5;

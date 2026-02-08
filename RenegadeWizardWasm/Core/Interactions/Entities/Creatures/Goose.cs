@@ -14,6 +14,8 @@ public class Goose : Entity
         Hitpoints = 5;
         
         Actions.Add(new Peck());
+        Tags.Add(new Organic(Duration.Infinite));
+
         
         Stats[Stat.Strength] = 2;
         Stats[Stat.Dexterity] = 2;
@@ -25,6 +27,5 @@ public class Goose : Entity
         Stats[Stat.Taste] = 7;
         Stats[Stat.FoodValue] = 6;
         
-        Tags.Add(new Organic(Duration.Infinite));
     }
 }

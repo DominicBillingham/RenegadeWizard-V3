@@ -47,6 +47,15 @@ public class Immovable : Tag
     }
 }
 
+public class Undead : Tag
+{
+    public Undead(Duration duration) : base(duration)
+    {
+        Name = "Undead";
+        DisplayPriority = DisplayPriority.Low;
+    }
+}
+
 public class Mechanical : Tag
 {
     public Mechanical(Duration duration) : base(duration)
