@@ -21,8 +21,25 @@ public class ApplyStatusEffect : InteractionEffect
 {
     public ApplyStatusEffect(ActionContext context, Entity target, Tag tag) : base(context)
     {
+        if (tag.HostilityScale == HostilityScale.Neutral)
+        {
+            Result = $"{target.Name} gained the {tag.Name} status.";
+            Result = $"{tag.Name} was applied to {target.Name}.";
+            Result = $"{target.Name} received {tag.Name}.";
+        }
+        else if (tag.HostilityScale == HostilityScale.Friendly)
+        {
+            Result = $"{target.Name} has been blessed with {tag.Name}.";
+            Result = $"{target.Name} enchanted with {tag.Name}.";
+            Result = $"{target.Name} has been given {tag.Name}.";
+        }
+        else if (tag.HostilityScale == HostilityScale.Aggressive)
+        {
+            Result = $"{target.Name} has been afflicted with {tag.Name}.";
+            Result = $"{target.Name} suffers from {tag.Name}.";
+            Result = $"{target.Name} is now cursed by {tag.Name}.";
+        }
         target.Tags.Add(tag);
-        Result = $"{target.Name} is now {tag.Name}.";
     }
 }
 

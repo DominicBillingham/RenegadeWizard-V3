@@ -8,9 +8,8 @@ public abstract class Tag
     public string Description { get; set; }
     public Duration Duration { get; set; }
     public bool AppliedThisRound { get; set; } = true;
-
+    public HostilityScale HostilityScale { get; set; } = HostilityScale.Neutral;
     public DisplayPriority DisplayPriority { get; set; } = DisplayPriority.Normal;
-
 
     public Tag(Duration duration)
     {

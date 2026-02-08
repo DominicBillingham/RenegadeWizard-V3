@@ -7,6 +7,7 @@ public class Huge : Tag
     public Huge(Duration duration) : base(duration)
     {
         Name = "Huge";
+        HostilityScale = HostilityScale.Friendly;
     }
     
     public override void ModifyStats(Stat stat, ref int value)

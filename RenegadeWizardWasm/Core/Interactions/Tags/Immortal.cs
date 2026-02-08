@@ -7,5 +7,6 @@ public class Immortal : Tag
     public Immortal(Duration duration) : base(duration)
     {
         Name = "Immortal";
+        HostilityScale = HostilityScale.Friendly;
     }
 }

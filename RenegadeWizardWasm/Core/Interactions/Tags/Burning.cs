@@ -11,6 +11,8 @@ public class Burning : Tag
     public Burning(Duration duration) : base(duration)
     {
         Name = "Burning";
+        Description = "The target is on fire and suffers damage over time.";
+        HostilityScale = HostilityScale.Aggressive;
     }
 
     public override void StatusEffect(ActionContext context)
