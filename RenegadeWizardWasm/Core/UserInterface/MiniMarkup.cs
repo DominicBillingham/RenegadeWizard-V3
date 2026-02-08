@@ -138,6 +138,9 @@ static class MiniMarkup
             { "carefully", ["carefully", "cautiously", "meticulously", "precisely", "diligently", "attentively", "thoroughly", "vigilantly", "prudently", "mindfully", "warily", "deliberately", "fastidiously", "methodically", "scrupulously", "conscientiously", "painstakingly", "watchfully", "exactingly", "studiously"] },
             { "delicate", ["delicate", "fragile", "dainty", "subtle", "refined", "elegant", "graceful", "ethereal", "gossamer", "fine", "exquisite", "sensitive", "frail", "tender", "light", "silken", "intricate", "airy", "flimsy", "gentle"] },
             { "ugly", ["ugly", "hideous", "grotesque", "repulsive", "unsightly", "revolting", "ghastly", "monstrous", "disfigured", "repugnant", "horrid", "gruesome", "deformed", "frightful", "misshapen", "offensive", "unpleasant", "odious", "atrocious", "terrible"] },
+            { "ominous", ["ominous", "foreboding", "menacing", "threatening", "sinister", "portentous", "dire", "grim", "dark", "forbidding", "baleful", "inauspicious", "ill-boding", "unpropitious", "fearsome", "dreadful", "minatory", "looming", "brooding", "shadowy"] },
+            
+            
             
             // Connectors
             { "however", ["however", "nevertheless", "nonetheless", "yet", "still", "though", "although", "even so", "be that as it may", "in spite of that", "despite that", "on the other hand", "conversely", "in contrast", "that said", "having said that", "at the same time", "notwithstanding", "all the same", "regardless" ] },

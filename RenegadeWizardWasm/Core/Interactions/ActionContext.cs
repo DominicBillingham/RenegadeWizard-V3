@@ -57,6 +57,12 @@ public class ActionContext(
         }
         
         GameAction.Perform(this);
+
+        // Keeps an eye on this actor ontroller check, if it happens again split this method into 2.
+        if (actor.Controller == Controller.Npc)
+        {
+            Result += $"{Actor.Name} {GameAction.UseText}";
+        }
         
         foreach (var effect in CombatLog)
         {

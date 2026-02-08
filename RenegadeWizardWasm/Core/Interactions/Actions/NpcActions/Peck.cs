@@ -9,9 +9,12 @@ public class Peck : GameAction
     public Peck()
     {
         Name = "Peck";
+        Aka = ["Bite"];
         Description = "A rather painful bite attack from a beaked creature.";
-        Intent = Intent.Attack;
         TargetHelpText = "Peck [name]";
+        
+        UseText = "has <ugly> hate in their eyes.";
+        Intent = Intent.Attack;
     }
 
     public Entity target { get; set; }
