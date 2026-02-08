@@ -22,12 +22,12 @@ public class Throw : GameAction
         thrownee = context.IntendedTargets[0];
         throwntoo = context.IntendedTargets[1];
     }
-    
+
     public override void Perform(ActionContext context)
     {
-        
+
         var forceMove = new ForceMoveEffect(context,
-            context.Actor, 
+            context.Actor,
             thrownee
         );
 
@@ -35,20 +35,27 @@ public class Throw : GameAction
         {
             return;
         }
-        
+
         var collision = new CollisionEffect(
-            context, 
-            throwntoo,
-            thrownee
+            context,
+            thrownee,
+            throwntoo
         );
 
-        if (throwntoo.Hitpoints > 0)
+        if (collision.PerformFollowupDamage)
         {
-            var damage = new DamageEffect(context, 
-                context.Actor, 
-                throwntoo, 
+            var damage = new DamageEffect(context,
+                context.Actor,
+                throwntoo,
                 thrownee.GetStat(Stat.Weight)
             );
+            
+            var damage2 = new DamageEffect(context,
+                context.Actor,
+                thrownee,
+                3
+            );
         }
+
     }
 }
