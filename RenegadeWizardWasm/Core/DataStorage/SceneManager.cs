@@ -12,7 +12,8 @@ public class SceneManager
     public Entity Player => Entities.First(x => x.Controller == Controller.Player);
     public List<Entity> Npcs => Entities.Where(x => x.Controller == Controller.Npc).ToList();
     public List<Entity> Objects => Entities.Where(x => x.Controller == Controller.Object).ToList();
-    
+    public List<Entity> Actors => Entities.Where(x => x.Controller == Controller.Player || x.Controller == Controller.Npc)
+                                             .OrderByDescending(x => x.Controller == Controller.Player).ToList();
     public SceneManager()
     {
         _entities.Add(new Player());

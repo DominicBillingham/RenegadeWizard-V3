@@ -15,7 +15,7 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
         RefreshNpcsIntentions();
     }
     
-    public List<string> PlayRound()
+    public List<string> NextRound()
     {
         List<string> CombatLines = new List<string>();
         

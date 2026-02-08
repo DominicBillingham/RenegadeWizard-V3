@@ -9,7 +9,7 @@ public class DamageEffect : InteractionEffect
     {
         if (target.Hitpoints < 1)
         {
-            Result = $"but {target.Name} has already been destroyed!";
+            Result += $"but {target.Name} has already been destroyed!";
             return;
         }
 
@@ -20,11 +20,11 @@ public class DamageEffect : InteractionEffect
         
         if (target.Tags.FirstOrDefault(tag => tag is Deflecting) is Deflecting deflecting)
         {
-            Result = $"but {target.Name} is deflecting the damage.";
+            Result += $"but {target.Name} is deflecting the damage.";
         }
         else if (target.Tags.FirstOrDefault(tag => tag is Immortal) is Immortal immortal)
         {
-            Result = $"but {target.Name} is completely immortal.";
+            Result += $"but {target.Name} is completely immortal.";
         }
         else
         {
@@ -43,7 +43,11 @@ public class DamageEffect : InteractionEffect
         
         if (target.Hitpoints <= 0)
         {
-            Result += $"{target.Name} <destroyed>";
+            if (target.Tags.FirstOrDefault(tag => tag is Explosive) is Explosive explosive)
+            {
+                Result += $"{target.Name} explodes!";
+            }
+            
         }
     }
 

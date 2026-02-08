@@ -22,3 +22,11 @@ public abstract class Tag
     } 
 
 }
+
+public class Explosive : Tag
+{
+    public Explosive(Duration duration) : base(duration)
+    {
+        Name = "Explosive";
+    }
+}
