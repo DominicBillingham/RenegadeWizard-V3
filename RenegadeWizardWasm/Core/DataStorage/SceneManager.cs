@@ -28,26 +28,28 @@ public class SceneManager
         _entities.Clear();
         _entities.Add(tempPlayer);
         
-        _entities.Add(new Goblin()
-        {
-            Name = "EternalAdam",
-            Description = "A wise old gremlin with a long beard and a staff.",
-            Tags = [new Immortal(Duration.Infinite)]
-        });
+        _entities.Add(new GrimGooser());
         
-        _entities.Add(new Goblin()
-        {
-            Name = "GiantGarry",
-            Description = "A giant goblin with a huge head.",
-            Tags = [new Huge(Duration.Infinite), new Tenacious(Duration.Infinite)]
-        });
-        
-        _entities.Add(new Goblin()
-        {
-            Name = "PatheticPenny",
-            Description = "She's trying - probably harder than you.",
-            Tags = [new Vulnerable(Duration.Infinite), new  Terrified(Duration.Infinite)]
-        });
+        // _entities.Add(new Goblin()
+        // {
+        //     Name = "EternalAdam",
+        //     Description = "A wise old gremlin with a long beard and a staff.",
+        //     Tags = [new Immortal(Duration.Infinite)]
+        // });
+        //
+        // _entities.Add(new Goblin()
+        // {
+        //     Name = "GiantGarry",
+        //     Description = "A giant goblin with a huge head.",
+        //     Tags = [new Huge(Duration.Infinite), new Tenacious(Duration.Infinite)]
+        // });
+        //
+        // _entities.Add(new Goblin()
+        // {
+        //     Name = "PatheticPenny",
+        //     Description = "She's trying - probably harder than you.",
+        //     Tags = [new Vulnerable(Duration.Infinite), new  Terrified(Duration.Infinite)]
+        // });
         
         _entities.Add(new Window()); 
         _entities.Add(new Door()); 

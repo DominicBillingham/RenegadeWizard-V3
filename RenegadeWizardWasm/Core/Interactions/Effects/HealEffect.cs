@@ -6,7 +6,7 @@ public class HealEffect : InteractionEffect
 {
     public int AmountHealed { get; set; } = 0;
 
-    public HealEffect(ActionContext context, Entity actor, Entity target, int amount) : base(context)
+    public HealEffect(ActionContext context, Entity target, int amount) : base(context)
     {
         if (target.Hitpoints < 1)
         {

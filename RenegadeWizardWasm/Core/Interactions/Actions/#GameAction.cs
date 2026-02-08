@@ -51,6 +51,7 @@ public class Reaper : GameAction
         Description = "Drains the souls of every living creature for your own gain.";
         TargetHelpText = "I use SoulReaper";
         ActionTags = ["Damage", "AoE"];
+        Intent = Intent.Attack;
     }
     
     List<Entity> livingCreatures = [];
@@ -67,7 +68,7 @@ public class Reaper : GameAction
             DamageEffect damage = new(context, context.Actor, target, 1);
             if (damage.DamageDealt > 0)
             {
-                HealEffect heal = new(context, context.Actor, target, damage.DamageDealt);
+                HealEffect heal = new(context, context.Actor, damage.DamageDealt);
             }
         }
     }
@@ -82,6 +83,7 @@ public class MarkForDeath : GameAction
         Description = "Leaves the target vulnerable to all damage.";
         TargetHelpText = "I use MarkForDeath on [name]s";
         ActionTags = ["Damage", "DeBuff"];
+        Intent = Intent.Debuff;
     }
     
     public Entity target { get; set; }

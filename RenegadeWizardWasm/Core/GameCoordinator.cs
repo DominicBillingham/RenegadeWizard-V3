@@ -35,7 +35,7 @@ public class GameCoordinator(InputManager inputManager, SceneManager sceneManage
         inputManager.ProcessInput(playerInput);
         gameResponse.PlayerInput  = playerInput;
 
-        if (string.IsNullOrWhiteSpace(playerInput))
+        if (string.IsNullOrWhiteSpace(playerInput) || inputManager.chosenAction == null)
         {
             return PopulateTerminal(gameResponse);
         }
