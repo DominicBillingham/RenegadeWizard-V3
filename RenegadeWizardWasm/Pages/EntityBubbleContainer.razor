@@ -13,30 +13,7 @@
                     
                     @($"{creature.Name} ({creature.Hitpoints}hp) ")
 
-                    @if (creature.Intent != null)
-                    {
-                        var intentIcon = creature.Intent switch
-                        {
-                            RenegadeWizardWasm.Core.Enums.Intent.Unknown => "question",
-                            RenegadeWizardWasm.Core.Enums.Intent.Attack => "explosion",
-                            RenegadeWizardWasm.Core.Enums.Intent.Debuff => "droplet",
-                            RenegadeWizardWasm.Core.Enums.Intent.Buff => "fire-flame-curved",
-                            _ => "question"
-                        };
-
-                        var intentColor = creature.Intent switch
-                        {
-                            RenegadeWizardWasm.Core.Enums.Intent.Unknown => "color: #FFD700;",
-                            RenegadeWizardWasm.Core.Enums.Intent.Attack => "color: #DC143C;",
-                            RenegadeWizardWasm.Core.Enums.Intent.Debuff => "color: #9370DB;",
-                            RenegadeWizardWasm.Core.Enums.Intent.Buff => "color: #4169E1;",
-                            _ => "color: #FFD700;"
-                        };
-
-                        <span class="intention-icon">
-                            <i class="fa-solid fa-@intentIcon intention-icon" style="@intentColor"></i>
-                        </span>
-                    }
+                    @GetIntentIcon(creature.Intent)
 
                 </div>
 
@@ -49,6 +26,7 @@
                                 @if (creature.Intent != null)
                                 {
                                     <span class="entity-name">@creature.Intent.ToString()</span>
+                                    @GetIntentIcon(creature.Intent)
                                 }
 
                             </div>
@@ -117,4 +95,38 @@
 @code {
     [Parameter] public List<TerminalCard> CreatureCards { get; set; } = new();
     [Parameter] public List<TerminalCard> ObjectCards { get; set; } = new();
+
+    private RenderFragment GetIntentIcon(Intent? intent) => __builder =>
+    {
+        if (intent == null) return;
+
+        var icon = intent switch
+        {
+            Intent.Unknown => "question",
+            Intent.Attack => "explosion",
+            Intent.Debuff => "droplet",
+            Intent.Buff => "fire-flame-curved",
+            _ => "question"
+        };
+
+        var color = intent switch
+        {
+            Intent.Unknown => "#FFD700",
+            Intent.Attack => "#DC143C",
+            Intent.Debuff => "#9370DB",
+            Intent.Buff => "#4169E1",
+            _ => "#FFD700"
+        };
+
+        var iconClass = $"fa-solid fa-{icon} intention-icon";
+        var style = $"color: {color};";
+
+        __builder.OpenElement(0, "span");
+        __builder.AddAttribute(1, "class", "intention-icon");
+        __builder.OpenElement(2, "i");
+        __builder.AddAttribute(3, "class", iconClass);
+        __builder.AddAttribute(4, "style", style);
+        __builder.CloseElement();
+        __builder.CloseElement();
+    };
 }
