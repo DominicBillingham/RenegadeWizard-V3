@@ -10,7 +10,7 @@ public class Kick : GameAction
         Name = "Kick";
         Description = "Use some kinetic energy to shunt an enemy.";
         Aka = ["Shove", "Push", "Shunt", "Boot", "Punt"];
-        Icon = "shoe-prints";
+        Intent = Intent.Attack;
         TargetHelpText = "I throw [name] at [name2]";
         ActionTags = ["Contact", "Push", "Damage"];
     }

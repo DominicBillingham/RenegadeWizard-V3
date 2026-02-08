@@ -1,4 +1,5 @@
-﻿using RenegadeWizardWasm.Core.Interactions.Effects;
+﻿using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Interactions.Effects;
 
 namespace RenegadeWizardWasm.Core.Interactions.Actions;
 
@@ -9,7 +10,7 @@ public class Punch : GameAction
         Name = "Punch";
         Description = "Use your fists to strike an enemy. A tad boring though...";
         Aka = ["Hit", "Slap", "Whack"];
-        Icon = "hand-back-fist";
+        Intent = Intent.Attack;
         TargetHelpText = "Punch [name]";
         ActionTags = ["Contact", "Damage"];
     }

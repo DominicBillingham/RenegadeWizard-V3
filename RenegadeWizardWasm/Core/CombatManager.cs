@@ -1,4 +1,5 @@
 ﻿using RenegadeWizardWasm.Core.DataStorage;
+using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.UserInterface;
 
 namespace RenegadeWizardWasm.Core.Interactions;
@@ -31,7 +32,10 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
         {
             intent.Resolve();
             CombatLines.Add(intent.Result);
-            if (intent.Actor != null) intent.Actor.IntentionIcon = null;
+            if (intent.Actor != null)
+            {
+                intent.Actor.Intent = null;
+            }
         }
         
         sceneManager.RemoveDestroyedEntities();
@@ -58,7 +62,7 @@ public class CombatManager(SceneManager sceneManager, InputManager inputManager)
             GameAction action = ent.Actions[random.Next(ent.Actions.Count)];
             List<Entity> targets = action.NpcGetTargets(sceneManager.Entities);
             EnemyIntentions.Add(new ActionContext(ent, action, sceneManager.Entities, targets));
-            ent.IntentionIcon = action.Icon;
+            ent.Intent = action.Intent;
         }
     }
 

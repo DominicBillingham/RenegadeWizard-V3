@@ -9,7 +9,7 @@ public abstract class GameAction()
     // Action information
     public string Name { get; set; }
     public string Description { get; set; }
-    public string Icon { get; set; } = "circle";
+    public Intent Intent { get; set; }
     public List<string> Aka { get; set; } = new();
     public List<string> Names => Aka.Append(Name).ToList();
     public List<string> ActionTags { get; set; } = [];

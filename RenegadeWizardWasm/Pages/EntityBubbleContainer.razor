@@ -10,7 +10,34 @@
             <div class="entity-bubble-wrapper">
 
                 <div class="entity-bubble creature-bubble">
-                    @($"{creature.Name} ({creature.Hitpoints}hp)")
+                    
+                    @($"{creature.Name} ({creature.Hitpoints}hp) ")
+
+                    @if (creature.Intent != null)
+                    {
+                        var intentIcon = creature.Intent switch
+                        {
+                            RenegadeWizardWasm.Core.Enums.Intent.Unknown => "question",
+                            RenegadeWizardWasm.Core.Enums.Intent.Attack => "explosion",
+                            RenegadeWizardWasm.Core.Enums.Intent.Debuff => "droplet",
+                            RenegadeWizardWasm.Core.Enums.Intent.Buff => "fire-flame-curved",
+                            _ => "question"
+                        };
+
+                        var intentColor = creature.Intent switch
+                        {
+                            RenegadeWizardWasm.Core.Enums.Intent.Unknown => "color: #FFD700;",
+                            RenegadeWizardWasm.Core.Enums.Intent.Attack => "color: #DC143C;",
+                            RenegadeWizardWasm.Core.Enums.Intent.Debuff => "color: #9370DB;",
+                            RenegadeWizardWasm.Core.Enums.Intent.Buff => "color: #4169E1;",
+                            _ => "color: #FFD700;"
+                        };
+
+                        <span class="intention-icon">
+                            <i class="fa-solid fa-@intentIcon intention-icon" style="@intentColor"></i>
+                        </span>
+                    }
+
                 </div>
 
                 <div class="entity-card-popup">
@@ -22,12 +49,7 @@
                                 {
                                     <span class="entity-hp">@creature.Hitpoints HP</span>
                                 }
-                                @if (!string.IsNullOrEmpty(creature.IntentionIcon))
-                                {
-                                    <span class="intention-icon">
-                                        <i class="fa-solid @creature.IntentionIcon"></i>
-                                    </span>
-                                }
+
                             </div>
                         </div>
 

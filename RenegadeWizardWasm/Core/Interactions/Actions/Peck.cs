@@ -1,4 +1,5 @@
-﻿using RenegadeWizardWasm.Core.Interactions.Effects;
+﻿using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Interactions.Effects;
 
 namespace RenegadeWizardWasm.Core.Interactions.Actions;
 
@@ -8,7 +9,7 @@ public class Peck : GameAction
     {
         Name = "Peck";
         Description = "A rather painful bite attack from a beaked creature.";
-        Icon = "crow";
+        Intent = Intent.Attack;
         TargetHelpText = "Peck [name]";
     }
 
