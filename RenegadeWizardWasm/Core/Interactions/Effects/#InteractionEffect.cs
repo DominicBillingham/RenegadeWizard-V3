@@ -19,6 +19,16 @@ public abstract class InteractionEffect
 }
 
 
+public class ApplyStatusEffect : InteractionEffect
+{
+    public ApplyStatusEffect(ActionContext context, Entity target, Tag tag) : base(context)
+    {
+        target.Tags.Add(tag);
+        Result = $"{target.Name} is now {tag.Name}.";
+    }
+}
+
+
 public class UseEffect : InteractionEffect
 {
     public UseEffect(ActionContext context, Entity actor, Entity item) : base(context)

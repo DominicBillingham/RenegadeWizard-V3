@@ -24,5 +24,7 @@ public class GrimGooser : Entity
     
         Stats[Stat.Taste] = 7;
         Stats[Stat.FoodValue] = 6;
+        
+        
     }
 }

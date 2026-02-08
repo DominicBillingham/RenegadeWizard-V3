@@ -7,6 +7,7 @@ public abstract class Tag
     public string Name { get; set; }
     public string Description { get; set; }
     public Duration Duration { get; set; }
+    public bool AppliedThisRound { get; set; } = true;
 
     public DisplayPriority DisplayPriority { get; set; } = DisplayPriority.Normal;
 
