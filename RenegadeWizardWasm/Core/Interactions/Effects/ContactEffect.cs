@@ -1,4 +1,6 @@
-﻿namespace RenegadeWizardWasm.Core.Interactions.Effects;
+﻿using RenegadeWizardWasm.Core.Interactions.Entities;
+
+namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
 public class ContactEffect : InteractionEffect
 {

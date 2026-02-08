@@ -1,5 +1,7 @@
 ﻿using RenegadeWizardWasm.Core.DataStorage;
 using RenegadeWizardWasm.Core.Interactions;
+using RenegadeWizardWasm.Core.Interactions.Actions;
+using RenegadeWizardWasm.Core.Interactions.Entities;
 
 namespace RenegadeWizardWasm.Core.UserInterface;
 

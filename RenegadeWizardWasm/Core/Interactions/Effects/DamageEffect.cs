@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using RenegadeWizardWasm.Core.Interactions.Entities;
 using RenegadeWizardWasm.Core.Interactions.Tags;
 
 namespace RenegadeWizardWasm.Core.Interactions.Effects;

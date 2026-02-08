@@ -1,7 +1,7 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Interactions.Actions;
 
-namespace RenegadeWizardWasm.Core.Entities;
+namespace RenegadeWizardWasm.Core.Interactions.Entities.Creatures;
 
 public class IronGolem : Entity
 {

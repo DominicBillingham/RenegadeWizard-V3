@@ -1,9 +1,8 @@
-﻿
-using RenegadeWizardWasm.Core.Enums;
-using RenegadeWizardWasm.Core.Interactions;
+﻿using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Interactions.Actions;
 using RenegadeWizardWasm.Core.Interactions.Tags;
 
-namespace RenegadeWizardWasm.Core;
+namespace RenegadeWizardWasm.Core.Interactions.Entities;
 
 public abstract class Entity
 {

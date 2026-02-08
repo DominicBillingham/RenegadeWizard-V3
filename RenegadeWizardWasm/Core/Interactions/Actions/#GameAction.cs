@@ -1,7 +1,7 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
-using RenegadeWizardWasm.Core.Interactions.Tags;
+using RenegadeWizardWasm.Core.Interactions.Entities;
 
-namespace RenegadeWizardWasm.Core.Interactions;
+namespace RenegadeWizardWasm.Core.Interactions.Actions;
 
 public abstract class GameAction()
 {

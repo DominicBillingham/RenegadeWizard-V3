@@ -1,4 +1,5 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Interactions.Entities;
 using RenegadeWizardWasm.Core.Interactions.Tags;
 
 namespace RenegadeWizardWasm.Core.Interactions.Effects;

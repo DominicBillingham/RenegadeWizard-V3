@@ -1,8 +1,10 @@
 ﻿using RenegadeWizardWasm.Core.DataStorage;
-using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Interactions;
+using RenegadeWizardWasm.Core.Interactions.Actions;
+using RenegadeWizardWasm.Core.Interactions.Entities;
 using RenegadeWizardWasm.Core.UserInterface;
 
-namespace RenegadeWizardWasm.Core.Interactions;
+namespace RenegadeWizardWasm.Core;
 
 public class CombatManager(SceneManager sceneManager, InputManager inputManager)
 {

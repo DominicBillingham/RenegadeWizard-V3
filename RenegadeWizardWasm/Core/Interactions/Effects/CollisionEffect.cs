@@ -1,4 +1,5 @@
-﻿using RenegadeWizardWasm.Core.Interactions.Tags;
+﻿using RenegadeWizardWasm.Core.Interactions.Entities;
+using RenegadeWizardWasm.Core.Interactions.Tags;
 
 namespace RenegadeWizardWasm.Core.Interactions.Effects;
 

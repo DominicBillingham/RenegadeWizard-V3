@@ -1,8 +1,7 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Interactions.Actions;
-using RenegadeWizardWasm.Core.Interactions.Tags;
 
-namespace RenegadeWizardWasm.Core.Entities;
+namespace RenegadeWizardWasm.Core.Interactions.Entities.Creatures;
 
 public class Player : Entity
 {

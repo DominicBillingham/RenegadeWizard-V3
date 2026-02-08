@@ -3,12 +3,13 @@ using RenegadeWizardWasm.Core.Interactions.Actions;
 
 namespace RenegadeWizardWasm.Core.Interactions.Entities.Creatures;
 
-public class Goose : Entity
+public class GrimGooser : Entity
 {
-    public  Goose()
+    
+    public  GrimGooser()
     {
-        Name = "Goose";
-        Description = "One might say a rather foul fowl!";
+        Name = "GrimGooser";
+        Description = "Spooky scary geese send shivers down your spine!";
         Controller = Controller.Npc;
         Hitpoints = 5;
         

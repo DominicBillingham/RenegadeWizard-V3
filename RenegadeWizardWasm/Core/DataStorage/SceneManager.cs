@@ -1,6 +1,8 @@
 ﻿
 using RenegadeWizardWasm.Core.Enums;
-using RenegadeWizardWasm.Core.Entities;
+using RenegadeWizardWasm.Core.Interactions.Entities;
+using RenegadeWizardWasm.Core.Interactions.Entities.Creatures;
+using RenegadeWizardWasm.Core.Interactions.Entities.Objects;
 using RenegadeWizardWasm.Core.Interactions.Tags;
 
 namespace RenegadeWizardWasm.Core.DataStorage;

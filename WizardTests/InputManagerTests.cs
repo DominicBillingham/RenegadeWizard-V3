@@ -1,6 +1,5 @@
 ﻿using RenegadeWizardWasm.Core;
 using RenegadeWizardWasm.Core.DataStorage;
-using RenegadeWizardWasm.Core.Entities;
 using RenegadeWizardWasm.Core.UserInterface;
 using Xunit;
 

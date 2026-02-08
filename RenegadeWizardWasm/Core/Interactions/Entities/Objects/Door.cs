@@ -1,7 +1,7 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Interactions.Tags;
 
-namespace RenegadeWizardWasm.Core.Entities;
+namespace RenegadeWizardWasm.Core.Interactions.Entities.Objects;
 
 public class Door : Entity
 {
