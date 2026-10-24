@@ -18,6 +18,10 @@
       <_ContentIncludedByDefault Remove="React\FrontEnd\package-lock.json" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="FrontEnd\src\assets\" />
+    </ItemGroup>
+
     <Target Name="BuildReactApp" BeforeTargets="Build">
         <Exec Command="npm install" WorkingDirectory="FrontEnd" />
         <Exec Command="npm run build" WorkingDirectory="FrontEnd" />
