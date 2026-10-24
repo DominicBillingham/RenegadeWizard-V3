@@ -18,4 +18,9 @@ builder.Services.AddScoped<CombatManager>();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-await builder.Build().RunAsync();
+var host = builder.Build();
+
+var gameCoordinator = host.Services.GetRequiredService<GameCoordinator>();
+GameCoordinator.Initialize(gameCoordinator);
+
+await host.RunAsync();

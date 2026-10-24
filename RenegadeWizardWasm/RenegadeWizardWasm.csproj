@@ -17,4 +17,13 @@
       <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
     </ItemGroup>
 
+    <Target Name="BuildReactApp" BeforeTargets="Build">
+        <Exec Command="npm install" WorkingDirectory="FrontEnd" />
+        <Exec Command="npm run build" WorkingDirectory="FrontEnd" />
+        <ItemGroup>
+            <ReactBuildFiles Include="FrontEnd\dist\**\*.*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(ReactBuildFiles)" DestinationFolder="wwwroot\%(RecursiveDir)" SkipUnchangedFiles="true" />
+    </Target>
+
 </Project>

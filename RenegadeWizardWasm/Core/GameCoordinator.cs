@@ -1,4 +1,5 @@
-﻿using RenegadeWizardWasm.Core.DataStorage;
+﻿using Microsoft.JSInterop;
+using RenegadeWizardWasm.Core.DataStorage;
 using RenegadeWizardWasm.Core.Interactions;
 using RenegadeWizardWasm.Core.UserInterface;
 
@@ -15,6 +16,22 @@ public enum GameState
 }
 public class GameCoordinator(InputManager inputManager, SceneManager sceneManager, CombatManager combatManager)
 {
+    private static GameCoordinator? _instance;
+
+    public static void Initialize(GameCoordinator instance)
+    {
+        _instance = instance;
+    }
+
+    [JSInvokable]
+    public static GameResponse EnterInputStatic(string playerInput)
+    {
+        if (_instance == null)
+        {
+            throw new InvalidOperationException("GameCoordinator not initialized.");
+        }
+        return _instance.EnterInput(playerInput);
+    }
 
     private GameState GameState { get; set; } = GameState.Combat;
 
