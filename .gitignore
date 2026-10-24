@@ -13,6 +13,10 @@
 *.DS_Store
 Thumbs.db
 
+/RenegadeWizardWasm/wwwroot/assets/
+/RenegadeWizardWasm/wwwroot/favicon.svg
+/RenegadeWizardWasm/wwwroot/icons.svg
+
 # ---- Build output ----
 [Bb]in/
 [Oo]bj/
