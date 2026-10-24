@@ -8,8 +8,8 @@ using RenegadeWizardWasm.Core.UserInterface;
 using RenegadeWizardWasm.Pages;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
-builder.RootComponents.Add<App>("#app");
-builder.RootComponents.Add<HeadOutlet>("head::after");
+// builder.RootComponents.Add<App>("#app");
+// builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped<GameCoordinator>();
 builder.Services.AddScoped<InputManager>();
