@@ -1,13 +1,22 @@
 ﻿import CreatureCard from './CreatureCard';
 import ItemCard from './ItemCard';
 import { Sword, Shield, Zap, Flame, Snowflake, Ghost } from 'lucide-react';
+import InputBox from "./InputBox.tsx";
 
 export default function GameWindow() {
     return (
         <div className="flex h-screen w-full">
             {/* Left column - 40% of screen */}
-            <div className="w-2/5 bg-gray-800 p-4 overflow-y-auto border-r border-gray-700">
+
+            <div className="w-2/5 bg-gray-800 p-4 overflow-y-auto border-r border-gray-700 flex flex-col">
                 <h2 className="text-white text-xl font-bold mb-4">Game Info</h2>
+                
+                <div className="mt-auto">
+                    <InputBox value={""} onChange={() => {
+                    }} onSubmit={() => {
+                    }}/>
+                </div>
+                
             </div>
 
             {/* Right section - 60% of screen */}
