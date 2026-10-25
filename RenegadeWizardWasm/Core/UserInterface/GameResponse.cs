@@ -9,45 +9,44 @@ public class GameResponse()
 {
     // This get is used to format the list of strings for the terminal
     // This way, strings can be added in any order and still formatted correctlys
-    public List<string> Text
+    public List<string> Text { get; set; } = new();
+
+    public List<string> GetFormattedText()
     {
-        get
+        List<string> _text = new List<string>();
+
+        if (!string.IsNullOrWhiteSpace(PlayerInput))
         {
-            List<string> _text = new List<string>();
-
-            if (!string.IsNullOrWhiteSpace(PlayerInput))
-            {
-                _text.Add(" ");
-                _text.Add($"> {PlayerInput}");
-            }
-
-            if (DebugLines.Any())
-            {
-                //_text.AddRange(DebugLines);
-            }
-            
-            if (NarrationLines.Any()) 
-            {
-                _text.AddRange(NarrationLines);
-            }
-            
-            if (NpcIntentionLines.Any())
-            {
-                _text.AddRange(NpcIntentionLines);
-            }
-            
-            if (CombatLines.Any())
-            {
-                _text.AddRange(CombatLines);
-            }
-
-            if (SceneLines.Any())
-            {
-                _text.AddRange(SceneLines);
-            }
-
-            return _text;
+            _text.Add(" ");
+            _text.Add($"> {PlayerInput}");
         }
+
+        if (DebugLines.Any())
+        {
+            //_text.AddRange(DebugLines);
+        }
+        
+        if (NarrationLines.Any()) 
+        {
+            _text.AddRange(NarrationLines);
+        }
+        
+        if (NpcIntentionLines.Any())
+        {
+            _text.AddRange(NpcIntentionLines);
+        }
+        
+        if (CombatLines.Any())
+        {
+            _text.AddRange(CombatLines);
+        }
+
+        if (SceneLines.Any())
+        {
+            _text.AddRange(SceneLines);
+        }
+
+        return _text;
     }
 
     public string PlayerInput { get; set; } = "";

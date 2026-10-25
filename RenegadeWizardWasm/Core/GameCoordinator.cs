@@ -24,6 +24,16 @@ public class GameCoordinator(InputManager inputManager, SceneManager sceneManage
     }
 
     [JSInvokable]
+    public static GameResponse StartGameStatic()
+    {
+        if (_instance == null)
+        {
+            throw new InvalidOperationException("GameCoordinator not initialized.");
+        }
+        return _instance.StartGame();
+    }
+
+    [JSInvokable]
     public static GameResponse EnterInputStatic(string playerInput)
     {
         if (_instance == null)
@@ -89,6 +99,12 @@ public class GameCoordinator(InputManager inputManager, SceneManager sceneManage
         gameResponse.ObjectCards = sceneManager.Objects.Select(entity => new TerminalCard(entity)).ToList();
         gameResponse.ActionNames = sceneManager.Player.Actions.Select(action => action.Name.ToLower()).ToList();
         gameResponse.EntityNames = sceneManager.Entities.Select(entity => entity.Name.ToLower()).ToList();
+
+        // Convert narration/combat lines to HTML using MiniMarkup
+        // This makes it easier for the React front-end to render styled text
+        var allText = gameResponse.GetFormattedText();
+        gameResponse.Text = allText.Select(line => MiniMarkup.ConvertString(line)).ToList();
+        
         return gameResponse;
     }
     
