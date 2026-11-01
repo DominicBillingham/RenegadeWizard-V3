@@ -16,6 +16,7 @@ public class GameManager(SceneManager sceneManager, InputManager inputManager)
         roundResult.rawUserInput += "FISH";
         
         roundResult.ChosenAction = inputManager.ChosenAction;
+        roundResult.Entities = sceneManager.Entities ?? new List<Entity>();
 
         return roundResult;
     }

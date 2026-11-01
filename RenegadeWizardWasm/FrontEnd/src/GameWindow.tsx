@@ -46,7 +46,7 @@ export default function GameWindow() {
             // @ts-ignore
             const result = await window.DotNet.invokeMethodAsync(
                 'RenegadeWizardWasm',
-                'EnterInputStatic',
+                'EnterInput',
                 input
             );
             console.log("WASM Result:", result);

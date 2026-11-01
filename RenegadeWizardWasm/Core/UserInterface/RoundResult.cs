@@ -1,4 +1,5 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Models;
 
 namespace RenegadeWizardWasm.Core.UserInterface;
 
@@ -10,6 +11,8 @@ public class RoundResult
     public string rawUserInput { get; set; }
     
     public ActionNames? ChosenAction { get; set; }
+
+    public List<Entity> Entities { get; set; } = new();
 
     // Will format the text ready for the console.
     public string text => rawUserInput + ChosenAction;
