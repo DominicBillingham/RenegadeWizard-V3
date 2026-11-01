@@ -13,10 +13,10 @@ public class GameManager(SceneManager sceneManager, InputManager inputManager)
             rawUserInput = playerInput
         };
 
-        roundResult.rawUserInput += "FISH";
-        
+        inputManager.ProcessInput(playerInput);
         roundResult.ChosenAction = inputManager.ChosenAction;
         roundResult.Entities = sceneManager.Entities ?? new List<Entity>();
+        roundResult.rawUserInput += "FISH" + inputManager.ChosenAction.ToString();
 
         return roundResult;
     }

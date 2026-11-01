@@ -3,9 +3,10 @@ using RenegadeWizardWasm.Core.Models;
 
 namespace RenegadeWizardWasm.Core.UserInterface;
 
-public class InputManager
+public class InputManager(SceneManager sceneManager)
 {
     public ActionNames? ChosenAction { get; set; }
+    public List<Entity> ChosenTargets { get; set; } = new List<Entity>();
 
     public void ProcessInput(string userInput)
     {
@@ -18,49 +19,41 @@ public class InputManager
             .Where(x => x.Length > 2)
             .ToArray();
 
-        foreach (ActionNames action in Enum.GetValues(typeof(ActionNames)))
+        foreach (string chunk in userInputChunks)
         {
-            if (FuzzyMatch(action.ToString(), userInputChunks))
+            if (ChosenAction is null)
             {
-                ChosenAction = action;
-                break;
-            }
-        }
-    }
-
-    public bool FuzzyMatch(string keyword, IEnumerable<string> input)
-    {
-        foreach (var inputWord in input)
-        {
-            int distance = LevenshteinDistance(inputWord, keyword);
-
-            if (distance <= 1)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public bool FuzzyMatch(IEnumerable<string> keywords, IEnumerable<string> input)
-    {
-        foreach (var inputWord in input)
-        {
-            foreach (var keyword in keywords)
-            {
-                int distance = LevenshteinDistance(inputWord, keyword);
-
-                if (distance <= 1)
+                foreach (ActionNames action in Enum.GetValues(typeof(ActionNames)))
                 {
-                    return true;
+                    if (FuzzyMatch(action.ToString(), chunk))
+                    {
+                        ChosenAction = action;
+                        break;
+                    }
+                }
+            }
+            
+            foreach (Entity entity in sceneManager.Entities)
+            {
+                if (FuzzyMatch(entity.Name, chunk))
+                {
+                    ChosenTargets.Add(entity);
                 }
             }
         }
-
-        return false;
+        
     }
 
+    public bool FuzzyMatch(string keyword, string input)
+    {
+        int distance = LevenshteinDistance(keyword, input);
+        if (distance <= 1)
+        {
+            return true;
+        }
+        return false;
+    }
+    
     private int LevenshteinDistance(string a, string b)
     {
         a = a.ToLower();
