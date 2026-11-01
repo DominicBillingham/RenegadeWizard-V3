@@ -69,9 +69,10 @@ public class InputManagerTests
     public void SelectTargetsInOrder()
     {
         var inputManager = new InputManager(getScene());
-        string userInput = "I kick GLORB, then TUBA";
+        string userInput = "I punch GLORB, then TUBA";
         inputManager.ProcessInput(userInput);
     
+        Assert.Equal(ActionNames.Punch, inputManager.ChosenAction);
         Assert.Equal("Glorb", inputManager.ChosenTargets[0].Name);
         Assert.Equal("Tuba", inputManager.ChosenTargets[1].Name);
     }
