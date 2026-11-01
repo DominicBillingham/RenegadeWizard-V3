@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
+import GameWindow from "./GameWindow.tsx";
 
 async function init() {
   // @ts-ignore
@@ -12,7 +12,7 @@ async function init() {
 
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
-      <App />
+      <GameWindow />
     </StrictMode>,
   )
 }

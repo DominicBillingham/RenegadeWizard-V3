@@ -22,6 +22,7 @@
       <_ContentIncludedByDefault Remove="Pages\Home.razor" />
       <_ContentIncludedByDefault Remove="Pages\TerminalInput.razor" />
       <_ContentIncludedByDefault Remove="Pages\_Imports.razor" />
+      <_ContentIncludedByDefault Remove="wwwroot\bootstrap\bootstrap.min.css" />
     </ItemGroup>
 
     <Target Name="BuildReactApp" BeforeTargets="Build">
