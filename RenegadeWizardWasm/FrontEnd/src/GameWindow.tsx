@@ -37,7 +37,7 @@ export default function GameWindow() {
     };
     
     return (
-        <div className="flex h-screen w-full bg-gray-900 justify-center">
+        <div className="flex h-screen w-full bg-gray-100 justify-center">
             {/* Main column - anchored 30% from bottom */}
             <div className="w-2/5 flex flex-col relative h-full">
                 
@@ -47,18 +47,18 @@ export default function GameWindow() {
                     className="flex-1 flex flex-col justify-end overflow-y-auto p-4 pt-10" 
                     style={{ height: '70vh' }}
                 >
-                    <div className="text-gray-300 font-mono space-y-1">
+                    <div className="text-black font-mono space-y-2 text-xl">
                         {terminalLines.map((line, i) => (
                             <div key={i} dangerouslySetInnerHTML={{ __html: line }} />
                         ))}
                     </div>
                 </div>
 
-                {/* Thin Line Separator */}
-                <div className="border-t border-gray-700 w-full"></div>
+                {/* Thick Line Separator */}
+                <div className="border-t-4 border-black w-full"></div>
 
                 {/* Text Bar - Anchored at ~30% from bottom */}
-                <div className="p-4 bg-gray-800">
+                <div className="p-4">
                     <input
                         type="text"
                         value={userInput}
@@ -68,14 +68,14 @@ export default function GameWindow() {
                                 handleSubmit();
                             }
                         }}
-                        className="w-full bg-transparent text-white px-3 py-2 focus:outline-none"
-                        placeholder="Enter your command..."
+                        className="w-full bg-transparent text-black px-3 py-2 focus:outline-none text-xl"
+                        placeholder="> Enter your command..."
                         autoFocus
                     />
                 </div>
                 
                 {/* Spacer to push everything up to 30% from bottom */}
-                <div style={{ height: '30vh' }}></div>
+                <div style={{ height: '20vh' }}></div>
             </div>
         </div>
     )
