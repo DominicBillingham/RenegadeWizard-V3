@@ -2,8 +2,8 @@
 
 namespace RenegadeWizardWasm.Core;
 
-public static class SceneManager
+public class SceneManager
 {
-    public static List<Entity> Entities;
+    public List<Entity> Entities;
     
 }

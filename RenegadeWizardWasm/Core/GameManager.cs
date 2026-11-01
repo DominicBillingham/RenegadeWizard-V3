@@ -4,31 +4,20 @@ using RenegadeWizardWasm.Core.UserInterface;
 
 namespace RenegadeWizardWasm.Core;
 
-public static class GameManager
+public class GameManager(SceneManager sceneManager, InputManager inputManager)
 {
-    [JSInvokable]
-    public static RoundResult EnterInputStatic(string playerInput)
+    public RoundResult EnterInput(string playerInput)
     {
         RoundResult roundResult = new()
         {
             rawUserInput = playerInput
         };
+
+        roundResult.rawUserInput += "FISH";
         
-        roundResult.ChosenAction = InputManager.chosenAction;
+        roundResult.ChosenAction = inputManager.ChosenAction;
 
         return roundResult;
-    }
-
-    public static void StartGame()
-    {
-        SceneManager.Entities.Add(new Entity()
-        {
-            Name = "Player",
-            Description = "A potato.",
-            IsPlayer = true
-        });
-        
-        
     }
     
 }

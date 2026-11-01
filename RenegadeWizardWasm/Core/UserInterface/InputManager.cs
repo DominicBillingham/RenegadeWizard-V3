@@ -3,14 +3,15 @@ using RenegadeWizardWasm.Core.Models;
 
 namespace RenegadeWizardWasm.Core.UserInterface;
 
-public static class InputManager
+public class InputManager
 {
-    public static ActionNames? chosenAction { get; set; }
-    public static void ProcessInput(string userInput)
+    public ActionNames? ChosenAction { get; set; }
+
+    public void ProcessInput(string userInput)
     {
         string[] userInputChunks = new string(userInput
-            .Where(c => !char.IsPunctuation(c))
-            .ToArray())
+                .Where(c => !char.IsPunctuation(c))
+                .ToArray())
             .Trim()
             .ToLower()
             .Split(" ")
@@ -21,14 +22,13 @@ public static class InputManager
         {
             if (FuzzyMatch(action.ToString(), userInputChunks))
             {
-                chosenAction = action;
+                ChosenAction = action;
                 break;
             }
         }
-        
     }
-    
-    public static bool FuzzyMatch(string keyword, IEnumerable<string> input)
+
+    public bool FuzzyMatch(string keyword, IEnumerable<string> input)
     {
         foreach (var inputWord in input)
         {
@@ -42,8 +42,8 @@ public static class InputManager
 
         return false;
     }
-    
-    public static bool FuzzyMatch(IEnumerable<string> keywords, IEnumerable<string> input)
+
+    public bool FuzzyMatch(IEnumerable<string> keywords, IEnumerable<string> input)
     {
         foreach (var inputWord in input)
         {
@@ -60,8 +60,8 @@ public static class InputManager
 
         return false;
     }
-    
-    private static int LevenshteinDistance(string a, string b)
+
+    private int LevenshteinDistance(string a, string b)
     {
         a = a.ToLower();
         b = b.ToLower();
