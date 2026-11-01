@@ -1,15 +1,12 @@
-﻿using RenegadeWizardWasm.Core.DataStorage;
-using RenegadeWizardWasm.Core.Interactions;
-using RenegadeWizardWasm.Core.Interactions.Actions;
-using RenegadeWizardWasm.Core.Interactions.Entities;
+﻿using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Models;
 
 namespace RenegadeWizardWasm.Core.UserInterface;
 
-public class InputManager(SceneManager sceneManager)
+public static class InputManager
 {
-    public List<Entity> Targets { get; set; } = new();
-    public GameAction? chosenAction { get; set; }
-    public void ProcessInput(string userInput)
+    public static ActionNames? chosenAction { get; set; }
+    public static void ProcessInput(string userInput)
     {
         string[] userInputChunks = new string(userInput
             .Where(c => !char.IsPunctuation(c))
@@ -17,28 +14,21 @@ public class InputManager(SceneManager sceneManager)
             .Trim()
             .ToLower()
             .Split(" ")
-            .Where(x => x.Length > 2 || x == "go")
+            .Where(x => x.Length > 2)
             .ToArray();
-        
-        chosenAction = sceneManager.Player.Actions.
-            FirstOrDefault(action => FuzzyMatch(action.Names, userInputChunks));
-        
-        if (chosenAction == null) return;
-        
-        userInputChunks = userInputChunks.Where(x => x != chosenAction.Name).ToArray();
-        
-        Targets.Clear();
 
-        foreach (var chunk in userInputChunks)
+        foreach (ActionNames action in Enum.GetValues(typeof(ActionNames)))
         {
-            var target = sceneManager.Entities.FirstOrDefault(x => FuzzyMatch(chunk, x.Names));
-            if (target != null)
-                Targets.Add(target);
+            if (FuzzyMatch(action.ToString(), userInputChunks))
+            {
+                chosenAction = action;
+                break;
+            }
         }
         
     }
-
-    public bool FuzzyMatch(string keyword, IEnumerable<string> input)
+    
+    public static bool FuzzyMatch(string keyword, IEnumerable<string> input)
     {
         foreach (var inputWord in input)
         {
@@ -53,7 +43,7 @@ public class InputManager(SceneManager sceneManager)
         return false;
     }
     
-    public bool FuzzyMatch(IEnumerable<string> keywords, IEnumerable<string> input)
+    public static bool FuzzyMatch(IEnumerable<string> keywords, IEnumerable<string> input)
     {
         foreach (var inputWord in input)
         {
@@ -71,7 +61,7 @@ public class InputManager(SceneManager sceneManager)
         return false;
     }
     
-    private int LevenshteinDistance(string a, string b)
+    private static int LevenshteinDistance(string a, string b)
     {
         a = a.ToLower();
         b = b.ToLower();

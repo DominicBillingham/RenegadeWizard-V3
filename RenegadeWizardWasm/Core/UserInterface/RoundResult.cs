@@ -1,4 +1,6 @@
-﻿namespace RenegadeWizardWasm.Core.UserInterface;
+﻿using RenegadeWizardWasm.Core.Enums;
+
+namespace RenegadeWizardWasm.Core.UserInterface;
 
 public class RoundResult
 {
@@ -6,9 +8,11 @@ public class RoundResult
     // It will then return this information to the user interface..
 
     public string rawUserInput { get; set; }
+    
+    public ActionNames? ChosenAction { get; set; }
 
     // Will format the text ready for the console.
-    public string text => rawUserInput + "fish";
+    public string text => rawUserInput + ChosenAction;
 
     // What the user entered
     // What action was selected
