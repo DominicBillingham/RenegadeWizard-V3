@@ -5,6 +5,13 @@ export default function GameWindow() {
     const [userInput, setUserInput] = useState("");
     const [terminalLines, setTerminalLines] = useState<string[]>([]);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const typingSoundRef = useRef<HTMLAudioElement | null>(null);
+    const enterSoundRef = useRef<HTMLAudioElement | null>(null);
+
+    useEffect(() => {
+        typingSoundRef.current = new Audio("/sound/typing.mp3");
+        enterSoundRef.current = new Audio("/sound/enter.wav");
+    }, []);
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -12,9 +19,26 @@ export default function GameWindow() {
         }
     }, [terminalLines]);
 
+    const playTypingSound = () => {
+        if (typingSoundRef.current) {
+            const sound = typingSoundRef.current.cloneNode() as HTMLAudioElement;
+            // Shift pitch between 0.8 and 1.2
+            sound.playbackRate = 0.8 + Math.random() * 0.4;
+            sound.play().catch(e => console.error("Error playing typing sound:", e));
+        }
+    };
+
+    const playEnterSound = () => {
+        if (enterSoundRef.current) {
+            const sound = enterSoundRef.current.cloneNode() as HTMLAudioElement;
+            sound.play().catch(e => console.error("Error playing enter sound:", e));
+        }
+    };
+
     const handleSubmit = async () => {
         if (!userInput.trim()) return;
 
+        playEnterSound();
         const input = userInput;
         setUserInput("");
 
@@ -62,7 +86,10 @@ export default function GameWindow() {
                     <input
                         type="text"
                         value={userInput}
-                        onChange={(e) => setUserInput(e.target.value)}
+                        onChange={(e) => {
+                            setUserInput(e.target.value);
+                            playTypingSound();
+                        }}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') {
                                 handleSubmit();
