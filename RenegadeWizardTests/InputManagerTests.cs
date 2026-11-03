@@ -8,25 +8,10 @@ namespace RenegadeWizardTests;
 
 public class InputManagerTests
 {
-
-    private SceneManager getScene()
-    {
-        var scene = new SceneManager()
-        {
-            Entities = new List<Entity>()
-            {
-                new Entity { Name = "Glorb", Description = "The menance" },
-                new Entity { Name = "Grendal", Description = "The terror" },
-                new Entity { Name = "Tuba", Description = "The horror" },
-            }
-        };
-        return scene;
-    }
-    
     [Fact]
     public void SelectAction()
     {
-        var inputManager = new InputManager(getScene());
+        var inputManager = new InputManager(TestHelper.GetTestScene());
         string userInput = "I kick the monster right up the arse";
         inputManager.ProcessInput(userInput);
         
@@ -36,7 +21,7 @@ public class InputManagerTests
     [Fact]
     public void SelectActionInOrder()
     {
-        var inputManager = new InputManager(getScene());
+        var inputManager = new InputManager(TestHelper.GetTestScene());
         string userInput = "I kick the monster right up the arse, then violently punch it.";
         inputManager.ProcessInput(userInput);
         
@@ -47,7 +32,7 @@ public class InputManagerTests
     [Fact]
     public void SelectMisspeltAction()
     {
-        var inputManager = new InputManager(getScene());
+        var inputManager = new InputManager(TestHelper.GetTestScene());
         string userInput = "I kik the monster";
         inputManager.ProcessInput(userInput);
         
@@ -57,7 +42,7 @@ public class InputManagerTests
     [Fact]
     public void SelectTargets()
     {
-        var inputManager = new InputManager(getScene());
+        var inputManager = new InputManager(TestHelper.GetTestScene());
         string userInput = "I kick GLORB";
         inputManager.ProcessInput(userInput);
     
@@ -68,7 +53,7 @@ public class InputManagerTests
     [Fact]
     public void SelectTargetsInOrder()
     {
-        var inputManager = new InputManager(getScene());
+        var inputManager = new InputManager(TestHelper.GetTestScene());
         string userInput = "I punch GLORB, then TUBA";
         inputManager.ProcessInput(userInput);
     
@@ -81,7 +66,7 @@ public class InputManagerTests
     [Fact]
     public void SelectMisspeltTarget()
     {
-        var inputManager = new InputManager(getScene());
+        var inputManager = new InputManager(TestHelper.GetTestScene());
         string userInput = "I kick GLOB";
         inputManager.ProcessInput(userInput);
     
