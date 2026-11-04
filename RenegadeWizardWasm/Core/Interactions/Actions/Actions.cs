@@ -1,6 +1,8 @@
-﻿namespace RenegadeWizardWasm.Core.Interactions;
+﻿using RenegadeWizardWasm.Core.Enums;
 
-public class Actions
+namespace RenegadeWizardWasm.Core.Interactions;
+
+public abstract class BaseAction
 {
-    
+    public required string Names { get; set; }
 }

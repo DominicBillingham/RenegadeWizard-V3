@@ -1,0 +1,30 @@
+﻿
+This is a list of example scenrarios that I wish to create. I can then make unit tests to see how they work.
+Rules: Must only be a single roll at per action (too confusing otherwise).
+Rules: All items are single use.
+
+I punch the goblin.
+-> Success, the goblin takes 1 wound.
+-> Med Success, the goblin is stunned.
+-> Failure, player gains stress.
+
+I punch the goblin, but it's spiky
+-> Success, the goblin takes 1 wound. (player gain 1 wound)
+-> Med Success, the goblin is stunned. (player gain 1 wound)
+-> Failure, target gains stress.
+
+I throw the table at the goblin
+-> Success, the table shatters and the goblin takes 1 wound.
+-> Med Success, the goblin is stunned.
+-> Failure, player gains stress.
+
+I throw the table at the goblin, but player is blinded.
+-> Success, the table shatters but ther'es only a 50% chance the gobin takes 1 wound.
+-> Med Success, the goblin takes 1 wound.
+-> Failure, player gains stress.
+
+I throw the table at the goblin, and the goblin is suprised / stunned.
+-> Success, the table shatters and the goblin takes 2 wounds.
+-> Med Success, the goblin takes 1 wound.
+-> Failure, player gains stress.
+
