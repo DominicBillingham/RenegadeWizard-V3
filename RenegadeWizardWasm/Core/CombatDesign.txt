@@ -1,0 +1,28 @@
+﻿This outlines how the game works.
+
+### Overview
+Each turn, a player enters a string.
+This string is then parsed into an ACTION and the TARGETS
+An ACTION is then further broken down into a seris of EFFECTS
+EFFECTS are then the smallest unit of logic the game functions on, which modify the 
+
+### Actions
+Each action has a series of targets and effects strung together.
+A KICK action is A DAMAGE effect and a KNOCKBACK effect.
+Each action starts with a single dice pool roll, to determine it's overall impact.
+For example, a kick might only knockback, rather than knockback and stun.
+
+### Effects
+Effects fundamentally modify the state of creatures.
+They are the smallest "thing" that can happen.
+Often they involve changing the state of a creautre.
+Effects centralise logic inside of themselves.
+Effects also consider the tags on a creature.
+EXAMPLE: A KNOCKBACK effect against a creature with the TAG IMMOVABLE wont' do anything.
+
+### Tags
+Tags are just a list of enums on a creature for now.
+They influence the logic of an effect.
+Logic is centralised in the effects rather than the tag to avoid distrubted logic.
+
+

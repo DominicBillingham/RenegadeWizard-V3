@@ -5,5 +5,8 @@ public enum Tags
     Flammable,
     Immovable,
     Immortal, 
-    Spiky
+    Spiky,
+    Toppled,
+    Stunned,
+    Burning,
 }

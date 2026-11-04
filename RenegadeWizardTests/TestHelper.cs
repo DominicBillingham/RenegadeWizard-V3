@@ -37,4 +37,14 @@ public static class TestHelper
         return scene;
     }
     
+    public static Entity GetTestEntity()
+    {
+        return new Entity { 
+            Name = "Glorb", 
+            Description = "The menance", 
+            MaxWounds = 3, 
+            Relationship = PlayerRelationship.Neutral 
+        };
+    }
+    
 }

@@ -1,4 +1,5 @@
-﻿using RenegadeWizardWasm.Core.Interactions.Effects;
+﻿using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Interactions.Effects;
 
 namespace RenegadeWizardTests;
 
@@ -13,15 +14,44 @@ public class EffectTests
     // Stun Effect -> Prevent the creature from taking a turn.
     
     [Fact]
-    public void DamageEffectReduceHearts()
+    public void DamageEffect()
     {
-        var scene = TestHelper.GetTestScene();
-        var effect = new DamageEffect(1, scene.Entities[0]);
-        Assert.Equal(1, effect.Target.Wounds);
+        var testEnt = TestHelper.GetTestEntity();
+        var effect = new DamageEffect(1, testEnt);
+        Assert.Equal(1, testEnt.Wounds);
+    }
+        
+    [Fact]
+    public void CharmEffect()
+    {
+        var testEnt = TestHelper.GetTestEntity();
+        testEnt.Relationship = PlayerRelationship.Hated; // (0)
+        Assert.Equal(1, (int)testEnt.Relationship); // Has it boosted by 1 level?
     }
     
-    
-    
-    
-    
+    [Fact]
+    public void KnockdownEffect()
+    {
+        var testEnt = TestHelper.GetTestEntity();
+        Assert.Contains(Tags.Toppled, testEnt.Tags);
+    }
+
+    [Fact]
+    public void StunnedEffect()
+    {
+        var testEnt = TestHelper.GetTestEntity();
+        Assert.Contains(Tags.Stunned, testEnt.Tags);
+    }
+
+    [Fact]
+    public void BurnEffect()
+    {
+        var testEnt = TestHelper.GetTestEntity();
+        Assert.Contains(Tags.Burning, testEnt.Tags);
+    }
+
+
+
+
+
 }
