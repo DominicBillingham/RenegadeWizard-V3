@@ -16,7 +16,7 @@ public class EffectTests
     [Fact]
     public void DamageEffect()
     {
-        var testEnt = TestHelper.GetTestEntity();
+        var testEnt = Test.GetGlorb();
         var effect = new DamageEffect(1, testEnt);
         Assert.Equal(1, testEnt.Wounds);
     }
@@ -24,7 +24,7 @@ public class EffectTests
     [Fact]
     public void CharmEffect()
     {
-        var testEnt = TestHelper.GetTestEntity();
+        var testEnt = Test.GetGlorb();
         testEnt.Relationship = PlayerRelationship.Hated; // (0)
         Assert.Equal(1, (int)testEnt.Relationship); // Has it boosted by 1 level?
     }
@@ -32,26 +32,21 @@ public class EffectTests
     [Fact]
     public void KnockdownEffect()
     {
-        var testEnt = TestHelper.GetTestEntity();
+        var testEnt = Test.GetGlorb();
         Assert.Contains(Tags.Toppled, testEnt.Tags);
     }
 
     [Fact]
     public void StunnedEffect()
     {
-        var testEnt = TestHelper.GetTestEntity();
+        var testEnt = Test.GetGlorb();
         Assert.Contains(Tags.Stunned, testEnt.Tags);
     }
 
     [Fact]
     public void BurnEffect()
     {
-        var testEnt = TestHelper.GetTestEntity();
+        var testEnt = Test.GetGlorb();
         Assert.Contains(Tags.Burning, testEnt.Tags);
     }
-
-
-
-
-
 }

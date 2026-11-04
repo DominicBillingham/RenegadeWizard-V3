@@ -1,4 +1,5 @@
-﻿using RenegadeWizardWasm.Core.Models;
+﻿using RenegadeWizardWasm.Core.Interactions.Effects;
+using RenegadeWizardWasm.Core.Models;
 
 namespace RenegadeWizardWasm.Core.Interactions;
 
@@ -8,9 +9,6 @@ public class Attack
 
     public void Execute(Entity attacker, Entity target)
     {
-        
-        
+        var damage = new DamageEffect(1, target);
     }
-
-
 }
