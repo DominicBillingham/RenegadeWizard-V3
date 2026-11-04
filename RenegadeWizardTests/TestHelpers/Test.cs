@@ -14,6 +14,7 @@ public static class Test
             Name = "Player",
             Description = "The player character",
             MaxWounds = 10,
+            MaxStress = 10,
             Relationship = PlayerRelationship.Friendly,
             IsPlayer = true
         };
@@ -26,6 +27,7 @@ public static class Test
             Name = "Glorb",
             Description = "The menance",
             MaxWounds = 3,
+            MaxStress = 10,
             Relationship = PlayerRelationship.Neutral,
         };
     }
@@ -37,6 +39,7 @@ public static class Test
             Name = "SpikyMob",
             Description = "Description",
             MaxWounds = 3,
+            MaxStress = 10,
             Relationship = PlayerRelationship.Neutral,
             Tags = [Tags.Spiky]
         };
@@ -49,6 +52,7 @@ public static class Test
             Name = "Grendal",
             Description = "The terror", 
             MaxWounds = 3, 
+            MaxStress = 10,
             Relationship = PlayerRelationship.Aggressive 
         };
     }
@@ -60,7 +64,20 @@ public static class Test
             Name = "Tuba", 
             Description = "The horror",
             MaxWounds = 3,
+            MaxStress = 10,
             Relationship = PlayerRelationship.Hostile 
+        };
+    }
+    
+    public static Entity GetTable()
+    {
+        return new Entity
+        {
+            Name = "Table", 
+            Description = "The table",
+            MaxWounds = 3,
+            MaxStress = 3,
+            Relationship = PlayerRelationship.Neutral 
         };
     }
     
