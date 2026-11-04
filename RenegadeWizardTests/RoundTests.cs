@@ -80,12 +80,14 @@ public class RoundTests
     {
         var glorb = Test.GetGlorb();
         var player = Test.GetPlayer();
-        var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player } };
+        var table = Test.GetTable();
+        var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player, table } };
         
         var inputManager = new InputManager(scene);
         string userInput = "I throw the table at glorb";
         
         Assert.Equal(0, glorb.Wounds);
+        Assert.True(table.IsDestroyed);
     }
 
     [Fact]
@@ -103,7 +105,18 @@ public class RoundTests
         Assert.True(table.IsDestroyed);
     }
     
-    
-    
-
+    [Fact]
+    public void ThrowTableSurprised()
+    {
+        var glorb = Test.GetGlorb();
+        var player = Test.GetPlayer();
+        var table = Test.GetTable();
+        var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player, table } };
+        
+        var inputManager = new InputManager(scene);
+        string userInput = "I throw the table at glorb";
+        
+        Assert.Equal(2, glorb.Wounds);
+        Assert.True(table.IsDestroyed);
+    }
 }
