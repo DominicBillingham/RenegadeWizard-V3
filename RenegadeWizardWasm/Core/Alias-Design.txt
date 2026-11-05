@@ -4,5 +4,5 @@ Aliases shoudln't be used to primarily identiy actions.
 It would be far better to immediately map an alias to a clear identitifer.
 
 Creatures alias -> Creatue ID
-Item alias -> Item ID
+Item alias -> Item ID 
 Action alias -> Action ID

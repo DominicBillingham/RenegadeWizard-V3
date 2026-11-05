@@ -5,7 +5,7 @@ namespace RenegadeWizardWasm.Core.UserInterface;
 
 public class InputManager(SceneManager sceneManager)
 {
-    public ActionNames? ChosenAction { get; set; }
+    public ActionId? ChosenAction { get; set; }
     public List<Entity> ChosenTargets { get; set; } = new List<Entity>();
 
     public void ProcessInput(string userInput)
@@ -22,8 +22,8 @@ public class InputManager(SceneManager sceneManager)
         foreach (string chunk in userInputChunks)
         {
             if (ChosenAction is null)
-            {
-                foreach (ActionNames action in Enum.GetValues(typeof(ActionNames)))
+            { 
+                foreach (ActionId action in Enum.GetValues(typeof(ActionId)))
                 {
                     if (FuzzyMatch(action.ToString(), chunk))
                     {

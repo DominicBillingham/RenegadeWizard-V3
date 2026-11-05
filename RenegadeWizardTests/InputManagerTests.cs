@@ -15,7 +15,19 @@ public class InputManagerTests
         string userInput = "I kick the monster right up the arse";
         inputManager.ProcessInput(userInput);
         
-        Assert.Equal(ActionNames.Kick, inputManager.ChosenAction);
+        Assert.Equal(ActionId.Kick, inputManager.ChosenAction);
+    }
+    
+    [Fact]
+    public void SelectFromAlternativeName()
+    {
+        var scene = Test.GetBasicScene();
+        var inputManager = new InputManager(scene);      
+        
+        string userInput = "I kill GLORB";
+        inputManager.ProcessInput(userInput);
+    
+        Assert.Equal(ActionId.Attack, inputManager.ChosenAction);
     }
         
     [Fact]
@@ -27,7 +39,7 @@ public class InputManagerTests
         string userInput = "I kick the monster right up the arse, then violently punch it.";
         inputManager.ProcessInput(userInput);
         
-        Assert.Equal(ActionNames.Kick, inputManager.ChosenAction);
+        Assert.Equal(ActionId.Kick, inputManager.ChosenAction);
     }
     
     [Fact]
@@ -39,7 +51,7 @@ public class InputManagerTests
         string userInput = "I kik the monster";
         inputManager.ProcessInput(userInput);
         
-        Assert.Equal(ActionNames.Kick, inputManager.ChosenAction);
+        Assert.Equal(ActionId.Kick, inputManager.ChosenAction);
     }
     
     [Fact]
@@ -64,7 +76,7 @@ public class InputManagerTests
         string userInput = "I punch GLORB, then TUBA";
         inputManager.ProcessInput(userInput);
     
-        Assert.Equal(ActionNames.Punch, inputManager.ChosenAction);
+        Assert.Equal(ActionId.Punch, inputManager.ChosenAction);
         Assert.Equal("Glorb", inputManager.ChosenTargets[0].Name);
         Assert.Equal("Tuba", inputManager.ChosenTargets[1].Name);
     }
@@ -81,4 +93,5 @@ public class InputManagerTests
         Assert.Single(inputManager.ChosenTargets);
         Assert.Equal("Glorb", inputManager.ChosenTargets[0].Name);
     }
+    
 }

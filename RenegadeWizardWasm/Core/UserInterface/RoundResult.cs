@@ -10,7 +10,7 @@ public class RoundResult
 
     public string rawUserInput { get; set; }
     
-    public ActionNames? ChosenAction { get; set; }
+    public ActionId? ChosenAction { get; set; }
 
     public List<Entity> Entities { get; set; } = new();
 

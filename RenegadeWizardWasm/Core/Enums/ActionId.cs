@@ -1,8 +1,9 @@
 ﻿namespace RenegadeWizardWasm.Core.Enums;
 
-public enum ActionNames
+public enum ActionId
 {
     Punch,
     Kick,
-    Stab
+    Stab,
+    Attack,
 }
