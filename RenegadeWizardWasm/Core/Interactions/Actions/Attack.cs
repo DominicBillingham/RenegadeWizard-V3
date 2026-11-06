@@ -7,9 +7,9 @@ namespace RenegadeWizardWasm.Core.Interactions;
 public class Attack : BaseAction
 {
     
-    public override Identity Identity { get; set; } = new Identity
+    public override ActionIdentity ActionIdentity { get; set; } = new ActionIdentity
     {
-        ActionId = ActionId.Punch,
+        ActionId = ActionId.Attack,
         Names = ["Punch", "Attack", "Murder", "Knockout", "Kill"]
     };
     

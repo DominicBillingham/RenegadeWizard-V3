@@ -5,9 +5,11 @@ namespace RenegadeWizardWasm.Core.Interactions;
 
 public class Fireball : BaseAction
 {
-    public override Identity Identity { get; set; } = new Identity
+    public override ActionIdentity ActionIdentity { get; set; } = new ActionIdentity
     {
         ActionId = ActionId.Fireball,
         Names = ["Fire", "Fireball"]
     };
+    
+    
 }

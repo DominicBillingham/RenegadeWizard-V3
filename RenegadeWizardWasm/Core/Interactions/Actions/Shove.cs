@@ -6,7 +6,7 @@ namespace RenegadeWizardWasm.Core.Interactions;
 
 public class Shove : BaseAction
 {
-    public override Identity Identity { get; set; } = new Identity
+    public override ActionIdentity ActionIdentity { get; set; } = new ActionIdentity
     {
         ActionId = ActionId.Shove,
         Names = ["Kick", "Shove", "Push", "Shove"]

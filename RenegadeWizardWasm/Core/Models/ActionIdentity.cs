@@ -2,9 +2,8 @@
 
 namespace RenegadeWizardWasm.Core.Models;
 
-public class Identity
+public class ActionIdentity
 {
     public required List<string> Names { get; set; }
-    public ActionId? ActionId { get; set; }
-    public int? EntityId { get; set; }
+    public required ActionId ActionId { get; set; }
 }

@@ -1,5 +1,6 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Models;
+using RenegadeWizardWasm.Core.Statics;
 
 namespace RenegadeWizardWasm.Core.UserInterface;
 
@@ -22,13 +23,16 @@ public class InputManager(SceneManager sceneManager)
         foreach (string chunk in userInputChunks)
         {
             if (ChosenAction is null)
-            { 
-                foreach (ActionId action in Enum.GetValues(typeof(ActionId)))
+            {
+                foreach (var action in ActionList.Actions)
                 {
-                    if (FuzzyMatch(action.ToString(), chunk))
+                    foreach (var identity in action.ActionIdentity.Names)
                     {
-                        ChosenAction = action;
-                        break;
+                        if (FuzzyMatch(chunk, identity))
+                        {
+                            ChosenAction = action.ActionIdentity.ActionId;
+                            break;
+                        }
                     }
                 }
             }

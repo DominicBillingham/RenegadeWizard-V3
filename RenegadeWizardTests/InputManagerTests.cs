@@ -12,10 +12,10 @@ public class InputManagerTests
         var scene = Test.GetBasicScene();
         var inputManager = new InputManager(scene);        
 
-        string userInput = "I kick the monster right up the arse";
+        string userInput = "I attack GLORB";
         inputManager.ProcessInput(userInput);
         
-        Assert.Equal(ActionId.Shove, inputManager.ChosenAction);
+        Assert.Equal(ActionId.Attack, inputManager.ChosenAction);
     }
     
     [Fact]
@@ -39,7 +39,7 @@ public class InputManagerTests
         string userInput = "I kick the monster right up the arse, then violently punch it.";
         inputManager.ProcessInput(userInput);
         
-        Assert.Equal(ActionId.Shove, inputManager.ChosenAction);
+        Assert.Equal(ActionId.Attack, inputManager.ChosenAction);
     }
     
     [Fact]
@@ -48,10 +48,10 @@ public class InputManagerTests
         var scene = Test.GetBasicScene();
         var inputManager = new InputManager(scene);    
         
-        string userInput = "I kik the monster";
+        string userInput = "I use fireboll";
         inputManager.ProcessInput(userInput);
         
-        Assert.Equal(ActionId.Shove, inputManager.ChosenAction);
+        Assert.Equal(ActionId.Fireball, inputManager.ChosenAction);
     }
     
     [Fact]

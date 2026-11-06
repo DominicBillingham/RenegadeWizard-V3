@@ -5,5 +5,5 @@ namespace RenegadeWizardWasm.Core.Interactions;
 
 public abstract class BaseAction
 {
-    public abstract Identity Identity { get; set; }
+    public abstract ActionIdentity ActionIdentity { get; set; }
 }
