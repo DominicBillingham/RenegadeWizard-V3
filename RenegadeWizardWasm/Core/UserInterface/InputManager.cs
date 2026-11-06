@@ -25,7 +25,7 @@ public class InputManager(SceneManager sceneManager)
             if (ChosenAction is null)
             {
                 // Option A: Exact/Dictionary Match (O(1))
-                var id = ActionRegistry.FindIdByAlias(chunk);
+                var id = ActionReg.FindIdByAlias(chunk);
                 if (id.HasValue) 
                 {
                     ChosenAction = id;
@@ -33,11 +33,11 @@ public class InputManager(SceneManager sceneManager)
                 else 
                 {
                     // Option B: Fuzzy Match (Only if exact match fails)
-                    foreach (var alias in ActionRegistry.AllAliases)
+                    foreach (var alias in ActionReg.AllAliases)
                     {
                         if (FuzzyMatch(chunk, alias))
                         {
-                            ChosenAction = ActionRegistry.FindIdByAlias(alias);
+                            ChosenAction = ActionReg.FindIdByAlias(alias);
                             break;
                         }
                     }

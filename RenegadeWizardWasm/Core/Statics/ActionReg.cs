@@ -3,15 +3,12 @@ using RenegadeWizardWasm.Core.Interactions;
 
 namespace RenegadeWizardWasm.Core.Statics;
 
-public static class ActionRegistry
+public static class ActionReg
 {
-    // High-performance lookup: Alias -> ActionId
     private static readonly Dictionary<string, ActionId> _aliasToId = new(StringComparer.OrdinalIgnoreCase);
-    
-    // Quick lookup: ActionId -> Action Instance
-    private static readonly Dictionary<ActionId, BaseAction> _actions = new();
+    private static readonly Dictionary<ActionId, BaseAction> _idToAction = new();
 
-    static ActionRegistry()
+    static ActionReg()
     {
         Register(new Attack());
         Register(new Fireball());
@@ -20,15 +17,17 @@ public static class ActionRegistry
 
     private static void Register(BaseAction action)
     {   
-        _actions[action.ActionIdentity.ActionId] = action;
+        _idToAction[action.ActionIdentity.ActionId] = action;
         foreach (var name in action.ActionIdentity.Names)
         {
             _aliasToId[name] = action.ActionIdentity.ActionId;
         }
     }
 
-    public static BaseAction GetAction(ActionId id) => _actions[id];
+    // Used to fetch actions by ID. While players use "Aliases", we use the ID internally.
+    public static BaseAction GetAction(ActionId id) => _idToAction[id];
     
+    // Used for fuzzy matching if the main lookup fails.
     public static IEnumerable<string> AllAliases => _aliasToId.Keys;
 
     public static ActionId? FindIdByAlias(string alias) 
