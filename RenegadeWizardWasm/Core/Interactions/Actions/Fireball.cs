@@ -11,5 +11,7 @@ public class Fireball : BaseAction
         Names = ["Fire", "Fireball"]
     };
     
-    
+    public override void Execute(List<Entity> targets)
+    {
+    }
 }

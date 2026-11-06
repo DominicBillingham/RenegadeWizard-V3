@@ -13,8 +13,8 @@ public class Attack : BaseAction
         Names = ["Punch", "Attack", "Murder", "Knockout", "Kill"]
     };
     
-    public void Execute(Entity attacker, Entity target)
+    public override void Execute(List<Entity> targets)
     {
-        var damage = new DamageEffect(1, target);
+        var damage = new DamageEffect(1, targets[0]);
     }
 }

@@ -12,8 +12,7 @@ public class Shove : BaseAction
         Names = ["Kick", "Shove", "Push", "Shove"]
     };
     
-    public void Execute(Entity attacker, Entity target)
+    public override void Execute(List<Entity> targets)
     {
-        var damage = new DamageEffect(1, target);
     }
 }

@@ -15,10 +15,7 @@ public class RoundResult
     // Round Calculations
     public ActionId? ChosenActionId { get; set; }
     public List<Entity> ChosenTargets { get; set; } = new();
-    
-    
-    
-    
+    public List<ActionResult> ActionResults { get; set; } = new();
     
     public List<Entity> Entities { get; set; } = new();
     
@@ -27,9 +24,9 @@ public class RoundResult
     // This is a single object that gathers all the results of a single round.
     // It will then return this information to the user interface..
 
+}
+
+public class ActionResult
+{
     
-
-    
-
-
 }
