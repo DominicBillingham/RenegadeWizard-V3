@@ -13,9 +13,11 @@ public class RoundTests
         var glorb = Test.GetGlorb();
         var player = Test.GetPlayer();
         var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player } };
-        
         var inputManager = new InputManager(scene);
+        var manager = new GameManager(scene, inputManager);
+        
         string userInput = "I attack glorb";
+        manager.EnterInput(userInput);
         
         Assert.Equal(1, glorb.Wounds);
     }

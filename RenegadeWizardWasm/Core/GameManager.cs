@@ -51,7 +51,7 @@ public class GameManager(SceneManager sceneManager, InputManager inputManager)
         }
         
         // Perform each NPC's action after 
-        try
+        try 
         {
             
         }
