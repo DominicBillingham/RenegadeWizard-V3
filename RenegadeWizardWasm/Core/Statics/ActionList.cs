@@ -2,15 +2,13 @@
 
 namespace RenegadeWizardWasm.Core.Statics;
 
-public class ActionList
+public static class ActionList
 {
-    private List<BaseAction> actions { get; set; } = new();
+    public static List<BaseAction> Actions { get; set; } = new();
     
-    ActionList()
+    static ActionList()
     {
-        actions.Add(new Attack());
-        
-        
-        
+        Actions.Add(new Attack());
+        Actions.Add(new Fireball());
     }
 }

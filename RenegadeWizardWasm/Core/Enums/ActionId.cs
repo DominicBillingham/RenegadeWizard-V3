@@ -3,7 +3,8 @@
 public enum ActionId
 {
     Punch,
-    Kick,
+    Shove,
     Stab,
     Attack,
+    Fireball
 }

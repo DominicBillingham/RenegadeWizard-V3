@@ -15,7 +15,7 @@ public class InputManagerTests
         string userInput = "I kick the monster right up the arse";
         inputManager.ProcessInput(userInput);
         
-        Assert.Equal(ActionId.Kick, inputManager.ChosenAction);
+        Assert.Equal(ActionId.Shove, inputManager.ChosenAction);
     }
     
     [Fact]
@@ -39,7 +39,7 @@ public class InputManagerTests
         string userInput = "I kick the monster right up the arse, then violently punch it.";
         inputManager.ProcessInput(userInput);
         
-        Assert.Equal(ActionId.Kick, inputManager.ChosenAction);
+        Assert.Equal(ActionId.Shove, inputManager.ChosenAction);
     }
     
     [Fact]
@@ -51,7 +51,7 @@ public class InputManagerTests
         string userInput = "I kik the monster";
         inputManager.ProcessInput(userInput);
         
-        Assert.Equal(ActionId.Kick, inputManager.ChosenAction);
+        Assert.Equal(ActionId.Shove, inputManager.ChosenAction);
     }
     
     [Fact]

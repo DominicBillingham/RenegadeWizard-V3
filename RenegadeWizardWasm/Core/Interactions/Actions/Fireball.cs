@@ -1,6 +1,13 @@
-﻿namespace RenegadeWizardWasm.Core.Interactions;
+﻿using RenegadeWizardWasm.Core.Enums;
+using RenegadeWizardWasm.Core.Models;
 
-public class Fireball
+namespace RenegadeWizardWasm.Core.Interactions;
+
+public class Fireball : BaseAction
 {
-    public string Names { get; set; }
+    public override Identity Identity { get; set; } = new Identity
+    {
+        ActionId = ActionId.Fireball,
+        Names = ["Fire", "Fireball"]
+    };
 }
