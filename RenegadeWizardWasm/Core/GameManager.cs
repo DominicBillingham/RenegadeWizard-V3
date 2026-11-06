@@ -1,5 +1,7 @@
 ﻿using Microsoft.JSInterop;
+using RenegadeWizardWasm.Core.Interactions;
 using RenegadeWizardWasm.Core.Models;
+using RenegadeWizardWasm.Core.Statics;
 using RenegadeWizardWasm.Core.UserInterface;
 
 namespace RenegadeWizardWasm.Core;
@@ -14,14 +16,16 @@ public class GameManager(SceneManager sceneManager, InputManager inputManager)
         };
 
         inputManager.ProcessInput(playerInput);
-        roundResult.ChosenAction = inputManager.ChosenAction;
         
+        if  (inputManager.ChosenAction == null)
+        {
+            roundResult.ErrorMessage = "No action chosen";
+            return roundResult;
+        }
         
-        // Process input
-        // Find action
-        // Find targets
-        // Carry out player action
-        // Carry out 
+        roundResult.ChosenActionId = inputManager.ChosenAction;
+        roundResult.ChosenTargets = inputManager.ChosenTargets;
+        
         
         
         

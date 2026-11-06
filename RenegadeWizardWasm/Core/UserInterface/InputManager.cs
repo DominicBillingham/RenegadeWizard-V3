@@ -24,13 +24,20 @@ public class InputManager(SceneManager sceneManager)
         {
             if (ChosenAction is null)
             {
-                foreach (var action in ActionList.Actions)
+                // Option A: Exact/Dictionary Match (O(1))
+                var id = ActionRegistry.FindIdByAlias(chunk);
+                if (id.HasValue) 
                 {
-                    foreach (var identity in action.ActionIdentity.Names)
+                    ChosenAction = id;
+                }
+                else 
+                {
+                    // Option B: Fuzzy Match (Only if exact match fails)
+                    foreach (var alias in ActionRegistry.AllAliases)
                     {
-                        if (FuzzyMatch(chunk, identity))
+                        if (FuzzyMatch(chunk, alias))
                         {
-                            ChosenAction = action.ActionIdentity.ActionId;
+                            ChosenAction = ActionRegistry.FindIdByAlias(alias);
                             break;
                         }
                     }

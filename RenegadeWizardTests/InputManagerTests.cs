@@ -76,7 +76,7 @@ public class InputManagerTests
         string userInput = "I punch GLORB, then TUBA";
         inputManager.ProcessInput(userInput);
     
-        Assert.Equal(ActionId.Punch, inputManager.ChosenAction);
+        Assert.Equal(ActionId.Attack, inputManager.ChosenAction);
         Assert.Equal("Glorb", inputManager.ChosenTargets[0].Name);
         Assert.Equal("Tuba", inputManager.ChosenTargets[1].Name);
     }
