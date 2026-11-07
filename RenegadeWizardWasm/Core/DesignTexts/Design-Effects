@@ -1,0 +1,25 @@
+﻿
+Contact Effect
+Does nothing by itself, only does thing when present via tags.
+Slippery tag on target -> Causes a 50% chance of the action to fail (because the item escaped)
+Spiky tag on target -> Causes a 50% chance of a wound on the executor.
+(Needs slippery tag to be added)
+
+Consume Effect
+If the target has edible, it gives the executor 1 wound back.
+If the target does not have edible, the executor is hurt by 1 wound.
+(Needs a new tag added) 
+
+ForceMoveEffect
+If the item is the same size as the executor, it's dependent on the roll (pass)
+If the item is smaller than the executor, it's 100% allowed.
+If the item is larger than the executor, it fails.
+(Needs a size enum to be created and added to entity)
+
+NoiseEffect
+Does nothing by itself, only does thing when present via tags.
+Any creature present with LoudFear will be affected by the noise on a pass roll.
+
+
+
+
