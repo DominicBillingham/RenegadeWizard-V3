@@ -2,7 +2,7 @@
 using RenegadeWizardWasm.Core.Models;
 using RenegadeWizardWasm.Core.Statics;
 
-namespace RenegadeWizardWasm.Core.UserInterface;
+namespace RenegadeWizardWasm.Core.Services;
 
 public class InputManager(SceneManager sceneManager)
 {

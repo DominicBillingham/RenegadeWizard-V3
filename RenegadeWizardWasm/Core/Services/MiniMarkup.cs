@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 
-namespace RenegadeWizardWasm.Core.UserInterface;
+namespace RenegadeWizardWasm.Core.Services;
 
 static class MiniMarkup
 {

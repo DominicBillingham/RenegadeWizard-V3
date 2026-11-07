@@ -1,5 +1,6 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Interactions;
+using RenegadeWizardWasm.Core.Interactions.Actions;
 
 namespace RenegadeWizardWasm.Core.Statics;
 

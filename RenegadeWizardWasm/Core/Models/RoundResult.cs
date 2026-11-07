@@ -1,7 +1,6 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
-using RenegadeWizardWasm.Core.Models;
 
-namespace RenegadeWizardWasm.Core.UserInterface;
+namespace RenegadeWizardWasm.Core.Models;
 
 public class RoundResult
 {

@@ -1,7 +1,6 @@
-﻿using RenegadeWizardWasm.Core.Enums;
-using RenegadeWizardWasm.Core.Models;
+﻿using RenegadeWizardWasm.Core.Models;
 
-namespace RenegadeWizardWasm.Core.Interactions;
+namespace RenegadeWizardWasm.Core.Interactions.Actions;
 
 public abstract class BaseAction
 {

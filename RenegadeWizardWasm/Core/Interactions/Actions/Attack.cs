@@ -2,7 +2,7 @@
 using RenegadeWizardWasm.Core.Interactions.Effects;
 using RenegadeWizardWasm.Core.Models;
 
-namespace RenegadeWizardWasm.Core.Interactions;
+namespace RenegadeWizardWasm.Core.Interactions.Actions;
 
 public class Attack : BaseAction
 {

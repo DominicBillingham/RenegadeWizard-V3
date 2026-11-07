@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using RenegadeWizardWasm;
 using RenegadeWizardWasm.Core;
-using RenegadeWizardWasm.Core.UserInterface;
+using RenegadeWizardWasm.Core.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 

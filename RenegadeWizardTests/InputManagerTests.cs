@@ -1,5 +1,5 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
-using RenegadeWizardWasm.Core.UserInterface;
+using RenegadeWizardWasm.Core.Services;
 
 namespace RenegadeWizardTests;
 

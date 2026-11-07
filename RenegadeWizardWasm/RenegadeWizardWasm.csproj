@@ -25,6 +25,10 @@
       <_ContentIncludedByDefault Remove="wwwroot\bootstrap\bootstrap.min.css" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Core\Services\Interfaces\" />
+    </ItemGroup>
+
     <Target Name="BuildReactApp" BeforeTargets="Build">
         <Exec Command="npm install" WorkingDirectory="FrontEnd" />
         <Exec Command="npm run build" WorkingDirectory="FrontEnd" />

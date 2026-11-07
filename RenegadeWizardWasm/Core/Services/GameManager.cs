@@ -1,11 +1,9 @@
-﻿using Microsoft.JSInterop;
-using RenegadeWizardWasm.Core.Errors;
-using RenegadeWizardWasm.Core.Interactions;
+﻿using RenegadeWizardWasm.Core.Errors;
+using RenegadeWizardWasm.Core.Interactions.Actions;
 using RenegadeWizardWasm.Core.Models;
 using RenegadeWizardWasm.Core.Statics;
-using RenegadeWizardWasm.Core.UserInterface;
 
-namespace RenegadeWizardWasm.Core;
+namespace RenegadeWizardWasm.Core.Services;
 
 public class GameManager(SceneManager sceneManager, InputManager inputManager)
 {

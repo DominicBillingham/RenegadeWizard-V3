@@ -1,6 +1,6 @@
 ﻿using RenegadeWizardWasm.Core.Models;
 
-namespace RenegadeWizardWasm.Core;
+namespace RenegadeWizardWasm.Core.Services;
 
 public class SceneManager
 {

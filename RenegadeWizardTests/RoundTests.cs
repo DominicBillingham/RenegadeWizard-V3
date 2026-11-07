@@ -1,7 +1,7 @@
 ﻿using RenegadeWizardWasm.Core;
 using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Models;
-using RenegadeWizardWasm.Core.UserInterface;
+using RenegadeWizardWasm.Core.Services;
 
 namespace RenegadeWizardTests;
 

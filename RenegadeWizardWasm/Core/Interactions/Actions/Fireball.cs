@@ -1,7 +1,7 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Models;
 
-namespace RenegadeWizardWasm.Core.Interactions;
+namespace RenegadeWizardWasm.Core.Interactions.Actions;
 
 public class Fireball : BaseAction
 {

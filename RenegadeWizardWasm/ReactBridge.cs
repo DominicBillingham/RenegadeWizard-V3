@@ -1,8 +1,8 @@
 ﻿using Microsoft.JSInterop;
 using RenegadeWizardWasm.Core.Models;
-using RenegadeWizardWasm.Core.UserInterface;
+using RenegadeWizardWasm.Core.Services;
 
-namespace RenegadeWizardWasm.Core;
+namespace RenegadeWizardWasm;
 
 public static class ReactBridge
 {
