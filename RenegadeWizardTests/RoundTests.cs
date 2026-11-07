@@ -14,7 +14,7 @@ public class RoundTests
         var player = Test.GetPlayer();
         var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player } };
         var inputManager = new InputManager(scene);
-        var manager = new GameManager(scene, inputManager, new DiceRoller());
+        var manager = new GameManager(scene, inputManager, new DiceRollerCrit());
         
         string userInput = "I attack glorb";
         manager.EnterInput(userInput);
@@ -23,14 +23,16 @@ public class RoundTests
     }
     
     [Fact]
-    public void AttackSuccess()
+    public void AttackPass()
     {
         var glorb = Test.GetGlorb();
         var player = Test.GetPlayer();
         var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player } };
-        
         var inputManager = new InputManager(scene);
+        var manager = new GameManager(scene, inputManager, new DiceRollerPass());
+        
         string userInput = "I attack glorb";
+        manager.EnterInput(userInput);
         
         Assert.Contains(Tags.Stunned, glorb.Tags);
         Assert.Equal(0, glorb.Wounds);
@@ -42,24 +44,28 @@ public class RoundTests
         var glorb = Test.GetGlorb();
         var player = Test.GetPlayer();
         var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player } };
-        
         var inputManager = new InputManager(scene);
+        var manager = new GameManager(scene, inputManager, new DiceRollerFail());
+        
         string userInput = "I attack glorb";
+        manager.EnterInput(userInput);
         
         Assert.Equal(1, player.Stress);
         Assert.Equal(0, glorb.Wounds);
     }
     
     [Fact]
-    public void AttackSpiky()
+    public void AttackCritSpiky()
     {
         var spiky = Test.GetSpikyMob();
         var player = Test.GetPlayer();
         var scene = new SceneManager() { Entities = new List<Entity>() { spiky, player } };
-        
         var inputManager = new InputManager(scene);
-        string userInput = "I attack spiky";
+        var manager = new GameManager(scene, inputManager, new DiceRollerCrit());
         
+        string userInput = "I attack spiky";
+        manager.EnterInput(userInput);
+
         Assert.Equal(1, spiky.Wounds);
         Assert.Equal(1, player.Wounds);
     }
@@ -69,10 +75,13 @@ public class RoundTests
     {
         var glorb = Test.GetGlorb();
         var player = Test.GetPlayer();
-        var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player } };
-        
+        var table = Test.GetTable();
+        var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player, table } };
         var inputManager = new InputManager(scene);
+        var manager = new GameManager(scene, inputManager, new DiceRollerCrit());
+        
         string userInput = "I throw the table at glorb";
+        manager.EnterInput(userInput);
         
         Assert.Equal(1, glorb.Wounds);
     }
@@ -84,9 +93,11 @@ public class RoundTests
         var player = Test.GetPlayer();
         var table = Test.GetTable();
         var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player, table } };
-        
         var inputManager = new InputManager(scene);
+        var manager = new GameManager(scene, inputManager, new DiceRollerCrit());
+        
         string userInput = "I throw the table at glorb";
+        manager.EnterInput(userInput);
         
         Assert.Equal(0, glorb.Wounds);
         Assert.True(table.IsDestroyed);
@@ -99,9 +110,11 @@ public class RoundTests
         var player = Test.GetPlayer();
         var table = Test.GetTable();
         var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player, table } };
-        
         var inputManager = new InputManager(scene);
+        var manager = new GameManager(scene, inputManager, new DiceRollerCrit());
+        
         string userInput = "I throw the table at glorb";
+        manager.EnterInput(userInput);
         
         Assert.Equal(1, glorb.Wounds);
         Assert.True(table.IsDestroyed);
@@ -114,9 +127,11 @@ public class RoundTests
         var player = Test.GetPlayer();
         var table = Test.GetTable();
         var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player, table } };
-        
         var inputManager = new InputManager(scene);
+        var manager = new GameManager(scene, inputManager, new DiceRollerCrit());
+        
         string userInput = "I throw the table at glorb";
+        manager.EnterInput(userInput);
         
         Assert.Equal(2, glorb.Wounds);
         Assert.True(table.IsDestroyed);
