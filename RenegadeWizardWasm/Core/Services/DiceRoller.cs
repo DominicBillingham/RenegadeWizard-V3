@@ -21,7 +21,16 @@ public class DiceRoller : IDiceRoller
                 highestDice = diceRoll;
             }
         }
-        return (DiceOutcome)highestDice;
+
+        if (highestDice >= (int)DiceOutcome.Crit)
+        {
+            return DiceOutcome.Crit;
+        }
+        if (highestDice >= (int)DiceOutcome.Pass)
+        {
+            return DiceOutcome.Pass;
+        }
+        return DiceOutcome.Fail;
     }
     
     private int RollDice(int sides)
@@ -53,6 +62,6 @@ public class DiceRollerFail : IDiceRoller
 {
     public DiceOutcome RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
     {
-        return DiceOutcome.Failure;
+        return DiceOutcome.Fail;
     }
 }

@@ -2,7 +2,7 @@
 
 public enum DiceOutcome
 {
-    Failure = 5,
+    Fail = 0,
     Pass = 6,
     Crit = 9
 }
