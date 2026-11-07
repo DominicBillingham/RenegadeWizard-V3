@@ -5,7 +5,7 @@ using RenegadeWizardWasm.Core.Statics;
 
 namespace RenegadeWizardWasm.Core.Services;
 
-public class GameManager(SceneManager sceneManager, InputManager inputManager)
+public class GameManager(SceneManager sceneManager, InputManager inputManager, IDiceRoller diceRoller)
 {
     // This is the high-level orchestrator of the game.
     // The only error handling is found here, as it should decide what happens when an error occurs.

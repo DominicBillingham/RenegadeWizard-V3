@@ -14,7 +14,7 @@ public class RoundTests
         var player = Test.GetPlayer();
         var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player } };
         var inputManager = new InputManager(scene);
-        var manager = new GameManager(scene, inputManager);
+        var manager = new GameManager(scene, inputManager, new DiceRoller());
         
         string userInput = "I attack glorb";
         manager.EnterInput(userInput);

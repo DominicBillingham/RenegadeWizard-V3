@@ -6,6 +6,7 @@ using RenegadeWizardWasm.Core.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
+builder.Services.AddSingleton<IDiceRoller, DiceRoller>();
 builder.Services.AddSingleton<GameManager>();
 builder.Services.AddSingleton<SceneManager>();
 builder.Services.AddSingleton<InputManager>();
