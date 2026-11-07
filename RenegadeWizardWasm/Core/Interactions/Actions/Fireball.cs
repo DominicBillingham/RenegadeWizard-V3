@@ -12,7 +12,7 @@ public class Fireball : BaseAction
         Names = ["Fire", "Fireball"]
     };
     
-    public override void Execute(IDiceRoller roller, List<Entity> targets)
+    public override void Execute(ActionContext context)
     {
     }
 }

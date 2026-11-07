@@ -14,13 +14,24 @@ public class Attack : BaseAction
         Names = ["Punch", "Attack", "Murder", "Knockout", "Kill"]
     };
     
-    public override void Execute(IDiceRoller roller, List<Entity> targets)
+    public override void Execute(ActionContext context)
     {
+        DiceOutcome roll = context.Roller.RollDicePool(10, 1);
+        Entity? target = context.IntendedTargets.FirstOrDefault();
 
-        DiceOutcome roll = roller.RollDicePool(10, 1);
-        
-        var damage = new DamageEffect(1, targets[0]);
-        
-        
+        if (target == null) return;
+
+        if (roll == DiceOutcome.Crit)
+        {
+            new DamageEffect(1, target);
+        }
+        else if (roll == DiceOutcome.Pass)
+        {
+            target.Tags.Add(Tags.Stunned);
+        }
+        else if (roll == DiceOutcome.Fail)
+        {
+            context.Executor.Stress += 1;
+        }
     }
 }

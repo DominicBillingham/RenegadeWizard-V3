@@ -30,12 +30,18 @@ public class GameManager(SceneManager sceneManager, InputManager inputManager, I
         
         roundResult.ChosenActionId = inputManager.ChosenAction;
         roundResult.ChosenTargets = inputManager.ChosenTargets;
-
+        
         // Perform the player's action.
         try
         {
+            var context = new ActionContext
+            {
+                Roller = diceRoller,
+                Executor = sceneManager.GetPlayer,
+                IntendedTargets = inputManager.ChosenTargets
+            };
             BaseAction action = ActionReg.GetAction(inputManager.ChosenAction.Value);
-            action.Execute(diceRoller, inputManager.ChosenTargets);
+            action.Execute(context);
         }
         catch (BadInputException ex) // Custom error specifically for us to be able to throw / catch
         {
