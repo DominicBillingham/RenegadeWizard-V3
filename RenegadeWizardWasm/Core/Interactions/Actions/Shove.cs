@@ -1,5 +1,6 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Models;
+using RenegadeWizardWasm.Core.Services;
 
 namespace RenegadeWizardWasm.Core.Interactions.Actions;
 
@@ -11,7 +12,7 @@ public class Shove : BaseAction
         Names = ["Kick", "Shove", "Push", "Shove"]
     };
     
-    public override void Execute(List<Entity> targets)
+    public override void Execute(IDiceRoller roller, List<Entity> targets)
     {
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace RenegadeWizardWasm.Core.Services;
+﻿using RenegadeWizardWasm.Core.Enums;
+
+namespace RenegadeWizardWasm.Core.Services;
 
 public interface IDiceRoller
 {
-    int RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0);
+    DiceOutcome RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0);
 }

@@ -1,24 +1,27 @@
-﻿namespace RenegadeWizardWasm.Core.Services;
+﻿using RenegadeWizardWasm.Core.Enums;
+
+namespace RenegadeWizardWasm.Core.Services;
 
 public class DiceRoller : IDiceRoller
 {
-    public int RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
+    public DiceOutcome RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
     {
         int highestDice = 1;
         
-        foreach (int roll in Enumerable.Range(1, diceCount))
+        for (int i = 0; i < diceCount; i++)
         {
             int diceRoll = RollDice(diceSize);
-            if (diceRoll > highestDice)
-            {
-                highestDice = diceRoll;
-            }
+            
             if (diceRoll < rerollThreshold)
             {
                 diceRoll = RollDice(diceSize);
             }
+            if (diceRoll > highestDice)
+            {
+                highestDice = diceRoll;
+            }
         }
-        return highestDice;
+        return (DiceOutcome)highestDice;
     }
     
     private int RollDice(int sides)
@@ -32,24 +35,24 @@ public class DiceRoller : IDiceRoller
 
 public class DiceRollerCrit : IDiceRoller
 {
-    public int RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
+    public DiceOutcome RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
     {
-        return 9;
+        return DiceOutcome.Crit;
     }
 }
 
 public class DiceRollerPass : IDiceRoller
 {
-    public int RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
+    public DiceOutcome RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
     {
-        return 6;
+        return DiceOutcome.Pass;
     }
 }
 
 public class DiceRollerFail : IDiceRoller
 {
-    public int RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
+    public DiceOutcome RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
     {
-        return 5;
+        return DiceOutcome.Failure;
     }
 }

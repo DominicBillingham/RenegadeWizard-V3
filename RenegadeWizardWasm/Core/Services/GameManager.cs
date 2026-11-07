@@ -35,7 +35,7 @@ public class GameManager(SceneManager sceneManager, InputManager inputManager, I
         try
         {
             BaseAction action = ActionReg.GetAction(inputManager.ChosenAction.Value);
-            action.Execute(inputManager.ChosenTargets);
+            action.Execute(diceRoller, inputManager.ChosenTargets);
         }
         catch (BadInputException ex) // Custom error specifically for us to be able to throw / catch
         {
