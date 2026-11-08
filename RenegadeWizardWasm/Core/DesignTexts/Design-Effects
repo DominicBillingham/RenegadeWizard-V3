@@ -10,11 +10,13 @@ If the target has edible, it gives the executor 1 wound back.
 If the target does not have edible, the executor is hurt by 1 wound.
 (Needs a new tag added) 
 
-ForceMoveEffect
+ForceMoveEffect <-
 If the item is the same size as the executor, it's dependent on the roll (pass)
 If the item is smaller than the executor, it's 100% allowed.
 If the item is larger than the executor, it fails.
 (Needs a size enum to be created and added to entity)
+// Scrapped, this is really a check to see if the executor can move the target.
+// Therefore it's main job is orhcestration, which should be done by the action.
 
 NoiseEffect
 Does nothing by itself, only does thing when present via tags.
