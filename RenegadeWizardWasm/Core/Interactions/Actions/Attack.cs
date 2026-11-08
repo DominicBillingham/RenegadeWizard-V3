@@ -22,8 +22,14 @@ public class Attack : BaseAction
         if (target == null) return;
 
         if (roll == DiceOutcome.Crit)
-        {
-            new DamageEffect(1, target);
+        {   
+            var effect = new DamageEffect
+            {
+                Context = context,
+                Target = target,
+                Damage = 1,
+            };
+            effect.Execute();
         }
         else if (roll == DiceOutcome.Pass)
         {

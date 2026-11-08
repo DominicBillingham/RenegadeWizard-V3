@@ -5,13 +5,12 @@ namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
 public class DamageEffect : BaseEffect
 {
-    public int Damage { get; }
-    public Entity Target { get; }
+    public required int Damage { get; set; }
+    public required Entity Target { get; set; }
 
-    public DamageEffect(int damage, Entity target)
+    public override void Execute()
     {
-        Damage = damage;
-        Target = target;
-        target.Wounds += damage;
+        Target.Wounds += Damage;
     }
+    
 }

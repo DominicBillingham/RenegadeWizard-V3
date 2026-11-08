@@ -5,15 +5,31 @@ namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
 public class ContactEffect : BaseEffect
 {
-    public ContactEffect(Entity target1, Entity target2)
+    public required Entity Target1 { get; init; }
+    public required Entity Target2 { get; init; }
+
+    public override void Execute()
     {
-        if (target1.Tags.Contains(Tags.Spiky))
+        if (Target1.Tags.Contains(Tags.Spiky))
         {
-            new DamageEffect(1, target2);
+            var effect = new DamageEffect
+            {
+                Context = Context,
+                Target = Target2,
+                Damage = 1,
+            };
+            effect.Execute();
         }
-        else if (target2.Tags.Contains(Tags.Spiky))
+        else if (Target2.Tags.Contains(Tags.Spiky))
         {
-            new DamageEffect(1, target1);
+            var effect = new DamageEffect
+            {
+                Context = Context,
+                Target = Target1,
+                Damage = 1,
+            };
+            effect.Execute();
         }
     }
+
 }

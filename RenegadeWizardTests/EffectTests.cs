@@ -1,5 +1,6 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Interactions.Effects;
+using RenegadeWizardWasm.Core.Models;
 
 namespace RenegadeWizardTests;
 
@@ -17,7 +18,13 @@ public class EffectTests
     public void DamageEffect()
     {
         var testEnt = Test.GetGlorb();
-        var effect = new DamageEffect(1, testEnt);
+        var effect = new DamageEffect
+        {
+            Context = new ActionContext(),
+            Target = testEnt,
+            Damage = 1,
+        };
+        effect.Execute();
         Assert.Equal(1, testEnt.Wounds);
     }
         
