@@ -100,7 +100,7 @@ public class RoundTests
         manager.EnterInput(userInput);
         
         Assert.Equal(0, glorb.Wounds);
-        Assert.True(table.IsDestroyed);
+        Assert.True(table.IsDefeated);
     }
 
     [Fact]
@@ -117,7 +117,7 @@ public class RoundTests
         manager.EnterInput(userInput);
         
         Assert.Equal(1, glorb.Wounds);
-        Assert.True(table.IsDestroyed);
+        Assert.True(table.IsDefeated);
     }
     
     [Fact]
@@ -134,6 +134,6 @@ public class RoundTests
         manager.EnterInput(userInput);
         
         Assert.Equal(2, glorb.Wounds);
-        Assert.True(table.IsDestroyed);
+        Assert.True(table.IsDefeated);
     }
 }

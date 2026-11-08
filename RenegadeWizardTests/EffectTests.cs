@@ -67,7 +67,7 @@ public class EffectTests
     public void ConsumeEffect()
     {
         var testEnt = Test.GetGlorb();
-        Assert.True(testEnt.IsDestroyed);
+        Assert.True(testEnt.IsDefeated);
     }
     
     [Fact]

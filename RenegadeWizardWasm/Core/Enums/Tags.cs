@@ -9,4 +9,9 @@ public enum Tags
     Toppled,
     Stunned,
     Burning,
+    LoudNoiseFear,
+    Edible,
+    Inedible,
+    InedibleAndHurtful
+    
 }

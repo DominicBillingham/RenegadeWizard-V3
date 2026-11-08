@@ -7,7 +7,7 @@ public class Entity
     // Not Required
     public bool IsPlayer { get; set; } = false;
     public List<Tags> Tags { get; set; } = new List<Tags>();
-    public bool IsDestroyed { get; set; } = false;
+    public bool IsDefeated { get; set; } = false;
 
     // Required
     public required string Name { get; set; }
@@ -17,5 +17,6 @@ public class Entity
     public int Wounds { get; set; } = 0;
     public int Stress { get; set; } = 0;
     public required PlayerRelationship Relationship { get; set; }
+    public required Size Size { get; set; }
     
 }
