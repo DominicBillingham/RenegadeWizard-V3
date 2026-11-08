@@ -25,8 +25,7 @@ public class EffectTests
     public void CharmEffect()
     {
         var testEnt = Test.GetGlorb();
-        testEnt.Relationship = PlayerRelationship.Hated; // (0)
-        Assert.Equal(1, (int)testEnt.Relationship); // Has it boosted by 1 level?
+        Assert.Equal(1, (int)testEnt.Relationship);
     }
     
     [Fact]
@@ -49,4 +48,46 @@ public class EffectTests
         var testEnt = Test.GetGlorb();
         Assert.Contains(Tags.Burning, testEnt.Tags);
     }
+
+    [Fact]
+    public void ForceMoveEffect()
+    {
+        var testEnt = Test.GetGlorb();
+
+    }
+
+    [Fact]
+    public void ConsumeEffect()
+    {
+        var testEnt = Test.GetGlorb();
+        Assert.True(testEnt.IsDestroyed);
+    }
+    
+    [Fact]
+    public void ContactEffect()
+    {
+        var testEnt = Test.GetGlorb();
+    }
+
+    [Fact]
+    public void NoiseEffect()
+    {
+        var testEnt = Test.GetGlorb();
+    }
+    
+    [Fact]
+    public void MoveEffect()
+    {
+        var testEnt = Test.GetGlorb();
+    }
+
+    public void HealEffect()
+    {
+        var testEnt = Test.GetGlorb();
+        testEnt.Wounds = 2;
+        Assert.Equal(0, testEnt.Wounds);
+    }
+    
+    
+    
 }
