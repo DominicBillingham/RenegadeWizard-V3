@@ -1,7 +1,6 @@
 ﻿using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Interactions.Effects;
 using RenegadeWizardWasm.Core.Models;
-using RenegadeWizardWasm.Core.Services;
 
 namespace RenegadeWizardWasm.Core.Interactions.Actions;
 
@@ -16,12 +15,20 @@ public class Attack : BaseAction
     
     public override void Execute(ActionContext context)
     {
-        DiceOutcome roll = context.Roller.RollDicePool(10, 1);
         Entity? target = context.IntendedTargets.FirstOrDefault();
+        
+        context.Roller.RollDicePool(10, 1);
 
         if (target == null) return;
+        
+        new ContactEffect
+        {
+            Context = context,
+            Target1 = context.Executor,
+            Target2 = target
+        }.Execute();
 
-        if (roll == DiceOutcome.Crit)
+        if (context.Roller.Outcome == DiceOutcome.Crit)
         {   
             var effect = new DamageEffect
             {
@@ -31,11 +38,11 @@ public class Attack : BaseAction
             };
             effect.Execute();
         }
-        else if (roll == DiceOutcome.Pass)
+        else if (context.Roller.Outcome == DiceOutcome.Pass)
         {
             target.Tags.Add(Tags.Stunned);
         }
-        else if (roll == DiceOutcome.Fail)
+        else if (context.Roller.Outcome == DiceOutcome.Fail)
         {
             context.Executor.Stress += 1;
         }

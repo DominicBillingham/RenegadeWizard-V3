@@ -4,13 +4,16 @@ namespace RenegadeWizardWasm.Core.Services;
 
 public class DiceRoller : IDiceRoller
 {
-    public DiceOutcome RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
+    
+    public override void RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
     {
         int highestDice = 1;
         
         for (int i = 0; i < diceCount; i++)
         {
             int diceRoll = RollDice(diceSize);
+            
+            Rolls.Add(diceRoll);
             
             if (diceRoll < rerollThreshold)
             {
@@ -24,13 +27,16 @@ public class DiceRoller : IDiceRoller
 
         if (highestDice >= (int)DiceOutcome.Crit)
         {
-            return DiceOutcome.Crit;
+            Outcome = DiceOutcome.Crit;
         }
         if (highestDice >= (int)DiceOutcome.Pass)
         {
-            return DiceOutcome.Pass;
+            Outcome = DiceOutcome.Pass;
         }
-        return DiceOutcome.Fail;
+        else
+        {
+            Outcome = DiceOutcome.Fail;
+        }
     }
     
     private int RollDice(int sides)
@@ -44,24 +50,24 @@ public class DiceRoller : IDiceRoller
 
 public class DiceRollerCrit : IDiceRoller
 {
-    public DiceOutcome RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
+    public override void RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
     {
-        return DiceOutcome.Crit;
+        Outcome = DiceOutcome.Crit;
     }
 }
 
 public class DiceRollerPass : IDiceRoller
 {
-    public DiceOutcome RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
+    public override void RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
     {
-        return DiceOutcome.Pass;
+        Outcome = DiceOutcome.Pass;
     }
 }
 
 public class DiceRollerFail : IDiceRoller
 {
-    public DiceOutcome RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
+    public override void RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0)
     {
-        return DiceOutcome.Fail;
+        Outcome = DiceOutcome.Fail;
     }
 }

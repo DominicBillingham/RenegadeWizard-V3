@@ -2,7 +2,9 @@
 
 namespace RenegadeWizardWasm.Core.Services;
 
-public interface IDiceRoller
+public abstract class IDiceRoller
 {
-    DiceOutcome RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0);
+    public DiceOutcome Outcome { get; protected set; }
+    public List<int> Rolls { get; private set; } = new();
+    public abstract void RollDicePool(int diceSize, int diceCount, int rerollThreshold = 0);
 }
