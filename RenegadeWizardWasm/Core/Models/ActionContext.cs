@@ -9,14 +9,10 @@ public class ActionContext
     // This class is used to provide everything an action needs info wise.
     
     // Before action is processed
-    public IDiceRoller Roller { get; set; }
-    public Entity Executor { get; set; }
-    public List<Entity> IntendedTargets { get; set; }
-    public List<Entity> AllEntities { get; set; }
-    
-    // During action being processed.
-    DiceOutcome Roll { get; set; }
-    
+    public required IDiceRoller Roller { get; set; }
+    public required Entity Executor { get; set; }
+    public required List<Entity> IntendedTargets { get; set; }
+    public required List<Entity> AllEntities { get; set; }
     
     public string Result { get; set; }
 }

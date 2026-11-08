@@ -38,8 +38,10 @@ public class GameManager(SceneManager sceneManager, InputManager inputManager)
             {
                 Roller = new DiceRoller(),
                 Executor = sceneManager.GetPlayer,
-                IntendedTargets = inputManager.ChosenTargets
+                IntendedTargets = inputManager.ChosenTargets,
+                AllEntities = sceneManager.Entities
             };
+            
             BaseAction action = ActionReg.GetAction(inputManager.ChosenAction.Value);
             action.Execute(context);
         }
