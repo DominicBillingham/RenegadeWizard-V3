@@ -3,7 +3,7 @@ using RenegadeWizardWasm.Core.Models;
 
 namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
-public class DamageEffect
+public class DamageEffect : BaseEffect
 {
     public int Damage { get; }
     public Entity Target { get; }

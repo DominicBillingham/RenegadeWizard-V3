@@ -11,4 +11,5 @@ public class ActionContext
     public Entity Executor { get; set; }
     public List<Entity> IntendedTargets { get; set; }
     public List<Entity> AllEntities { get; set; }
+    public string Result { get; set; }
 }

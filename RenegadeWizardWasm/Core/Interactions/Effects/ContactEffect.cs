@@ -3,7 +3,7 @@ using RenegadeWizardWasm.Core.Models;
 
 namespace RenegadeWizardWasm.Core.Interactions.Effects;
 
-public class ContactEffect
+public class ContactEffect : BaseEffect
 {
     public ContactEffect(Entity target1, Entity target2)
     {
