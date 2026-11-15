@@ -86,22 +86,5 @@ public static class Test
         var player = Test.GetPlayer();
         return new SceneManager { Entities = new List<Entity> { player, glorb, grendal, tuba } };
     }
-
-    public static ActionContext GetBasicActionContext()
-    {
-        var glorb = Test.GetGlorb();
-        var grendal = Test.GetGrendal();
-        var tuba = Test.GetTuba();
-        var player = Test.GetPlayer();
-        var Entities = new List<Entity> { player, glorb, grendal, tuba };
-        
-        return new ActionContext
-        {
-            Roller = new DiceRoller(),
-            Executor = player,
-            IntendedTargets = new List<Entity> { glorb, grendal },
-            AllEntities = Entities,
-        };
-    }
     
 }
