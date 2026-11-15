@@ -17,7 +17,8 @@ public static class Test
             MaxWounds = 10,
             MaxStress = 10,
             Relationship = PlayerRelationship.Friendly,
-            IsPlayer = true
+            IsPlayer = true,
+            Size = Size.Medium,
         };
     }
 
@@ -30,6 +31,7 @@ public static class Test
             MaxWounds = 3,
             MaxStress = 10,
             Relationship = PlayerRelationship.Neutral,
+            Size = Size.Medium,
         };
     }
 
@@ -42,6 +44,7 @@ public static class Test
             MaxWounds = 3,
             MaxStress = 10,
             Relationship = PlayerRelationship.Neutral,
+            Size = Size.Medium,
             Tags = [Tags.Spiky]
         };
     }
@@ -54,6 +57,7 @@ public static class Test
             Description = "The terror", 
             MaxWounds = 3, 
             MaxStress = 10,
+            Size = Size.Medium,
             Relationship = PlayerRelationship.Aggressive 
         };
     }
@@ -66,6 +70,7 @@ public static class Test
             Description = "The horror",
             MaxWounds = 3,
             MaxStress = 10,
+            Size = Size.Medium,
             Relationship = PlayerRelationship.Hostile 
         };
     }
@@ -78,6 +83,7 @@ public static class Test
             Description = "The table",
             MaxWounds = 3,
             MaxStress = 3,
+            Size = Size.Medium,
             Relationship = PlayerRelationship.Neutral 
         };
     }
@@ -90,4 +96,22 @@ public static class Test
         var player = Test.GetPlayer();
         return new SceneManager { Entities = new List<Entity> { player, glorb, grendal, tuba } };
     }
+
+    public static ActionContext GetBasicActionContext()
+    {
+        var glorb = Test.GetGlorb();
+        var grendal = Test.GetGrendal();
+        var tuba = Test.GetTuba();
+        var player = Test.GetPlayer();
+        var Entities = new List<Entity> { player, glorb, grendal, tuba };
+        
+        return new ActionContext
+        {
+            Roller = new DiceRoller(),
+            Executor = player,
+            IntendedTargets = new List<Entity> { glorb },
+            AllEntities = Entities,
+        };
+    }
+    
 }
