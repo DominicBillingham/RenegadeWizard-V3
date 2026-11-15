@@ -21,71 +21,61 @@ public static class Test
             Size = Size.Medium,
         };
     }
-
-    public static Entity GetGlorb()
+    
+    private static Entity GetBasicEntity()
     {
         return new Entity
         {
-            Name = "Glorb",
-            Description = "The menance",
-            MaxWounds = 3,
-            MaxStress = 10,
-            Relationship = PlayerRelationship.Neutral,
-            Size = Size.Medium,
-        };
-    }
-
-    public static Entity GetSpikyMob()
-    {
-        return new Entity
-        {
-            Name = "SpikyMob",
+            Name = "Entity",
             Description = "Description",
             MaxWounds = 3,
             MaxStress = 10,
             Relationship = PlayerRelationship.Neutral,
             Size = Size.Medium,
-            Tags = [Tags.Spiky]
         };
+    }
+
+    public static Entity GetGlorb()
+    {
+        var entity = GetBasicEntity();
+        entity.Name = "Glorb";
+        entity.Description = "The menance";
+        return entity;
+    }
+
+    public static Entity GetSpikyMob()
+    {
+        var entity = GetBasicEntity();
+        entity.Name = "SpikyMob";
+        entity.Tags = [Tags.Spiky];
+        return entity;
     }
     
     public static Entity GetGrendal()
     {
-        return new Entity
-        {
-            Name = "Grendal",
-            Description = "The terror", 
-            MaxWounds = 3, 
-            MaxStress = 10,
-            Size = Size.Medium,
-            Relationship = PlayerRelationship.Aggressive 
-        };
+        var entity = GetBasicEntity();
+        entity.Name = "Grendal";
+        entity.Description = "The terror";
+        entity.Relationship = PlayerRelationship.Aggressive;
+        return entity;
     }
     
     public static Entity GetTuba()
     {
-        return new Entity
-        {
-            Name = "Tuba", 
-            Description = "The horror",
-            MaxWounds = 3,
-            MaxStress = 10,
-            Size = Size.Medium,
-            Relationship = PlayerRelationship.Hostile 
-        };
+        var entity = GetBasicEntity();
+        entity.Name = "Tuba";
+        entity.Description = "The horror";
+        entity.Relationship = PlayerRelationship.Hostile;
+        return entity;
     }
     
     public static Entity GetTable()
     {
-        return new Entity
-        {
-            Name = "Table", 
-            Description = "The table",
-            MaxWounds = 3,
-            MaxStress = 3,
-            Size = Size.Medium,
-            Relationship = PlayerRelationship.Neutral 
-        };
+        var entity = GetBasicEntity();
+        entity.Name = "Table";
+        entity.Description = "The table";
+        entity.MaxStress = 3;
+        return entity;
     }
     
     public static SceneManager GetBasicScene()
@@ -109,7 +99,7 @@ public static class Test
         {
             Roller = new DiceRoller(),
             Executor = player,
-            IntendedTargets = new List<Entity> { glorb },
+            IntendedTargets = new List<Entity> { glorb, grendal },
             AllEntities = Entities,
         };
     }

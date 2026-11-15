@@ -20,7 +20,7 @@ public class EffectTests
         var testEnt = Test.GetGlorb();
         var effect = new DamageEffect
         {
-            Context = new ActionContext(),
+            Context = Test.GetBasicActionContext(),
             Target = testEnt,
             Damage = 1,
         };
