@@ -42,10 +42,26 @@ public class Shove : BaseAction
         }
         
         context.Roller.RollDicePool(10, diceToRoll);
-        
-        
-        
-        
-        
+
+        if (context.Roller.Outcome == DiceOutcome.Pass)
+        {
+            if (destination != null)
+            {
+                target.Tags.Add(Tags.Toppled);
+            }
+            else
+            {
+                new ContactEffect()
+                {
+                    Context = context,
+                    Target1 = target,
+                    Target2 = destination
+                };
+            }
+        }
+        else
+        {
+            context.Executor.Stress++;
+        }
     }
 }
