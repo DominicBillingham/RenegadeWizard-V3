@@ -63,7 +63,7 @@ public class RoundTests
         var inputManager = new InputManager(scene);
         var manager = new GameManager(scene, inputManager, new DiceRollerCrit());
         
-        string userInput = "I attack spiky";
+        string userInput = "I attack spikymob";
         manager.EnterInput(userInput);
 
         Assert.Equal(1, spiky.Wounds);
