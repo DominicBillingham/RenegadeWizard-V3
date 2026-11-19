@@ -6,5 +6,8 @@ public enum ActionId
     Shove,
     Stab,
     Attack,
-    Fireball
+    Fireball,
+    Eat,
+    Throw,
+    Push
 }

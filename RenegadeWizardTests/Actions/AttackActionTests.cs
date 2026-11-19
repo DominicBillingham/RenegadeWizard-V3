@@ -1,11 +1,11 @@
-﻿using RenegadeWizardWasm.Core;
+using RenegadeWizardWasm.Core;
 using RenegadeWizardWasm.Core.Enums;
 using RenegadeWizardWasm.Core.Models;
 using RenegadeWizardWasm.Core.Services;
 
-namespace RenegadeWizardTests;
+namespace RenegadeWizardTests.Actions;
 
-public class RoundTests
+public class AttackActionTests
 {
     [Fact]
     public void AttackCrit()
@@ -69,71 +69,105 @@ public class RoundTests
         Assert.Equal(1, spiky.Wounds);
         Assert.Equal(1, player.Wounds);
     }
-    
+
     [Fact]
-    public void ThrowTable()
+    public void AttackGoblinCrit()
     {
-        var glorb = Test.GetGlorb();
+        var goblin = Test.GetGoblin();
         var player = Test.GetPlayer();
-        var table = Test.GetTable();
-        var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player, table } };
+        var scene = new SceneManager { Entities = new List<Entity> { goblin, player } };
         var inputManager = new InputManager(scene);
         var manager = new GameManager(scene, inputManager, new DiceRollerCrit());
-        
-        string userInput = "I throw the table at glorb";
+
+        string userInput = "I attack the goblin";
         manager.EnterInput(userInput);
-        
-        Assert.Equal(1, glorb.Wounds);
+
+        Assert.Equal(1, goblin.Wounds);
+        Assert.Contains(Tags.Stunned, goblin.Tags);
     }
 
     [Fact]
-    public void ThrowTableBlindMiss()
+    public void AttackGoblinPass()
     {
-        var glorb = Test.GetGlorb();
+        var goblin = Test.GetGoblin();
         var player = Test.GetPlayer();
-        var table = Test.GetTable();
-        var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player, table } };
+        var scene = new SceneManager { Entities = new List<Entity> { goblin, player } };
         var inputManager = new InputManager(scene);
-        var manager = new GameManager(scene, inputManager, new DiceRollerCrit());
-        
-        string userInput = "I throw the table at glorb";
+        var manager = new GameManager(scene, inputManager, new DiceRollerPass());
+
+        string userInput = "I attack the goblin";
         manager.EnterInput(userInput);
-        
-        Assert.Equal(0, glorb.Wounds);
-        Assert.True(table.IsDefeated);
+
+        Assert.Contains(Tags.Stunned, goblin.Tags);
+        Assert.Equal(0, goblin.Wounds);
     }
 
     [Fact]
-    public void ThrowTableBlindHit()
+    public void AttackGoblinFail()
     {
-        var glorb = Test.GetGlorb();
+        var goblin = Test.GetGoblin();
         var player = Test.GetPlayer();
-        var table = Test.GetTable();
-        var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player, table } };
+        var scene = new SceneManager { Entities = new List<Entity> { goblin, player } };
         var inputManager = new InputManager(scene);
-        var manager = new GameManager(scene, inputManager, new DiceRollerCrit());
-        
-        string userInput = "I throw the table at glorb";
+        var manager = new GameManager(scene, inputManager, new DiceRollerFail());
+
+        string userInput = "I attack the goblin";
         manager.EnterInput(userInput);
-        
-        Assert.Equal(1, glorb.Wounds);
-        Assert.True(table.IsDefeated);
+
+        Assert.Equal(1, player.Stress);
+        Assert.Equal(0, goblin.Wounds);
     }
-    
+
     [Fact]
-    public void ThrowTableSurprised()
+    public void AttackGoblinUnsteadyCrit()
     {
-        var glorb = Test.GetGlorb();
+        var goblin = Test.GetGoblin();
         var player = Test.GetPlayer();
+        player.Tags.Add(Tags.Unsteady);
         var table = Test.GetTable();
-        var scene = new SceneManager() { Entities = new List<Entity>() { glorb, player, table } };
+        var scene = new SceneManager { Entities = new List<Entity> { goblin, player, table } };
         var inputManager = new InputManager(scene);
         var manager = new GameManager(scene, inputManager, new DiceRollerCrit());
-        
-        string userInput = "I throw the table at glorb";
+
+        string userInput = "I attack the goblin";
         manager.EnterInput(userInput);
-        
-        Assert.Equal(2, glorb.Wounds);
-        Assert.True(table.IsDefeated);
+
+        Assert.Equal(1, goblin.Wounds);
+    }
+
+    [Fact]
+    public void AttackGoblinUnsteadyPass()
+    {
+        var goblin = Test.GetGoblin();
+        var player = Test.GetPlayer();
+        player.Tags.Add(Tags.Unsteady);
+        var table = Test.GetTable();
+        var scene = new SceneManager { Entities = new List<Entity> { goblin, player, table } };
+        var inputManager = new InputManager(scene);
+        var manager = new GameManager(scene, inputManager, new DiceRollerPass());
+
+        string userInput = "I attack the goblin";
+        manager.EnterInput(userInput);
+
+        Assert.Equal(0, goblin.Wounds);
+        Assert.Equal(1, table.Wounds);
+    }
+
+    [Fact]
+    public void AttackGoblinUnsteadyFail()
+    {
+        var goblin = Test.GetGoblin();
+        var player = Test.GetPlayer();
+        player.Tags.Add(Tags.Unsteady);
+        var table = Test.GetTable();
+        var scene = new SceneManager { Entities = new List<Entity> { goblin, player, table } };
+        var inputManager = new InputManager(scene);
+        var manager = new GameManager(scene, inputManager, new DiceRollerFail());
+
+        string userInput = "I attack the goblin";
+        manager.EnterInput(userInput);
+
+        Assert.Equal(1, goblin.Wounds);
+        Assert.Equal(0, table.Wounds);
     }
 }

@@ -12,6 +12,7 @@ public enum Tags
     LoudNoiseFear,
     Edible,
     Inedible,
-    InedibleAndHurtful
+    InedibleAndHurtful,
+    Unsteady
     
 }

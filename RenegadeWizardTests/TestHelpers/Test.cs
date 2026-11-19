@@ -77,6 +77,23 @@ public static class Test
         entity.MaxStress = 3;
         return entity;
     }
+
+    public static Entity GetGoblin()
+    {
+        var entity = GetBasicEntity();
+        entity.Name = "Goblin";
+        entity.Description = "A mischievous goblin";
+        return entity;
+    }
+
+    public static Entity GetSpikePit()
+    {
+        var entity = GetBasicEntity();
+        entity.Name = "SpikePit";
+        entity.Description = "A pit of sharp spikes";
+        entity.Tags = [Tags.Spiky];
+        return entity;
+    }
     
     public static SceneManager GetBasicScene()
     {
