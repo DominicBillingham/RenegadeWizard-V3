@@ -1,0 +1,26 @@
+
+Slimmed down test
+Push (test done)
+Attack (test done)
+Eat (test done)
+Throw (test done)
+
+Entities (Items)
+ExplosiveBarrel -> Explsoive, Inedible
+SpikyPit -> Spiky
+ButterStick -> Slippery, Edible
+GrenadeBerry -> Explosive, Edible
+
+Unsteady (tag) -> If shoved or pushed again, easier to knock down.
+Spiky (tag) -> Damage on contact
+Explosive (tag) -> Damages all enemies in the room
+Stunned (tag) -> Skips the next turn
+Edible (tag) -> You can gain 1 wound
+Inedible (tag) -> You dont heal from these
+Slippery (tag) -> pass to grab becomes a fail. (including to eat!)
+Toxic (tag) -> You take damage if you attempt to eat this
+
+Entities (Enemies)
+SlugDozer (large, eats things at random in the current room)
+
+
